@@ -15,12 +15,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<<<<<<< HEAD
+
 
         super.onCreate(savedInstanceState);
-=======
-        super.onCreate(saved);
->>>>>>> master
+
         setContentView(R.layout.activity_main);
 
 
