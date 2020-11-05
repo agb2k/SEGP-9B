@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/pillReminderFragment"
+        android:icon="@drawable/ic_pill"
+        android:title="Pill Reminder" />
+    <item
+        android:id="@+id/appointmentFragment"
+        android:icon="@drawable/ic_baseline_alarm_on_24"
+        android:title="Appontment" />
+    <item
+        android:id="@+id/trackerFragment"
+        android:icon="@drawable/ic_heart_pulse"
+        android:title="Tracker" />
+</menu>
