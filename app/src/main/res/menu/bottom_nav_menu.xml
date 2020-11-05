@@ -16,6 +16,6 @@
         android:title="Appontment" />
     <item
         android:id="@+id/trackerFragment"
-        android:icon="@drawable/ic_baseline_track_changes_24"
+        android:icon="@drawable/ic_heart_pulse"
         android:title="Tracker" />
 </menu>
