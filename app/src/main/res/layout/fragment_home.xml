@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <TableLayout android:id="@+id/appointmentHome"
+        android:background="@drawable/border"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stretchColumns="*">
+
+        <TableRow android:background="@drawable/border">
+
+            <TextView android:id="@+id/appointmentTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_span="2"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="@string/appoinment"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:id="@+id/planAppointment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="Planned \nAppointment"/>
+
+            <TextView android:id="@+id/confiremdAppoinment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="Confrimed \nAppoinment"/>
+        </TableRow>
+    </TableLayout>
+
+
+    <!--<TextView
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:textSize="40dp"
-        android:text="Homepage" />
+        android:text="Homepage" />-->
 
-</FrameLayout>
+</RelativeLayout>
