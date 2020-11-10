@@ -10,5 +10,6 @@ public class BloodPressureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure);
+        getSupportActionBar().setTitle("Blood Pressure");
     }
 }
