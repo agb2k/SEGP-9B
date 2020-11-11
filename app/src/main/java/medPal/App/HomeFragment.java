@@ -91,6 +91,15 @@ public class HomeFragment extends Fragment {
 
         pillList.setAdapter(pillAdapter);
 
+        healthBtn = v.findViewById(R.id.healthConditionButton);
+
+        healthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),healthPopUp.class));
+            }
+        });
+
 
 
         return v;

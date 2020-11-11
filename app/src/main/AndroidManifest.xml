@@ -11,6 +11,12 @@
         android:theme="@style/Theme.MedPal">
         <activity android:name=".SugarLevelActivity"></activity>
         <activity android:name=".BloodPressureActivity" />
+
+        <!--Health Condition Pop up window-->
+        <activity android:name=".healthPopUp"
+            android:theme="@style/healthPopStyle">
+        </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
