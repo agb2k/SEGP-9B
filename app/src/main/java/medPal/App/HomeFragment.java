@@ -80,12 +80,12 @@ public class HomeFragment extends Fragment {
 
         ArrayList<String> pillArray = new ArrayList<>();
 
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
+        pillArray.add("Panadol 1");
+        pillArray.add("Panadol 2");
+        pillArray.add("Panadol 3");
+        pillArray.add("Panadol 4");
+        pillArray.add("Panadol 5");
+        pillArray.add("Panadol 6");
 
         ArrayAdapter pillAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,pillArray);
 
