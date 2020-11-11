@@ -1,20 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SugarLevelActivity">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".BloodPressureActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SugarLevelActivity"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/pressuregraph" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reminder"
+                android:textSize="30sp"
+                android:id="@+id/remindertext"
+                android:paddingBottom="10dp"
+                android:textColor="#0000A0"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/NewSugarLevelReminderButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:text="+"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:textColor="#FFFFFF"
+
+                android:background="@drawable/custom_button3"/>
+
+            <TableLayout
+                android:id="@+id/SugarLevelReminder"
+                android:background="@drawable/home_column"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/remindertext"
+
+                android:stretchColumns="*">
+
+                <TableRow>
+                    <LinearLayout
+                        android:id="@+id/SugarLevelReminder1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="2dp"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder1Date"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="20/11"/>
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder1Time"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="3.00"/>
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder1APM"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="pm"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/SugarLevelReminder2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="2dp"
+                        android:orientation="vertical"
+                        android:weightSum="1" >
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder2Date"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="20/11"/>
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder2Time"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="8.00"/>
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder2APM"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="pm"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/SugarLevelReminder3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="2dp"
+                        android:orientation="vertical"
+                        android:weightSum="1" >
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder3Date"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="20/11"/>
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder3Time"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="10.00"/>
+
+                        <TextView
+                            android:id="@+id/SugarLevelReminder3APM"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textColor="#0000A0"
+                            android:textSize="20sp"
+                            android:text="pm"/>
+
+
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/NextSugarLevelReminderButton"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:text=">"
+                        android:textSize="30sp"
+                        android:background="@drawable/custom_button4"/>
+
+
+                </TableRow>
+
+
+
+            </TableLayout>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Record"
+                android:textSize="30sp"
+                android:id="@+id/recordtext"
+                android:paddingBottom="10dp"
+                android:textColor="#0000A0"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/SugarLevelRecordButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:text="+"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:textColor="#FFFFFF"
+
+                android:background="@drawable/custom_button3"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
