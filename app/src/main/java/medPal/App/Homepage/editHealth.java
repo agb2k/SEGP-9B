@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Homepage;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
+
+import medPal.App.R;
 
 
 public class editHealth extends Activity {
