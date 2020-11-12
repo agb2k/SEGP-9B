@@ -1,7 +1,6 @@
 package medPal.App;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,13 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import medPal.App.Homepage.healthPopUp;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,12 +79,12 @@ public class HomeFragment extends Fragment {
 
         ArrayList<String> pillArray = new ArrayList<>();
 
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
-        pillArray.add("Panadol");
+        pillArray.add("Panadol 1");
+        pillArray.add("Panadol 2");
+        pillArray.add("Panadol 3");
+        pillArray.add("Panadol 4");
+        pillArray.add("Panadol 5");
+        pillArray.add("Panadol 6");
 
         ArrayAdapter pillAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,pillArray);
 
@@ -96,7 +95,7 @@ public class HomeFragment extends Fragment {
         healthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),healthPopUp.class));
+                startActivity(new Intent(getActivity(), healthPopUp.class));
             }
         });
 

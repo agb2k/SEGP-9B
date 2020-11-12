@@ -1,6 +1,7 @@
-package medPal.App;
+package medPal.App.Homepage;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -8,11 +9,15 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 
+import medPal.App.R;
+
 public class healthPopUp extends Activity{
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +47,19 @@ public class healthPopUp extends Activity{
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //Dimming pop up window background
+
+        //Edit Health Condition Button
+        ImageButton b1;
+
+        b1 = (ImageButton)findViewById(R.id.editHealthButton) ;
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(healthPopUp.this, editHealth.class));
+            }
+        });
+
 
 
     }

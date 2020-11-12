@@ -23,7 +23,7 @@
 
     <style name="Theme.MedPal.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="healthPopStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="healthPopStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>

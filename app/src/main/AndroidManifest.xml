@@ -12,10 +12,12 @@
         <activity android:name=".NewSugarLevelRecord"></activity>
         <activity android:name=".NewPressureRecord" />
         <activity android:name=".SugarLevelActivity" />
-        <activity android:name=".BloodPressureActivity" /> <!-- Health Condition Pop up window -->
+        <activity android:name=".BloodPressureActivity" />
+        <!-- Health Condition Pop up window -->
         <activity
-            android:name=".healthPopUp"
+            android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
+        <activity android:name=".Homepage.editHealth"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
