@@ -61,7 +61,8 @@
                         android:id="@+id/SugarLevelReminder1"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="1dp"
+                        android:background="@color/white"
                         android:orientation="vertical"
                         android:weightSum="1">
 
@@ -94,11 +95,14 @@
 
                     </LinearLayout>
 
+
+
                     <LinearLayout
                         android:id="@+id/SugarLevelReminder2"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="1dp"
+                        android:background="@color/white"
                         android:orientation="vertical"
                         android:weightSum="1" >
 
@@ -135,7 +139,8 @@
                         android:id="@+id/SugarLevelReminder3"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_marginTop="2dp"
+                        android:background="@color/white"
+                        android:layout_marginRight="1dp"
                         android:orientation="vertical"
                         android:weightSum="1" >
 
@@ -172,7 +177,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/NextSugarLevelReminderButton"
-                        android:layout_width="10dp"
+                        android:layout_width="3dp"
                         android:layout_height="match_parent"
                         android:text=">"
                         android:textSize="30sp"

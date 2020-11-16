@@ -22,6 +22,7 @@
 
     <string name="november">November</string>
     <string name="novemberSugar">November</string>
+    <string name="fab_content_desc">+</string>
 
     <string-array name="november">
         <item>Record for november</item>

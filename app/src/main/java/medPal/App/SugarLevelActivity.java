@@ -14,6 +14,7 @@ import java.util.List;
 
 public class SugarLevelActivity extends AppCompatActivity {
     private Button b4;
+    private Button b5;
     ExpandableListView expandableListView;
     List<String> listGroup;
     HashMap<String,List<String>> listItem;
@@ -40,7 +41,13 @@ public class SugarLevelActivity extends AppCompatActivity {
             }
         });
 
-
+        b5 = (Button) findViewById(R.id.NewSugarLevelReminderButton);
+        b5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSugarReminderList();
+            }
+        });
 
     }
 
@@ -64,4 +71,10 @@ public class SugarLevelActivity extends AppCompatActivity {
         Intent intent2 = new Intent(this, NewSugarLevelRecord.class);
         startActivity(intent2);
     }
+
+    public void openSugarReminderList() {
+        Intent intent2 = new Intent(this, SugarReminderList.class);
+        startActivity(intent2);
+    }
+
 }
