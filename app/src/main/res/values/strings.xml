@@ -20,5 +20,18 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <string name="november">November</string>
+    <string name="novemberSugar">November</string>
+
+    <string-array name="november">
+        <item>Record for november</item>
+    </string-array>
+
+    <string-array name="novemberSugar">
+        <item>1/11       50</item>
+        <item>2/11       50</item>
+        <item>3/11       50</item>
+        <item>4/11       50</item>
+    </string-array>
 
 </resources>

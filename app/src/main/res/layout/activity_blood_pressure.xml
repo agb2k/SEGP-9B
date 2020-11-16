@@ -217,6 +217,12 @@
 
         android:background="@drawable/custom_button3"/>
 
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recordtext"
+            android:id="@+id/expandablelistview"/>
+
     </RelativeLayout>
 
 </LinearLayout>
