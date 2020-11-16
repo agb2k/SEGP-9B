@@ -1,5 +1,6 @@
 package medPal.App;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import medPal.App.Homepage.healthPopUp;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +54,7 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +62,46 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
+
+    Button healthBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Homepage Pill Reminder java coding
+        ListView pillList = (ListView)v.findViewById(R.id.pillListHome);
+
+        ArrayList<String> pillArray = new ArrayList<>();
+
+        pillArray.add("Panadol 1");
+        pillArray.add("Panadol 2");
+        pillArray.add("Panadol 3");
+        pillArray.add("Panadol 4");
+        pillArray.add("Panadol 5");
+        pillArray.add("Panadol 6");
+
+        ArrayAdapter pillAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,pillArray);
+
+        pillList.setAdapter(pillAdapter);
+
+        healthBtn = v.findViewById(R.id.healthConditionButton);
+
+        healthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), healthPopUp.class));
+            }
+        });
+
+
+
+        return v;
+
     }
 }

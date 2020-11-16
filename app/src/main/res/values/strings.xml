@@ -2,7 +2,37 @@
     <string name="app_name">medPal</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
     <string name="blood_sugar_level">Blood Sugar Level</string>
     <string name="allow_pop_up_notification">Allow pop-up notification</string>
     <string name="blood_pressure">Blood Pressure</string>
+
+
+    <string name="appoinment">Appoinment</string>
+    <string name="title_activity_blood_pressure">BloodPressureActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="november">November</string>
+    <string name="novemberSugar">November</string>
+    <string name="fab_content_desc">+</string>
+
+    <string-array name="november">
+        <item>Record for november</item>
+    </string-array>
+
+    <string-array name="novemberSugar">
+        <item>1/11       50</item>
+        <item>2/11       50</item>
+        <item>3/11       50</item>
+        <item>4/11       50</item>
+    </string-array>
+
 </resources>

@@ -1,16 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
+
+    <TableLayout android:id="@+id/appointmentHome"
+        android:background="@drawable/home_column"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="40dp"
-        android:text="Homepage" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stretchColumns="*">
 
-</FrameLayout>
+        <TableRow>
+            <TextView android:id="@+id/appointmentTitle"
+                android:background="@drawable/home_bottom_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="3dip"
+                android:textStyle="bold"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Upcoming Appointment"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="#FF0000"
+                android:textSize="20sp"
+                android:text="Planned"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="	#008000"
+                android:textSize="20sp"
+                android:text="Confirmed"/>
+        </TableRow>
+
+
+        <TableRow>
+            <LinearLayout
+                android:id="@+id/planAppointment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/planAppointmentDate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="20/11/20"/>
+
+                <TextView
+                    android:id="@+id/planAppointmentTime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="3.00pm"/>
+
+                <TextView
+                    android:id="@+id/planAppointmentDoc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Dr. Sam"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/confirmAppointment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical"
+                android:weightSum="1" >
+
+                <TextView
+                    android:id="@+id/confirmAppointmentDate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="25/10/20"/>
+
+                <TextView
+                    android:id="@+id/confirmAppointmentTime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="8.00am"/>
+
+                <TextView
+                    android:id="@+id/confirmAppointmentDoc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Dr. Alex"/>
+
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout android:id="@+id/pillHome"
+        android:background="@drawable/home_column"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stretchColumns="*">
+
+        <TableRow>
+            <TextView android:id="@+id/pillTitle"
+                android:background="@drawable/home_bottom_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textStyle="bold"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Pill Reminder"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView tools:ignore="NestedScrolling,UselessParent">
+
+
+                <ListView
+                    android:id="@+id/pillListHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                </ListView>
+
+            </ScrollView>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+    <TableLayout android:id="@+id/trackerHome"
+        android:background="@drawable/home_column"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pillHome"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stretchColumns="*">
+
+        <TableRow>
+            <TextView android:id="@+id/trackerTitle"
+                android:background="@drawable/home_bottom_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:padding="3dip"
+                android:textStyle="bold"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Tracker"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:paddingBottom="0dip"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Blood Pressure"/>
+
+            <TextView android:id="@+id/lastPressure"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="30"/>
+        </TableRow>
+
+
+        <TableRow>
+            <TextView android:id="@+id/lastPressureTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="Last recorded 9.02am 23/10/2020"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textAlignment="center"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="mmol/L"/>
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Blood Glucose"/>
+
+            <TextView android:id="@+id/lastGlucose"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="122/78"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:id="@+id/lastGlucoseTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="Last recorded 9.02am 23/10/2020"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textAlignment="center"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="mmHg"/>
+
+        </TableRow>
+
+
+
+    </TableLayout>
+
+    <Button android:id="@+id/healthConditionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="100dp"
+        android:textColor="#0000A0"
+        android:text="Health Condition"/>
+
+
+</LinearLayout>
+</ScrollView>
