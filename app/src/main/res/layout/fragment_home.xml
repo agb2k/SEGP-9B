@@ -31,7 +31,7 @@
                 android:textStyle="bold"
                 android:textColor="#0000A0"
                 android:textSize="25sp"
-                android:text="@string/appoinment"/>
+                android:text="Upcoming Appointment"/>
         </TableRow>
 
         <TableRow>
