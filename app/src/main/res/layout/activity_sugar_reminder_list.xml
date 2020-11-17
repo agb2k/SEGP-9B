@@ -7,13 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".SugarReminderList">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="16dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <TextView
+        android:id="@+id/remindertext1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_below="@+id/toolbar"
+        android:textStyle="bold"
+        android:text="CLICK ON REMINDER BELOW TO SET ALARM"/>
+
     <ListView
-        android:id="@+id/sugarReminderList"
+        android:id="@+id/list123"
+        android:layout_below="@+id/remindertext1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <RelativeLayout
-        android:id="@+id/EmptySugarReminderList"
+        android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" >
@@ -29,18 +49,16 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/AddNewSugarReminder"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:text="+"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
         android:layout_marginTop="2dp"
-        android:textColor="#FFFFFF"
-
-        android:background="@drawable/custom_button3"/>
+        android:src="@drawable/ic_plus"
+        app:fabSize="normal"/>
 
 
 

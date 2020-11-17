@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="medPal.App">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPal">
-        <activity android:name=".NewSugarReminder"></activity>
+        <activity android:name=".alarm_item"></activity>
+
         <activity android:name=".SugarReminderList" />
         <activity android:name=".NewSugarLevelRecord" />
         <activity android:name=".NewPressureRecord" />
@@ -26,6 +31,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".NewSugarReminder"
+
+            android:parentActivityName=".SugarReminderList">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SugarReminderList"
+                />
+        </activity>
+
+        <provider
+            android:name=".AlarmReminderProvider"
+            android:authorities="medPal.App"
+            android:exported="false" />
+
+        <service
+            android:name=".ReminderAlarmService"
+            android:exported="false" />
+
     </application>
+
+
 
 </manifest>

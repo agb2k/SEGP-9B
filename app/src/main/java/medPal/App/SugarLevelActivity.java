@@ -1,12 +1,12 @@
 package medPal.App;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +45,7 @@ public class SugarLevelActivity extends AppCompatActivity {
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openSugarReminderList();
             }
         });
@@ -73,8 +74,8 @@ public class SugarLevelActivity extends AppCompatActivity {
     }
 
     public void openSugarReminderList() {
-        Intent intent2 = new Intent(this, SugarReminderList.class);
-        startActivity(intent2);
+        Intent intent = new Intent(this, SugarReminderList.class);
+        startActivity(intent);
     }
 
 }

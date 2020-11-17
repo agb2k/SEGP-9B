@@ -1,16 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PillReminderFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="40dp"
-        android:text="Pill Reminder" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/pillNotificationSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Allow pop-up notification"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:textStyle="bold"
+            android:textColor="#0000A0"
+            android:textSize="25sp"
+            android:text="Pill Reminder"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/NewPillReminderButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:text="+"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/custom_button3"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/home_column">
+
+            <TextView android:id="@+id/pillReminderTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="9.00 AM"/>
+
+            <ImageButton
+                android:id="@+id/editPillReminderButton"
+                android:background="@color/tableColor"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_baseline_edit_24"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pillReminderTime"
+                android:layout_marginTop="10dp">
+
+                <TableRow tools:ignore="UselessParent">
+
+                    <ImageView
+                        android:id="@+id/pillReminderImage1"
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_pill" />
+
+                    <ImageView
+                        android:id="@+id/pillReminderImage2"
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_pill" />
+
+                    <ImageView
+                        android:id="@+id/pillReminderImage3"
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_pill" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView android:id="@+id/pillName1"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="#0000A0"
+                        android:textSize="15sp"
+                        android:text="Medicine A"/>
+
+                    <TextView android:id="@+id/pillName2"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="#0000A0"
+                        android:textSize="15sp"
+                        android:text="Medicine B"/>
+
+                    <TextView android:id="@+id/pillName3"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="#0000A0"
+                        android:textSize="15sp"
+                        android:text="Medicine C"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView android:id="@+id/pillTake1"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="15sp"
+                        android:text="Take 2"/>
+                    <TextView android:id="@+id/pillTake2"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="15sp"
+                        android:text="Take 2"/>
+                    <TextView android:id="@+id/pillTake3"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/lightgrey"
+                        android:textSize="15sp"
+                        android:text="Take 2"/>
+                </TableRow>
+            </TableLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/NextPillReminderButton"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text=">"
+                android:textSize="30sp"
+                android:background="@drawable/custom_button4"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textStyle="bold"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Medicine"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/NewMedicineButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:text="+"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/custom_button3"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/home_column">
+            <TextView
+                android:id="@+id/medicineDetailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Medicine Detail"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medicineDetailTitle">
+
+                <TableRow>
+                    <ImageView
+                        android:id="@+id/MedicineImage1"
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_pill" />
+
+                    <TableLayout>
+                        <TableRow>
+                            <TextView android:id="@+id/medicineName1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#0000A0"
+                                android:textSize="15sp"
+                                android:text="Medicine A"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView android:id="@+id/medicineDose1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/lightgrey"
+                                android:textSize="12sp"
+                                android:text="500mg"/>
+                        </TableRow>
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/medicineFunction1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Reduce Blood Pressure"
+                                android:textColor="@color/lightgrey"
+                                android:textSize="12sp" />
+                        </TableRow>
+                        <TableRow>
+                            <TextView android:id="@+id/medicineRemark1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/lightgrey"
+                                android:textSize="12sp"
+                                android:text="Remark 1"/>
+                        </TableRow>
+                    </TableLayout>
+                </TableRow>
+
+
+            </TableLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="Get PDF Report" />
+
+
+    </LinearLayout>
+
+</ScrollView>
