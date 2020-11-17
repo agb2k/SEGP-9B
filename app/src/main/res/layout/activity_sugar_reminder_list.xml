@@ -28,7 +28,7 @@
 
     <ListView
         android:id="@+id/list123"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/remindertext1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

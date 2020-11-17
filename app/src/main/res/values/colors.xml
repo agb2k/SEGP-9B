@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="tableColor">#C2E2EE</color>
     <color name="lightgrey">#A5AFB3</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="fab_pressed">#546e7a</color>
 </resources>
