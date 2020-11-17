@@ -63,7 +63,9 @@ public class    ReminderAlarmService extends IntentService {
             }
         }
 
-        Notification note = new NotificationCompat.Builder(this)
+
+
+        Notification note = new NotificationCompat.Builder(this, "MY_CH_ID" )
                 .setContentTitle(getString(R.string.reminder_title))
                 .setContentText(description)
                 .setSmallIcon(R.drawable.ic_plus)
