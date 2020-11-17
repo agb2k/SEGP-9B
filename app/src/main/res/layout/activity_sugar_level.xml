@@ -40,12 +40,10 @@
                 android:id="@+id/NewSugarLevelReminderButton"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:text="+"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="2dp"
                 android:textColor="#FFFFFF"
-
-                android:background="@drawable/custom_button3"/>
+                android:background="@drawable/ic_baseline_edit_24"/>
 
             <TableLayout
                 android:id="@+id/SugarLevelReminder"
