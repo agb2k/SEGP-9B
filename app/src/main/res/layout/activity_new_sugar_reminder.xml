@@ -2,21 +2,32 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewSugarReminder">
+    
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="16dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <LinearLayout
         android:id="@+id/Linear1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="148dp"
         android:orientation="vertical">
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/NewSugarReminderTitle"
+            android:layout_height="148dp"
+            android:id="@+id/reminder_title"
             android:hint="Reminder"
             android:textSize="25sp"
             android:lines="4"
@@ -24,6 +35,7 @@
             android:gravity="top|left"
             android:scrollHorizontally="false"
             android:inputType="textCapWords|textMultiLine"
+            android:layout_marginLeft="72dp"
             android:layout_marginRight="15dp"/>
 
     </LinearLayout>
@@ -52,7 +64,8 @@
                 android:id="@+id/setDate"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:clickable="true">
+                android:clickable="true"
+                android:onClick="setDate">
 
                 <ImageView
                     android:id="@+id/date_icon"
@@ -94,7 +107,8 @@
                 android:id="@+id/setTime"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:clickable="true">
+                android:clickable="true"
+                android:onClick="setTime">
 
                 <ImageView
                     android:id="@+id/time_icon"
@@ -135,8 +149,7 @@
             <RelativeLayout
                 android:id="@+id/setrepeat1"
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:clickable="true">
+                android:layout_height="72dp">
 
                 <ImageView
                     android:id="@+id/repeat_icon"
@@ -171,22 +184,140 @@
 
                 </LinearLayout>
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/repeat_Switch"
+                <Switch
+                    android:id="@+id/repeat_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginStart="8dp"/>
+                    android:layout_marginStart="8dp"
+                    android:checked="true"
+                    android:textOn="On"
+                    android:textOff="Off"/>
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/repeatNo"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:clickable="true"
+                android:onClick="setRepeatNo">
 
+                <ImageView
+                    android:id="@+id/repeatNo_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_alarm_on_24"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/repeatNo_icon">
+
+                    <TextView
+                        android:id="@+id/repeatNo_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Repetition Interval"
+                        android:textSize="15dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/set_repeat_no"
+                        android:textSize="15dp"/>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/repeatType"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:clickable="true"
+                android:onClick="selectRepeatType">
+
+                <ImageView
+                    android:id="@+id/repeatType_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_alarm_on_24"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/repeatType_icon">
+
+                    <TextView
+                        android:id="@+id/repeatType_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type Of Repetitions"
+                        android:textSize="15dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/set_repeat_type"
+                        android:textSize="15dp"/>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
 
 
         </LinearLayout>
 
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/Linear1" />
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/starred1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="selectFab1"
+        fab:fab_icon="@drawable/ic_plus"
+        app:fab_size="normal"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="168dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/starred2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="selectFab2"
+        fab:fab_icon="@drawable/ic_plus"
+        app:fab_size="normal"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="168dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"/>
 
 </RelativeLayout>
