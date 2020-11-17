@@ -227,12 +227,14 @@
                                 android:text="500mg"/>
                         </TableRow>
                         <TableRow>
-                            <TextView android:id="@+id/medicineFunction1"
+
+                            <TextView
+                                android:id="@+id/medicineFunction1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Reduce Blood Pressure"
                                 android:textColor="@color/lightgrey"
-                                android:textSize="12sp"
-                                android:text="Reduce Blood Pressure"/>
+                                android:textSize="12sp" />
                         </TableRow>
                         <TableRow>
                             <TextView android:id="@+id/medicineRemark1"
