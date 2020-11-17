@@ -1,12 +1,20 @@
 package medPal.App;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,12 +63,26 @@ public class PillReminderFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pill_reminder, container, false);
 
+        PillReminderController prController = new PillReminderController();
+        ArrayList<PillReminder> pillreminders = prController.getAllPillReminder();
+
+        String result = "Result: \n";
+        for(int i=0; i<pillreminders.size(); i++){
+            result += pillreminders.get(i).toString();
+        }
+        Log.v("Test backend",result);
+
+        /* Get image
+        ImageView iV = (ImageView) v.findViewById(R.id.imageViewId);
+        Picasso.get().load(prController.getMedicineById(2003).getImagePath()).into(iV);
+        */
 
         return v;
     }
