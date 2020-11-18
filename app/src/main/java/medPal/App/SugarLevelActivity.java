@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -85,9 +84,9 @@ public class SugarLevelActivity extends AppCompatActivity {
 
                     for (int i = 0; i<ja.length(); i++){
                         jo = ja.getJSONObject(i);
-                        date[i] = jo.getString("date");
-                        time[i] = jo.getString("time");
-                        level[i] = jo.getString("level");
+                        date[i] = jo.getString("Date");
+                        time[i] = jo.getString("Time");
+                        level[i] = jo.getString("Level");
                     }
                     myadapter adptr = new myadapter(getApplicationContext(), date, time, level);
                     lv.setAdapter(adptr);
