@@ -2,27 +2,17 @@ package medPal.App;
 
 
 import android.content.Intent;
-
 import android.os.Build;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.Button;
-
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
->>>>>>> 0410e019bfbe2715f0135b0b57de733c17723bbb
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,7 +79,7 @@ public class PillReminderFragment extends Fragment {
             }
         });
 
-        PillReminderController prController = new PillReminderController();
+        /*PillReminderController prController = new PillReminderController();
         ArrayList<PillReminder> pillreminders = prController.getAllPillReminder();
 
         String result = "Result: \n";

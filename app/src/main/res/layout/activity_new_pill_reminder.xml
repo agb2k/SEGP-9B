@@ -66,13 +66,13 @@
 
             <EditText
                 android:id="@+id/NewPillReminderMedicineName"
-                android:background="@drawable/input_text_box_column"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/NewMedicineNameCol"
+                android:autofillHints="Medicine Name 1"
+                android:background="@drawable/input_text_box_column"
                 android:inputType="text"
-                android:textSize="25sp"
-                android:autofillHints="Medicine Name 1" />
+                android:textSize="25sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -202,12 +202,12 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/newPillReminderConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_gravity="center"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:text="Confirm"/>
 
     </LinearLayout>

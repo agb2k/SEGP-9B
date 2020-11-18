@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +10,7 @@
     tools:context=".NewPressureRecord">
 
     <RelativeLayout
+        android:id="@+id/NewSugarDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="15dp">
@@ -18,36 +20,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="5dp"
+            android:paddingRight="35dp"
             android:text="Date"
             android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextDate"
+            android:background="@drawable/input_text_box_column"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/Date"
             android:ems="10"
             android:inputType="date" />
+    </RelativeLayout>
 
+
+    <RelativeLayout
+        android:id="@+id/NewSugarTime"
+        android:layout_width="match_parent"
+        android:paddingBottom="20dp"
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Date"
             android:paddingRight="30dp"
             android:text="Time"
             android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextTime"
+            android:background="@drawable/input_text_box_column"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editTextDate"
             android:layout_toRightOf="@id/Time"
             android:ems="10"
             android:inputType="time" />
+
     </RelativeLayout>
 
 
@@ -79,8 +88,11 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/input_text_box_column"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:ems="4"
-                android:inputType="time" />
+                android:inputType="number" />
 
 
         </LinearLayout>
@@ -108,13 +120,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remark"
+            android:padding="20dp"
             android:textSize="20sp"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/input_text_box_column"
             android:ems="15"
-            android:layout_toRightOf="@id/Remark"
+            android:layout_below="@id/Remark"
             android:inputType="textLongMessage" />
 
 

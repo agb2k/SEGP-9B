@@ -207,7 +207,7 @@
                         android:id="@+id/MedicineImage1"
                         android:layout_width="100dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/ic_pill" />
+                        android:src="@drawable/ic_pill"/>
 
                     <TableLayout>
                         <TableRow>
