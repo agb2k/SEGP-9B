@@ -4,11 +4,11 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".BloodPressureActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="20dp"
-        tools:context=".BloodPressureActivity">
+        android:padding="20dp">
 
 
         <com.jjoe64.graphview.GraphView
@@ -193,6 +193,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/PastSugarRecordText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
@@ -221,10 +222,9 @@
 
         </RelativeLayout>
 
-        <ExpandableListView
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/recordtext"
-            android:id="@+id/expandablelistview2"/>
+            android:id="@+id/lv"/>
 
     </LinearLayout>
