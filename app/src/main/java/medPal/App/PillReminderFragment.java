@@ -1,10 +1,10 @@
 package medPal.App;
 
-<<<<<<< HEAD
+
 import android.content.Intent;
-=======
+
 import android.os.Build;
->>>>>>> 0410e019bfbe2715f0135b0b57de733c17723bbb
+
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
@@ -14,9 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
+
 import android.widget.Button;
-=======
+
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
