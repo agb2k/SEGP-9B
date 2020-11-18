@@ -2,12 +2,15 @@ package medPal.App;
 
 import android.app.IntentService;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
@@ -62,17 +65,36 @@ public class    ReminderAlarmService extends IntentService {
                 cursor.close();
             }
         }
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
-        Notification note = new NotificationCompat.Builder(this)
-                .setContentTitle(getString(R.string.reminder_title))
-                .setContentText(description)
-                .setSmallIcon(R.drawable.ic_plus)
-                .setContentIntent(operation)
-                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setAutoCancel(true)
-                .build();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_HIGH);
 
-        manager.notify(NOTIFICATION_ID, note);
+            // Configure the notification channel.
+            notificationChannel.setDescription("Channel description");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            notificationChannel.enableVibration(true);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+
+        notificationBuilder.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_baseline_alarm_on_24)
+                .setTicker("Hearty365")
+                .setSound(Settings.System.DEFAULT_ALARM_ALERT_URI)
+                .setVibrate(new long[] {1000, 1000, 1000, 1000, 1000})
+                //     .setPriority(Notification.PRIORITY_MAX)
+                .setContentTitle("Alarm Reminder")
+                .setContentText("HELLO THERE TEXT!")
+                .setContentInfo("ABCCC");
+
+        notificationManager.notify(/*notification id*/1, notificationBuilder.build());
     }
 }

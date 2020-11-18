@@ -77,7 +77,7 @@ public class AlarmCursorAdapter extends CursorAdapter {
         if(active != null){
             setActiveImage(active);
         }else{
-            mActiveImage.setImageResource(R.drawable.ic_plus);
+            mActiveImage.setImageResource(R.drawable.ic_notification_on);
         }
 
 
@@ -117,9 +117,9 @@ public class AlarmCursorAdapter extends CursorAdapter {
     // Set active image as on or off
     public void setActiveImage(String active){
         if(active.equals("true")){
-            mActiveImage.setImageResource(R.drawable.ic_plus);
+            mActiveImage.setImageResource(R.drawable.ic_notification_on);
         }else if (active.equals("false")) {
-            mActiveImage.setImageResource(R.drawable.ic_plus);
+            mActiveImage.setImageResource(R.drawable.ic_notification_off);
         }
     }
 }
