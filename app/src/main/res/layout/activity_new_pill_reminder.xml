@@ -201,6 +201,15 @@
                 android:autofillHints="Medicine Name 1" />
         </RelativeLayout>
 
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:textSize="30dp"
+            android:text="Confirm"/>
+
     </LinearLayout>
 
 </ScrollView>
