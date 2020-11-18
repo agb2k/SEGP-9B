@@ -11,4 +11,6 @@
     <color name="lightgrey">#A5AFB3</color>
     <color name="colorAccent">#FF4081</color>
     <color name="fab_pressed">#546e7a</color>
+    <color name="blueFontColor">#0000A0</color>
+    <color name="textBoxGrey">#DEDEE4</color>
 </resources>

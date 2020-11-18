@@ -1,12 +1,28 @@
 package medPal.App;
 
+
+import android.content.Intent;
+
+import android.os.Build;
+
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.widget.Button;
+
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+>>>>>>> 0410e019bfbe2715f0135b0b57de733c17723bbb
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +71,9 @@ public class PillReminderFragment extends Fragment {
         }
     }
 
+    private Button b1;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +81,33 @@ public class PillReminderFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_pill_reminder, container, false);
 
 
+        b1 = v.findViewById(R.id.NewPillReminderButton);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewPillReminder();
+            }
+        });
+
+        PillReminderController prController = new PillReminderController();
+        ArrayList<PillReminder> pillreminders = prController.getAllPillReminder();
+
+        String result = "Result: \n";
+        for(int i=0; i<pillreminders.size(); i++){
+            result += pillreminders.get(i).toString();
+        }
+        Log.v("Test backend",result);
+
+        /* Get image
+        ImageView iV = (ImageView) v.findViewById(R.id.imageViewId);
+        Picasso.get().load(prController.getMedicineById(2003).getImagePath()).into(iV);
+        */
+
         return v;
+    }
+
+    public void openNewPillReminder() {
+        Intent intent = new Intent(getActivity(), NewPillReminder.class);
+        startActivity(intent);
     }
 }

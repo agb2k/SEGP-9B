@@ -19,7 +19,11 @@
         <activity android:name=".NewSugarLevelRecord" />
         <activity android:name=".NewPressureRecord" />
         <activity android:name=".SugarLevelActivity" />
-        <activity android:name=".BloodPressureActivity" /> <!-- Health Condition Pop up window -->
+        <activity android:name=".BloodPressureActivity" />
+
+        <activity android:name=".NewPillReminder"/>
+
+        <!-- Health Condition Pop up window -->
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
