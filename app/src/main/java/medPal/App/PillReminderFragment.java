@@ -1,14 +1,28 @@
 package medPal.App;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+import android.os.Build;
+>>>>>>> 0410e019bfbe2715f0135b0b57de733c17723bbb
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.Button;
+=======
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+>>>>>>> 0410e019bfbe2715f0135b0b57de733c17723bbb
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,11 +73,13 @@ public class PillReminderFragment extends Fragment {
 
     private Button b1;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pill_reminder, container, false);
+
 
         b1 = v.findViewById(R.id.NewPillReminderButton);
         b1.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +88,20 @@ public class PillReminderFragment extends Fragment {
                 openNewPillReminder();
             }
         });
+
+        PillReminderController prController = new PillReminderController();
+        ArrayList<PillReminder> pillreminders = prController.getAllPillReminder();
+
+        String result = "Result: \n";
+        for(int i=0; i<pillreminders.size(); i++){
+            result += pillreminders.get(i).toString();
+        }
+        Log.v("Test backend",result);
+
+        /* Get image
+        ImageView iV = (ImageView) v.findViewById(R.id.imageViewId);
+        Picasso.get().load(prController.getMedicineById(2003).getImagePath()).into(iV);
+        */
 
         return v;
     }
