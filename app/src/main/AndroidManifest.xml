@@ -23,6 +23,8 @@
 
         <activity android:name=".NewPillReminder"/>
 
+        <activity android:name=".NewAppointment"/>
+
         <!-- Health Condition Pop up window -->
         <activity
             android:name=".Homepage.healthPopUp"
