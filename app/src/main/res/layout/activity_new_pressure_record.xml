@@ -9,6 +9,7 @@
     tools:context=".NewPressureRecord">
 
     <RelativeLayout
+        android:id="@+id/NewPressureDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="15dp">
@@ -18,33 +19,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="5dp"
+        android:paddingRight="35dp"
         android:text="Date"
         android:textSize="30sp" />
 
     <EditText
         android:id="@+id/editTextDate"
+        android:background="@drawable/input_text_box_column"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/Date"
         android:ems="10"
         android:inputType="date" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/NewPressureTime"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/Time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Date"
         android:paddingRight="30dp"
         android:text="Time"
         android:textSize="30sp" />
 
     <EditText
         android:id="@+id/editTextTime"
+        android:background="@drawable/input_text_box_column"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextDate"
         android:layout_toRightOf="@id/Time"
         android:ems="10"
         android:inputType="time" />
@@ -85,8 +93,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/input_text_box_column"
                 android:ems="4"
-                android:inputType="time" />
+                android:inputType="number" />
 
 
         </LinearLayout>
@@ -112,8 +121,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/input_text_box_column"
                 android:ems="4"
-                android:inputType="time" />
+                android:inputType="number" />
 
 
         </LinearLayout>
@@ -140,14 +150,18 @@
             android:id="@+id/Remark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
             android:text="Remark"
             android:textSize="20sp"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/input_text_box_column"
+            android:lines="3"
+            android:maxLines="3"
             android:ems="15"
-            android:layout_toRightOf="@id/Remark"
+            android:layout_below="@id/Remark"
             android:inputType="textLongMessage" />
 
 

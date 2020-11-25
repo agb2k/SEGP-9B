@@ -1,16 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AppointmentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="40dp"
-        android:text="Appointment" />
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/appointmentNotificationSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Allow pop-up notification"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textStyle="bold"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Upcoming Appointment"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/newAppointmentButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:text="+"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/custom_button3"/>
+        </RelativeLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/home_column">
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Date:"/>
+
+                <TextView android:id="@+id/AppointmentDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="30/10/2020"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Time:"/>
+
+                <TextView android:id="@+id/AppoimentTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="12:00pm"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Doctor:"/>
+
+                <TextView android:id="@+id/AppoimentDoctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Dr. Name"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Venue:"/>
+
+                <TextView android:id="@+id/AppoimentVenue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Hospital Name"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Contact:"/>
+
+                <TextView android:id="@+id/AppoimentContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="012-3456789"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Email/Link:"/>
+
+                <TextView android:id="@+id/AppoimentEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="doctor@hospital.com"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="20sp"
+                android:text="Purpose:"/>
+
+            <TextView android:id="@+id/AppoimentPurpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:text="BodyCheck"
+                android:textColor="@color/lightgrey"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="20sp"
+                android:text="Remark:"/>
+
+            <TextView android:id="@+id/AppoimentRemark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:text="None"
+                android:textColor="@color/lightgrey"
+                android:textSize="20sp" />
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>

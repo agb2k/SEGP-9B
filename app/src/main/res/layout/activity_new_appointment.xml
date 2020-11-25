@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <RadioButton android:id="@+id/radio_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Confirmed"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/radio_follow_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:text="Planned"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentDateCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Date:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentDate"
+                android:background="@drawable/input_text_box_column"
+                android:layout_marginStart="10dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/NewAppointmentDateCol"
+                android:inputType="date"
+                android:textSize="20sp"
+                android:autofillHints="Date" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentTimeCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Time:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentTime"
+                android:background="@drawable/input_text_box_column"
+                android:layout_marginStart="10dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/NewAppointmentTimeCol"
+                android:inputType="time"
+                android:textSize="20sp"
+                android:autofillHints="Time" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentDoctorCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Doctor:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentDoctor"
+                android:background="@drawable/input_text_box_column"
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/NewAppointmentDoctorCol"
+                android:inputType="text"
+                android:textSize="20sp"
+                android:autofillHints="Dr. Name" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentVenueCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Venue:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentVenue"
+                android:background="@drawable/input_text_box_column"
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/NewAppointmentVenueCol"
+                android:inputType="text"
+                android:textSize="20sp"
+                android:autofillHints="hospital" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentContactCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Contact:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentContact"
+                android:background="@drawable/input_text_box_column"
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/NewAppointmentContactCol"
+                android:inputType="number"
+                android:textSize="20sp"
+                android:autofillHints="012-3456789" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentEmailCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Email:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentEmail"
+                android:background="@drawable/input_text_box_column"
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/NewAppointmentEmailCol"
+                android:inputType="textEmailAddress"
+                android:textSize="20sp"
+                android:autofillHints="Email" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentPurposeCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Purpose:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentPurpose"
+                android:background="@drawable/input_text_box_column"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/NewAppointmentPurposeCol"
+                android:inputType="textMultiLine"
+                android:maxLines="20"
+                android:textSize="20sp"
+                android:autofillHints="Dr. Name" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/NewAppointmentRemarkCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blueFontColor"
+                android:textSize="20sp"
+                android:text="Remark:"/>
+
+            <EditText
+                android:id="@+id/NewAppointmentRemark"
+                android:background="@drawable/input_text_box_column"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/NewAppointmentRemarkCol"
+                android:inputType="textMultiLine"
+                android:maxLines="20"
+                android:textSize="20sp"
+                android:autofillHints="Remark" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/newAppointmentConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="100dp"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:text="Confirm"/>
+    </LinearLayout>
+
+</ScrollView>
