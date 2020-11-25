@@ -1,20 +1,23 @@
 package medPal.App;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
-public class PillReminderController {
+public class PillReminderController implements Serializable {
     private ArrayList<Medicine> medicineList = new ArrayList<>();
     private ArrayList<PillReminder> pillReminderList = new ArrayList<PillReminder>();
     private ArrayList<PillReminder> todayPillReminder = new ArrayList<PillReminder>();
-    private HashMap<LocalTime,ArrayList<PillReminder>> pillReminderByTime = new HashMap<LocalTime,ArrayList<PillReminder>>();
-    public HashMap<LocalTime,Integer> takenBit = new HashMap<LocalTime,Integer>();
+    private TreeMap<LocalTime,ArrayList<PillReminder>> pillReminderByTime = new TreeMap<LocalTime,ArrayList<PillReminder>>();
+    public TreeMap<LocalTime,Integer> takenBit = new TreeMap<LocalTime,Integer>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     PillReminderController() {
@@ -24,6 +27,15 @@ public class PillReminderController {
         formTodaysPillReminder();
         groupPillReminderByTime();
         setAllNotTaken();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void refreshData() {
+        RetrievePillReminders getDB = new RetrievePillReminders();
+        medicineList = getDB.getAllMedicine();
+        pillReminderList = getDB.getAllPillReminder();
+        formTodaysPillReminder();
+        groupPillReminderByTime();
     }
 
     public ArrayList<Medicine> getAllMedicine() {
@@ -81,7 +93,7 @@ public class PillReminderController {
     }
 
     // Get today's pill reminder, group by time
-    public HashMap<LocalTime,ArrayList<PillReminder>> getPillReminderByTime() {
+    public TreeMap<LocalTime,ArrayList<PillReminder>> getPillReminderByTime() {
         return pillReminderByTime;
     }
 
@@ -97,14 +109,14 @@ public class PillReminderController {
 
     // Get current pill reminders
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public HashMap<LocalTime,ArrayList<PillReminder>> getNotTaken(){
+    public TreeMap<LocalTime,ArrayList<PillReminder>> getNotTaken(){
         FilterNotTaken notTaken = new FilterNotTaken();
         return notTaken.meetsCriteria(pillReminderByTime,takenBit);
     }
 
     // Get upcoming pill reminders
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public HashMap<LocalTime,ArrayList<PillReminder>> getUpcomingPillReminder(){
+    public TreeMap<LocalTime,ArrayList<PillReminder>> getUpcomingPillReminder(){
         FilterUpcoming upcoming = new FilterUpcoming();
         return upcoming.meetsCriteria(pillReminderByTime);
     }

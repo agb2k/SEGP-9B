@@ -1,10 +1,8 @@
 package medPal.App;
 
-<<<<<<< HEAD
 import android.content.Intent;
-=======
+import android.database.DataSetObserver;
 import android.os.Build;
->>>>>>> 0410e019bfbe2715f0135b0b57de733c17723bbb
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
@@ -14,15 +12,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
 import android.widget.Button;
-=======
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.squareup.picasso.Picasso;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
->>>>>>> 0410e019bfbe2715f0135b0b57de733c17723bbb
+import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +74,10 @@ public class PillReminderFragment extends Fragment {
     }
 
     private Button b1;
+    private ExpandableListView parentListView;
+    private ExpandableListAdapter parentAdapter;
+    private ExpandableListView expandableMedicineList;
+    private ExpandableListAdapter expandableMedicineAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -80,7 +86,7 @@ public class PillReminderFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pill_reminder, container, false);
 
-
+        // Add new reminder button
         b1 = v.findViewById(R.id.NewPillReminderButton);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,19 +95,74 @@ public class PillReminderFragment extends Fragment {
             }
         });
 
+        // Get ExpandableListView
+        parentListView = (ExpandableListView) v.findViewById(R.id.prExpandableListView);
+        // Call PillReminderController
         PillReminderController prController = new PillReminderController();
-        ArrayList<PillReminder> pillreminders = prController.getAllPillReminder();
+        // Get today's pill reminder, grouped by time
+        TreeMap<LocalTime,ArrayList<PillReminder>> prByTime = prController.getPillReminderByTime();
+        // Get the list of time of reminders
+        ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
+        timeList.addAll(prByTime.keySet());
 
-        String result = "Result: \n";
-        for(int i=0; i<pillreminders.size(); i++){
-            result += pillreminders.get(i).toString();
+        // This is line sets the height of the pill reminder section (480dp for each reminder)
+        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,timeList.size()*480);
+        parentListView.setLayoutParams(param);
+        // Make some space between rows
+        parentListView.setDividerHeight(50);
+
+        // Set up ExpandableListView
+        parentAdapter = new PillReminderTimeAdapter(getContext(), timeList, prByTime, prController);
+        parentListView.setAdapter(parentAdapter);
+        // Expand all
+        for(int i=0; i<timeList.size(); i++){
+            parentListView.expandGroup(i);
         }
-        Log.v("Test backend",result);
+        // Disable collapse
+        parentListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                return true; // This way the expander cannot be collapsed
+            }
+        });
 
-        /* Get image
-        ImageView iV = (ImageView) v.findViewById(R.id.imageViewId);
-        Picasso.get().load(prController.getMedicineById(2003).getImagePath()).into(iV);
-        */
+        // Create expandable list view for medicine
+        expandableMedicineList = (ExpandableListView) v.findViewById(R.id.expandableMedicineList);
+        ArrayList<Medicine> medicineList = prController.getAllMedicine();
+        HashMap<String, ArrayList<Medicine>> medicineHashMap = new HashMap<>();
+        medicineHashMap.put("Medicine Detail", medicineList);
+        expandableMedicineAdapter = new MedicineAdapter(getContext(), medicineHashMap);
+        expandableMedicineList.setAdapter(expandableMedicineAdapter);
+
+        expandableMedicineList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(141 + medicineList.size()*260));
+                expandableMedicineList.setLayoutParams(param);
+            }
+        });
+
+        expandableMedicineList.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                expandableMedicineList.setLayoutParams(param);
+            }
+        });
+
+        expandableMedicineList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                Intent editMedicineIntent = new Intent(getActivity(), EditMedicineActivity.class);
+                editMedicineIntent.putExtra("MedicineObject",medicineList.get(childPosition));
+                startActivity(editMedicineIntent);
+                return false;
+            }
+        });
 
         return v;
     }

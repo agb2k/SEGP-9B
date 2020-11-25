@@ -79,13 +79,14 @@ public class RetrievePillReminders {
         int type = jsonObj.getInt("type");
         int frequency = (type==2)?(jsonObj.getInt("frequency")):0; //may be null
         String week_bit = (type==3)?(jsonObj.getString("week_bit")):""; //may be null
-        String pillReminderRemarks = (jsonObj.isNull("pillreminder_remark"))?"":jsonObj.getString("pillreminder_remark"); //may be null
+        int quantity = jsonObj.getInt("quantity");
         String start_date = jsonObj.getString("start_date");
-        String end_date = (jsonObj.isNull("end_date"))?"":jsonObj.getString("end_date"); //may be null
+        boolean noEndDate = (jsonObj.isNull("end_date"));
+        String end_date = noEndDate?"":jsonObj.getString("end_date"); //may be null
         int medicine = jsonObj.getInt("medicineId");
         Medicine mObj = medicineById.get(medicine);
 
-        return new PillReminder(pillReminderId,time,type,frequency,week_bit,pillReminderRemarks,start_date,end_date,mObj);
+        return new PillReminder(pillReminderId,time,type,frequency,week_bit,quantity,start_date,noEndDate,end_date,mObj);
     }
 
     public ArrayList<PillReminder> getAllPillReminder() {
@@ -94,7 +95,7 @@ public class RetrievePillReminders {
 
     public ArrayList<Medicine> getAllMedicine() { return medicineList; }
 
-    private static class ConnectDB extends AsyncTask<String,Void,String> {
+    static class ConnectDB extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... source) {
             StringBuilder total = new StringBuilder();;
@@ -111,6 +112,7 @@ public class RetrievePillReminders {
                 for (String line; (line = r.readLine()) != null; ) {
                     total.append(line).append('\n');
                 }
+                connection.disconnect();
             }catch(IOException ioE){
                 ioE.printStackTrace();
             }

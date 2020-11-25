@@ -2,9 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="medPal.App">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -13,17 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPal">
-        <activity android:name=".alarm_item"></activity>
-
+        <activity android:name=".EditPillReminderDetail"></activity>
+        <activity android:name=".EditMedicineActivity" />
+        <activity android:name=".EditPillReminderActivity" />
+        <activity android:name=".alarm_item" />
         <activity android:name=".SugarReminderList" />
         <activity android:name=".NewSugarLevelRecord" />
         <activity android:name=".NewPressureRecord" />
         <activity android:name=".SugarLevelActivity" />
         <activity android:name=".BloodPressureActivity" />
-
-        <activity android:name=".NewPillReminder"/>
-
-        <!-- Health Condition Pop up window -->
+        <activity android:name=".NewPillReminder" /> <!-- Health Condition Pop up window -->
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
@@ -35,16 +39,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".NewSugarReminder"
-
+        <activity
+            android:name=".NewSugarReminder"
             android:parentActivityName=".SugarReminderList">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SugarReminderList"
-                />
+                android:value=".SugarReminderList" />
         </activity>
 
         <provider
@@ -55,9 +57,6 @@
         <service
             android:name=".ReminderAlarmService"
             android:exported="false" />
-
     </application>
-
-
 
 </manifest>

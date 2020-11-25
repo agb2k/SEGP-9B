@@ -1,152 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/NewPillReminderScrollView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/editPillReminderScrollView"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewPillReminder">
+    tools:context=".EditPillReminderDetail">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp">
 
         <RelativeLayout
-            android:id="@+id/NewMedicineNameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:id="@+id/NewMedicineNameCol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Medicine Name"
-                android:textColor="@color/blueFontColor"
-                android:textSize="25sp" />
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/NewPillReminderMedicineName"
-                android:background="@drawable/input_text_box_column"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/NewMedicineNameCol"
-                android:inputType="text"
-                android:textSize="25sp"
-                android:autofillHints="Medicine Name 1" />
+                android:layout_height="100dp"
+                android:orientation="horizontal">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/PillImage"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_pill"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/NewMedicineManufacturerCol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Manufacturer"
-                android:textColor="@color/blueFontColor"
-                android:textSize="25sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/NewMedicineManufacturerCol"
-                android:text="(Optional)"
-                android:textSize="22sp"
-                android:layout_marginTop="2sp"
-                android:layout_alignParentEnd="true"
-                android:textAlignment="textEnd"/>
+                    <TextView
+                        android:id="@+id/PillName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blueFontColor"
+                        android:textSize="30sp"
+                        android:text="Medicine"/>
 
-            <EditText
-                android:id="@+id/NewPillReminderManufacturer"
-                android:background="@drawable/input_text_box_column"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/NewMedicineManufacturerCol"
-                android:inputType="text"
-                android:textSize="25sp"
-                android:autofillHints="Manufacturer" />
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/PillManufacturer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Some Factory"/>
 
-        <RelativeLayout
-            android:id="@+id/DosageLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/DosageCol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blueFontColor"
-                android:textSize="25sp"
-                android:text="Strength"
-                android:layout_marginTop="10dp"/>
-
-            <EditText
-                android:id="@+id/NewPillReminderDosage"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="-57dp"
-                android:layout_toRightOf="@id/DosageCol"
-                android:autofillHints="Medicine Name 1"
-                android:background="@drawable/input_text_box_column"
-                android:inputType="number"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="38dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="77dp"
-                android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/NewPillReminderDosage"
-                android:text="mg"
-                android:textColor="@color/lightgrey"
-                android:textSize="20sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/NewMedicineImageCol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Image"
-                android:textColor="@color/blueFontColor"
-                android:textSize="25sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/NewMedicineImageCol"
-                android:text="(Optional)"
-                android:textSize="22sp"
-                android:layout_marginTop="2sp"
-                android:layout_marginStart="10dp"/>
-
-            <ImageButton
-                android:id="@+id/NewPillReminderImage"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_below="@id/NewMedicineImageCol"
-                android:src="@drawable/ic_baseline_add_a_photo_24"/>
+                    <TextView
+                        android:id="@+id/PillDosage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200mg"/>
+                </LinearLayout>
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/frequencyLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/NewPillTypeCol"
+                android:id="@+id/editPillTypeCol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Frequency"
@@ -155,22 +74,13 @@
                 android:layout_marginTop="10dp"/>
 
             <Spinner
-                android:id="@+id/NewPillReminderType"
-                android:layout_width="244dp"
+                android:id="@+id/editPillReminderType"
+                android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/NewPillTypeCol"
-                android:background="@drawable/input_text_box_column" />
+                android:textAlignment="viewEnd"
+                android:layout_toEndOf="@id/editPillTypeCol"/>
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="0dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -200,7 +110,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/NewPillReminderDaysInterval"
+                android:id="@+id/editPillReminderDaysInterval"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -215,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_toEndOf="@id/NewPillReminderDaysInterval"
+                android:layout_toEndOf="@id/editPillReminderDaysInterval"
                 android:text="days"
                 android:textColor="@color/lightgrey"
                 android:textSize="20sp" />
@@ -294,13 +204,13 @@
             android:textSize="15sp"/>
 
         <RelativeLayout
-            android:id="@+id/NewPillTimeLayout"
+            android:id="@+id/editPillTimeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:onClick="onclickTimePicker">
             <TextView
-                android:id="@+id/NewPillTimeCol"
+                android:id="@+id/editPillTimeCol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time"
@@ -334,7 +244,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TimePicker
-                android:id="@+id/NewPillReminderTime"
+                android:id="@+id/editPillReminderTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:timePickerMode="spinner"/>
@@ -374,7 +284,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/NewPillReminderNoPill"
+                android:id="@+id/editPillReminderNoPill"
                 android:background="@drawable/input_text_box_column"
                 android:layout_marginStart="10dp"
                 android:layout_width="100dp"
@@ -389,7 +299,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_toEndOf="@id/NewPillReminderNoPill"
+                android:layout_toEndOf="@id/editPillReminderNoPill"
                 android:text="pills"
                 android:textColor="@color/lightgrey"
                 android:textSize="20sp" />
@@ -401,7 +311,7 @@
             android:layout_marginTop="10dp"
             android:onClick="onclickStartDatePicker">
             <TextView
-                android:id="@+id/NewPillStartDateCol"
+                android:id="@+id/editPillStartDateCol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Starting Date"
@@ -435,7 +345,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <DatePicker
-                android:id="@+id/NewPillReminderStartDate"
+                android:id="@+id/editPillReminderStartDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:datePickerMode="spinner"
@@ -449,7 +359,7 @@
             android:layout_marginTop="10dp"
             android:onClick="onclickEndDatePicker">
             <TextView
-                android:id="@+id/NewPillEndDateCol"
+                android:id="@+id/editPillEndDateCol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ending Date"
@@ -483,7 +393,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <DatePicker
-                android:id="@+id/NewPillReminderEndDate"
+                android:id="@+id/editPillReminderEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:datePickerMode="spinner"
@@ -498,83 +408,29 @@
             android:textColor="@color/design_default_color_error"
             android:textSize="15sp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:id="@+id/NewMedicinePurposeCol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Purpose"
-                android:textColor="@color/blueFontColor"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/NewMedicinePurposeCol"
-                android:text="(Optional)"
-                android:textSize="22sp"
-                android:layout_marginTop="2sp"
-                android:layout_alignParentEnd="true"
-                android:textAlignment="textEnd"/>
-
-            <EditText
-                android:id="@+id/NewPillReminderMedicinePurpose"
-                android:background="@drawable/input_text_box_column"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/NewMedicinePurposeCol"
-                android:inputType="textMultiLine"
-                android:textSize="25sp"
-                android:autofillHints="What is this medicine for?" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/RemarkCol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remark"
-                android:textColor="@color/blueFontColor"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/RemarkCol"
-                android:text="(Optional)"
-                android:textSize="22sp"
-                android:layout_marginTop="2sp"
-                android:layout_alignParentEnd="true"
-                android:textAlignment="textEnd"/>
-
-            <EditText
-                android:id="@+id/NewPillReminderMedicineRemark"
-                android:background="@drawable/input_text_box_column"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/RemarkCol"
-                android:inputType="textMultiLine"
-                android:textSize="25sp"
-                android:autofillHints="Any remarks for this pill?" />
-        </RelativeLayout>
 
         <Button
-            android:id="@+id/newPillReminderConfirm"
-            android:layout_width="wrap_content"
+            android:id="@+id/editPillReminderConfirm"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:layout_marginBottom="30dp"
             android:layout_gravity="center"
             android:textSize="30sp"
             android:padding="10dp"
             android:text="Confirm"/>
+
+        <TextView
+            android:id="@+id/deletePillReminderConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:padding="10dp"
+            android:textColor="@color/design_default_color_error"
+            android:textAlignment="center"
+            android:text="Delete Reminder"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
