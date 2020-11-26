@@ -184,7 +184,7 @@ public class EditPillReminderDetail extends AppCompatActivity implements
                 daysIntervalLayout.setVisibility(View.VISIBLE);
                 daysOfWeekLayout.setVisibility(GONE);
                 EditText editDaysInterval = (EditText) findViewById(R.id.editPillReminderDaysInterval);
-                editDaysInterval.setText(pr.getFrequency());
+                editDaysInterval.setText(String.valueOf(pr.getFrequency()));
                 break;
             case 3:
                 // Case 2 : Specific days of week

@@ -73,15 +73,6 @@
                 android:textSize="25sp"
                 android:text="Medicine"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/NewMedicineButton"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:text="+"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="2dp"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/custom_button3"/>
         </RelativeLayout>
 
         <RelativeLayout
