@@ -9,8 +9,8 @@ public class Medicine {
     private String purpose;
     private String medicineRemarks;
 
-    public Medicine(int medicineId, String medicineName, String manufacturer, int dosage, String imagePath, String purpose,
-                    String medicineRemarks) {
+    public Medicine(int medicineId, String medicineName, String manufacturer, int dosage,
+                    String imagePath, String purpose, String medicineRemarks) {
         this.medicineId = medicineId;
         this.medicineName = medicineName;
         this.manufacturer = manufacturer;
