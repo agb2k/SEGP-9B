@@ -2,9 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="medPal.App">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPal">
-        <activity android:name=".alarm_item"></activity>
-
+        <activity android:name=".EditPillReminderDetail"></activity>
+        <activity android:name=".EditMedicineActivity" />
+        <activity android:name=".EditPillReminderActivity" />
+        <activity android:name=".alarm_item" />
         <activity android:name=".SugarReminderList" />
         <activity android:name=".NewSugarLevelRecord" />
         <activity android:name=".NewPressureRecord" />

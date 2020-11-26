@@ -7,14 +7,15 @@ import androidx.annotation.RequiresApi;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class FilterUpcoming {
     LocalTime now = LocalTime.now();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public HashMap<LocalTime, ArrayList<PillReminder>> meetsCriteria(HashMap<LocalTime, ArrayList<PillReminder>> prByTime){
-        HashMap<LocalTime, ArrayList<PillReminder>> result = new HashMap<LocalTime, ArrayList<PillReminder>>();
+    public TreeMap<LocalTime, ArrayList<PillReminder>> meetsCriteria(TreeMap<LocalTime, ArrayList<PillReminder>> prByTime){
+        TreeMap<LocalTime, ArrayList<PillReminder>> result = new TreeMap<LocalTime, ArrayList<PillReminder>>();
         result.putAll(prByTime);
 
         int delay = 5; // Show pill reminders that is <delay> minutes past
