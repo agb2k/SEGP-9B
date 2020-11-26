@@ -28,7 +28,12 @@ public class FilterDay {
         for(PillReminder prObj: pillReminders) {
 
             prStartDate = prObj.getStart_date();
-            prEndDate = prObj.getEnd_date();
+            if(prObj.isNoEndDate()){
+                int year = LocalDate.now().getYear() + 1;
+                prEndDate = LocalDate.of(year,1,1);
+            }else{
+                prEndDate = prObj.getEnd_date();
+            }
             boolean isBetween = date.isAfter(prStartDate) && date.isBefore(prEndDate);
             boolean isToday = date.equals(prStartDate) || date.equals(prEndDate);
 

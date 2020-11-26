@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/editMedicineScrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditMedicineActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/PillImage"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_pill"/>
+
+                <TextView
+                    android:id="@+id/MedicineName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/blueFontColor"
+                    android:textSize="30sp"
+                    android:text="Medicine A"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/editManufacturerCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manufacturer"
+                android:textColor="@color/blueFontColor"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/editManufacturerCol"
+                android:text="(Optional)"
+                android:textSize="22sp"
+                android:layout_marginTop="2sp"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="textEnd"/>
+
+            <EditText
+                android:id="@+id/editManufacturer"
+                android:background="@drawable/input_text_box_column"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editManufacturerCol"
+                android:inputType="text"
+                android:textSize="25sp"
+                android:autofillHints="Manufacturer" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/DosageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/DosageCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blueFontColor"
+                android:textSize="25sp"
+                android:text="Strength"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/editDosage"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="-57dp"
+                android:layout_toRightOf="@id/DosageCol"
+                android:autofillHints="Strength"
+                android:background="@drawable/input_text_box_column"
+                android:inputType="number"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="38dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="77dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/editDosage"
+                android:text="mg"
+                android:textColor="@color/lightgrey"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/editMedicinePurposeCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purpose"
+                android:textColor="@color/blueFontColor"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/editMedicinePurposeCol"
+                android:text="(Optional)"
+                android:textSize="22sp"
+                android:layout_marginTop="2sp"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="textEnd"/>
+
+            <EditText
+                android:id="@+id/editMedicinePurpose"
+                android:background="@drawable/input_text_box_column"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editMedicinePurposeCol"
+                android:inputType="textMultiLine"
+                android:textSize="25sp"
+                android:autofillHints="What is this medicine for?" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/RemarkCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remark"
+                android:textColor="@color/blueFontColor"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/RemarkCol"
+                android:text="(Optional)"
+                android:textSize="22sp"
+                android:layout_marginTop="2sp"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="textEnd"/>
+
+            <EditText
+                android:id="@+id/editMedicineRemark"
+                android:background="@drawable/input_text_box_column"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RemarkCol"
+                android:inputType="textMultiLine"
+                android:textSize="25sp"
+                android:autofillHints="Any remarks for this pill?" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/editMedicineConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:padding="10dp"
+            android:text="Confirm"/>
+
+        <TextView
+            android:id="@+id/deleteMedicineConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:padding="10dp"
+            android:textColor="@color/design_default_color_error"
+            android:textAlignment="center"
+            android:text="Delete Medicine"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</ScrollView>

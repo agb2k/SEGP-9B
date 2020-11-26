@@ -1,6 +1,8 @@
 package medPal.App;
 
-public class Medicine {
+import java.io.Serializable;
+
+public class Medicine implements Serializable {
     private int medicineId;
     private String medicineName;
     private String manufacturer;

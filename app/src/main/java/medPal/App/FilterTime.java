@@ -1,19 +1,20 @@
 package medPal.App;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class FilterTime {
     HashMap<LocalTime, ArrayList<PillReminder>> prByTime = new HashMap<LocalTime,ArrayList<PillReminder>>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public HashMap<LocalTime,ArrayList<PillReminder>> meetsCriteria(ArrayList<PillReminder> pillReminders) {
-        // TODO Auto-generated method stub
+    public TreeMap<LocalTime,ArrayList<PillReminder>> meetsCriteria(ArrayList<PillReminder> pillReminders) {
 
         String timeStr;
         LocalTime localtime;
@@ -31,7 +32,10 @@ public class FilterTime {
             }
         }
 
-        return prByTime;
+        TreeMap<LocalTime,ArrayList<PillReminder>> sorted = new TreeMap<>();
+        sorted.putAll(prByTime);
+
+        return sorted;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,7 +46,7 @@ public class NewSugarLevelRecord extends AppCompatActivity {
                 s1 = e1.getText().toString();
                 s2 = e2.getText().toString();
                 s3 = e3.getText().toString();
-                String url = "https://bulacke.xyz/medpal-db/getSugarRecord.php";
+                String url = "https://bulacke.xyz/medpal-db/postInsertSugarRecord.php";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -58,7 +59,7 @@ public class NewSugarLevelRecord extends AppCompatActivity {
                                 Toast.makeText(NewSugarLevelRecord.this, error.toString(), Toast.LENGTH_LONG).show();
                             }
                         }){
-                    protected Map<String, String> getParams(){
+                    protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("Date", s1);
                         params.put("Time", s2);

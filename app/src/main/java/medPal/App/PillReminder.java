@@ -4,30 +4,37 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class PillReminder {
+public class PillReminder implements Serializable {
     private int pillReminderId;
     private String time;
     private int type;
     private int frequency;
     private String week_bit;
-    private String pillReminderRemarks;
+    private int quantity;
     private LocalDate start_date;
     private LocalDate end_date;
+    private boolean noEndDate = false;
     private Medicine medicine;
     private boolean taken;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public PillReminder(int pillReminderId, String time, int type, int frequency, String week_bit, String pillReminderRemarks, String start_date, String end_date, Medicine medicine) {
+    public PillReminder(int pillReminderId, String time, int type, int frequency, String week_bit, int quantity, String start_date, boolean noEndDate, String end_date, Medicine medicine) {
         this.pillReminderId = pillReminderId;
         this.time = time;
         this.type = type;
         this.frequency = frequency;
         this.week_bit = week_bit;
-        this.pillReminderRemarks = pillReminderRemarks;
+        this.quantity = quantity;
         this.start_date = stringToLocalDate(start_date);
-        this.end_date = (end_date=="")?LocalDate.of(LocalDate.now().getYear()+1,12,31):stringToLocalDate(end_date);
+        this.noEndDate = noEndDate;
+        if(noEndDate){
+            this.end_date = LocalDate.of(1,1,1);
+        }else{
+            this.end_date = stringToLocalDate(end_date);
+        }
         this.medicine = medicine;
         taken = false;
     }
@@ -81,12 +88,12 @@ public class PillReminder {
         this.week_bit = week_bit;
     }
 
-    public String getPillReminderRemarks() {
-        return pillReminderRemarks;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setPillReminderRemarks(String pillReminderRemarks) {
-        this.pillReminderRemarks = pillReminderRemarks;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDate getStart_date() {
@@ -100,6 +107,10 @@ public class PillReminder {
 
     public LocalDate getEnd_date() {
         return end_date;
+    }
+
+    public boolean isNoEndDate() {
+        return noEndDate;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -131,7 +142,6 @@ public class PillReminder {
                 ", type=" + type +
                 ", frequency=" + frequency +
                 ", week_bit='" + week_bit + '\'' +
-                ", pillReminderRemarks='" + pillReminderRemarks + '\'' +
                 ", start_date='" + start_date + '\'' +
                 ", end_date='" + end_date + '\'' +
                 ", medicine='" + medicine + '\'' +
