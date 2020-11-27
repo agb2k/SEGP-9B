@@ -18,8 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.PointsGraphSeries;
+import com.jjoe64.graphview.series.DataPointInterface;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +32,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class SugarLevelActivity extends AppCompatActivity {
     private Button b4;
@@ -47,14 +54,26 @@ public class SugarLevelActivity extends AppCompatActivity {
 
 
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sugar_level);
         getSupportActionBar().setTitle("Blood Sugar Level");
 
+        x_axis.clear();
+        y_axis.clear();
         lv = (ListView) findViewById(R.id.lv);
-        fetch_data_into_array(lv);
+        try {
+            fetch_data_into_array(lv);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         lv.setOnItemClickListener((parent, view, position, id) -> {
             String s = lv.getItemAtPosition(position).toString();
             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
@@ -77,60 +96,53 @@ public class SugarLevelActivity extends AppCompatActivity {
             }
         });
 
-        //Calendar calendar = Calendar.getInstance();
-        //Date d1 = calendar.getTime();
-        //calendar.add(Calendar.DATE, 1);
-        //Date d2 = calendar.getTime();
-        //calendar.add(Calendar.DATE, 1);
-        //Date d3 = calendar.getTime();
 
+        
         GraphView graph = (GraphView) findViewById(R.id.sugarGraph);
-        fetch_data_into_array2(graph);
-        PointsGraphSeries<DataPoint> series;
-        series= new PointsGraphSeries<>(data());
-        series.setShape(PointsGraphSeries.Shape.POINT);
-        series.setSize(5);
+        //fetch_data_into_array(graph);
+        LineGraphSeries<DataPoint> series;
+        series= new LineGraphSeries<>(data());
+        series.setThickness(8);
+        series.setDrawDataPoints(true);
+        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface DataPoint) {
+                Toast.makeText(SugarLevelActivity.this,"On Data Point clicked:"+DataPoint, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //series.setShape(PointsGraphSeries.Shape.POINT);
+        //series.setSize(5);
         graph.addSeries(series);
-        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(SugarLevelActivity.this));
-        //graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(SugarLevelActivity.this));
+        graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(true);
+        /*Viewport viewport = graph.getViewport();
+        viewport.setYAxisBoundsManual(true);
+        viewport.setMinY(0);
+        viewport.setMaxY(600);
+        viewport.setScalable(true);
+        viewport.setScrollable(true);
+        viewport.setScalableY(true);
+        viewport.setScrollableY(true);
 
-// set manual x bounds to have nice steps
-        //graph.getViewport().setMinX(d1.getTime());
-        //graph.getViewport().setMaxX(d3.getTime());
-        //graph.getViewport().setXAxisBoundsManual(true);
+
+
+
+
+        //graph.getViewport().setXAxisBoundsManual(false);
 
 // as we use dates as labels, the human rounding to nice readable numbers
 // is not necessary
         //graph.getGridLabelRenderer().setHumanRounding(false);
-
+    */
     }
 
-    public void fetch_data_into_array(View view){
+    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException {
 
         class dbManager extends AsyncTask<String, Void, String>
         {
-            protected void onPostExecute (String data){
-                try {
-                    JSONArray ja = new JSONArray(data);
-                    JSONObject jo = null;
-
-                    date = new String[ja.length()];
-                    time = new String[ja.length()];
-                    level = new String[ja.length()];
-
-                    for (int i = 0; i<ja.length(); i++){
-                        jo = ja.getJSONObject(i);
-                        date[i] = jo.getString("Date");
-                        time[i] = jo.getString("Time");
-                        level[i] = jo.getString("Level");
-                    }
-                    myadapter adptr = new myadapter(getApplicationContext(), date, time, level);
-                    lv.setAdapter(adptr);
-                } catch (Exception ex) {
-                    Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-
             protected String doInBackground(String... strings){
                 try{
                     URL url = new URL(strings[0]);
@@ -151,57 +163,29 @@ public class SugarLevelActivity extends AppCompatActivity {
             }
         }
         dbManager obj = new dbManager();
-        obj.execute(apiurl);
+        String data = obj.execute(apiurl).get();
 
-    }
+        try {
+            JSONArray ja = new JSONArray(data);
+            JSONObject jo = null;
 
-    public void fetch_data_into_array2(View view){
+            date = new String[ja.length()];
+            time = new String[ja.length()];
+            level = new String[ja.length()];
 
-        class dbManager extends AsyncTask<String, Void, String>
-        {
-            protected void onPostExecute (String data){
-                try {
-                    JSONArray ja = new JSONArray(data);
-                    JSONObject jo = null;
-
-                    date = new String[ja.length()];
-                    time = new String[ja.length()];
-                    level = new String[ja.length()];
-
-                    for (int i = 0; i<ja.length(); i++){
-                        jo = ja.getJSONObject(i);
-                        date[i] = jo.getString("Date");
-                        time[i] = jo.getString("Time");
-                        level[i] = jo.getString("Level");
-                    }
-
-                } catch (Exception ex) {
-                    Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                }
+            for (int i = 0; i<ja.length(); i++){
+                jo = ja.getJSONObject(i);
+                date[i] = jo.getString("Date");
+                time[i] = jo.getString("Time");
+                level[i] = jo.getString("Level");
+                x_axis.add(date[i]);
+                y_axis.add(level[i]);
             }
-
-            protected String doInBackground(String... strings){
-                try{
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    StringBuffer data = new StringBuffer();
-                    String line;
-
-                    while((line = br.readLine()) != null){
-                        data.append(line + "\n");
-                    }
-                    br.close();
-                    return data.toString();
-                } catch (Exception ex) {
-                    return ex.getMessage();
-                }
-            }
+            myadapter adptr = new myadapter(getApplicationContext(), date, time, level);
+            lv.setAdapter(adptr);
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
         }
-        dbManager obj = new dbManager();
-        obj.execute(apiurl);
-
     }
 
     class myadapter extends ArrayAdapter<String>
@@ -236,14 +220,24 @@ public class SugarLevelActivity extends AppCompatActivity {
     }
 
     public DataPoint[] data(){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         int n=x_axis.size();     //to find out the no. of data-points
         DataPoint[] values = new DataPoint[n];     //creating an object of type DataPoint[] of size 'n'
         for(int i=0;i<n;i++){
-            DataPoint v = new DataPoint(Double.parseDouble(x_axis.get(i)),Double.parseDouble(y_axis.get(i)));
+
+            DataPoint v = null;
+            try {
+                v = new DataPoint(sdf.parse(x_axis.get(i)),Integer.parseInt(y_axis.get(i)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             values[i] = v;
         }
         return values;
     }
+
+
 
 
     public void openNewSugarLevelRecord() {
