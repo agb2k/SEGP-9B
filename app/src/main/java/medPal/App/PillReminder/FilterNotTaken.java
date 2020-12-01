@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.Build;
 
@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 @RequiresApi(api = Build.VERSION_CODES.O)

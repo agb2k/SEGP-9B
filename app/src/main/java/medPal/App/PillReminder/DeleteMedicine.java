@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.AsyncTask;
 
@@ -12,41 +12,23 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class UpdateMedicine {
+public class DeleteMedicine {
 
-    private String id;
-    private String manufacturer;
-    private String dosage;
-    private String purpose;
-    private String remark;
     private String encodedData = "";
-    private int exitStatus = 0;
+    private int returnStatus = 0;
 
-    UpdateMedicine(int id, String medicineManufacturer, int dosage, String purpose, String remark) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        this.id = String.valueOf(id);
-        this.manufacturer = medicineManufacturer;
-        this.dosage = String.valueOf(dosage);
-        this.purpose = purpose;
-        this.remark = remark;
+    DeleteMedicine(int id) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        encodedData += URLEncoder.encode("id", "UTF-8")+ "=" + URLEncoder.encode(String.valueOf(id), "UTF-8");
+        String result = new DeleteMedicine.ConnectDB().execute(encodedData).get();
 
-        encodeData();
-        String result = new UpdateMedicine.ConnectDB().execute(encodedData).get();
-        exitStatus = Integer.parseInt(result);
+        returnStatus = Integer.parseInt(result);
     }
 
-    public int getStatus() {
-        return exitStatus;
+    public boolean success() {
+        return (returnStatus==1);
     }
 
-    public void encodeData() throws UnsupportedEncodingException {
-        encodedData += URLEncoder.encode("id", "UTF-8")+ "=" + URLEncoder.encode(id, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("manufacturer", "UTF-8") + "=" + URLEncoder.encode(manufacturer, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("dosage", "UTF-8") + "=" + URLEncoder.encode(dosage, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("purpose", "UTF-8") + "=" + URLEncoder.encode(purpose, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("remark", "UTF-8") + "=" + URLEncoder.encode(remark, "UTF-8");
-    }
-
-    static class ConnectDB extends AsyncTask<String,Void,String> {
+    private static class ConnectDB extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... encodedData) {
             BufferedReader reader = null;
@@ -55,7 +37,7 @@ public class UpdateMedicine {
             // Send data
             try {
                 // Defined URL  where to send data
-                URL url = new URL("https://bulacke.xyz/medpal-db/updateMedicine.php");
+                URL url = new URL("https://bulacke.xyz/medpal-db/deleteMedicine.php");
 
                 // Send POST data request
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();

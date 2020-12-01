@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import java.io.Serializable;
 

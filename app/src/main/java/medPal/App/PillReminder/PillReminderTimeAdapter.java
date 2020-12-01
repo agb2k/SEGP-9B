@@ -1,11 +1,9 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.icu.text.Transliterator;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
+
+import medPal.App.R;
 
 public class PillReminderTimeAdapter implements ExpandableListAdapter {
     private Context context;

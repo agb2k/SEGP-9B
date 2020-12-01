@@ -18,9 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPal">
-        <activity android:name=".EditPillReminderDetail"></activity>
-        <activity android:name=".EditMedicineActivity" />
-        <activity android:name=".EditPillReminderActivity" />
+        <activity android:name=".PillReminder.EditPillReminderDetail"></activity>
+        <activity android:name=".PillReminder.EditMedicineActivity" />
+        <activity android:name=".PillReminder.EditPillReminderActivity" />
         <activity android:name=".alarm_item" />
         <activity android:name=".SugarReminderList" />
         <activity android:name=".NewSugarLevelRecord" />
@@ -28,7 +28,7 @@
         <activity android:name=".SugarLevelActivity" />
         <activity android:name=".BloodPressureActivity" />
 
-        <activity android:name=".NewPillReminder"/>
+        <activity android:name=".PillReminder.NewPillReminder"/>
 
         <activity android:name=".NewAppointment"/>
 

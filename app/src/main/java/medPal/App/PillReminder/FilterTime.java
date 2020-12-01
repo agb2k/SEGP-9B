@@ -1,7 +1,6 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 

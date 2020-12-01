@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
+
+import medPal.App.PillReminder.PillReminder;
 
 public class RetrievePillReminders {
     private ArrayList<PillReminder> pillReminderList = new ArrayList<PillReminder>();

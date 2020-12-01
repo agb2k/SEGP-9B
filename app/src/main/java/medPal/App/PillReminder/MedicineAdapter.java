@@ -1,7 +1,6 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import medPal.App.R;
 
 public class MedicineAdapter extends BaseExpandableListAdapter {
 

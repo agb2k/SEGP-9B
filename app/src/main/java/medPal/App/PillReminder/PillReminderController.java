@@ -1,7 +1,6 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -9,7 +8,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 public class PillReminderController implements Serializable {

@@ -1,11 +1,9 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import medPal.App.R;
 
 public class PillReminderAdapter extends RecyclerView.Adapter<PillReminderAdapter.ViewHolder> {
 

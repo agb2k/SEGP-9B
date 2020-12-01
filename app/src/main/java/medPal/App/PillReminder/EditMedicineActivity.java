@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ExecutionException;
+
+import medPal.App.R;
 
 public class EditMedicineActivity extends AppCompatActivity {
 

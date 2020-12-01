@@ -1,31 +1,16 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import static android.view.View.GONE;
 
 public class PostNewPillReminder {
 
