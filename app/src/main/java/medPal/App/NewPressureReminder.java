@@ -34,7 +34,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Calendar;
 
 
-public class NewSugarReminder extends AppCompatActivity implements
+public class NewPressureReminder extends AppCompatActivity implements
         TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener, LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -89,7 +89,7 @@ public class NewSugarReminder extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_sugar_reminder);
+        setContentView(R.layout.activity_new_pressure_reminder);
 
         Intent intent = getIntent();
         mCurrentReminderUri = intent.getData();
@@ -111,16 +111,16 @@ public class NewSugarReminder extends AppCompatActivity implements
 
 
         // Initialize Views
-        mToolbar = (Toolbar) findViewById(R.id.toolbar1);
-        mTitleText = (EditText) findViewById(R.id.reminder_title);
-        mDateText = (TextView) findViewById(R.id.set_date);
-        mTimeText = (TextView) findViewById(R.id.set_time);
-        mRepeatText = (TextView) findViewById(R.id.set_repeat);
-        mRepeatNoText = (TextView) findViewById(R.id.set_repeat_no);
-        mRepeatTypeText = (TextView) findViewById(R.id.set_repeat_type);
-        mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch);
-        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
-        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar1_pressure);
+        mTitleText = (EditText) findViewById(R.id.reminder_title_pressure);
+        mDateText = (TextView) findViewById(R.id.set_date_pressure);
+        mTimeText = (TextView) findViewById(R.id.set_time_pressure);
+        mRepeatText = (TextView) findViewById(R.id.set_repeat_pressure);
+        mRepeatNoText = (TextView) findViewById(R.id.set_repeat_no_pressure);
+        mRepeatTypeText = (TextView) findViewById(R.id.set_repeat_type_pressure);
+        mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch_pressure);
+        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
+        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
         // Initialize default values
         mActive = "true";
@@ -272,18 +272,18 @@ public class NewSugarReminder extends AppCompatActivity implements
 
     // On clicking the active button
     public void selectFab1(View v) {
-        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
+        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
         mFAB1.setVisibility(View.GONE);
-        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
+        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
         mFAB2.setVisibility(View.VISIBLE);
         mActive = "true";
     }
 
     // On clicking the inactive button
     public void selectFab2(View v) {
-        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
+        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
         mFAB2.setVisibility(View.GONE);
-        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
+        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
         mFAB1.setVisibility(View.VISIBLE);
         mActive = "false";
     }
@@ -410,7 +410,7 @@ public class NewSugarReminder extends AppCompatActivity implements
                 // If the reminder hasn't changed, continue with navigating up to parent activity
                 // which is the {@link MainActivity}.
                 if (!mVehicleHasChanged) {
-                    NavUtils.navigateUpFromSameTask(NewSugarReminder.this);
+                    NavUtils.navigateUpFromSameTask(NewPressureReminder.this);
                     return true;
                 }
 
@@ -422,7 +422,7 @@ public class NewSugarReminder extends AppCompatActivity implements
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // User clicked "Discard" button, navigate to parent activity.
-                                NavUtils.navigateUpFromSameTask(NewSugarReminder.this);
+                                NavUtils.navigateUpFromSameTask(NewPressureReminder.this);
                             }
                         };
 

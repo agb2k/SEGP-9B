@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPal">
-        <activity android:name=".EditPillReminderDetail"></activity>
+        <activity android:name=".NewPressureReminder"></activity>
+        <activity android:name=".PressureReminderList" />
+        <activity android:name=".EditPillReminderDetail" />
         <activity android:name=".EditMedicineActivity" />
         <activity android:name=".EditPillReminderActivity" />
         <activity android:name=".alarm_item" />
@@ -27,12 +29,8 @@
         <activity android:name=".NewPressureRecord" />
         <activity android:name=".SugarLevelActivity" />
         <activity android:name=".BloodPressureActivity" />
-
-        <activity android:name=".NewPillReminder"/>
-
-        <activity android:name=".NewAppointment"/>
-
-        <!-- Health Condition Pop up window -->
+        <activity android:name=".NewPillReminder" />
+        <activity android:name=".NewAppointment" /> <!-- Health Condition Pop up window -->
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
@@ -44,16 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".NewSugarReminder"
-
+        <activity
+            android:name=".NewSugarReminder"
             android:parentActivityName=".SugarReminderList">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SugarReminderList"
-                />
+                android:value=".SugarReminderList" />
         </activity>
 
         <provider
@@ -64,9 +60,6 @@
         <service
             android:name=".ReminderAlarmService"
             android:exported="false" />
-
     </application>
-
-
 
 </manifest>
