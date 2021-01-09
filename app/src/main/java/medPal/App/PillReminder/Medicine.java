@@ -2,6 +2,9 @@ package medPal.App.PillReminder;
 
 import java.io.Serializable;
 
+/**
+ * Medicine Class.
+ */
 public class Medicine implements Serializable {
     private int medicineId;
     private String medicineName;
@@ -11,6 +14,16 @@ public class Medicine implements Serializable {
     private String purpose;
     private String medicineRemarks;
 
+    /**
+     * Constructor of medicine object.
+     * @param medicineId Medicine ID.
+     * @param medicineName Medicine name.
+     * @param manufacturer Manufacturer of this medicine.
+     * @param dosage Dosage of this medicine.
+     * @param imagePath Image path of this medicine.
+     * @param purpose Purpose of taking this medicine.
+     * @param medicineRemarks Remarks for this medicine.
+     */
     public Medicine(int medicineId, String medicineName, String manufacturer, int dosage, String imagePath, String purpose,
                     String medicineRemarks) {
         this.medicineId = medicineId;

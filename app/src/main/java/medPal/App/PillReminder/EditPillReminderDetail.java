@@ -33,6 +33,9 @@ import medPal.App.R;
 
 import static android.view.View.GONE;
 
+/**
+ * Activity to let user edit (or delete) an existing pill reminder.
+ */
 public class EditPillReminderDetail extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
@@ -154,6 +157,9 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Automatically fill in the original data.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void putDataIntoInputField() {
 
@@ -222,6 +228,10 @@ public class EditPillReminderDetail extends AppCompatActivity implements
 
     }
 
+    /**
+     * A function to set day of week checkbox.
+     * @param index Day of week (starting from 0 which represents Monday)
+     */
     public void setDayOfWeekCheckbox(int index){
         CheckBox checkbox = null;
         switch(index){
@@ -250,6 +260,13 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         checkbox.setChecked(true);
     }
 
+    /**
+     * Get user input and validate input.
+     * If inputs are valid, send the data to UpdatePillReminder class to perform the database operations.
+     * @throws UnsupportedEncodingException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     // Validate user input
     public void getUserInput() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
@@ -378,7 +395,9 @@ public class EditPillReminderDetail extends AppCompatActivity implements
 
     }
 
-    // Initialize array list of error messages text view and hide all
+    /**
+     * Hide all error messages.
+     */
     public void hideAllErrorMessage(){
         // Error message for days of week
         TextView daysOfWeekErrMessage = (TextView) findViewById(R.id.DaysOfWeekErrorMessage);
@@ -393,8 +412,14 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         // Note: Other input fields can use 'setError' to show error messages
     }
 
+    /**
+     * Handle changes on the days interval field.
+     * @param parent
+     * @param view
+     * @param position Position of the selected item.
+     * @param id
+     */
     @Override
-    // Handle changes of the frequency field
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         View daysIntervalLayout = (View) findViewById(R.id.DaysIntervalInputField);
         View daysOfWeekLayout = (View) findViewById(R.id.DaysOfWeekInputField);
@@ -422,8 +447,11 @@ public class EditPillReminderDetail extends AppCompatActivity implements
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
 
+    /**
+     * Handle the changes on the time picker.
+     * @param view
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    // Handle time picker on change
     public void onclickTimePicker(View view){
         ImageButton button = (ImageButton) findViewById(R.id.clockButtonId);
         RelativeLayout timePicker = (RelativeLayout) findViewById(R.id.time_picker);
@@ -454,7 +482,12 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         }
     }
 
-    // Generate 12 format time
+    /**
+     * Generate 12-Hour format time string.
+     * @param h Hour in 24-hour format.
+     * @param m Minute.
+     * @return 12-Hour format time string.
+     */
     public String to12HourFormat(int h, int m){
         String AMPM;
         String time = "";
@@ -481,7 +514,11 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         return (time + " " + AMPM);
     }
 
-    // Store time input
+    /**
+     * Store user input time.
+     * @param h Hour
+     * @param m Minute
+     */
     public void setInputTime(int h, int m){
         hour = h;
         minute = m;
@@ -496,8 +533,11 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         time = hourZero + String.valueOf(h) + minuteZero + String.valueOf(m);
     }
 
+    /**
+     * Handle the changes on start date picker.
+     * @param view
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    // Handle start date picker
     public void onclickStartDatePicker(View view){
         ImageButton button = (ImageButton) findViewById(R.id.startDateButtonId);
         RelativeLayout sdPicker = (RelativeLayout) findViewById(R.id.startDatePicker);
@@ -529,7 +569,12 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         }
     }
 
-    // Store start date input
+    /**
+     * Store user input start date.
+     * @param year Year.
+     * @param month Month.
+     * @param day Day.
+     */
     public void setInputStartDate(int year, int month, int day){
         sdYear = year;
         sdMonth = month;
@@ -537,8 +582,11 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         startDate = year + "-" + month + "-" + day;
     }
 
+    /**
+     * Handle changes on end date picker.
+     * @param view
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    // Handle end date picker
     public void onclickEndDatePicker(View view){
         ImageButton button = (ImageButton) findViewById(R.id.endDateButtonId);
         RelativeLayout edPicker = (RelativeLayout) findViewById(R.id.endDatePicker);
@@ -575,7 +623,12 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         }
     }
 
-    // Store end date
+    /**
+     * Store user input end date.
+     * @param year Year.
+     * @param month Month.
+     * @param day Day.
+     */
     public void setInputEndDate(int year, int month, int day){
         edYear = year;
         edMonth = month;

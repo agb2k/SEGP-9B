@@ -19,6 +19,9 @@ import java.util.ArrayList;
 
 import medPal.App.R;
 
+/**
+ * Activity to let user select an existing pill reminder to be edited.
+ */
 public class EditPillReminderActivity extends AppCompatActivity {
 
     PillReminderController prController;
@@ -59,6 +62,10 @@ public class EditPillReminderActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * After user selected (clicked) a pill reminder, bring the user to EditPillReminderDetail activity to edit the selected pill reminder.
+     * @param pr The selected pill reminder instance.
+     */
     public void startEditPillReminderDetailActivity(PillReminder pr) {
         Intent editPillReminderDetail = new Intent(this,EditPillReminderDetail.class);
         editPillReminderDetail.putExtra("PillReminderObj",pr);

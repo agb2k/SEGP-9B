@@ -12,6 +12,9 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * Update pill reminder database.
+ */
 public class UpdatePillReminder {
 
     String id;

@@ -8,7 +8,16 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+/**
+ * A class to filter pill reminders by day. (i.e. Filter out the pill reminders that need to be taken on a given day)
+ */
 public class FilterDay {
+
+    /**
+     * Filter out pill reminders that need to be taken today.
+     * @param pillReminders Arraylist of pill reminders.
+     * @return Arraylist of pill reminders that need to be taken today.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public ArrayList<PillReminder> meetsCriteria(ArrayList<PillReminder> pillReminders) {
         LocalDate now = LocalDate.now();
@@ -16,6 +25,12 @@ public class FilterDay {
         return onCertainDate(pillReminders,now);
     }
 
+    /**
+     * Filter out pill reminders that need to be taken on a given date.
+     * @param pillReminders Arraylist of pill reminders.
+     * @param date Date.
+     * @return Arraylist of pill reminders to be taken on the given date.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public ArrayList<PillReminder> onCertainDate(ArrayList<PillReminder> pillReminders, LocalDate date) {
         ArrayList<PillReminder> todayPillReminders = new ArrayList<PillReminder>();

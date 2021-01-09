@@ -12,6 +12,9 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * This class helps to delete pill reminder from database.
+ */
 public class DeletePillReminder {
 
     private String encodedData = "";

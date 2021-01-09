@@ -14,6 +14,9 @@ import java.util.ArrayList;
 
 import medPal.App.R;
 
+/**
+ * Adapter for pill reminder. Handles the view of the EditPillReminder class.
+ */
 public class EditPillReminderAdapter extends BaseAdapter {
 
     private Activity context;

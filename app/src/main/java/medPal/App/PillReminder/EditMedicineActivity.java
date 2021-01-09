@@ -20,6 +20,9 @@ import java.util.concurrent.ExecutionException;
 
 import medPal.App.R;
 
+/**
+ * Activity to edit (or delete) an existing medicine.
+ */
 public class EditMedicineActivity extends AppCompatActivity {
 
     Medicine medicine;
@@ -50,7 +53,9 @@ public class EditMedicineActivity extends AppCompatActivity {
             }
         });
 
-        // Delete pill reminder
+        /**
+         * Onclick listener to delete pill medicine.
+         */
         TextView deleteMedicine = (TextView) findViewById(R.id.deleteMedicineConfirm);
         deleteMedicine.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -74,6 +79,9 @@ public class EditMedicineActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Automatically fill in the original data.
+     */
     public void putDataIntoInputField() {
         ImageView pillImage = (ImageView) findViewById(R.id.PillImage);
         Picasso.get().load(medicine.getImagePath()).into(pillImage);
@@ -100,6 +108,13 @@ public class EditMedicineActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Get user input and validate user input when user click finish.
+     * If input is valid then parse the data to UpdateMedicine class to perform the database operations.
+     * @throws InterruptedException
+     * @throws UnsupportedEncodingException
+     * @throws ExecutionException
+     */
     public void getUserInput() throws InterruptedException, UnsupportedEncodingException, ExecutionException {
         // Indicate if there is invalid input field
         boolean warning = false;

@@ -10,6 +10,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+/**
+ * A class to handle the pill reminders list.
+ */
 public class PillReminderController implements Serializable {
     private ArrayList<Medicine> medicineList = new ArrayList<>();
     private ArrayList<PillReminder> pillReminderList = new ArrayList<PillReminder>();
@@ -17,6 +20,9 @@ public class PillReminderController implements Serializable {
     private TreeMap<LocalTime,ArrayList<PillReminder>> pillReminderByTime = new TreeMap<LocalTime,ArrayList<PillReminder>>();
     public TreeMap<LocalTime,Integer> takenBit = new TreeMap<LocalTime,Integer>();
 
+    /**
+     * Initialize and get list of pill reminders from database.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     PillReminderController() {
         RetrievePillReminders getDB = new RetrievePillReminders();
@@ -27,6 +33,9 @@ public class PillReminderController implements Serializable {
         setAllNotTaken();
     }
 
+    /**
+     * Get the data from database again.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void refreshData() {
         RetrievePillReminders getDB = new RetrievePillReminders();

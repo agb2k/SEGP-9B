@@ -15,6 +15,9 @@ import java.util.HashMap;
 
 import medPal.App.R;
 
+/**
+ * Adapter to handle the view of medicines on PillReminderFragment.
+ */
 public class MedicineAdapter extends BaseExpandableListAdapter {
 
     private Context context;

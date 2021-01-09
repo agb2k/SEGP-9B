@@ -12,6 +12,9 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * Update medicine database.
+ */
 public class UpdateMedicine {
 
     private String id;

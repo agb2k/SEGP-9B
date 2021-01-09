@@ -15,6 +15,10 @@ import java.util.ArrayList;
 
 import medPal.App.R;
 
+/**
+ * Adapter to handle the view of pill reminders on PillReminderFragment.
+ * Works with PillReminderTimeAdapter.
+ */
 public class PillReminderAdapter extends RecyclerView.Adapter<PillReminderAdapter.ViewHolder> {
 
     private Context context;

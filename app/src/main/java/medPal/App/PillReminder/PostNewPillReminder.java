@@ -12,6 +12,9 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * Add new pill reminder to database.
+ */
 public class PostNewPillReminder {
 
     String medicineName;
@@ -54,6 +57,10 @@ public class PostNewPillReminder {
         return exitStatus;
     }
 
+    /**
+     * Encode data.
+     * @throws UnsupportedEncodingException
+     */
     public void encodeData() throws UnsupportedEncodingException {
         encodedData += URLEncoder.encode("medicine", "UTF-8")+ "=" + URLEncoder.encode(medicineName, "UTF-8");
         encodedData += "&" + URLEncoder.encode("manufacturer", "UTF-8") + "=" + URLEncoder.encode(manufacturer, "UTF-8");

@@ -23,6 +23,9 @@ import java.util.TreeMap;
 
 import medPal.App.R;
 
+/**
+ * Handle the view of pill reminders on the PillReminderFragment. Works together with PillReminderAdapter.
+ */
 public class PillReminderTimeAdapter implements ExpandableListAdapter {
     private Context context;
     private ArrayList<LocalTime> time = new ArrayList<LocalTime>();

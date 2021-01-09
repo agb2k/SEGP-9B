@@ -31,6 +31,9 @@ import medPal.App.R;
 
 import static android.view.View.GONE;
 
+/**
+ * Activity to add new pill reminder.
+ */
 public class NewPillReminder extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
@@ -125,7 +128,9 @@ public class NewPillReminder extends AppCompatActivity implements
 
     }
 
-    // Initialize array list of error messages text view and hide all
+    /**
+     * Hide all error messages.
+     */
     public void hideAllErrorMessage(){
         // Error message for days of week
         TextView daysOfWeekErrMessage = (TextView) findViewById(R.id.DaysOfWeekErrorMessage);
@@ -140,9 +145,14 @@ public class NewPillReminder extends AppCompatActivity implements
         // Note: Other input fields can use 'setError' to show error messages
     }
 
-
+    /**
+     * Get user input and validate user input.
+     * If inputs are valid, send the data to PostNewPillReminder class to perform database operations.
+     * @throws UnsupportedEncodingException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    // Validate user input
     public void getUserInput() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
 
         // Indicate if there is invalid input field
@@ -308,8 +318,14 @@ public class NewPillReminder extends AppCompatActivity implements
 
     }
 
+    /**
+     * Handles the changes on frequency selector.
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
-    // Handle changes of the frequency field
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         View daysIntervalLayout = (View) findViewById(R.id.DaysIntervalInputField);
         View daysOfWeekLayout = (View) findViewById(R.id.DaysOfWeekInputField);
@@ -337,8 +353,11 @@ public class NewPillReminder extends AppCompatActivity implements
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
 
+    /**
+     * Handle the changes on time picker.
+     * @param view
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    // Handle time picker on change
     public void onclickTimePicker(View view){
         ImageButton button = (ImageButton) findViewById(R.id.clockButtonId);
         RelativeLayout timePicker = (RelativeLayout) findViewById(R.id.time_picker);
@@ -391,7 +410,11 @@ public class NewPillReminder extends AppCompatActivity implements
         }
     }
 
-    // Store time input
+    /**
+     * Store user input time.
+     * @param h Hour.
+     * @param m Minute.
+     */
     public void setInputTime(int h, int m){
         hour = h;
         minute = m;
@@ -406,8 +429,11 @@ public class NewPillReminder extends AppCompatActivity implements
         time = hourZero + String.valueOf(h) + minuteZero + String.valueOf(m);
     }
 
+    /**
+     * Handle the changes on start date picker.
+     * @param view
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    // Handle start date picker
     public void onclickStartDatePicker(View view){
         ImageButton button = (ImageButton) findViewById(R.id.startDateButtonId);
         RelativeLayout sdPicker = (RelativeLayout) findViewById(R.id.startDatePicker);
@@ -439,7 +465,12 @@ public class NewPillReminder extends AppCompatActivity implements
         }
     }
 
-    // Store start date input
+    /**
+     * Store user input start date.
+     * @param year Year.
+     * @param month Month.
+     * @param day Day.
+     */
     public void setInputStartDate(int year, int month, int day){
         sdYear = year;
         sdMonth = month;
@@ -447,8 +478,11 @@ public class NewPillReminder extends AppCompatActivity implements
         startDate = year + "-" + month + "-" + day;
     }
 
+    /**
+     * Handle the changes on end date picker.
+     * @param view
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    // Handle end date picker
     public void onclickEndDatePicker(View view){
         ImageButton button = (ImageButton) findViewById(R.id.endDateButtonId);
         RelativeLayout edPicker = (RelativeLayout) findViewById(R.id.endDatePicker);
@@ -485,7 +519,12 @@ public class NewPillReminder extends AppCompatActivity implements
         }
     }
 
-    // Store end date
+    /**
+     * Store user input end date.
+     * @param year Year.
+     * @param month Month.
+     * @param day Day.
+     */
     public void setInputEndDate(int year, int month, int day){
         edYear = year;
         edMonth = month;
