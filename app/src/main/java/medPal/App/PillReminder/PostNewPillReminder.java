@@ -1,6 +1,8 @@
 package medPal.App.PillReminder;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,7 +22,6 @@ public class PostNewPillReminder {
     String medicineName;
     String manufacturer;
     String dosage;
-    // Image
     String prType;
     String daysInterval;
     String week_bit;
@@ -30,11 +31,12 @@ public class PostNewPillReminder {
     String endDate;
     String purpose;
     String remark;
+    Bitmap bitmap;
 
     public String encodedData = "";
     public int exitStatus = 0;
 
-    PostNewPillReminder(String medicineName, String manufacturer, int dosage, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate, String purpose, String remark) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+    PostNewPillReminder(String medicineName, String manufacturer, int dosage, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate, String purpose, String remark, Bitmap bitmap) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         this.medicineName = medicineName;
         this.manufacturer = manufacturer;
         this.dosage = String.valueOf(dosage);
@@ -47,10 +49,18 @@ public class PostNewPillReminder {
         this.endDate = endDate;
         this.purpose = purpose;
         this.remark = remark;
+        this.bitmap = bitmap;
 
         encodeData();
         String result = new PostNewPillReminder.ConnectDB().execute(encodedData).get();
-        exitStatus = Integer.parseInt(result);
+        if(result.length() > 1){
+            // If result length > 0, means success, return format: "1-<medicine_id>"
+            String medicineId = result.substring(3,result.length()-1);
+            UploadImage uploadImage = new UploadImage(bitmap,medicineId);
+            exitStatus = uploadImage.getStatus();
+        }else{
+            exitStatus = Integer.parseInt(result);
+        }
     }
 
     public int getStatus() {

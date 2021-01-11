@@ -1,8 +1,16 @@
 package medPal.App.PillReminder;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,8 +28,12 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -36,6 +48,9 @@ import static android.view.View.GONE;
  */
 public class NewPillReminder extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
+
+    private ImageButton uploadImageButton;
+    private Bitmap bitmap = null;
 
     private int prType;
 
@@ -124,8 +139,15 @@ public class NewPillReminder extends AppCompatActivity implements
         RelativeLayout edPicker = (RelativeLayout) findViewById(R.id.endDatePicker);
         edPicker.setVisibility(GONE);
 
-        //hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
-
+        // Upload image feature
+        uploadImageButton = (ImageButton) findViewById(R.id.NewPillReminderImage);
+        uploadImageButton.setOnClickListener(event -> {
+            if(bitmap == null){
+                showSourceOption();
+            }else{
+                showActionOption();
+            }
+        });
     }
 
     /**
@@ -308,11 +330,13 @@ public class NewPillReminder extends AppCompatActivity implements
 
         if(!warning){
             // Input to database
-            PostNewPillReminder postData = new PostNewPillReminder(medicineNameInput,manufacturerInput,dosageInput,prType,daysInterval,week_bit,time,quantityInput,startDateInput,endDateInput,purposeInput,remarkInput);
+            PostNewPillReminder postData = new PostNewPillReminder(medicineNameInput,manufacturerInput,dosageInput,prType,daysInterval,week_bit,time,quantityInput,startDateInput,endDateInput,purposeInput,remarkInput,bitmap);
             if(postData.getStatus() == 1){
                 Toast toast = Toast.makeText(getApplicationContext(), "Reminder added successfully", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();
+            }else{
+                Log.v("Bulacke","Failed to insert new pill reminder");
             }
         }
 
@@ -530,6 +554,170 @@ public class NewPillReminder extends AppCompatActivity implements
         edMonth = month;
         edDay = day;
         endDate = year + "-" + month + "-" + day;
+    }
+
+    /**
+     * Display dialog for image source options
+     */
+    public void showSourceOption() {
+        AlertDialog.Builder sourceDialog = new AlertDialog.Builder(this);
+        sourceDialog.setTitle("Select Image Source");
+        sourceDialog.setCancelable(true);
+        String[] sourceDialogItems = {"Photo Gallery", "Camera"};
+        sourceDialog.setItems(sourceDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                switch (i) {
+                    case 0:
+                        requestGalleryPermission();
+                        break;
+                    case 1:
+                        requestCameraPermission();
+                        break;
+                }
+            }
+        });
+        sourceDialog.show();
+    }
+
+    /**
+     * Display dialog for actions on selected pill image.
+     */
+    public void showActionOption() {
+        AlertDialog.Builder actionDialog = new AlertDialog.Builder(this);
+        actionDialog.setTitle("Select Action");
+        actionDialog.setCancelable(true);
+        String[] actionDialogItems = {"Remove Image","Select Other Image"};
+        actionDialog.setItems(actionDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch(which){
+                    case 0:
+                        uploadImageButton.setImageResource(R.drawable.ic_baseline_add_a_photo_24);
+                        bitmap = null;
+                        return;
+                    case 1:
+                        showSourceOption();
+                }
+            }
+        });
+        actionDialog.show();
+    }
+
+    /**
+     * Request permission for accessing image gallery.
+     */
+    private void requestGalleryPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            showFileChooser();
+            return;
+        }
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            //If the user has denied the permission previously your code will come to this block
+            //Here you can explain why you need this permission
+            //Explain here why you need this permission
+        }
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+    }
+
+    /**
+     * Request permission for accessing camera.
+     */
+    private void requestCameraPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            takePhotoFromCamera();
+            return;
+        }
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+            //If the user has denied the permission previously your code will come to this block
+            //Here you can explain why you need this permission
+            //Explain here why you need this permission
+        }
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 2);
+    }
+
+    /**
+     * Handle user permissions.
+     * @param requestCode Request code. 1 for image gallery permission, and 2 for camera permission.
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        //Checking the request code of our request
+        switch (requestCode) {
+            case 1:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission is granted. Continue the action or workflow in your app.
+                    showFileChooser();
+                } else {
+                    // Explain to the user that the feature is unavailable because
+                    // the features requires a permission that the user has denied.
+                    // At the same time, respect the user's decision. Don't link to
+                    // system settings in an effort to convince the user to change
+                    // their decision.
+                    Toast.makeText(this, "Unable to access photo gallery", Toast.LENGTH_LONG).show();
+                }
+                return;
+            case 2:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission is granted. Continue the action or workflow in your app.
+                    takePhotoFromCamera();
+                } else {
+                    // Explain to the user that the feature is unavailable because
+                    // the features requires a permission that the user has denied.
+                    // At the same time, respect the user's decision. Don't link to
+                    // system settings in an effort to convince the user to change
+                    // their decision.
+                    Toast.makeText(this, "Unable to access camera.", Toast.LENGTH_LONG).show();
+                }
+                return;
+        }
+    }
+
+    /**
+     * Select image from image gallery.
+     */
+    private void showFileChooser(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, 1);
+    }
+
+    /**
+     * Take picture using camera.
+     */
+    private void takePhotoFromCamera(){
+        Intent camera = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(camera, 2);
+    }
+
+    /**
+     * Get bitmap from image gallery or camera.
+     * @param requestCode Request code. 1 for image gallery and 2 for camera.
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            if(requestCode == 1) {
+                Uri imageUri = data.getData();
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(requestCode == 2){
+                bitmap = (Bitmap) data.getExtras().get("data");
+            }
+            uploadImageButton.setImageBitmap(bitmap);
+        }
     }
 
 }

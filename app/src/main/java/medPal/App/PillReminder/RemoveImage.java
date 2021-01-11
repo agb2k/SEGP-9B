@@ -2,40 +2,30 @@ package medPal.App.PillReminder;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Base64;
+import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Update medicine database.
- */
-public class UpdateMedicine {
+public class RemoveImage {
 
-    private String id;
-    private String manufacturer;
-    private String dosage;
-    private String purpose;
-    private String remark;
-    private Bitmap bitmap = null;
-    private String encodedData = "";
+    private static String medicineId;
+    private static final String source = "https://bulacke.xyz/medpal-db/removeMedicineImage.php";
     private int exitStatus = 0;
 
-    UpdateMedicine(int id, String medicineManufacturer, int dosage, String purpose, String remark) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        this.id = String.valueOf(id);
-        this.manufacturer = medicineManufacturer;
-        this.dosage = String.valueOf(dosage);
-        this.purpose = purpose;
-        this.remark = remark;
+    RemoveImage(String medicineId) throws ExecutionException, InterruptedException {
+        RemoveImage.medicineId = medicineId;
 
-        encodeData();
-        String result = new UpdateMedicine.ConnectDB().execute(encodedData).get();
+        String result = new RemoveImage.ConnectDB().execute(source).get();
+        Log.v("Bulacke",result);
         exitStatus = Integer.parseInt(result);
     }
 
@@ -43,30 +33,27 @@ public class UpdateMedicine {
         return exitStatus;
     }
 
-    public void encodeData() throws UnsupportedEncodingException {
-        encodedData += URLEncoder.encode("id", "UTF-8")+ "=" + URLEncoder.encode(id, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("manufacturer", "UTF-8") + "=" + URLEncoder.encode(manufacturer, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("dosage", "UTF-8") + "=" + URLEncoder.encode(dosage, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("purpose", "UTF-8") + "=" + URLEncoder.encode(purpose, "UTF-8");
-        encodedData += "&" + URLEncoder.encode("remark", "UTF-8") + "=" + URLEncoder.encode(remark, "UTF-8");
-    }
-
     static class ConnectDB extends AsyncTask<String,Void,String> {
         @Override
-        protected String doInBackground(String... encodedData) {
+        protected String doInBackground(String... source) {
             BufferedReader reader = null;
             String text = null;
 
             // Send data
             try {
                 // Defined URL  where to send data
-                URL url = new URL("https://bulacke.xyz/medpal-db/updateMedicine.php");
+                URL url = new URL(source[0]);
 
                 // Send POST data request
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.setDoOutput(true);
+
+                // Prepare the bitmap parameter to be parsed
+                String encodedData = URLEncoder.encode("medId", "UTF-8") + "=" + URLEncoder.encode(medicineId, "UTF-8");
+
+                // Parse data
                 OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
-                wr.write(encodedData[0]);
+                wr.write(encodedData);
                 wr.flush();
 
                 // Get the server response
@@ -75,8 +62,7 @@ public class UpdateMedicine {
                 String line = null;
 
                 // Read Server Response
-                while((line = reader.readLine()) != null)
-                {
+                while((line = reader.readLine()) != null){
                     // Append server response in string
                     sb.append(line);
                 }
@@ -88,7 +74,8 @@ public class UpdateMedicine {
             finally {
                 try {
                     reader.close();
-                }catch(Exception ex) {
+                }
+                catch(Exception ex) {
                     ex.printStackTrace();
                 }
             }
@@ -96,5 +83,4 @@ public class UpdateMedicine {
             return text;
         }
     }
-
 }
