@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.AsyncTask;
 import android.os.Build;
@@ -19,6 +19,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.PillReminder.PillReminder;
+
+/**
+ * Retrieve pill reminder and medicine data from database.
+ */
 public class RetrievePillReminders {
     private ArrayList<PillReminder> pillReminderList = new ArrayList<PillReminder>();
     private HashMap<Integer, Medicine> medicineById = new HashMap<>();
@@ -61,6 +66,12 @@ public class RetrievePillReminders {
         }
     }
 
+    /**
+     * Create medicine instance from JSON object.
+     * @param jsonObj JSON object.
+     * @return Medicine instance.
+     * @throws JSONException
+     */
     private Medicine makeMedicineObject(JSONObject jsonObj) throws JSONException {
         int medicineId = jsonObj.getInt("medicineId");
         String medicineName = jsonObj.getString("medicineName");
@@ -72,6 +83,12 @@ public class RetrievePillReminders {
         return new Medicine(medicineId,medicineName,manufacturer,dosage,imagePath,purpose,medicineRemarks);
     }
 
+    /**
+     * Create pill reminder instance from JSON object.
+     * @param jsonObj JSON object.
+     * @return Pill reminder instance.
+     * @throws JSONException
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private PillReminder makePillReminderObject(JSONObject jsonObj) throws JSONException {
         int pillReminderId = jsonObj.getInt("pillreminder_id");

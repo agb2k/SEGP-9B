@@ -1,7 +1,6 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import medPal.App.R;
+
+/**
+ * Adapter to handle the view of medicines on PillReminderFragment.
+ */
 public class MedicineAdapter extends BaseExpandableListAdapter {
 
     private Context context;

@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +17,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import medPal.App.R;
+
+/**
+ * Activity to let user select an existing pill reminder to be edited.
+ */
 public class EditPillReminderActivity extends AppCompatActivity {
 
     PillReminderController prController;
@@ -58,6 +62,10 @@ public class EditPillReminderActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * After user selected (clicked) a pill reminder, bring the user to EditPillReminderDetail activity to edit the selected pill reminder.
+     * @param pr The selected pill reminder instance.
+     */
     public void startEditPillReminderDetailActivity(PillReminder pr) {
         Intent editPillReminderDetail = new Intent(this,EditPillReminderDetail.class);
         editPillReminderDetail.putExtra("PillReminderObj",pr);

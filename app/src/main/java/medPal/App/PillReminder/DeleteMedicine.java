@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.AsyncTask;
 
@@ -12,6 +12,9 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * This class helps to delete medicine from database.
+ */
 public class DeleteMedicine {
 
     private String encodedData = "";

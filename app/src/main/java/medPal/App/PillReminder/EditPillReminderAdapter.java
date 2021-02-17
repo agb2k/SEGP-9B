@@ -1,8 +1,6 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +10,13 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 
+import medPal.App.R;
+
+/**
+ * Adapter for pill reminder. Handles the view of the EditPillReminder class.
+ */
 public class EditPillReminderAdapter extends BaseAdapter {
 
     private Activity context;

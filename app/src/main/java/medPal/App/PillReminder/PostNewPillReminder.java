@@ -1,38 +1,27 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import static android.view.View.GONE;
-
+/**
+ * Add new pill reminder to database.
+ */
 public class PostNewPillReminder {
 
     String medicineName;
     String manufacturer;
     String dosage;
-    // Image
     String prType;
     String daysInterval;
     String week_bit;
@@ -42,11 +31,12 @@ public class PostNewPillReminder {
     String endDate;
     String purpose;
     String remark;
+    Bitmap bitmap;
 
     public String encodedData = "";
     public int exitStatus = 0;
 
-    PostNewPillReminder(String medicineName, String manufacturer, int dosage, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate, String purpose, String remark) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+    PostNewPillReminder(String medicineName, String manufacturer, int dosage, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate, String purpose, String remark, Bitmap bitmap) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         this.medicineName = medicineName;
         this.manufacturer = manufacturer;
         this.dosage = String.valueOf(dosage);
@@ -59,16 +49,28 @@ public class PostNewPillReminder {
         this.endDate = endDate;
         this.purpose = purpose;
         this.remark = remark;
+        this.bitmap = bitmap;
 
         encodeData();
         String result = new PostNewPillReminder.ConnectDB().execute(encodedData).get();
-        exitStatus = Integer.parseInt(result);
+        if(result.length() > 1){
+            // If result length > 0, means success, return format: "1-<medicine_id>"
+            String medicineId = result.substring(3,result.length()-1);
+            UploadImage uploadImage = new UploadImage(bitmap,medicineId);
+            exitStatus = uploadImage.getStatus();
+        }else{
+            exitStatus = Integer.parseInt(result);
+        }
     }
 
     public int getStatus() {
         return exitStatus;
     }
 
+    /**
+     * Encode data.
+     * @throws UnsupportedEncodingException
+     */
     public void encodeData() throws UnsupportedEncodingException {
         encodedData += URLEncoder.encode("medicine", "UTF-8")+ "=" + URLEncoder.encode(medicineName, "UTF-8");
         encodedData += "&" + URLEncoder.encode("manufacturer", "UTF-8") + "=" + URLEncoder.encode(manufacturer, "UTF-8");

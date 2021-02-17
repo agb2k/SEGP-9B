@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.os.Build;
 
@@ -7,6 +7,9 @@ import androidx.annotation.RequiresApi;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Pill reminder class.
+ */
 public class PillReminder implements Serializable {
     private int pillReminderId;
     private String time;
@@ -20,6 +23,19 @@ public class PillReminder implements Serializable {
     private Medicine medicine;
     private boolean taken;
 
+    /**
+     * Constructor of pill reminder object.
+     * @param pillReminderId Pill reminder ID.
+     * @param time Time to take this pill reminder.
+     * @param type Type of this pill reminder: Everyday / Every n days / Every days of week.
+     * @param frequency If type = Every n days, frequency = n.
+     * @param week_bit If type = Every days of week, week_bit represents the days of week.
+     * @param quantity Quantity of pill to be taken.
+     * @param start_date Starting date of this pill reminder.
+     * @param noEndDate Boolean variables to represents whether this pill reminder has an end date.
+     * @param end_date End date of this pill reminder.
+     * @param medicine Medicine object.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public PillReminder(int pillReminderId, String time, int type, int frequency, String week_bit, int quantity, String start_date, boolean noEndDate, String end_date, Medicine medicine) {
         this.pillReminderId = pillReminderId;
@@ -39,6 +55,11 @@ public class PillReminder implements Serializable {
         taken = false;
     }
 
+    /**
+     * Convert string type date to localdate type date.
+     * @param date String type date.
+     * @return LocalDate type date.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public LocalDate stringToLocalDate(String date) {
         int year = Integer.parseInt(date.substring(0,4));

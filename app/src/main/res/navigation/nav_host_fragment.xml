@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/pillReminderFragment"
-        android:name="medPal.App.PillReminderFragment"
+        android:name="medPal.App.PillReminder.PillReminderFragment"
         android:label="fragment_pill_reminder"
         tools:layout="@layout/fragment_pill_reminder" />
     <fragment

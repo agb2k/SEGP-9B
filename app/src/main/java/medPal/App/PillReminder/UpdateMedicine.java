@@ -1,7 +1,7 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,23 +13,45 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class DeletePillReminder {
+/**
+ * Update medicine database.
+ */
+public class UpdateMedicine {
 
+    private String id;
+    private String manufacturer;
+    private String dosage;
+    private String purpose;
+    private String remark;
+    private Bitmap bitmap = null;
     private String encodedData = "";
-    private int returnStatus = 0;
+    private int exitStatus = 0;
 
-    DeletePillReminder(int id) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
-        encodedData += URLEncoder.encode("id", "UTF-8")+ "=" + URLEncoder.encode(String.valueOf(id), "UTF-8");
-        String result = new DeletePillReminder.ConnectDB().execute(encodedData).get();
+    UpdateMedicine(int id, String medicineManufacturer, int dosage, String purpose, String remark) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        this.id = String.valueOf(id);
+        this.manufacturer = medicineManufacturer;
+        this.dosage = String.valueOf(dosage);
+        this.purpose = purpose;
+        this.remark = remark;
 
-        returnStatus = Integer.parseInt(result);
+        encodeData();
+        String result = new UpdateMedicine.ConnectDB().execute(encodedData).get();
+        exitStatus = Integer.parseInt(result);
     }
 
-    public boolean success() {
-        return (returnStatus==1);
+    public int getStatus() {
+        return exitStatus;
     }
 
-    private static class ConnectDB extends AsyncTask<String,Void,String> {
+    public void encodeData() throws UnsupportedEncodingException {
+        encodedData += URLEncoder.encode("id", "UTF-8")+ "=" + URLEncoder.encode(id, "UTF-8");
+        encodedData += "&" + URLEncoder.encode("manufacturer", "UTF-8") + "=" + URLEncoder.encode(manufacturer, "UTF-8");
+        encodedData += "&" + URLEncoder.encode("dosage", "UTF-8") + "=" + URLEncoder.encode(dosage, "UTF-8");
+        encodedData += "&" + URLEncoder.encode("purpose", "UTF-8") + "=" + URLEncoder.encode(purpose, "UTF-8");
+        encodedData += "&" + URLEncoder.encode("remark", "UTF-8") + "=" + URLEncoder.encode(remark, "UTF-8");
+    }
+
+    static class ConnectDB extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... encodedData) {
             BufferedReader reader = null;
@@ -38,7 +60,7 @@ public class DeletePillReminder {
             // Send data
             try {
                 // Defined URL  where to send data
-                URL url = new URL("https://bulacke.xyz/medpal-db/deletePillReminder.php");
+                URL url = new URL("https://bulacke.xyz/medpal-db/updateMedicine.php");
 
                 // Send POST data request
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();

@@ -1,30 +1,26 @@
-package medPal.App;
+package medPal.App.PillReminder;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-import com.squareup.picasso.Picasso;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
+
+import medPal.App.R;
 
 /**
  * A simple {@link Fragment} subclass.
