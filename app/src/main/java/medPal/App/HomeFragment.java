@@ -15,12 +15,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
-import medPal.App.Homepage.NextAppointment.NextAppointment;
-import medPal.App.Homepage.NextAppointment.RetrieveNextAppointment;
 import medPal.App.Homepage.healthPopUp;
 
 /**
@@ -82,16 +78,6 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        RetrieveNextAppointment nextApt = new RetrieveNextAppointment();
-        ArrayList<NextAppointment> nxtAptArr = nextApt.getNextAppointmentArrayList();
-        TextView planApptTime = (TextView)v.findViewById(R.id.planAppointmentTime);
-        String tempStr = "";
-        for(int i=0;i<nxtAptArr.size();i++){
-            tempStr += nxtAptArr.get(i) + "/n";
-        }
-        //planApptTime.setText(nextApt.getNextApptTime());
-
-        // Homepage Pill Reminder java coding
         ListView pillList = (ListView)v.findViewById(R.id.pillListHome);
 
         ArrayList<String> pillArray = new ArrayList<>();
