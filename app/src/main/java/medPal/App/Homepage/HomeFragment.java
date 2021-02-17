@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Homepage;
 
 import android.content.Intent;
 import android.os.Build;
@@ -17,7 +17,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
+
+import medPal.App.R;
 import medPal.App.Homepage.healthPopUp;
+
 
 /**
  * A simple {@link Fragment} subclass.
