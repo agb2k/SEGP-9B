@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.Alarm;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -11,8 +11,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-
 
 
 public class AlarmReminderProvider extends ContentProvider {

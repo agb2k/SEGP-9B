@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.Alarm;
 
 import android.app.AlarmManager;
 import android.content.Context;

@@ -8,15 +8,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="3dip"
-            android:textStyle="bold"
-            android:textColor="#0000A0"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            android:text="Edit Health Condition"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -80,11 +71,16 @@
                 android:layout_toEndOf="@id/allergicCol"
                 android:inputType="text"/>
 
-
-
         </RelativeLayout>
 
-
+        <Button
+            android:id="@+id/editHealthConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:text="Confirm"/>
 
 
     </LinearLayout>

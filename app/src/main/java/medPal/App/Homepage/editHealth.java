@@ -15,17 +15,19 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import medPal.App.R;
 
 
-public class editHealth extends Activity {
+public class editHealth extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.edit_health);
+        getSupportActionBar().setTitle("Edit Health Condition");
 
     }
 }

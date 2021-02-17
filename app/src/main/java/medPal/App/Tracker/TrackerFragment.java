@@ -1,14 +1,17 @@
-package medPal.App;
+package medPal.App.Tracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+
+import medPal.App.R;
+import medPal.App.Tracker.BloodPressure.BloodPressureActivity;
+import medPal.App.Tracker.BloodSugarLevel.SugarLevelActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,13 +74,13 @@ public class TrackerFragment extends Fragment {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),BloodPressureActivity.class));
+                startActivity(new Intent(getActivity(), BloodPressureActivity.class));
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),SugarLevelActivity.class));
+                startActivity(new Intent(getActivity(), SugarLevelActivity.class));
             }
         });
         return v;

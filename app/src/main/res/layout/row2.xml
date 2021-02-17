@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/display_Date_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp"
+        android:text="Date"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/display_Time_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/display_Date_pressure"
+        android:layout_toLeftOf="@+id/display_DIA"
+        android:text="Time"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/display_SYS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/display_DIA"
+        android:text="SYS"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/display_slash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/display_SYS"
+        android:text="/"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/display_DIA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_alignParentRight="true"
+        android:text="DIA"
+        android:textSize="20dp"/>
+
+</RelativeLayout>

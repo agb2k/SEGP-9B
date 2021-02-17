@@ -14,6 +14,7 @@ public class Medicine implements Serializable {
     private String purpose;
     private String medicineRemarks;
 
+
     /**
      * Constructor of medicine object.
      * @param medicineId Medicine ID.
@@ -26,6 +27,7 @@ public class Medicine implements Serializable {
      */
     public Medicine(int medicineId, String medicineName, String manufacturer, int dosage, String imagePath, String purpose,
                     String medicineRemarks) {
+
         this.medicineId = medicineId;
         this.medicineName = medicineName;
         this.manufacturer = manufacturer;

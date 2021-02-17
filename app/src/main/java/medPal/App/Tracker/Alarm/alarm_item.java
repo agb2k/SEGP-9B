@@ -1,8 +1,10 @@
-package medPal.App;
+package medPal.App.Tracker.Alarm;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import medPal.App.R;
 
 public class alarm_item extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.Alarm;
 
 import android.app.IntentService;
 import android.app.Notification;
@@ -16,8 +16,8 @@ import android.provider.Settings;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 
-
-
+import medPal.App.Tracker.BloodSugarLevel.NewSugarReminder;
+import medPal.App.R;
 
 
 public class    ReminderAlarmService extends IntentService {
