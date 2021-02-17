@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.BloodSugarLevel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +36,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import medPal.App.R;
 
 public class SugarLevelActivity extends AppCompatActivity {
     private Button b4;

@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.BloodSugarLevel;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
@@ -32,6 +32,10 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
+
+import medPal.App.R;
+import medPal.App.Tracker.Alarm.AlarmReminderContract;
+import medPal.App.Tracker.Alarm.AlarmScheduler;
 
 
 public class NewSugarReminder extends AppCompatActivity implements

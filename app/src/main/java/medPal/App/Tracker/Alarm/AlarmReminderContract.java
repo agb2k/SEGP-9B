@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.Alarm;
 
 import android.content.ContentResolver;
 import android.database.Cursor;

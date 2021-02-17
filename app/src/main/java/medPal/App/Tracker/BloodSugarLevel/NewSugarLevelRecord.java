@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.BloodSugarLevel;
 
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import medPal.App.R;
 
 public class NewSugarLevelRecord extends AppCompatActivity {
     EditText e1;
