@@ -23,9 +23,9 @@
             android:padding="3dip"
             android:textStyle="bold"
             android:textColor="#0000A0"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textAlignment="center"
-            android:text="Healt Condition"/>
+            android:text="Health Condition"/>
 
         <ImageButton
             android:id="@+id/editHealthButton"
