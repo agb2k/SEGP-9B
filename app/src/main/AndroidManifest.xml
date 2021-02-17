@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--Camera permission issue: https://stackoverflow.com/questions/43042725/revoked-permission-android-permission-camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -18,19 +20,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPal">
-        <activity android:name=".NewPressureReminder"></activity>
-        <activity android:name=".PressureReminderList" />
-        <activity android:name=".EditPillReminderDetail" />
-        <activity android:name=".EditMedicineActivity" />
-        <activity android:name=".EditPillReminderActivity" />
-        <activity android:name=".alarm_item" />
-        <activity android:name=".SugarReminderList" />
-        <activity android:name=".NewSugarLevelRecord" />
-        <activity android:name=".NewPressureRecord" />
-        <activity android:name=".SugarLevelActivity" />
-        <activity android:name=".BloodPressureActivity" />
-        <activity android:name=".NewPillReminder" />
+
+        <activity android:name=".Tracker.BloodPressure.NewPressureReminder"></activity>
+        <activity android:name=".Tracker.BloodPressure.PressureReminderList" />
+        <activity android:name=".PillReminder.EditPillReminderDetail" />
+        <activity android:name=".PillReminder.EditMedicineActivity" />
+        <activity android:name=".PillReminder.EditPillReminderActivity" />
+        <activity android:name=".Tracker.Alarm.alarm_item" />
+        <activity android:name=".Tracker.BloodSugarLevel.SugarReminderList" />
+        <activity android:name=".Tracker.BloodSugarLevel.NewSugarLevelRecord" />
+        <activity android:name=".Tracker.BloodPressure.NewPressureRecord" />
+        <activity android:name=".Tracker.BloodSugarLevel.SugarLevelActivity" />
+        <activity android:name=".Tracker.BloodPressure.BloodPressureActivity" />
+        <activity android:name=".PillReminder.NewPillReminder" />
         <activity android:name=".NewAppointment" /> <!-- Health Condition Pop up window -->
+
+
+
+        <!-- Health Condition Pop up window -->
+
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
@@ -43,22 +51,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewSugarReminder"
-            android:parentActivityName=".SugarReminderList">
+            android:name=".Tracker.BloodSugarLevel.NewSugarReminder"
+            android:parentActivityName=".Tracker.BloodSugarLevel.SugarReminderList">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SugarReminderList" />
+                android:value=".Tracker.BloodSugarLevel.SugarReminderList" />
         </activity>
 
         <provider
-            android:name=".AlarmReminderProvider"
+            android:name=".Tracker.Alarm.AlarmReminderProvider"
             android:authorities="medPal.App"
             android:exported="false" />
 
         <service
-            android:name=".ReminderAlarmService"
+            android:name=".Tracker.Alarm.ReminderAlarmService"
             android:exported="false" />
     </application>
 
