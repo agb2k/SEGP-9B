@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingRight="20dp"
         android:text="Date"
-        android:textSize="30dp"/>
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/display.Time"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/display.Date"
         android:text="Time"
-        android:textSize="30dp"/>
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/display.Level"
@@ -27,6 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:text="Level"
-        android:textSize="30dp"/>
+        android:textSize="20dp"/>
 
 </RelativeLayout>

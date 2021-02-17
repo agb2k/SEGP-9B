@@ -1,8 +1,10 @@
 package medPal.App.Homepage;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,10 +13,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
 import medPal.App.R;
+import medPal.App.Homepage.NextAppointment.NextAppointment;
+import medPal.App.Homepage.NextAppointment.RetrieveNextAppointment;
+import medPal.App.Homepage.healthPopUp;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,11 +78,21 @@ public class HomeFragment extends Fragment {
 
     Button healthBtn;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        RetrieveNextAppointment nextApt = new RetrieveNextAppointment();
+        ArrayList<NextAppointment> nxtAptArr = nextApt.getNextAppointmentArrayList();
+        TextView planApptTime = (TextView)v.findViewById(R.id.planAppointmentTime);
+        String tempStr = "";
+        for(int i=0;i<nxtAptArr.size();i++){
+            tempStr += nxtAptArr.get(i) + "/n";
+        }
+        //planApptTime.setText(nextApt.getNextApptTime());
 
         // Homepage Pill Reminder java coding
         ListView pillList = (ListView)v.findViewById(R.id.pillListHome);
@@ -98,8 +118,6 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), healthPopUp.class));
             }
         });
-
-
 
         return v;
 

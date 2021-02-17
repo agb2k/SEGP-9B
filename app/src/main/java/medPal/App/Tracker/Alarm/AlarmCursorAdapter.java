@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Tracker.Alarm;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 
+import medPal.App.R;
 
 
 public class AlarmCursorAdapter extends CursorAdapter {

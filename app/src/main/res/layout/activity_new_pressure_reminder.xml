@@ -6,10 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tracker.BloodSugarLevel.NewSugarReminder">
-    
+    tools:context=".Tracker.BloodPressure.NewPressureReminder">
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar1"
+        android:id="@+id/toolbar1_pressure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
@@ -19,7 +19,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <LinearLayout
-        android:id="@+id/Linear1"
+        android:id="@+id/Linear1_pressure"
         android:layout_width="match_parent"
         android:layout_height="148dp"
         android:orientation="vertical">
@@ -27,7 +27,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="148dp"
-            android:id="@+id/reminder_title"
+            android:id="@+id/reminder_title_pressure"
             android:hint="Reminder"
             android:textSize="25sp"
             android:lines="4"
@@ -43,7 +43,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/Linear1">
+        android:layout_below="@+id/Linear1_pressure">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/Details"
+                android:id="@+id/Details_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:layout_marginTop="8dp"
@@ -61,14 +61,14 @@
                 android:layout_marginLeft="72dp"/>
 
             <RelativeLayout
-                android:id="@+id/setDate"
+                android:id="@+id/setDate_Pressure"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:clickable="true"
                 android:onClick="setDate">
 
                 <ImageView
-                    android:id="@+id/date_icon"
+                    android:id="@+id/date_icon_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -82,10 +82,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/date_icon">
+                    android:layout_toRightOf="@id/date_icon_pressure">
 
                     <TextView
-                        android:id="@+id/date_text"
+                        android:id="@+id/date_text_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Date"
@@ -94,7 +94,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/set_date"
+                        android:id="@+id/set_date_pressure"
                         android:textSize="15dp"/>
 
 
@@ -104,14 +104,14 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/setTime"
+                android:id="@+id/setTime_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:clickable="true"
                 android:onClick="setTime">
 
                 <ImageView
-                    android:id="@+id/time_icon"
+                    android:id="@+id/time_icon_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -125,10 +125,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/time_icon">
+                    android:layout_toRightOf="@id/time_icon_pressure">
 
                     <TextView
-                        android:id="@+id/time_text"
+                        android:id="@+id/time_text_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Time"
@@ -137,7 +137,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/set_time"
+                        android:id="@+id/set_time_pressure"
                         android:textSize="15dp"/>
 
 
@@ -147,12 +147,12 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/setrepeat1"
+                android:id="@+id/setrepeat1_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="72dp">
 
                 <ImageView
-                    android:id="@+id/repeat_icon"
+                    android:id="@+id/repeat_icon_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -166,10 +166,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/repeat_icon">
+                    android:layout_toRightOf="@id/repeat_icon_pressure">
 
                     <TextView
-                        android:id="@+id/Repeat_text"
+                        android:id="@+id/Repeat_text_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Repeat"
@@ -178,14 +178,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/set_repeat"
+                        android:id="@+id/set_repeat_pressure"
                         android:textSize="15dp"/>
 
 
                 </LinearLayout>
 
                 <Switch
-                    android:id="@+id/repeat_switch"
+                    android:id="@+id/repeat_switch_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -199,14 +199,14 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/repeatNo"
+                android:id="@+id/repeatNo_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:clickable="true"
                 android:onClick="setRepeatNo">
 
                 <ImageView
-                    android:id="@+id/repeatNo_icon"
+                    android:id="@+id/repeatNo_icon_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -220,10 +220,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/repeatNo_icon">
+                    android:layout_toRightOf="@id/repeatNo_icon_pressure">
 
                     <TextView
-                        android:id="@+id/repeatNo_text"
+                        android:id="@+id/repeatNo_text_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Repetition Interval"
@@ -232,7 +232,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/set_repeat_no"
+                        android:id="@+id/set_repeat_no_pressure"
                         android:textSize="15dp"/>
 
 
@@ -242,14 +242,14 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/repeatType"
+                android:id="@+id/repeatType_pressure"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:clickable="true"
                 android:onClick="selectRepeatType">
 
                 <ImageView
-                    android:id="@+id/repeatType_icon"
+                    android:id="@+id/repeatType_icon_pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -263,10 +263,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/repeatType_icon">
+                    android:layout_toRightOf="@id/repeatType_icon_pressure">
 
                     <TextView
-                        android:id="@+id/repeatType_text"
+                        android:id="@+id/repeatType_text_pressure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Type Of Repetitions"
@@ -275,7 +275,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/set_repeat_type"
+                        android:id="@+id/set_repeat_type_pressure"
                         android:textSize="15dp"/>
 
 
@@ -292,10 +292,10 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@+id/Linear1" />
+        android:layout_below="@+id/Linear1_pressure" />
 
     <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/starred1"
+        android:id="@+id/starred1_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -310,7 +310,7 @@
         android:layout_marginLeft="8dp"/>
 
     <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/starred2"
+        android:id="@+id/starred2_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
