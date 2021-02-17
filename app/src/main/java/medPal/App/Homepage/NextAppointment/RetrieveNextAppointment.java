@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 
 public class RetrieveNextAppointment{
 
-    private static final String URL = "http://192.168.0.105/SEGP/nextAppointment.php";
+    private static final String URL = "http://192.168.68.110/SEGP/nextAppointment.php";
     private ArrayList<NextAppointment> nextAppointmentArrayList = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
