@@ -12,13 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
-
+import medPal.App.Homepage.NextAppointment.NextAppointment;
+import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
+import medPal.App.Homepage.NextAppointment.NextAppointmentController;
 import medPal.App.R;
 import medPal.App.Homepage.healthPopUp;
 
@@ -73,7 +77,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-    Button healthBtn;
+    private Button healthBtn;
+    private ExpandableListView nextAppointmentExpandableList;
+    private ExpandableListAdapter nextAppointmentExpandableListAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -82,20 +88,12 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ListView pillList = (ListView)v.findViewById(R.id.pillListHome);
+        nextAppointmentExpandableList = (ExpandableListView) v.findViewById(R.id.nextAppointmentExpandableList);
+        NextAppointmentController nextAppointmentController = new NextAppointmentController();
+        ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
+        //nextAppointmentExpandableListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
+        //nextAppointmentExpandableList.setAdapter(nextAppointmentExpandableListAdapter);
 
-        ArrayList<String> pillArray = new ArrayList<>();
-
-        pillArray.add("Panadol 1");
-        pillArray.add("Panadol 2");
-        pillArray.add("Panadol 3");
-        pillArray.add("Panadol 4");
-        pillArray.add("Panadol 5");
-        pillArray.add("Panadol 6");
-
-        ArrayAdapter pillAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,pillArray);
-
-        pillList.setAdapter(pillAdapter);
 
         healthBtn = v.findViewById(R.id.healthConditionButton);
 

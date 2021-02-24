@@ -1,4 +1,4 @@
-package medPal.App.Homepage;
+package medPal.App.Homepage.NextPillReminder;
 
 import android.os.AsyncTask;
 import android.os.Build;
