@@ -29,8 +29,10 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 /**
@@ -85,11 +87,8 @@ public class EditMedicineActivity extends AppCompatActivity {
         deleteMedicine.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DeleteMedicine delete = null;
-                RemoveImage removeImage = null;
                 try {
-                    removeImage = new RemoveImage(String.valueOf(medicine.getMedicineId()));
-                    delete = new DeleteMedicine(medicine.getMedicineId());
+                    deleteMedicine();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -97,14 +96,28 @@ public class EditMedicineActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(delete.success() && removeImage.getStatus()==1){
-                    Toast toast = Toast.makeText(getApplicationContext(), "Medicine deleted successfully", Toast.LENGTH_SHORT);
-                    toast.show();
-                    finish();
-                }
             }
         });
+    }
 
+    private void deleteMedicine() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.DELETE,DatabaseHelper.MEDICINE);
+        dbHelper.encodeData("id",String.valueOf(medicine.getMedicineId()));
+        if(Integer.parseInt(dbHelper.send()) == 1) {
+            if(deleteImage()) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Medicine deleted successfully", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }else{
+                Toast toast = Toast.makeText(getApplicationContext(), "Failed to delete medicine image.", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }
+        }else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Failed to delete medicine.", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }
     }
 
     /**
@@ -195,33 +208,67 @@ public class EditMedicineActivity extends AppCompatActivity {
 
         if(!warning){
             // Input to database
-            UpdateMedicine postData = new UpdateMedicine(medicine.getMedicineId(),manufacturerInput,dosageInput,purposeInput,remarkInput);
-            if(postData.getStatus() == 1){
-                int status = 0;
-                if(isImageChange){
-                    if(!(initiallyNoImage && bitmap==null)) {
-                        if (bitmap != null) {
-                            // If user replace or upload image.
-                            UploadImage updateImage = new UploadImage(bitmap, String.valueOf(medicine.getMedicineId()));
-                            status = updateImage.getStatus();
-                        } else if (!initiallyNoImage && bitmap==null) {
-                            // If user wants to remove image
-                            RemoveImage removeImage = new RemoveImage(String.valueOf(medicine.getMedicineId()));
-                            status = removeImage.getStatus();
-                        }
-                    }else{
-                        // No need to update image.
-                        status = 1;
-                    }
-                }
-
-                if(status == 1) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Medicine detail has been changed", Toast.LENGTH_SHORT);
-                    toast.show();
-                    finish();
-                }
-            }
+            sendData(medicine.getMedicineId(),manufacturerInput,dosageInput,purposeInput,remarkInput);
         }
+    }
+
+    private void sendData(int id, String medicineManufacturer, int dosage, String purpose, String remark) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        int status = 0;
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.UPDATE,DatabaseHelper.MEDICINE);
+        dbHelper.encodeData("id", String.valueOf(id));
+        dbHelper.encodeData("manufacturer", medicineManufacturer);
+        dbHelper.encodeData("dosage", String.valueOf(dosage));
+        dbHelper.encodeData("purpose", purpose);
+        dbHelper.encodeData("remark", remark);
+        if(Integer.parseInt(dbHelper.send()) == 1) {
+            if(isImageChange){
+                if(!(initiallyNoImage && bitmap==null)) {
+                    if (bitmap != null) {
+                        // If user replace or upload image.
+                        if(updateImage()) {
+                            status = 1;
+                        }
+                    } else if (!initiallyNoImage && bitmap==null) {
+                        // If user wants to remove image
+                        if(deleteImage()) {
+                            status = 1;
+                        }
+                    }
+                }else{
+                    // No need to update image.
+                    status = 1;
+                }
+            }else{
+                status = 1;
+            }
+
+            if(status == 1) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Medicine detail has been changed", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }else{
+                Toast toast = Toast.makeText(getApplicationContext(), "Failed to update image.", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(), "Failed to update medicine detail.", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }
+    }
+
+    private boolean updateImage() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.INSERT,DatabaseHelper.MEDICINE_IMAGE);
+        dbHelper.encodeImage(bitmap);
+        dbHelper.encodeData("medId",String.valueOf(medicine.getMedicineId()));
+        return Integer.parseInt(dbHelper.send())==1;
+    }
+
+    private boolean deleteImage() throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.DELETE,DatabaseHelper.MEDICINE_IMAGE);
+        dbHelper.encodeData("medId",String.valueOf(medicine.getMedicineId()));
+        return Integer.parseInt(dbHelper.send())==1;
     }
 
     /**

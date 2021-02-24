@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.PillReminder.PillReminder;
 
 /**
@@ -38,10 +39,13 @@ public class RetrievePillReminders {
         Medicine mObj;
         PillReminder prObj;
 
+        DatabaseHelper medDbHelper = new DatabaseHelper(DatabaseHelper.GET,DatabaseHelper.MEDICINE);
+        DatabaseHelper pillDbHelper = new DatabaseHelper(DatabaseHelper.GET,DatabaseHelper.PILL_REMINDER);
+
         // Extract data from JSON
         try {
             // Get medicine
-            jsonStr = new ConnectDB().execute("https://bulacke.xyz/medpal-db/getMedicine.php").get();
+            jsonStr = medDbHelper.send();
             jsonArr = new JSONArray(jsonStr);
             for(int i=0; i<jsonArr.length(); i++) {
                 jsonObj = (JSONObject) jsonArr.get(i);
@@ -50,7 +54,7 @@ public class RetrievePillReminders {
                 medicineList.add(mObj);
             }
             // Get pill reminders
-            jsonStr = new ConnectDB().execute("https://bulacke.xyz/medpal-db/getPillReminder.php").get();
+            jsonStr = pillDbHelper.send();
             jsonArr = new JSONArray(jsonStr);
             for(int i=0; i<jsonArr.length(); i++){
                 jsonObj = (JSONObject) jsonArr.get(i);
@@ -111,29 +115,4 @@ public class RetrievePillReminders {
     }
 
     public ArrayList<Medicine> getAllMedicine() { return medicineList; }
-
-    static class ConnectDB extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... source) {
-            StringBuilder total = new StringBuilder();;
-            try {
-                // Create a neat value object to hold the URL
-                URL url = new URL(source[0]);
-                // Open a connection(?) on the URL(?) and cast the response(??)
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                // Now it's "open", we can set the request method, headers etc.
-                connection.setRequestProperty("accept", "application/json");
-                // This line makes the request
-                InputStream responseStream = connection.getInputStream();
-                BufferedReader r = new BufferedReader(new InputStreamReader(responseStream));
-                for (String line; (line = r.readLine()) != null; ) {
-                    total.append(line).append('\n');
-                }
-                connection.disconnect();
-            }catch(IOException ioE){
-                ioE.printStackTrace();
-            }
-            return total.toString();
-        }
-    }
 }

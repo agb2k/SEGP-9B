@@ -35,10 +35,12 @@ import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 import static android.view.View.GONE;
@@ -169,7 +171,7 @@ public class NewPillReminder extends AppCompatActivity implements
 
     /**
      * Get user input and validate user input.
-     * If inputs are valid, send the data to PostNewPillReminder class to perform database operations.
+     * If inputs are valid, send the data to database.
      * @throws UnsupportedEncodingException
      * @throws ExecutionException
      * @throws InterruptedException
@@ -329,17 +331,72 @@ public class NewPillReminder extends AppCompatActivity implements
         String remarkInput = ((EditText) findViewById(R.id.NewPillReminderMedicineRemark)).getText().toString();
 
         if(!warning){
-            // Input to database
-            PostNewPillReminder postData = new PostNewPillReminder(medicineNameInput,manufacturerInput,dosageInput,prType,daysInterval,week_bit,time,quantityInput,startDateInput,endDateInput,purposeInput,remarkInput,bitmap);
-            if(postData.getStatus() == 1){
+            sendData(medicineNameInput, manufacturerInput, dosageInput, prType, daysInterval, week_bit, time, quantityInput, startDateInput, endDateInput, purposeInput, remarkInput, bitmap);
+        }
+
+    }
+
+    /**
+     * Insert to database.
+     * @param medicineName
+     * @param manufacturer
+     * @param dosage
+     * @param prType
+     * @param daysInterval
+     * @param week_bit
+     * @param time
+     * @param quantity
+     * @param startDate
+     * @param endDate
+     * @param purpose
+     * @param remark
+     * @param bitmap
+     * @throws UnsupportedEncodingException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    private void sendData(String medicineName, String manufacturer, int dosage, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate, String purpose, String remark, Bitmap bitmap) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        DatabaseHelper insertDB = new DatabaseHelper(DatabaseHelper.INSERT,DatabaseHelper.PILL_REMINDER);
+        insertDB.encodeData("medicine",medicineName);
+        insertDB.encodeData("manufacturer",manufacturer);
+        insertDB.encodeData("dosage", String.valueOf(dosage));
+        insertDB.encodeData("type",String.valueOf(prType));
+        insertDB.encodeData("frequency", String.valueOf(daysInterval));
+        insertDB.encodeData("week_bit",week_bit);
+        insertDB.encodeData("time", time);
+        insertDB.encodeData("quantity",String.valueOf(quantity));
+        insertDB.encodeData("start_date",startDate);
+        insertDB.encodeData("end_date",endDate);
+        insertDB.encodeData("purpose",purpose);
+        insertDB.encodeData("remark", remark);
+
+        String message = insertDB.send();
+        if(message.length() > 1) {
+            String medicineId = message.substring(3,message.length()-1);
+            if(bitmap != null) {
+                DatabaseHelper imageDB = new DatabaseHelper(DatabaseHelper.INSERT, DatabaseHelper.MEDICINE_IMAGE);
+                imageDB.encodeData("medId", medicineId);
+                imageDB.encodeImage(bitmap);
+                message = imageDB.send();
+                if(Integer.parseInt(message) == 1) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Reminder added successfully", Toast.LENGTH_SHORT);
+                    toast.show();
+                    finish();
+                }else{
+                    Toast toast = Toast.makeText(getApplicationContext(), "Failed to upload image.,", Toast.LENGTH_SHORT);
+                    toast.show();
+                    finish();
+                }
+            }else{
                 Toast toast = Toast.makeText(getApplicationContext(), "Reminder added successfully", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();
-            }else{
-                Log.v("Bulacke","Failed to insert new pill reminder");
             }
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(), "Failed to add new pill reminder.", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
         }
-
     }
 
     /**

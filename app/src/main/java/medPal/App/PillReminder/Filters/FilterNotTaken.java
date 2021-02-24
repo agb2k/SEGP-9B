@@ -1,4 +1,4 @@
-package medPal.App.PillReminder;
+package medPal.App.PillReminder.Filters;
 
 import android.os.Build;
 
@@ -7,6 +7,8 @@ import androidx.annotation.RequiresApi;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
+
+import medPal.App.PillReminder.PillReminder;
 
 /**
  * A class to filter the pill reminders that haven be taken.

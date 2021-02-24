@@ -1,4 +1,4 @@
-package medPal.App.PillReminder;
+package medPal.App.PillReminder.Filters;
 
 import android.os.Build;
 
@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
+
+import medPal.App.PillReminder.PillReminder;
 
 /**
  * A class the group the pill reminders by time.
