@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -95,6 +96,7 @@ public class HomeFragment extends Fragment {
 
         NextAppointmentController nextAppointmentController = new NextAppointmentController();
         ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
+
 
         nextAppointmentExpandableListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
         nextAppointmentExpandableList.setAdapter(nextAppointmentExpandableListAdapter);
