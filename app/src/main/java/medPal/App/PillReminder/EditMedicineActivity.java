@@ -164,7 +164,7 @@ public class EditMedicineActivity extends AppCompatActivity {
 
     /**
      * Get user input and validate user input when user click finish.
-     * If input is valid then parse the data to UpdateMedicine class to perform the database operations.
+     * If input is valid then parse the data to database.
      * @throws InterruptedException
      * @throws UnsupportedEncodingException
      * @throws ExecutionException

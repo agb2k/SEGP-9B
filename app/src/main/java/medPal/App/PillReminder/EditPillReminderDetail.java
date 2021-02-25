@@ -213,18 +213,36 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         EditText noPill = (EditText) findViewById(R.id.editPillReminderNoPill);
         noPill.setText(String.valueOf(pr.getQuantity()));
 
-        startDate = pr.getStart_date().toString();
+        startDate = "";
         sdYear = pr.getStart_date().getYear();
+        startDate += String.valueOf(sdYear);
         sdMonth = pr.getStart_date().getMonthValue();
+        if(sdMonth < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(sdMonth);
         sdDay = pr.getStart_date().getDayOfMonth();
+        if(sdDay < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(sdDay);
 
         if(pr.isNoEndDate()){
             endDate = "";
         }else{
-            endDate = pr.getEnd_date().toString();
+            endDate = "";
             edYear = pr.getEnd_date().getYear();
+            endDate += String.valueOf(edYear);
             edMonth = pr.getEnd_date().getMonthValue();
+            if(edMonth < 10) {
+                endDate += "0";
+            }
+            endDate += String.valueOf(edMonth);
             edDay = pr.getEnd_date().getDayOfMonth();
+            if(edDay < 10) {
+                endDate += "0";
+            }
+            endDate += String.valueOf(edDay);
         }
 
     }
@@ -306,6 +324,8 @@ public class EditPillReminderDetail extends AppCompatActivity implements
                         scroll.scrollTo(0,daysIntervalY);
                         warning = true;
                     }
+                }else{
+                    daysInterval = daysIntervalInput;
                 }
             }
         }
@@ -594,10 +614,22 @@ public class EditPillReminderDetail extends AppCompatActivity implements
      * @param day Day.
      */
     public void setInputStartDate(int year, int month, int day){
+        startDate = "";
+
         sdYear = year;
+        startDate += String.valueOf(year);
+
         sdMonth = month;
+        if(month < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(month);
+
         sdDay = day;
-        startDate = year + "-" + month + "-" + day;
+        if(day < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(day);
     }
 
     /**
@@ -648,9 +680,21 @@ public class EditPillReminderDetail extends AppCompatActivity implements
      * @param day Day.
      */
     public void setInputEndDate(int year, int month, int day){
+        endDate = "";
+
         edYear = year;
+        endDate += String.valueOf(year);
+
         edMonth = month;
+        if(month < 10) {
+            endDate += "0";
+        }
+        endDate += String.valueOf(month);
+
         edDay = day;
-        endDate = year + "-" + month + "-" + day;
+        if(day < 10) {
+            endDate += "0";
+        }
+        endDate += String.valueOf(day);
     }
 }
