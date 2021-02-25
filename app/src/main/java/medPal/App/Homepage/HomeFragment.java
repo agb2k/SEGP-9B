@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -78,8 +81,8 @@ public class HomeFragment extends Fragment {
     }
 
     private Button healthBtn;
-    private ExpandableListView nextAppointmentExpandableList;
-    private ExpandableListAdapter nextAppointmentExpandableListAdapter;
+    private RecyclerView nextAppointmentExpandableList;
+    private NextAppointmentAdapter nextAppointmentExpandableListAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -88,11 +91,18 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        nextAppointmentExpandableList = (ExpandableListView) v.findViewById(R.id.nextAppointmentExpandableList);
+        nextAppointmentExpandableList = v.findViewById(R.id.nextAppointmentExpandableList);
+        nextAppointmentExpandableList.setLayoutManager(new LinearLayoutManager(v.getContext()));
+
         NextAppointmentController nextAppointmentController = new NextAppointmentController();
         ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
-        //nextAppointmentExpandableListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
-        //nextAppointmentExpandableList.setAdapter(nextAppointmentExpandableListAdapter);
+
+        // This is line sets the height of the pill reminder section (480dp for each reminder)
+        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,nextAppointmentArrayList.size()*480);
+        nextAppointmentExpandableList.setLayoutParams(param);
+
+        nextAppointmentExpandableListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
+        nextAppointmentExpandableList.setAdapter(nextAppointmentExpandableListAdapter);
 
 
         healthBtn = v.findViewById(R.id.healthConditionButton);

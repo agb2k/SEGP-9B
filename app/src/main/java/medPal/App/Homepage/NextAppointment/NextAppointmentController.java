@@ -16,11 +16,13 @@ public class NextAppointmentController implements Serializable{
     @RequiresApi(api = Build.VERSION_CODES.O)
     public NextAppointmentController() {
         RetrieveNextAppoinment getDB = new RetrieveNextAppoinment();
+        NextApptList=getDB.getNextApptList();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void refreshData(){
         RetrieveNextAppoinment getDB = new RetrieveNextAppoinment();
+        NextApptList=getDB.getNextApptList();
     }
 
     public ArrayList<NextAppointment> getNextApptList() {
