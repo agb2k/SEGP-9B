@@ -25,10 +25,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 import static android.view.View.GONE;
@@ -95,21 +97,10 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         deletePillReminder.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DeletePillReminder delete = null;
                 try {
-                    delete = new DeletePillReminder(pr.getPillReminderId());
-                } catch (UnsupportedEncodingException e) {
+                    deleteReminder(pr.getPillReminderId());
+                } catch (UnsupportedEncodingException | ExecutionException | InterruptedException e) {
                     e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if(delete.success()){
-                    prController.refreshData();
-                    Toast toast = Toast.makeText(getApplicationContext(), "Reminder deleted successfully", Toast.LENGTH_SHORT);
-                    toast.show();
-                    finish();
                 }
             }
         });
@@ -154,6 +145,16 @@ public class EditPillReminderDetail extends AppCompatActivity implements
             String end = edDay + "-" + edMonth + "-" + edYear;
             TextView displayEndDate = (TextView) findViewById(R.id.displayEndDate);
             displayEndDate.setText(end);
+        }
+    }
+
+    private void deleteReminder(int id) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.DELETE,DatabaseHelper.PILL_REMINDER);
+        dbHelper.encodeData("id",String.valueOf(id));
+        if(Integer.parseInt(dbHelper.send()) == 1) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Reminder deleted successfully", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
         }
     }
 
@@ -212,18 +213,36 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         EditText noPill = (EditText) findViewById(R.id.editPillReminderNoPill);
         noPill.setText(String.valueOf(pr.getQuantity()));
 
-        startDate = pr.getStart_date().toString();
+        startDate = "";
         sdYear = pr.getStart_date().getYear();
+        startDate += String.valueOf(sdYear);
         sdMonth = pr.getStart_date().getMonthValue();
+        if(sdMonth < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(sdMonth);
         sdDay = pr.getStart_date().getDayOfMonth();
+        if(sdDay < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(sdDay);
 
         if(pr.isNoEndDate()){
             endDate = "";
         }else{
-            endDate = pr.getEnd_date().toString();
+            endDate = "";
             edYear = pr.getEnd_date().getYear();
+            endDate += String.valueOf(edYear);
             edMonth = pr.getEnd_date().getMonthValue();
+            if(edMonth < 10) {
+                endDate += "0";
+            }
+            endDate += String.valueOf(edMonth);
             edDay = pr.getEnd_date().getDayOfMonth();
+            if(edDay < 10) {
+                endDate += "0";
+            }
+            endDate += String.valueOf(edDay);
         }
 
     }
@@ -262,7 +281,7 @@ public class EditPillReminderDetail extends AppCompatActivity implements
 
     /**
      * Get user input and validate input.
-     * If inputs are valid, send the data to UpdatePillReminder class to perform the database operations.
+     * If inputs are valid, send the data to database.
      * @throws UnsupportedEncodingException
      * @throws ExecutionException
      * @throws InterruptedException
@@ -305,6 +324,8 @@ public class EditPillReminderDetail extends AppCompatActivity implements
                         scroll.scrollTo(0,daysIntervalY);
                         warning = true;
                     }
+                }else{
+                    daysInterval = daysIntervalInput;
                 }
             }
         }
@@ -385,14 +406,31 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         }
 
         if(!warning){
-            UpdatePillReminder updateData = new UpdatePillReminder(pr.getPillReminderId(),prType,daysInterval,week_bit,time,quantityInput,startDateInput,endDateInput);
-            if(updateData.getStatus() == 1){
-                Toast toast = Toast.makeText(getApplicationContext(), "Reminder has been changed", Toast.LENGTH_SHORT);
-                toast.show();
-                finish();
-            }
+            sendData(pr.getPillReminderId(),prType,daysInterval,week_bit,time,quantityInput,startDateInput,endDateInput);
         }
 
+    }
+
+    private void sendData(int id, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.UPDATE,DatabaseHelper.PILL_REMINDER);
+        dbHelper.encodeData("id", String.valueOf(id));
+        dbHelper.encodeData("type", String.valueOf(prType));
+        dbHelper.encodeData("frequency", String.valueOf(daysInterval));
+        dbHelper.encodeData("week_bit",week_bit);
+        dbHelper.encodeData("time", time);
+        dbHelper.encodeData("quantity",String.valueOf(quantity));
+        dbHelper.encodeData("start_date", startDate);
+        dbHelper.encodeData("end_date", endDate);
+
+        if(Integer.parseInt(dbHelper.send()) == 1) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Reminder has been changed", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(), "Failed to update pill reminder.", Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }
     }
 
     /**
@@ -576,10 +614,22 @@ public class EditPillReminderDetail extends AppCompatActivity implements
      * @param day Day.
      */
     public void setInputStartDate(int year, int month, int day){
+        startDate = "";
+
         sdYear = year;
+        startDate += String.valueOf(year);
+
         sdMonth = month;
+        if(month < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(month);
+
         sdDay = day;
-        startDate = year + "-" + month + "-" + day;
+        if(day < 10) {
+            startDate += "0";
+        }
+        startDate += String.valueOf(day);
     }
 
     /**
@@ -630,9 +680,21 @@ public class EditPillReminderDetail extends AppCompatActivity implements
      * @param day Day.
      */
     public void setInputEndDate(int year, int month, int day){
+        endDate = "";
+
         edYear = year;
+        endDate += String.valueOf(year);
+
         edMonth = month;
+        if(month < 10) {
+            endDate += "0";
+        }
+        endDate += String.valueOf(month);
+
         edDay = day;
-        endDate = year + "-" + month + "-" + day;
+        if(day < 10) {
+            endDate += "0";
+        }
+        endDate += String.valueOf(day);
     }
 }
