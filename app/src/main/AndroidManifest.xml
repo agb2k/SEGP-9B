@@ -37,12 +37,12 @@
 
 
 
-        <!-- Health Condition Pop up window -->
+        <!-- Health Condition Pop up window
 
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
-        <activity android:name=".Homepage.editHealth" />
+        <activity android:name=".Homepage.editHealth" />-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

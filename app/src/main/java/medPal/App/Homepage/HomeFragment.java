@@ -91,25 +91,25 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Set up Next Appointment Data
         nextAppointmentExpandableList = v.findViewById(R.id.nextAppointmentExpandableList);
         nextAppointmentExpandableList.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
         NextAppointmentController nextAppointmentController = new NextAppointmentController();
         ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
 
-
         nextAppointmentExpandableListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
         nextAppointmentExpandableList.setAdapter(nextAppointmentExpandableListAdapter);
 
 
-        healthBtn = v.findViewById(R.id.healthConditionButton);
+        /**healthBtn = v.findViewById(R.id.healthConditionButton);
 
         healthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), healthPopUp.class));
             }
-        });
+        });**/
 
         return v;
 
