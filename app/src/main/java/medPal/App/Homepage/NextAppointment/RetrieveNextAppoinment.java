@@ -34,11 +34,12 @@ public class RetrieveNextAppoinment {
         NextAppointment nextAppointment;
 
         try {
-            jsonStr = new ConnectDB().execute("http://192.168.68.110/SEGP/getNextAppointment.php").get();
+            jsonStr = new ConnectDB().execute("https://sayft1nottingham.000webhostapp.com/getNextAppointment.php").get();
             jsonArray = new JSONArray(jsonStr);
             for(int i=0; i<jsonArray.length(); i++) {
                 jsonObject = (JSONObject) jsonArray.get(i);
                 nextAppointment =  makeNextAppointmentObject(jsonObject);
+                NextApptList.add(nextAppointment);
             }
         }catch (JSONException e) {
             e.printStackTrace();

@@ -33,7 +33,7 @@
             android:textSize="25sp"
             android:text="Upcoming Appointment"/>
 
-        <ExpandableListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/nextAppointmentExpandableList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
