@@ -81,7 +81,7 @@
 
     </TableLayout>
 
-    <TableLayout android:id="@+id/trackerHome"
+    <RelativeLayout android:id="@+id/trackerHome"
         android:background="@drawable/home_column"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,107 +91,26 @@
         android:layout_marginRight="20dp"
         android:stretchColumns="*">
 
-        <TableRow>
-            <TextView android:id="@+id/trackerTitle"
-                android:background="@drawable/home_bottom_line"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_span="2"
-                android:padding="3dip"
-                android:textStyle="bold"
-                android:textColor="#0000A0"
-                android:textSize="25sp"
-                android:text="Tracker"/>
-        </TableRow>
+        <TextView android:id="@+id/homeTrackerTitle"
+            android:background="@drawable/home_bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:padding="3dip"
+            android:textStyle="bold"
+            android:textColor="#0000A0"
+            android:textSize="25sp"
+            android:text="Tracker"/>
 
-        <TableRow>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dip"
-                android:paddingRight="3dip"
-                android:paddingBottom="0dip"
-                android:textColor="#0000A0"
-                android:textSize="25sp"
-                android:text="Blood Pressure"/>
-
-            <TextView android:id="@+id/lastPressure"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="3dip"
-                android:textAlignment="center"
-                android:textColor="#0000A0"
-                android:textSize="25sp"
-                android:text="30"/>
-        </TableRow>
-
-
-        <TableRow>
-            <TextView android:id="@+id/lastPressureTime"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dip"
-                android:paddingRight="3dip"
-                android:textColor="@color/lightgrey"
-                android:textSize="15sp"
-                android:text="Last recorded 9.02am 23/10/2020"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dip"
-                android:paddingRight="3dip"
-                android:textAlignment="center"
-                android:textColor="@color/lightgrey"
-                android:textSize="15sp"
-                android:text="mmol/L"/>
-
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="3dip"
-                android:textColor="#0000A0"
-                android:textSize="25sp"
-                android:text="Blood Glucose"/>
-
-            <TextView android:id="@+id/lastGlucose"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="3dip"
-                android:textAlignment="center"
-                android:textColor="#0000A0"
-                android:textSize="25sp"
-                android:text="122/78"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView android:id="@+id/lastGlucoseTime"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dip"
-                android:paddingRight="3dip"
-                android:textColor="@color/lightgrey"
-                android:textSize="15sp"
-                android:text="Last recorded 9.02am 23/10/2020"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dip"
-                android:paddingRight="3dip"
-                android:textAlignment="center"
-                android:textColor="@color/lightgrey"
-                android:textSize="15sp"
-                android:text="mmHg"/>
-
-        </TableRow>
-
-
-
-    </TableLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lastBloodRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/homeTrackerTitle"
+            android:dividerHeight="5dp"
+            android:groupIndicator="@null"/>
+    </RelativeLayout>
 
     <!--<Button android:id="@+id/healthConditionButton"
         android:layout_width="match_parent"

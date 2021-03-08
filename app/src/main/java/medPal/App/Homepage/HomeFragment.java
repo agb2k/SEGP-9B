@@ -23,6 +23,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
+import medPal.App.Homepage.LastBloodRecord.LastBloodGlucose;
+import medPal.App.Homepage.LastBloodRecord.LastBloodPressure;
+import medPal.App.Homepage.LastBloodRecord.LastBloodRecordAdapter;
+import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
 import medPal.App.Homepage.NextAppointment.NextAppointment;
 import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
 import medPal.App.Homepage.NextAppointment.NextAppointmentController;
@@ -81,8 +85,10 @@ public class HomeFragment extends Fragment {
     }
 
     private Button healthBtn;
-    private RecyclerView nextAppointmentExpandableList;
-    private NextAppointmentAdapter nextAppointmentExpandableListAdapter;
+    private RecyclerView nextAppointmentList;
+    private NextAppointmentAdapter nextAppointmentListAdapter;
+    private RecyclerView lastBloodRecordList;
+    private LastBloodRecordAdapter lastBloodRecordAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -92,24 +98,35 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Set up Next Appointment Data
-        nextAppointmentExpandableList = v.findViewById(R.id.nextAppointmentExpandableList);
-        nextAppointmentExpandableList.setLayoutManager(new LinearLayoutManager(v.getContext()));
+        nextAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
+        nextAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
         NextAppointmentController nextAppointmentController = new NextAppointmentController();
         ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
 
-        nextAppointmentExpandableListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
-        nextAppointmentExpandableList.setAdapter(nextAppointmentExpandableListAdapter);
+        nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
+        nextAppointmentList.setAdapter(nextAppointmentListAdapter);
+
+        // Set up last blood record
+        lastBloodRecordList = v.findViewById(R.id.lastBloodRecord);
+        lastBloodRecordList.setLayoutManager(new LinearLayoutManager(v.getContext()));
+
+        LastBloodRecordController lastBloodRecordController = new LastBloodRecordController();
+        ArrayList<LastBloodPressure> lastBloodPressureList = lastBloodRecordController.getLastBloodPressureList();
+        ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 
 
-        /**healthBtn = v.findViewById(R.id.healthConditionButton);
+        lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(),lastBloodPressureList,lastBloodGlucoseList);
+        lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
+
+        /*healthBtn = v.findViewById(R.id.healthConditionButton);
 
         healthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), healthPopUp.class));
             }
-        });**/
+        });*/
 
         return v;
 

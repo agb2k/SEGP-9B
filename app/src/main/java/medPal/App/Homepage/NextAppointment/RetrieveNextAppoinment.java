@@ -19,14 +19,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-import medPal.App.Homepage.NextAppointment.NextAppointment;
 
 public class RetrieveNextAppoinment {
 
     private ArrayList<NextAppointment> NextApptList = new ArrayList<NextAppointment>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-
     RetrieveNextAppoinment() {
         String jsonStr;
         JSONArray jsonArray;
@@ -34,6 +32,7 @@ public class RetrieveNextAppoinment {
         NextAppointment nextAppointment;
 
         try {
+            //Retrieve Next Appointment
             jsonStr = new ConnectDB().execute("https://sayft1nottingham.000webhostapp.com/getNextAppointment.php").get();
             jsonArray = new JSONArray(jsonStr);
             for(int i=0; i<jsonArray.length(); i++) {
@@ -68,7 +67,7 @@ public class RetrieveNextAppoinment {
     static class ConnectDB extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... source) {
-            StringBuilder total = new StringBuilder();;
+            StringBuilder total = new StringBuilder();
             try {
                 // Create a neat value object to hold the URL
                 URL url = new URL(source[0]);

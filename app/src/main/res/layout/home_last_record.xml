@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pillHome"
+        android:stretchColumns="*">
+
+        <TableRow>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:paddingBottom="0dip"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Blood Pressure"/>
+
+            <TextView android:id="@+id/lastPressure"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="122/78"/>
+        </TableRow>
+
+
+        <TableRow>
+            <TextView android:id="@+id/lastPressureTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="Last recorded 9.02am 23/10/2020"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textAlignment="center"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="mmHg"/>
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="Blood Glucose"/>
+
+            <TextView android:id="@+id/lastGlucose"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="#0000A0"
+                android:textSize="25sp"
+                android:text="3"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:id="@+id/lastGlucoseTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="Last recorded 9.02am 23/10/2020"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dip"
+                android:paddingRight="3dip"
+                android:textAlignment="center"
+                android:textColor="@color/lightgrey"
+                android:textSize="15sp"
+                android:text="mmol/L"/>
+
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
