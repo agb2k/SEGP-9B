@@ -35,7 +35,7 @@ public class RetrieveLastBloodRecord {
 
         try {
             //Get last blood pressure record
-            jsonStr = new ConnectDB().execute("http://sayft1nottingham.000webhostapp.com/getLastBloodPressure.php").get();
+            jsonStr = new ConnectDB().execute("https://bulacke.xyz/medpal-db/getLastBloodPressure.php").get();
             jsonArray = new JSONArray(jsonStr);
             for(int i=0; i<jsonArray.length(); i++) {
                 jsonObject = (JSONObject) jsonArray.get(i);
@@ -44,7 +44,7 @@ public class RetrieveLastBloodRecord {
             }
 
             //get last blood glucose record
-            jsonStr = new ConnectDB().execute("http://sayft1nottingham.000webhostapp.com/getLastSugarRecord.php").get();
+            jsonStr = new ConnectDB().execute("https://bulacke.xyz/medpal-db/getLastSugarRecord.php").get();
             jsonArray = new JSONArray(jsonStr);
             for(int i=0; i<jsonArray.length(); i++) {
                 jsonObject = (JSONObject) jsonArray.get(i);

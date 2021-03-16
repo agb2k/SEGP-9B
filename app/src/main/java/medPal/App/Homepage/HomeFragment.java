@@ -20,7 +20,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 
 import medPal.App.Homepage.LastBloodRecord.LastBloodGlucose;
@@ -30,6 +32,10 @@ import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
 import medPal.App.Homepage.NextAppointment.NextAppointment;
 import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
 import medPal.App.Homepage.NextAppointment.NextAppointmentController;
+import medPal.App.PillReminder.PillReminder;
+import medPal.App.PillReminder.PillReminderAdapter;
+import medPal.App.PillReminder.PillReminderController;
+import medPal.App.PillReminder.PillReminderTimeAdapter;
 import medPal.App.R;
 import medPal.App.Homepage.healthPopUp;
 
@@ -87,6 +93,8 @@ public class HomeFragment extends Fragment {
     private Button healthBtn;
     private RecyclerView nextAppointmentList;
     private NextAppointmentAdapter nextAppointmentListAdapter;
+    private ExpandableListView nextPillReminderList;
+    private ExpandableListAdapter nextPillReminderAdapter;
     private RecyclerView lastBloodRecordList;
     private LastBloodRecordAdapter lastBloodRecordAdapter;
 
@@ -106,6 +114,30 @@ public class HomeFragment extends Fragment {
 
         nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
         nextAppointmentList.setAdapter(nextAppointmentListAdapter);
+
+        nextPillReminderList = (ExpandableListView)v.findViewById(R.id.nextPillReminder);
+
+        PillReminderController nextPillReminderController = new PillReminderController();
+        TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();
+        // Get the list of time of reminders
+        ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
+        timeList.addAll(nextPillReminder.keySet());
+
+        // This is line sets the height of the pill reminder section (480dp for each reminder)
+        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,timeList.size()*480);
+        nextPillReminderList.setLayoutParams(param);
+        // Make some space between rows
+        nextPillReminderList.setDividerHeight(50);
+
+
+        // Set up ExpandableListView
+        nextPillReminderAdapter = new PillReminderTimeAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
+        nextPillReminderList.setAdapter(nextPillReminderAdapter);
+        // Expand all
+        for(int i=0; i<timeList.size(); i++){
+            nextPillReminderList.expandGroup(i);
+        }
+
 
         // Set up last blood record
         lastBloodRecordList = v.findViewById(R.id.lastBloodRecord);

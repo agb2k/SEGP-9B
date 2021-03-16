@@ -55,12 +55,13 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
         bgTimeView.setText(tempBGTime);
 
         TextView bgLevelView = (TextView) holder.bgLevel;
-        bgLevelView.setText(lastBloodGlucoseList.get(position).getLevel());
+        String tempLevel = String.valueOf(lastBloodGlucoseList.get(position).getLevel());
+        bgLevelView.setText(tempLevel);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 1;
     }
 
     @Override

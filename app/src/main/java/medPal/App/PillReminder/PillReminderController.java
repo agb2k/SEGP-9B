@@ -29,7 +29,7 @@ public class PillReminderController implements Serializable {
      * Initialize and get list of pill reminders from database.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    PillReminderController() {
+    public PillReminderController() {
         RetrievePillReminders getDB = new RetrievePillReminders();
         medicineList = getDB.getAllMedicine();
         pillReminderList = getDB.getAllPillReminder();
