@@ -59,18 +59,30 @@
             android:background="@drawable/home_bottom_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:padding="3dip"
             android:textStyle="bold"
             android:textColor="#0000A0"
             android:textSize="25sp"
             android:text="Pill Reminder"/>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pillHome"
+        android:background="@drawable/home_column"
+        android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stretchColumns="*">
+
         <ExpandableListView
             android:id="@+id/nextPillReminder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/homePillTitle"
             android:dividerHeight="5dp"
             android:groupIndicator="@null"/>
 
@@ -84,6 +96,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="100dp"
         android:stretchColumns="*">
 
         <TextView android:id="@+id/homeTrackerTitle"
