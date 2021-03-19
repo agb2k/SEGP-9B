@@ -1,7 +1,6 @@
 package medPal.App.PillReminder;
 
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -67,7 +66,6 @@ public class PillReminder implements Serializable {
         int month = Integer.parseInt(date.substring(4,6));
         int day = Integer.parseInt(date.substring(6));
         String result = year + "" + month + "" + day;
-        Log.v("Bulacke",result);
         LocalDate localDate = LocalDate.of(year, month, day);
         return localDate;
     }

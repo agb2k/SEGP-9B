@@ -357,6 +357,7 @@ public class NewPillReminder extends AppCompatActivity implements
      * @throws ExecutionException
      * @throws InterruptedException
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendData(String medicineName, String manufacturer, int dosage, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate, String purpose, String remark, Bitmap bitmap) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         DatabaseHelper insertDB = new DatabaseHelper(DatabaseHelper.INSERT,DatabaseHelper.PILL_REMINDER);
         insertDB.encodeData("medicine",medicineName);
@@ -374,13 +375,16 @@ public class NewPillReminder extends AppCompatActivity implements
 
         String message = insertDB.send();
         if(message.length() > 1) {
-            String medicineId = message.substring(3,message.length()-1);
+            message = message.substring(1,message.length()-1);
+            String medicineId = message.split(",")[1];
+            int pill_reminder_id = Integer.parseInt(message.split(",")[2]);
             if(bitmap != null) {
                 DatabaseHelper imageDB = new DatabaseHelper(DatabaseHelper.INSERT, DatabaseHelper.MEDICINE_IMAGE);
                 imageDB.encodeData("medId", medicineId);
                 imageDB.encodeImage(bitmap);
                 message = imageDB.send();
                 if(Integer.parseInt(message) == 1) {
+                    setAlarm(prType,daysInterval,week_bit,time,startDate,pill_reminder_id);
                     Toast toast = Toast.makeText(getApplicationContext(), "Reminder added successfully", Toast.LENGTH_SHORT);
                     toast.show();
                     finish();
@@ -390,6 +394,7 @@ public class NewPillReminder extends AppCompatActivity implements
                     finish();
                 }
             }else{
+                setAlarm(prType,daysInterval,week_bit,time,startDate,pill_reminder_id);
                 Toast toast = Toast.makeText(getApplicationContext(), "Reminder added successfully", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();
@@ -399,6 +404,12 @@ public class NewPillReminder extends AppCompatActivity implements
             toast.show();
             finish();
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setAlarm(int prType, int daysInterval, String week_bit, String time, String startDate, int pill_reminder_id) {
+        PillReminderAlarmHelper alarmHelper = new PillReminderAlarmHelper(getApplicationContext(),prType,daysInterval,week_bit,time,startDate,pill_reminder_id);
+        alarmHelper.setAlarm();
     }
 
     /**

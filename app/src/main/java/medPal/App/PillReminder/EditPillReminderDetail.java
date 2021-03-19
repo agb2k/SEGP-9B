@@ -30,6 +30,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.AlarmAndNotification.AlarmHelper;
 import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
@@ -148,14 +149,33 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteReminder(int id) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.DELETE,DatabaseHelper.PILL_REMINDER);
         dbHelper.encodeData("id",String.valueOf(id));
         if(Integer.parseInt(dbHelper.send()) == 1) {
+            deleteAlarm();
             Toast toast = Toast.makeText(getApplicationContext(), "Reminder deleted successfully", Toast.LENGTH_SHORT);
             toast.show();
             finish();
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void deleteAlarm() {
+        LocalDate date = pr.getStart_date();
+        String strDate = "";
+        strDate += String.valueOf(date.getYear());
+        if(date.getMonthValue() < 10) {
+            strDate += "0";
+        }
+        strDate += String.valueOf(date.getMonthValue());
+        if(date.getDayOfMonth() < 10) {
+            strDate += "0";
+        }
+        strDate += String.valueOf(date.getDayOfMonth());
+        PillReminderAlarmHelper removeAlarm = new PillReminderAlarmHelper(getApplicationContext(), pr.getType(), pr.getFrequency(), pr.getWeek_bit(), pr.getTime(), strDate, pr.getPillReminderId());
+        removeAlarm.deleteAlarm();
     }
 
     /**
@@ -163,7 +183,6 @@ public class EditPillReminderDetail extends AppCompatActivity implements
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void putDataIntoInputField() {
-
         ImageView pillImage = (ImageView) findViewById(R.id.PillImage);
         Picasso.get().load(pr.getMedicine().getImagePath()).into(pillImage);
 
@@ -411,6 +430,7 @@ public class EditPillReminderDetail extends AppCompatActivity implements
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendData(int id, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.UPDATE,DatabaseHelper.PILL_REMINDER);
         dbHelper.encodeData("id", String.valueOf(id));
@@ -423,6 +443,7 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         dbHelper.encodeData("end_date", endDate);
 
         if(Integer.parseInt(dbHelper.send()) == 1) {
+            updateAlarm(id, prType, daysInterval, week_bit, time, startDate);
             Toast toast = Toast.makeText(getApplicationContext(), "Reminder has been changed", Toast.LENGTH_SHORT);
             toast.show();
             finish();
@@ -431,6 +452,26 @@ public class EditPillReminderDetail extends AppCompatActivity implements
             toast.show();
             finish();
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void updateAlarm(int id, int type, int frequency, String week_bit, String time, String startDate) {
+        LocalDate date = pr.getStart_date();
+        String strDate = "";
+        strDate += String.valueOf(date.getYear());
+        if(date.getMonthValue() < 10) {
+            strDate += "0";
+        }
+        strDate += String.valueOf(date.getMonthValue());
+        if(date.getDayOfMonth() < 10) {
+            strDate += "0";
+        }
+        strDate += String.valueOf(date.getDayOfMonth());
+        PillReminderAlarmHelper removeAlarm = new PillReminderAlarmHelper(getApplicationContext(), pr.getType(), pr.getFrequency(), pr.getWeek_bit(), pr.getTime(), strDate, pr.getPillReminderId());
+        removeAlarm.deleteAlarm();
+
+        PillReminderAlarmHelper newAlarm = new PillReminderAlarmHelper(getApplicationContext(), type, frequency, week_bit, time, startDate, id);
+        newAlarm.setAlarm();
     }
 
     /**
