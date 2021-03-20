@@ -102,7 +102,7 @@ public class PillReminderFragment extends Fragment {
         timeList.addAll(prByTime.keySet());
 
         // This is line sets the height of the pill reminder section (480dp for each reminder)
-        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,timeList.size()*480);
+        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,timeList.size()*460);
         parentListView.setLayoutParams(param);
         // Make some space between rows
         parentListView.setDividerHeight(50);
