@@ -2,11 +2,13 @@ package medPal.App.Tracker.BloodPressure;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -17,13 +19,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.OnDataPointTapListener;
-import com.jjoe64.graphview.series.Series;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,8 +38,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -53,7 +57,12 @@ public class BloodPressureActivity extends AppCompatActivity {
 
     public static ArrayList<String> x_axis=new ArrayList<String>();
     public static ArrayList<String> y_axis=new ArrayList<String>();
+    public static ArrayList<String> y_axis2=new ArrayList<String>();
 
+
+
+    private LineChart lineChart;
+    LineGraphSeries<DataPoint> series;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,7 @@ public class BloodPressureActivity extends AppCompatActivity {
 
         x_axis.clear();
         y_axis.clear();
+        y_axis2.clear();
         lv2 = (ListView) findViewById(R.id.lv2);
         try {
             fetch_data_into_array(lv2);
@@ -77,6 +87,17 @@ public class BloodPressureActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
         });
 
+        lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent3 = new Intent(BloodPressureActivity.this, EditPressureActivity.class);
+                intent3.putExtra("Date", date[position]);
+                intent3.putExtra("Time", time[position]);
+                intent3.putExtra("Sys", sys[position]);
+                intent3.putExtra("Dia", dia[position]);
+                startActivity(intent3);
+            }
+        });
 
 
         
@@ -97,27 +118,75 @@ public class BloodPressureActivity extends AppCompatActivity {
             }
         });
 
+        lineChart = (LineChart) findViewById(R.id.pressureGraph);
 
-        GraphView graph = (GraphView) findViewById(R.id.pressureGraph);
-        //fetch_data_into_array(graph);
-        LineGraphSeries<DataPoint> series;
-        series= new LineGraphSeries<>(data());
-        series.setThickness(8);
-        series.setDrawDataPoints(true);
-        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelRotationAngle(-45);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setLabelCount(5);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
-            public void onTap(Series series, DataPointInterface DataPoint) {
-                Toast.makeText(BloodPressureActivity.this,"On Data Point clicked:"+DataPoint, Toast.LENGTH_SHORT).show();
+            public String getFormattedValue(float index, AxisBase axis) {
+                //return xVal[(int) value]; // xVal is a string array
+                return x_axis.get((int) index);
+            }
+
+
+            public int getDecimalDigits() {
+                return 0;
             }
         });
-        //series.setShape(PointsGraphSeries.Shape.POINT);
-        //series.setSize(5);
-        graph.addSeries(series);
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(BloodPressureActivity.this));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
-        graph.getViewport().setScrollable(true);
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setYAxisBoundsManual(true);
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+        ArrayList<Entry> yValues2 = new ArrayList<>();
+
+        int n = x_axis.size();
+        for(int i=0; i<n; i++){
+            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+            yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+        }
+
+        for(int i=0; i<n; i++){
+            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+            yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
+        }
+
+
+
+
+        LineDataSet set1 = new LineDataSet(yValues, "SYS");
+        set1.setFillAlpha(110);
+        set1.setColor(Color.RED);
+        set1.setLineWidth(1.75f);
+        set1.setCircleRadius(5f);
+        set1.setCircleHoleRadius(2.5f);
+        set1.setValueTextSize(10);
+        set1.setCircleColor(Color.BLACK);
+        set1.setHighLightColor(Color.BLACK);
+        set1.setDrawValues(true);
+
+        LineDataSet set2 = new LineDataSet(yValues2, "DIA");
+        set2.setFillAlpha(110);
+        set2.setColor(Color.BLUE);
+        set2.setLineWidth(1.75f);
+        set2.setCircleRadius(5f);
+        set2.setCircleHoleRadius(2.5f);
+        set2.setValueTextSize(10);
+        set2.setCircleColor(Color.BLACK);
+        set2.setHighLightColor(Color.BLACK);
+        set2.setDrawValues(true);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+        dataSets.add(set2);
+
+        LineData data = new LineData(dataSets);
+
+        lineChart.setData(data);
+        lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
+
+
 
 
 
@@ -166,6 +235,7 @@ public class BloodPressureActivity extends AppCompatActivity {
                 dia[i] = jo.getString("DIA");
                 x_axis.add(date[i]);
                 y_axis.add(sys[i]);
+                y_axis2.add(dia[i]);
             }
             BloodPressureActivity.myadapter adptr = new BloodPressureActivity.myadapter(getApplicationContext(), date, time, sys, dia);
             lv2.setAdapter(adptr);
@@ -209,23 +279,6 @@ public class BloodPressureActivity extends AppCompatActivity {
 
     }
 
-    public DataPoint[] data(){
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        int n=x_axis.size();     //to find out the no. of data-points
-        DataPoint[] values = new DataPoint[n];     //creating an object of type DataPoint[] of size 'n'
-        for(int i=0;i<n;i++){
-
-            DataPoint v = null;
-            try {
-                v = new DataPoint(sdf.parse(x_axis.get(i)),Integer.parseInt(y_axis.get(i)));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            values[i] = v;
-        }
-        return values;
-    }
 
 
     public void openNewPressureRecord() {

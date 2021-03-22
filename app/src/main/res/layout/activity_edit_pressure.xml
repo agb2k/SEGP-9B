@@ -6,57 +6,59 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".Tracker.BloodPressure.NewPressureRecord">
+    tools:context=".Tracker.BloodPressure.EditPressureActivity">
 
     <RelativeLayout
-        android:id="@+id/NewPressureDate"
+        android:id="@+id/EditPressureDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="15dp">
 
-    <TextView
-        android:id="@+id/Date_pressure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingRight="35dp"
-        android:text="Date"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/Edit_Date_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingRight="35dp"
+            android:text="Date"
+            android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/editTextDate_pressure"
+            android:id="@+id/Edit_editTextDate_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-2dp"
-            android:layout_toRightOf="@+id/Date_pressure"
+            android:layout_toRightOf="@+id/Edit_Date_pressure"
             android:background="@drawable/input_text_box_column"
             android:ems="10"
+            android:textIsSelectable="true"
             android:inputType="date" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/NewPressureTime"
+        android:id="@+id/EditPressureTime"
         android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/Time_pressure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingRight="30dp"
-        android:text="Time"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/Edit_Time_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="30dp"
+            android:text="Time"
+            android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/editTextTime_pressure"
-        android:background="@drawable/input_text_box_column"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/Time_pressure"
-        android:ems="10"
-        android:inputType="time" />
+        <EditText
+            android:id="@+id/Edit_editTextTime_pressure"
+            android:background="@drawable/input_text_box_column"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/Edit_Time_pressure"
+            android:ems="10"
+            android:textIsSelectable="true"
+            android:inputType="time" />
     </RelativeLayout>
 
 
@@ -92,7 +94,7 @@
                 android:text="Systolic"/>
 
             <EditText
-                android:id="@+id/SYS"
+                android:id="@+id/Edit_SYS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_text_box_column"
@@ -121,7 +123,7 @@
                 android:text="Diastolic"/>
 
             <EditText
-                android:id="@+id/DIA"
+                android:id="@+id/Edit_DIA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_text_box_column"
@@ -150,7 +152,7 @@
         android:paddingTop="15dp">
 
         <TextView
-            android:id="@+id/Remark_pressure"
+            android:id="@+id/Edit_Remark_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
@@ -158,24 +160,34 @@
             android:textSize="30sp"/>
 
         <EditText
-            android:id="@+id/PressureRemark"
+            android:id="@+id/Edit_PressureRemark"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:background="@drawable/input_text_box_column"
             android:ems="15"
-            android:layout_below="@id/Remark_pressure"
-            android:inputType="textLongMessage" />
+            android:gravity="start"
+            android:layout_below="@id/Edit_Remark_pressure"
+            android:inputType="textMultiLine" />
 
 
     </RelativeLayout>
 
     <Button
-        android:id="@+id/ConfirmPressureRecordButton"
+        android:id="@+id/Edit_ConfirmPressureRecordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_gravity="center"
-        android:text="Confirm"
+        android:layout_marginTop="10dp"
+        android:text="Confirm Edit"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/DeletePressureRecordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Delete"
         android:textSize="20dp" />
 
 

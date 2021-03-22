@@ -11,9 +11,9 @@
     tools:context=".Tracker.BloodPressure.BloodPressureActivity">
 
 
-    <com.jjoe64.graphview.GraphView
+    <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="320dp"
         android:layout_marginBottom="20dp"
         android:id="@+id/pressureGraph" />
 
@@ -25,7 +25,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,6 +36,8 @@
             android:paddingBottom="10dp"
             android:textColor="#0000A0"/>
 
+
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/NewPressureReminderButton"
             android:layout_width="35dp"
@@ -45,158 +47,22 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/ic_baseline_edit_24"/>
 
-        <TableLayout
-            android:id="@+id/PressureReminder"
-            android:background="@drawable/home_column"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/remindertext2"
 
-            android:stretchColumns="*">
-
-            <TableRow>
-                <LinearLayout
-                    android:id="@+id/PressureReminder1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginRight="1dp"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/PressureReminder1Date"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="20/11"/>
-
-                    <TextView
-                        android:id="@+id/PressureReminder1Time"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="3.00"/>
-
-                    <TextView
-                        android:id="@+id/PressureReminder1APM"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="pm"/>
-
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:id="@+id/PressureReminder2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginRight="1dp"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:weightSum="1" >
-
-                    <TextView
-                        android:id="@+id/PressureReminder2Date"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="20/11"/>
-
-                    <TextView
-                        android:id="@+id/PressureReminder2Time"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="8.00"/>
-
-                    <TextView
-                        android:id="@+id/PressureReminder2APM"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="pm"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/PressureReminder3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="@color/white"
-                    android:layout_marginRight="1dp"
-                    android:orientation="vertical"
-                    android:weightSum="1" >
-
-                    <TextView
-                        android:id="@+id/PressureReminder3Date"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="20/11"/>
-
-                    <TextView
-                        android:id="@+id/PressureReminder3Time"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="10.00"/>
-
-                    <TextView
-                        android:id="@+id/PressureReminder3APM"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="#0000A0"
-                        android:textSize="20sp"
-                        android:text="pm"/>
-
-
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/NextPressureReminderButton"
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:text=">"
-                    android:textSize="30sp"
-                    android:background="@drawable/custom_button4"/>
-
-
-            </TableRow>
-
-
-
-        </TableLayout>
 
 
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
     <RelativeLayout
         android:id="@+id/PastPressureRecordText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
