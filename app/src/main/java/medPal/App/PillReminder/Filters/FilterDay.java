@@ -1,4 +1,4 @@
-package medPal.App.PillReminder;
+package medPal.App.PillReminder.Filters;
 
 import android.os.Build;
 
@@ -7,6 +7,8 @@ import androidx.annotation.RequiresApi;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import medPal.App.PillReminder.PillReminder;
 
 /**
  * A class to filter pill reminders by day. (i.e. Filter out the pill reminders that need to be taken on a given day)

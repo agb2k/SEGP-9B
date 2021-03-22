@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/NextAppointmentStatus"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:textAlignment="center"
+        android:textColor="#FF0000"
+        android:textSize="20sp"
+        android:text="Planned"/>
+
+    <TextView
+        android:id="@+id/NextAppointmentDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#0000A0"
+        android:textSize="20sp"
+        android:text="20/11/20"/>
+
+    <TextView
+        android:id="@+id/NextAppointmentTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#0000A0"
+        android:textSize="20sp"
+        android:text="3.00pm"/>
+
+    <TextView
+        android:id="@+id/NextAppointmentHospital"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#0000A0"
+        android:textSize="20sp"
+        android:text="clinic1"/>
+
+    <TextView
+        android:id="@+id/NextAppointmentDoc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#0000A0"
+        android:textSize="20sp"
+        android:text="Dr. Sam"/>
+
+</LinearLayout>

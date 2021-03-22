@@ -10,6 +10,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import medPal.App.PillReminder.Filters.FilterDay;
+import medPal.App.PillReminder.Filters.FilterNotTaken;
+import medPal.App.PillReminder.Filters.FilterTime;
+import medPal.App.PillReminder.Filters.FilterUpcoming;
+
 /**
  * A class to handle the pill reminders list.
  */
@@ -24,7 +29,7 @@ public class PillReminderController implements Serializable {
      * Initialize and get list of pill reminders from database.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    PillReminderController() {
+    public PillReminderController() {
         RetrievePillReminders getDB = new RetrievePillReminders();
         medicineList = getDB.getAllMedicine();
         pillReminderList = getDB.getAllPillReminder();

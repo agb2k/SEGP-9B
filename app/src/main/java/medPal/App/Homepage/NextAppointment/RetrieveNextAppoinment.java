@@ -16,68 +16,58 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 
-public class RetrieveNextAppointment{
+public class RetrieveNextAppoinment {
 
-    private static final String URL = "http://192.168.0.105/SEGP/nextAppointment.php";
-    private ArrayList<NextAppointment> nextAppointmentArrayList = new ArrayList<>();
+    private ArrayList<NextAppointment> NextApptList = new ArrayList<NextAppointment>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public RetrieveNextAppointment() {
-
+    RetrieveNextAppoinment() {
         String jsonStr;
-        JSONArray jsonArr;
-        JSONObject jsonObj;
-        NextAppointment nObj;
+        JSONArray jsonArray;
+        JSONObject jsonObject;
+        NextAppointment nextAppointment;
 
-
-        // Extract data from JSON
-        try{
-            jsonStr = new ConnectDB().execute(URL).get();
-            jsonArr = new JSONArray(jsonStr);
-            for(int i=0; i<jsonArr.length(); i++) {
-                jsonObj = (JSONObject) jsonArr.get(i);
-                nObj = makeNextAppointmentObject(jsonObj);
-                nextAppointmentArrayList.add(nObj);
+        try {
+            //Retrieve Next Appointment
+            jsonStr = new ConnectDB().execute("https://sayft1nottingham.000webhostapp.com/getNextAppointment.php").get();
+            jsonArray = new JSONArray(jsonStr);
+            for(int i=0; i<jsonArray.length(); i++) {
+                jsonObject = (JSONObject) jsonArray.get(i);
+                nextAppointment =  makeNextAppointmentObject(jsonObject);
+                NextApptList.add(nextAppointment);
             }
-
-        } catch (JSONException e) {
+        }catch (JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private NextAppointment makeNextAppointmentObject(JSONObject jsonObject) throws JSONException {
+        int apptId = jsonObject.getInt("apptID");
+        String date = jsonObject.getString("date");
+        String time = jsonObject.getString("time");
+        String hospital = jsonObject.getString("hospital");
+        String docName = jsonObject.getString("docName");
 
-    private NextAppointment makeNextAppointmentObject(JSONObject jsonObj) throws JSONException {
-        String email = jsonObj.getString("email");
-        String apptID = jsonObj.getString("apptID");
-        String date = jsonObj.getString("date");
-        String time = jsonObj.getString("time");
-        String hospital = jsonObj.getString("hospital");
-        String docName = jsonObj.getString("docName");
-        return new NextAppointment(email,apptID,date,time,hospital,docName);
+        return new NextAppointment(apptId, date, time, hospital, docName);
     }
 
-    public String getNextApptTime(JSONObject jsonObj)throws JSONException{
-        String nextApptTime = jsonObj.getString("time");
-        return nextApptTime;
+    public ArrayList<NextAppointment> getNextApptList() {
+        return NextApptList;
     }
 
-    public ArrayList<NextAppointment> getNextAppointmentArrayList(){
-        return nextAppointmentArrayList;
-    }
-
-    private static class ConnectDB extends AsyncTask<String,Void,String> {
+    static class ConnectDB extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... source) {
             StringBuilder total = new StringBuilder();
-
             try {
                 // Create a neat value object to hold the URL
                 URL url = new URL(source[0]);
@@ -91,15 +81,12 @@ public class RetrieveNextAppointment{
                 for (String line; (line = r.readLine()) != null; ) {
                     total.append(line).append('\n');
                 }
-            } catch (IOException ioE) {
+                connection.disconnect();
+            }catch(IOException ioE){
                 ioE.printStackTrace();
             }
             return total.toString();
         }
     }
 
-    }
-
-
-
-
+}
