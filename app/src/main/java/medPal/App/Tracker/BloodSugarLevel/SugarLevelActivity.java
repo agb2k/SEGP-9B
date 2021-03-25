@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -76,9 +77,21 @@ public class SugarLevelActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         lv.setOnItemClickListener((parent, view, position, id) -> {
             String s = lv.getItemAtPosition(position).toString();
             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent3 = new Intent(SugarLevelActivity.this, EditSugarLevelActivity.class);
+                intent3.putExtra("Date", date[position]);
+                intent3.putExtra("Time", time[position]);
+                intent3.putExtra("Level", level[position]);
+                startActivity(intent3);
+            }
         });
 
         b4 = (Button) findViewById(R.id.NewSugarLevelRecordButton);

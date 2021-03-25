@@ -7,16 +7,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".Tracker.BloodSugarLevel.NewSugarLevelRecord">
+    tools:context=".Tracker.BloodSugarLevel.EditSugarLevelActivity">
 
     <RelativeLayout
-        android:id="@+id/NewSugarDate"
+        android:id="@+id/edit_NewSugarDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="15dp">
 
         <TextView
-            android:id="@+id/Date"
+            android:id="@+id/edit_Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -25,23 +25,24 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/editTextDateSugar"
+            android:id="@+id/edit_editTextDateSugar"
             android:background="@drawable/input_text_box_column"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/Date"
+            android:layout_toRightOf="@+id/edit_Date"
+            android:textIsSelectable="true"
             android:ems="10"
             android:inputType="date" />
     </RelativeLayout>
 
 
     <RelativeLayout
-        android:id="@+id/NewSugarTime"
+        android:id="@+id/edit_NewSugarTime"
         android:layout_width="match_parent"
         android:paddingBottom="20dp"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/Time"
+            android:id="@+id/edit_Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="30dp"
@@ -49,11 +50,12 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/editTextTimeSugar"
+            android:id="@+id/edit_editTextTimeSugar"
             android:background="@drawable/input_text_box_column"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/Time"
+            android:layout_toRightOf="@id/edit_Time"
+            android:textIsSelectable="true"
             android:ems="10"
             android:inputType="time" />
 
@@ -77,26 +79,26 @@
 
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/edit_SugarLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/input_text_box_column"
             android:paddingTop="10dp"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:paddingBottom="10dp"
+            android:ems="4"
+            android:inputType="number" />
 
 
-            <EditText
-                android:id="@+id/SugarLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_text_box_column"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:ems="4"
-                android:inputType="number" />
-
-
-        </LinearLayout>
+    </LinearLayout>
 
 
     <TextView
@@ -117,7 +119,7 @@
         android:paddingTop="15dp">
 
         <TextView
-            android:id="@+id/Remark"
+            android:id="@+id/edit_Remark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remark"
@@ -125,24 +127,33 @@
             android:textSize="30sp"/>
 
         <EditText
-            android:id="@+id/SugarRemark"
+            android:id="@+id/edit_SugarRemark"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:background="@drawable/input_text_box_column"
             android:ems="15"
-            android:layout_below="@id/Remark"
+            android:layout_below="@id/edit_Remark"
             android:inputType="textLongMessage" />
 
 
     </RelativeLayout>
 
     <Button
-        android:id="@+id/ConfirmSugarRecordButton"
+        android:id="@+id/edit_ConfirmSugarRecordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:text="Confirm"
+        android:text="Confirm Edit"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/DeleteSugarRecordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Delete"
         android:textSize="20dp" />
 
 
