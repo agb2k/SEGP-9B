@@ -1,5 +1,6 @@
 package medPal.App.PillReminder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,13 +30,15 @@ import medPal.App.R;
  */
 public class PillReminderTimeAdapter implements ExpandableListAdapter {
     private Context context;
+    private Fragment fragment;
     private ArrayList<LocalTime> time = new ArrayList<LocalTime>();
     private TreeMap<LocalTime, ArrayList<PillReminder>> prByTime = new TreeMap<>();
     private ArrayList<LocalTime> prByTimeKeySet = new ArrayList<>();
     private PillReminderController prController;
 
-    public PillReminderTimeAdapter(Context context, ArrayList<LocalTime> time, TreeMap<LocalTime,ArrayList<PillReminder>> prByTime, PillReminderController prController) {
+    public PillReminderTimeAdapter(Context context, Fragment fragment, ArrayList<LocalTime> time, TreeMap<LocalTime,ArrayList<PillReminder>> prByTime, PillReminderController prController) {
         this.context = context;
+        this.fragment = fragment;
         this.time = time;
         this.prByTime = prByTime;
         this.prController = prController;
@@ -123,7 +127,7 @@ public class PillReminderTimeAdapter implements ExpandableListAdapter {
                 // Parse time
                 editPillReminder.putExtra("TimeLabel",time.toString());
                 editPillReminder.putExtra("Controller",prController);
-                context.startActivity(editPillReminder);
+                ((Fragment) fragment).startActivityForResult(editPillReminder,PillReminderFragment.UPDATE_PILL_REMINDER_REQUEST_CODE);
             }
         });
 
@@ -199,8 +203,9 @@ public class PillReminderTimeAdapter implements ExpandableListAdapter {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private String to12Format(LocalTime t){
+    private String to12Format(LocalTime t) {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("hh:mm a");
         return t.format(df);
     }
+
 }
