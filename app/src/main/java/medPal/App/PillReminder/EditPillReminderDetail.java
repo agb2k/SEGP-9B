@@ -1,5 +1,6 @@
 package medPal.App.PillReminder;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -157,6 +158,7 @@ public class EditPillReminderDetail extends AppCompatActivity implements
             deleteAlarm();
             Toast toast = Toast.makeText(getApplicationContext(), "Reminder deleted successfully", Toast.LENGTH_SHORT);
             toast.show();
+            setResult(Activity.RESULT_OK);
             finish();
         }
     }
@@ -446,10 +448,12 @@ public class EditPillReminderDetail extends AppCompatActivity implements
             updateAlarm(id, prType, daysInterval, week_bit, time, startDate);
             Toast toast = Toast.makeText(getApplicationContext(), "Reminder has been changed", Toast.LENGTH_SHORT);
             toast.show();
+            setResult(Activity.RESULT_OK);
             finish();
         }else{
             Toast toast = Toast.makeText(getApplicationContext(), "Failed to update pill reminder.", Toast.LENGTH_SHORT);
             toast.show();
+            setResult(Activity.RESULT_CANCELED);
             finish();
         }
     }

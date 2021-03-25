@@ -1,12 +1,18 @@
 package medPal.App.PillReminder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavDestination;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +24,10 @@ import android.widget.RelativeLayout;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.TreeMap;
 
+import medPal.App.MainActivity;
 import medPal.App.R;
 
 /**
@@ -28,6 +36,8 @@ import medPal.App.R;
  * create an instance of this fragment.
  */
 public class PillReminderFragment extends Fragment {
+
+    public static final int UPDATE_PILL_REMINDER_REQUEST_CODE = 10001;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,6 +79,7 @@ public class PillReminderFragment extends Fragment {
         }
     }
 
+    private PillReminderController prController;
     private Button b1;
     private ExpandableListView parentListView;
     private ExpandableListAdapter parentAdapter;
@@ -82,6 +93,16 @@ public class PillReminderFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pill_reminder, container, false);
 
+        // Get ExpandableListView
+        parentListView = (ExpandableListView) v.findViewById(R.id.prExpandableListView);
+        // Call PillReminderController
+        prController = new PillReminderController();
+        // Get today's pill reminder, grouped by time
+        TreeMap<LocalTime,ArrayList<PillReminder>> prByTime = prController.getPillReminderByTime();
+        // Get the list of time of reminders
+        ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
+        timeList.addAll(prByTime.keySet());
+
         // Add new reminder button
         b1 = v.findViewById(R.id.NewPillReminderButton);
         b1.setOnClickListener(new View.OnClickListener() {
@@ -91,16 +112,6 @@ public class PillReminderFragment extends Fragment {
             }
         });
 
-        // Get ExpandableListView
-        parentListView = (ExpandableListView) v.findViewById(R.id.prExpandableListView);
-        // Call PillReminderController
-        PillReminderController prController = new PillReminderController();
-        // Get today's pill reminder, grouped by time
-        TreeMap<LocalTime,ArrayList<PillReminder>> prByTime = prController.getPillReminderByTime();
-        // Get the list of time of reminders
-        ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
-        timeList.addAll(prByTime.keySet());
-
         // This is line sets the height of the pill reminder section (480dp for each reminder)
         RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,timeList.size()*460);
         parentListView.setLayoutParams(param);
@@ -108,7 +119,10 @@ public class PillReminderFragment extends Fragment {
         parentListView.setDividerHeight(50);
 
         // Set up ExpandableListView
-        parentAdapter = new PillReminderTimeAdapter(getContext(), timeList, prByTime, prController);
+        Fragment navhostFragment = requireActivity().getSupportFragmentManager().findFragmentById(R.id.fragment);
+        assert navhostFragment != null;
+        Fragment currentFragment = navhostFragment.getChildFragmentManager().getFragments().get(0);
+        parentAdapter = new PillReminderTimeAdapter(getContext(), currentFragment, timeList, prByTime, prController);
         parentListView.setAdapter(parentAdapter);
         // Expand all
         for(int i=0; i<timeList.size(); i++){
@@ -155,7 +169,7 @@ public class PillReminderFragment extends Fragment {
                                         int groupPosition, int childPosition, long id) {
                 Intent editMedicineIntent = new Intent(getActivity(), EditMedicineActivity.class);
                 editMedicineIntent.putExtra("MedicineObject",medicineList.get(childPosition));
-                startActivity(editMedicineIntent);
+                startActivityForResult(editMedicineIntent,UPDATE_PILL_REMINDER_REQUEST_CODE);
                 return false;
             }
         });
@@ -165,6 +179,27 @@ public class PillReminderFragment extends Fragment {
 
     public void openNewPillReminder() {
         Intent intent = new Intent(getActivity(), NewPillReminder.class);
-        startActivity(intent);
+        startActivityForResult(intent,UPDATE_PILL_REMINDER_REQUEST_CODE);
+    }
+
+    /**
+     * Refresh view after updating database.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == UPDATE_PILL_REMINDER_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Fragment navhostFragment = requireActivity().getSupportFragmentManager().findFragmentById(R.id.fragment);
+                assert navhostFragment != null;
+                Fragment currentFragment = navhostFragment.getChildFragmentManager().getFragments().get(0);
+                FragmentTransaction fragmentTransaction = currentFragment.getParentFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        }
     }
 }

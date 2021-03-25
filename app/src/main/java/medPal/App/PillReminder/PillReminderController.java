@@ -38,18 +38,6 @@ public class PillReminderController implements Serializable {
         setAllNotTaken();
     }
 
-    /**
-     * Get the data from database again.
-     */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void refreshData() {
-        RetrievePillReminders getDB = new RetrievePillReminders();
-        medicineList = getDB.getAllMedicine();
-        pillReminderList = getDB.getAllPillReminder();
-        formTodaysPillReminder();
-        groupPillReminderByTime();
-    }
-
     public ArrayList<Medicine> getAllMedicine() {
         return medicineList;
     }

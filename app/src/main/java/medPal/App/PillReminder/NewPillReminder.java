@@ -1,6 +1,7 @@
 package medPal.App.PillReminder;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -51,6 +52,7 @@ import static android.view.View.GONE;
 public class NewPillReminder extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
+    private PillReminderController prController;
     private ImageButton uploadImageButton;
     private Bitmap bitmap = null;
 
@@ -387,23 +389,28 @@ public class NewPillReminder extends AppCompatActivity implements
                     setAlarm(prType,daysInterval,week_bit,time,startDate,pill_reminder_id);
                     Toast toast = Toast.makeText(getApplicationContext(), "Reminder added successfully", Toast.LENGTH_SHORT);
                     toast.show();
+                    setResult(Activity.RESULT_OK);
                     finish();
                 }else{
                     Toast toast = Toast.makeText(getApplicationContext(), "Failed to upload image.,", Toast.LENGTH_SHORT);
                     toast.show();
+                    setResult(Activity.RESULT_OK);
                     finish();
                 }
             }else{
                 setAlarm(prType,daysInterval,week_bit,time,startDate,pill_reminder_id);
                 Toast toast = Toast.makeText(getApplicationContext(), "Reminder added successfully", Toast.LENGTH_SHORT);
                 toast.show();
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         }else{
             Toast toast = Toast.makeText(getApplicationContext(), "Failed to add new pill reminder.", Toast.LENGTH_SHORT);
             toast.show();
+            setResult(Activity.RESULT_CANCELED);
             finish();
         }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
