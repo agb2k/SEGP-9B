@@ -1,6 +1,5 @@
 package medPal.App.Homepage;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -12,13 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -32,12 +28,10 @@ import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
 import medPal.App.Homepage.NextAppointment.NextAppointment;
 import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
 import medPal.App.Homepage.NextAppointment.NextAppointmentController;
+import medPal.App.Homepage.NextPillReminder.NextPillReminderAdapter;
 import medPal.App.PillReminder.PillReminder;
-import medPal.App.PillReminder.PillReminderAdapter;
 import medPal.App.PillReminder.PillReminderController;
-import medPal.App.PillReminder.PillReminderTimeAdapter;
 import medPal.App.R;
-import medPal.App.Homepage.healthPopUp;
 
 
 /**
@@ -131,10 +125,10 @@ public class HomeFragment extends Fragment {
 
 
         // Set up ExpandableListView
-        nextPillReminderAdapter = new PillReminderTimeAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
+        nextPillReminderAdapter = new NextPillReminderAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
         nextPillReminderList.setAdapter(nextPillReminderAdapter);
         // Expand all
-        for(int i=0; i<timeList.size(); i++){
+        for(int i=0; i<1; i++){
             nextPillReminderList.expandGroup(i);
         }
 
