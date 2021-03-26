@@ -36,7 +36,7 @@ public class NextAppointmentAdapter extends RecyclerView.Adapter<NextAppointment
         viewHolder.apptDate = (TextView) cardview.findViewById(R.id.NextAppointmentDate);
         viewHolder.apptTime = (TextView) cardview.findViewById(R.id.NextAppointmentTime);
         viewHolder.hospital = (TextView) cardview.findViewById(R.id.NextAppointmentHospital);
-        viewHolder.hospital = (TextView) cardview.findViewById(R.id.NextAppointmentDoc);
+        viewHolder.docName = (TextView) cardview.findViewById(R.id.NextAppointmentDoc);
 
         return viewHolder;
     }
@@ -47,7 +47,8 @@ public class NextAppointmentAdapter extends RecyclerView.Adapter<NextAppointment
         apptDateTextView.setText(nextAppointments.get(position).getDate());
 
         TextView apptTimeTextView = (TextView) holder.apptTime;
-        apptTimeTextView.setText(nextAppointments.get(position).getTime());
+        String tempStr = nextAppointments.get(position).getTime();
+        apptTimeTextView.setText(tempStr.substring(11,16));
 
         TextView hospitalTextView = (TextView) holder.hospital;
         hospitalTextView.setText(nextAppointments.get(position).getHospital());

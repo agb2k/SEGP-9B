@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
         nextAppointmentList.setAdapter(nextAppointmentListAdapter);
 
         PillReminderController nextPillReminderController = new PillReminderController();
-        TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();
+        TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getPillReminderByTime();
         // Get the list of time of reminders
         ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
         timeList.addAll(nextPillReminder.keySet());
