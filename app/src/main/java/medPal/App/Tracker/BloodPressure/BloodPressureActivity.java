@@ -119,6 +119,7 @@ public class BloodPressureActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.pressureGraph);
+        lineChart.setVisibleXRangeMaximum(5);
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);

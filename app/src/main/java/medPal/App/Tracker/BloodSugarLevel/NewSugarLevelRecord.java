@@ -72,7 +72,7 @@ public class NewSugarLevelRecord extends AppCompatActivity {
                 s1 = e1.getText().toString();
                 s2 = e2.getText().toString();
                 s3 = e3.getText().toString();
-                String url = "https://bulacke.xyz/medpal-db/postInsertSugarRecord.php";
+                String url = "https://bulacke.xyz/medpal-db/insertSugarRecord.php";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
