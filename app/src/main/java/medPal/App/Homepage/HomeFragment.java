@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -109,27 +110,36 @@ public class HomeFragment extends Fragment {
         nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
         nextAppointmentList.setAdapter(nextAppointmentListAdapter);
 
-        nextPillReminderList = (ExpandableListView)v.findViewById(R.id.nextPillReminder);
-
         PillReminderController nextPillReminderController = new PillReminderController();
         TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();
         // Get the list of time of reminders
         ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
         timeList.addAll(nextPillReminder.keySet());
 
-        // This is line sets the height of the pill reminder section (480dp for each reminder)
-        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,480);
-        nextPillReminderList.setLayoutParams(param);
-        // Make some space between rows
-        nextPillReminderList.setDividerHeight(50);
+        nextPillReminderList = (ExpandableListView)v.findViewById(R.id.nextPillReminder);
+        TextView noPillReminderMessage = (TextView)v.findViewById(R.id.noPillReminderMessage);
+        if(timeList.size() > 0) {
+            // Show upcoming pill reminders
+            // This is line sets the height of the pill reminder section (480dp for each reminder)
+            nextPillReminderList.setVisibility(View.VISIBLE);
+            noPillReminderMessage.setVisibility(View.GONE);
 
+            RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,420);
+            nextPillReminderList.setLayoutParams(param);
+            // Make some space between rows
+            nextPillReminderList.setDividerHeight(50);
 
-        // Set up ExpandableListView
-        nextPillReminderAdapter = new NextPillReminderAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
-        nextPillReminderList.setAdapter(nextPillReminderAdapter);
-        // Expand all
-        for(int i=0; i<1; i++){
-            nextPillReminderList.expandGroup(i);
+            // Set up ExpandableListView
+            nextPillReminderAdapter = new NextPillReminderAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
+            nextPillReminderList.setAdapter(nextPillReminderAdapter);
+            // Expand all
+            for(int i=0; i<1; i++){
+                nextPillReminderList.expandGroup(i);
+            }
+        }else{
+            // If no upcoming pill reminders for today, show message
+            nextPillReminderList.setVisibility(View.GONE);
+            noPillReminderMessage.setVisibility(View.VISIBLE);
         }
 
 
