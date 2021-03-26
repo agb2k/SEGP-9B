@@ -1,6 +1,5 @@
 package medPal.App.Homepage;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -12,13 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -32,12 +28,10 @@ import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
 import medPal.App.Homepage.NextAppointment.NextAppointment;
 import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
 import medPal.App.Homepage.NextAppointment.NextAppointmentController;
+import medPal.App.Homepage.NextPillReminder.NextPillReminderAdapter;
 import medPal.App.PillReminder.PillReminder;
-import medPal.App.PillReminder.PillReminderAdapter;
 import medPal.App.PillReminder.PillReminderController;
-import medPal.App.PillReminder.PillReminderTimeAdapter;
 import medPal.App.R;
-import medPal.App.Homepage.healthPopUp;
 
 
 /**
@@ -124,17 +118,17 @@ public class HomeFragment extends Fragment {
         timeList.addAll(nextPillReminder.keySet());
 
         // This is line sets the height of the pill reminder section (480dp for each reminder)
-        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,timeList.size()*480);
+        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,480);
         nextPillReminderList.setLayoutParams(param);
         // Make some space between rows
         nextPillReminderList.setDividerHeight(50);
 
 
         // Set up ExpandableListView
-        nextPillReminderAdapter = new PillReminderTimeAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
+        nextPillReminderAdapter = new NextPillReminderAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
         nextPillReminderList.setAdapter(nextPillReminderAdapter);
         // Expand all
-        for(int i=0; i<timeList.size(); i++){
+        for(int i=0; i<1; i++){
             nextPillReminderList.expandGroup(i);
         }
 

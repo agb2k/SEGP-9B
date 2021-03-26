@@ -35,6 +35,11 @@
         <activity android:name=".PillReminder.NewPillReminder" />
         <activity android:name=".NewAppointment" /> <!-- Health Condition Pop up window -->
 
+<<<<<<< HEAD
+=======
+        <!-- Health Condition Pop up window
+
+>>>>>>> b2804da5afa4eb7d4c82f036f9c4c575677e5020
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
