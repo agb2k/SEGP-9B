@@ -13,6 +13,7 @@
         android:required="false" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="medpal"
@@ -33,7 +34,7 @@
         <activity android:name=".Tracker.BloodSugarLevel.SugarLevelActivity" />
         <activity android:name=".Tracker.BloodPressure.BloodPressureActivity" />
         <activity android:name=".PillReminder.NewPillReminder" />
-        <activity android:name=".NewAppointment" /> <!-- Health Condition Pop up window -->
+        <activity android:name=".Appointment.NewAppointment" /> <!-- Health Condition Pop up window -->
 
         <!-- Health Condition Pop up window
 
@@ -57,6 +58,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Tracker.BloodSugarLevel.SugarReminderList" />
         </activity>
+
+        <receiver
+            android:name=".AlarmAndNotification.RebootSetAlarm"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+
+                <!-- For htc devices. Source: https://www.semicolonworld.com/question/45980/boot-completed-not-working-android -->
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".AlarmAndNotification.Receivers.PillReminderReceiver"/>
+        <receiver
+            android:name=".AlarmAndNotification.Receivers.AppointmentReceiver"/>
+        <receiver
+            android:name=".AlarmAndNotification.Receivers.BloodPressureReceiver"/>
+        <receiver
+            android:name=".AlarmAndNotification.Receivers.BloodSugarReceiver"/>
 
         <provider
             android:name=".Tracker.Alarm.AlarmReminderProvider"

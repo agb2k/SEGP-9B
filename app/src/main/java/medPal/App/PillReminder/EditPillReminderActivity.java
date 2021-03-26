@@ -2,10 +2,16 @@ package medPal.App.PillReminder;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,11 +19,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import medPal.App.MainActivity;
 import medPal.App.R;
+
+import static medPal.App.PillReminder.PillReminderFragment.UPDATE_PILL_REMINDER_REQUEST_CODE;
 
 /**
  * Activity to let user select an existing pill reminder to be edited.
@@ -70,6 +80,17 @@ public class EditPillReminderActivity extends AppCompatActivity {
         Intent editPillReminderDetail = new Intent(this,EditPillReminderDetail.class);
         editPillReminderDetail.putExtra("PillReminderObj",pr);
         editPillReminderDetail.putExtra("Controller",prController);
-        startActivity(editPillReminderDetail);
+        startActivityForResult(editPillReminderDetail, UPDATE_PILL_REMINDER_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == UPDATE_PILL_REMINDER_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        }
     }
 }

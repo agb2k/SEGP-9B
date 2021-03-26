@@ -3,28 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingEnd="10dp"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/pillReminderImage"
         android:layout_width="100dp"
         android:layout_height="60dp"
+        android:layout_marginStart="5dp"
         android:src="@drawable/ic_pill"/>
 
     <TextView
         android:id="@+id/pillName"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="16sp"
         android:textAlignment="center"
         android:textColor="#0000A0"
-        android:textSize="15sp"/>
+        android:textSize="12sp"/>
 
     <TextView
         android:id="@+id/pillQuantity"
-        android:layout_width="85dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/lightgrey"
-        android:textSize="15sp"/>
+        android:textSize="10sp"/>
 
 </LinearLayout>

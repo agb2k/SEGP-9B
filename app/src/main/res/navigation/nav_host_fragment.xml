@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_pill_reminder" />
     <fragment
         android:id="@+id/appointmentFragment"
-        android:name="medPal.App.AppointmentFragment"
+        android:name="medPal.App.Appointment.AppointmentFragment"
         android:label="fragment_appointment"
         tools:layout="@layout/fragment_appointment" />
     <fragment
