@@ -2,6 +2,7 @@ package medPal.App.Tracker.BloodSugarLevel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,13 +19,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
-import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.OnDataPointTapListener;
-import com.jjoe64.graphview.series.Series;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,13 +57,7 @@ public class SugarLevelActivity extends AppCompatActivity {
     public static ArrayList<String> x_axis=new ArrayList<String>();
     public static ArrayList<String> y_axis=new ArrayList<String>();
 
-
-
-
-
-
-
-
+    private LineChart lineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,47 +109,54 @@ public class SugarLevelActivity extends AppCompatActivity {
             }
         });
 
+        lineChart = (LineChart) findViewById(R.id.sugarGraph);
+        lineChart.setVisibleXRangeMaximum(5);
 
-        
-        GraphView graph = (GraphView) findViewById(R.id.sugarGraph);
-        //fetch_data_into_array(graph);
-        LineGraphSeries<DataPoint> series;
-        series= new LineGraphSeries<>(data());
-        series.setThickness(8);
-        series.setDrawDataPoints(true);
-        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelRotationAngle(-45);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setLabelCount(5);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
-            public void onTap(Series series, DataPointInterface DataPoint) {
-                Toast.makeText(SugarLevelActivity.this,"On Data Point clicked:"+DataPoint, Toast.LENGTH_SHORT).show();
+            public String getFormattedValue(float index, AxisBase axis) {
+                //return xVal[(int) value]; // xVal is a string array
+                return x_axis.get((int) index);
+            }
+
+
+            public int getDecimalDigits() {
+                return 0;
             }
         });
-        //series.setShape(PointsGraphSeries.Shape.POINT);
-        //series.setSize(5);
-        graph.addSeries(series);
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(SugarLevelActivity.this));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
-        graph.getViewport().setScrollable(true);
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setYAxisBoundsManual(true);
-        /*Viewport viewport = graph.getViewport();
-        viewport.setYAxisBoundsManual(true);
-        viewport.setMinY(0);
-        viewport.setMaxY(600);
-        viewport.setScalable(true);
-        viewport.setScrollable(true);
-        viewport.setScalableY(true);
-        viewport.setScrollableY(true);
 
+        ArrayList<Entry> yValues = new ArrayList<>();
 
+        int n = x_axis.size();
+        for(int i=0; i<n; i++){
+            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+            yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+        }
 
+        LineDataSet set1 = new LineDataSet(yValues, "Sugar Level");
+        set1.setFillAlpha(110);
+        set1.setColor(Color.RED);
+        set1.setLineWidth(1.75f);
+        set1.setCircleRadius(5f);
+        set1.setCircleHoleRadius(2.5f);
+        set1.setValueTextSize(10);
+        set1.setCircleColor(Color.BLACK);
+        set1.setHighLightColor(Color.BLACK);
+        set1.setDrawValues(true);
 
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
 
-        //graph.getViewport().setXAxisBoundsManual(false);
+        LineData data = new LineData(dataSets);
 
-// as we use dates as labels, the human rounding to nice readable numbers
-// is not necessary
-        //graph.getGridLabelRenderer().setHumanRounding(false);
-    */
+        lineChart.setData(data);
+        lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
+
     }
 
     public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException {
