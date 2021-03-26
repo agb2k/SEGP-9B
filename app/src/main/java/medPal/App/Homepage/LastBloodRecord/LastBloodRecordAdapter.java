@@ -43,7 +43,8 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
         TextView bpTimeView = (TextView) holder.bpTime;
-        String tempBPTime = "Last Recorded at " + lastBloodPressureList.get(position).getTime() + " " + lastBloodPressureList.get(position).getDate();
+        String tempStr = lastBloodPressureList.get(position).getTime();
+        String tempBPTime = "Last Recorded at " + tempStr.substring(0,5) + " " + lastBloodPressureList.get(position).getDate();
         bpTimeView.setText(tempBPTime);
 
         TextView bpRecordView = (TextView) holder.bpRecord;
@@ -51,7 +52,8 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
         bpRecordView.setText(tempBPRecord);
 
         TextView bgTimeView = (TextView) holder.bgTime;
-        String tempBGTime = "Last Recorded at " + lastBloodGlucoseList.get(position).getTime() + " " + lastBloodGlucoseList.get(position).getDate();
+        String tempStr2 = lastBloodGlucoseList.get(position).getTime();
+        String tempBGTime = "Last Recorded at " + tempStr2.substring(0,5) + " " + lastBloodGlucoseList.get(position).getDate();
         bgTimeView.setText(tempBGTime);
 
         TextView bgLevelView = (TextView) holder.bgLevel;

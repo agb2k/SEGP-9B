@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment {
         nextPillReminderList = (ExpandableListView)v.findViewById(R.id.nextPillReminder);
 
         PillReminderController nextPillReminderController = new PillReminderController();
-        TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();
+        TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getPillReminderByTime();
         // Get the list of time of reminders
         ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
         timeList.addAll(nextPillReminder.keySet());
