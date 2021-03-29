@@ -161,41 +161,59 @@ public class AlarmHelper {
         }
     }
 
+    /**
+     * Recreate all alarm after reboot
+     * @param context
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void recreateAllAlarm(Context context) {
-        SQLiteHelper dbHelper = new SQLiteHelper(context, SQLiteHelper.TABLE_REQUEST_CODE);
+        SQLiteHelper dbHelper = new SQLiteHelper(context);
         ArrayList<RequestCodeItem> list = dbHelper.getAllRecord();
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        LocalDateTime t = LocalDateTime.now();
+        long now = TimeAndIntervalHelper.getMilli(t);
+
         for(RequestCodeItem item : list) {
             if(item.repeating_interval != 0) {
+                // Reset firstAlarmTime
+                long firstAlarmTime = item.time;
+                while(firstAlarmTime < now) {
+                    firstAlarmTime += item.repeating_interval;
+                }
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context, item.row_id, getReceiver(context, item.type), PendingIntent.FLAG_UPDATE_CURRENT);
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, item.time, item.repeating_interval, pendingIntent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, firstAlarmTime, item.repeating_interval, pendingIntent);
             }else {
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, item.row_id, getReceiver(context, item.type), PendingIntent.FLAG_UPDATE_CURRENT);
-                if (Build.VERSION.SDK_INT >= 23) {
-                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, item.time, pendingIntent);
-                } else if (Build.VERSION.SDK_INT >= 19) {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, item.time, pendingIntent);
-                } else {
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, item.time, pendingIntent);
+                // One-time alarm
+                // Only set the alarm that is in the future
+                if (item.time >= now) {
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, item.row_id, getReceiver(context, item.type), PendingIntent.FLAG_UPDATE_CURRENT);
+                    if (Build.VERSION.SDK_INT >= 23) {
+                        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, item.time, pendingIntent);
+                    } else if (Build.VERSION.SDK_INT >= 19) {
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, item.time, pendingIntent);
+                    } else {
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, item.time, pendingIntent);
+                    }
                 }
             }
         }
     }
 
     private PendingIntent getPendingIntent(long alarmTime, int reference_id) {
-        SQLiteHelper dbHelper = new SQLiteHelper(context, SQLiteHelper.TABLE_REQUEST_CODE);
+        SQLiteHelper dbHelper = new SQLiteHelper(context);
         int requestCode = dbHelper.getRequestCode(type, alarmTime, reference_id);
         return PendingIntent.getBroadcast(context, requestCode, getReceiver(context, type), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private PendingIntent getPendingIntent(long firstAlarmTime, long repeatInterval, int reference_id) {
-        SQLiteHelper dbHelper = new SQLiteHelper(context, SQLiteHelper.TABLE_REQUEST_CODE);
+        SQLiteHelper dbHelper = new SQLiteHelper(context);
         int requestCode = dbHelper.getRequestCode(type, firstAlarmTime, repeatInterval, reference_id);
         return PendingIntent.getBroadcast(context, requestCode, getReceiver(context, type), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private ArrayList<PendingIntent> deleteAllPendingIntent(int reference_id) {
-        SQLiteHelper dbHelper = new SQLiteHelper(context, SQLiteHelper.TABLE_REQUEST_CODE);
+        SQLiteHelper dbHelper = new SQLiteHelper(context);
 
         ArrayList<RequestCodeItem> requestCodes = new ArrayList<>();
         requestCodes = dbHelper.deactivateAll(reference_id);
@@ -209,7 +227,7 @@ public class AlarmHelper {
     }
 
     private ArrayList<PendingIntent> deletePendingIntentOfSpecificTime(int reference_id, long time, long interval) {
-        SQLiteHelper dbHelper = new SQLiteHelper(context, SQLiteHelper.TABLE_REQUEST_CODE);
+        SQLiteHelper dbHelper = new SQLiteHelper(context);
 
         ArrayList<RequestCodeItem> requestCodes = new ArrayList<>();
         requestCodes = dbHelper.deactivateSpecificTime(reference_id,time,interval);

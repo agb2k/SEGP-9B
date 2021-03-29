@@ -13,7 +13,12 @@ import medPal.App.R;
 
 public class NotificationHelper {
 
-    public static final int PILL_REMINDER_POP_UP_REQUEST_CODE = 10001;
+    public static final int PILL_REMINDER_NOTIFICATION_REQUEST_CODE = 1;
+    public static final int APPOINTMENT_NOTIFICATION_REQUEST_CODE = 2;
+    public static final int BLOOD_PRESSURE_NOTIFICATION_REQUEST_CODE = 3;
+    public static final int BLOOD_SUGAR_NOTIFICATION_REQUEST_CODE = 4;
+
+    public static final int PILL_REMINDER_POP_UP_INTENT_REQUEST_CODE = 10001;
 
     private final String title = "";
     private final String text = "";

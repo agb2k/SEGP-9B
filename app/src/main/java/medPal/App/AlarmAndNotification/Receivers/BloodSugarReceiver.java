@@ -17,8 +17,7 @@ public class BloodSugarReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SQLiteHelper dbHelper = new SQLiteHelper(context,SQLiteHelper.TABLE_NOTIFICATION_ID);
-        int id = dbHelper.getNotificationId(AlarmHelper.BLOOD_SUGAR);
+        int id = NotificationHelper.BLOOD_SUGAR_NOTIFICATION_REQUEST_CODE;
         NotificationHelper.createNotification(context,id,CHANNEL_ID,TITLE,TEXT,INFO);
     }
 

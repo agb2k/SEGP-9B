@@ -10,44 +10,30 @@ import java.util.ArrayList;
 
 public class SQLiteHelper {
 
-    public static final String TABLE_REQUEST_CODE = "RequestCodeTable";
-    public static final String TABLE_NOTIFICATION_ID = "NotificationIdTable";
-
     private final SQLiteDatabase myDB;
-    static String DB_NAME = "AlarmAndNotificationDB";
+    private static String DB_NAME = "AlarmAndNotificationDB";
+    private static String TABLE_NAME = "RequestCodeTable";
 
-    public SQLiteHelper(Context context, String table_name) {
+    public SQLiteHelper(Context context) {
         File DB_PATH = context.getDatabasePath(SQLiteHelper.DB_NAME);
 
         myDB = SQLiteDatabase.openOrCreateDatabase(DB_PATH, null);
-        switch(table_name) {
-            case TABLE_REQUEST_CODE:
-                myDB.execSQL(
-                        "CREATE TABLE IF NOT EXISTS "+ TABLE_REQUEST_CODE +"(" +
-                                "type INTEGER NOT NULL," +
-                                "time INTEGER," +
-                                "repeating_interval INTEGER," +
-                                "reference_id INTEGER," +
-                                "isActive INTEGER" +
-                                ");"
-                );
-                break;
-            case TABLE_NOTIFICATION_ID:
-                myDB.execSQL(
-                        "CREATE TABLE IF NOT EXISTS "+ TABLE_NOTIFICATION_ID +"(" +
-                                "type INTEGER NOT NULL" +
-                                ");"
-                );
-                break;
-            default:
-        }
+        myDB.execSQL(
+                "CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +"(" +
+                        "type INTEGER NOT NULL," +
+                        "time INTEGER," +
+                        "repeating_interval INTEGER," +
+                        "reference_id INTEGER," +
+                        "isActive INTEGER" +
+                        ");"
+        );
     }
 
     public int getRequestCode(int type, long time, long repeating_interval, int reference_id) {
-        myDB.execSQL("INSERT INTO " + TABLE_REQUEST_CODE + " VALUES(" + type + "," + time + "," + repeating_interval + "," + reference_id + ",1)");
+        myDB.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(" + type + "," + time + "," + repeating_interval + "," + reference_id + ",1)");
 
         int last_id = 0;
-        Cursor cursor = myDB.rawQuery("SELECT rowid FROM " + TABLE_REQUEST_CODE +
+        Cursor cursor = myDB.rawQuery("SELECT rowid FROM " + TABLE_NAME +
                         " ORDER BY rowid DESC LIMIT 1",
                 null);
         if(cursor != null && cursor.moveToFirst()) {
@@ -59,7 +45,7 @@ public class SQLiteHelper {
     }
 
     public int getRequestCode(int type, long time, int reference_id) {
-        myDB.execSQL("INSERT INTO " + TABLE_REQUEST_CODE + " VALUES(" +
+        myDB.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(" +
                 type + "," +
                 time + "," +
                 0 + "," +
@@ -68,22 +54,7 @@ public class SQLiteHelper {
         );
 
         int last_id = 0;
-        Cursor cursor = myDB.rawQuery("SELECT rowid FROM " + TABLE_REQUEST_CODE +
-                        " ORDER BY rowid DESC LIMIT 1",
-                null);
-        if(cursor != null && cursor.moveToFirst()) {
-            last_id = (int)cursor.getLong(0);
-        }
-        if(cursor != null)
-            cursor.close();
-        return last_id;
-    }
-
-    public int getNotificationId(int type) {
-        myDB.execSQL("INSERT INTO " + TABLE_NOTIFICATION_ID + " VALUES(" + type + ")");
-
-        int last_id = 0;
-        Cursor cursor = myDB.rawQuery("SELECT rowid FROM " + TABLE_NOTIFICATION_ID +
+        Cursor cursor = myDB.rawQuery("SELECT rowid FROM " + TABLE_NAME +
                         " ORDER BY rowid DESC LIMIT 1",
                 null);
         if(cursor != null && cursor.moveToFirst()) {
@@ -98,7 +69,7 @@ public class SQLiteHelper {
         ArrayList<RequestCodeItem> list = new ArrayList<>();
 
         // Find all requestCode records related to reference_id
-        Cursor cursor = myDB.rawQuery("SELECT rowid, * FROM " + TABLE_REQUEST_CODE +
+        Cursor cursor = myDB.rawQuery("SELECT rowid, * FROM " + TABLE_NAME +
                         " WHERE reference_id = " + reference_id +
                         " AND isActive = 1;"
                 ,null);
@@ -117,7 +88,7 @@ public class SQLiteHelper {
         cursor.close();
 
         // Deactivate ALL requestCode records related to reference_id
-        myDB.execSQL("UPDATE " + TABLE_REQUEST_CODE + " SET isActive = 0" +
+        myDB.execSQL("UPDATE " + TABLE_NAME + " SET isActive = 0" +
                 " WHERE reference_id = " + reference_id +
                 " AND isActive = 1;");
 
@@ -128,7 +99,7 @@ public class SQLiteHelper {
         ArrayList<RequestCodeItem> list = new ArrayList<>();
 
         // Find all requestCode records related to reference_id on the specific time
-        Cursor cursor = myDB.rawQuery("SELECT rowid, * FROM " + TABLE_REQUEST_CODE +
+        Cursor cursor = myDB.rawQuery("SELECT rowid, * FROM " + TABLE_NAME +
                 " WHERE reference_id = " + reference_id +
                 " AND isActive = 1" +
                 " AND time = " + time +
@@ -148,7 +119,7 @@ public class SQLiteHelper {
         cursor.close();
 
         // Deactivate ALL requestCode records related to reference_id on the specific time
-        myDB.execSQL("UPDATE " + TABLE_REQUEST_CODE + " SET isActive = 0 " +
+        myDB.execSQL("UPDATE " + TABLE_NAME + " SET isActive = 0 " +
                 "WHERE reference_id = " + reference_id +
                 " AND isActive = 1" +
                 " AND time = " + time +
@@ -161,7 +132,7 @@ public class SQLiteHelper {
     public ArrayList<RequestCodeItem> getAllRecord() {
         ArrayList<RequestCodeItem> list = new ArrayList<>();
 
-        Cursor cursor = myDB.rawQuery("SELECT rowid, * FROM " + TABLE_REQUEST_CODE + " WHERE isActive = 1;",null);
+        Cursor cursor = myDB.rawQuery("SELECT rowid, * FROM " + TABLE_NAME + " WHERE isActive = 1;",null);
         if (cursor.moveToFirst()){
             while (!cursor.isAfterLast()) {
                 int row_id = cursor.getInt(cursor.getColumnIndex("rowid"));

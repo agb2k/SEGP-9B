@@ -17,8 +17,7 @@ public class BloodPressureReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SQLiteHelper dbHelper = new SQLiteHelper(context,SQLiteHelper.TABLE_NOTIFICATION_ID);
-        int id = dbHelper.getNotificationId(AlarmHelper.BLOOD_PRESSURE);
+        int id = NotificationHelper.BLOOD_PRESSURE_NOTIFICATION_REQUEST_CODE;
         NotificationHelper.createNotification(context,id,CHANNEL_ID,TITLE,TEXT,INFO);
     }
 
