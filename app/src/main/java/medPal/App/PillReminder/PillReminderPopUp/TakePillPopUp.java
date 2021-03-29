@@ -1,4 +1,4 @@
-package medPal.App.PillReminder.NotificationReceiver;
+package medPal.App.PillReminder.PillReminderPopUp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,7 +25,6 @@ import java.util.TreeMap;
 
 import medPal.App.AlarmAndNotification.AlarmHelper;
 import medPal.App.AlarmAndNotification.TimeAndIntervalHelper;
-import medPal.App.PillReminder.Medicine;
 import medPal.App.PillReminder.PillReminder;
 import medPal.App.PillReminder.PillReminderController;
 import medPal.App.R;
@@ -101,8 +100,14 @@ public class TakePillPopUp {
         // Check which pill reminders have been handled (taken/skipped)
         ArrayList<String> takenList = new ArrayList<>();
         PillTakingDBHelper dbHelper = new PillTakingDBHelper(context);
-        LocalDate today = LocalDate.now();
-        String date = String.valueOf(today.getYear()) + String.valueOf(today.getMonthValue()) + String.valueOf(today.getDayOfMonth());
+        LocalDate d = LocalDate.now();
+        String date = String.valueOf(d.getYear());
+        if(d.getMonthValue() < 10)
+            date += "0";
+        date += String.valueOf(d.getMonthValue());
+        if(d.getDayOfMonth() < 10)
+            date += "0";
+        date += String.valueOf(d.getDayOfMonth());
         takenList = dbHelper.getTakenTime(date);
 
         // Ignore those that have been taken/skipped

@@ -8,12 +8,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import medPal.App.PillReminder.NotificationReceiver.TakePillPopUp;
+import medPal.App.PillReminder.PillReminderPopUp.TakePillPopUp;
 
 public class MainActivity extends AppCompatActivity {
 

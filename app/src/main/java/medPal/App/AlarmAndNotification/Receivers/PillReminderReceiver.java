@@ -23,7 +23,7 @@ public class PillReminderReceiver extends BroadcastReceiver {
 
         Intent targetIntent = new Intent(context, MainActivity.class);
         targetIntent.putExtra("showPillReminderPopUp",true);
-        PendingIntent targetPendingIntent = PendingIntent.getActivity(context,NotificationHelper.PILL_REMINDER_POP_UP_INTENT_REQUEST_CODE,targetIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent targetPendingIntent = PendingIntent.getActivity(context,NotificationHelper.PILL_REMINDER_ONCLICK_REQUEST_CODE,targetIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationHelper.createNotification(context,id,CHANNEL_ID,TITLE,TEXT,INFO,targetPendingIntent);
     }
 

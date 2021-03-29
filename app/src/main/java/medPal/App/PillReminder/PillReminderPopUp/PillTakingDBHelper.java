@@ -1,4 +1,4 @@
-package medPal.App.PillReminder.NotificationReceiver;
+package medPal.App.PillReminder.PillReminderPopUp;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,9 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import medPal.App.AlarmAndNotification.RequestCodeItem;
-import medPal.App.AlarmAndNotification.SQLiteHelper;
 
 public class PillTakingDBHelper {
 

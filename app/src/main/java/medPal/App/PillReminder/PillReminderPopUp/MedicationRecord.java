@@ -1,4 +1,4 @@
-package medPal.App.PillReminder.NotificationReceiver;
+package medPal.App.PillReminder.PillReminderPopUp;
 
 public class MedicationRecord {
 

@@ -18,7 +18,9 @@ public class NotificationHelper {
     public static final int BLOOD_PRESSURE_NOTIFICATION_REQUEST_CODE = 3;
     public static final int BLOOD_SUGAR_NOTIFICATION_REQUEST_CODE = 4;
 
-    public static final int PILL_REMINDER_POP_UP_INTENT_REQUEST_CODE = 10001;
+    public static final int PILL_REMINDER_ONCLICK_REQUEST_CODE = 10001;
+    public static final int BLOOD_PRESSURE_ONCLICK_REQUEST_CODE = 10002;
+    public static final int BLOOD_SUGAR_ONCLICK_REQUEST_CODE = 10003;
 
     private final String title = "";
     private final String text = "";
