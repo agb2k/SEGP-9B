@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -107,15 +108,18 @@ public class EditMedicineActivity extends AppCompatActivity {
             if(deleteImage()) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Medicine deleted successfully", Toast.LENGTH_SHORT);
                 toast.show();
+                setResult(Activity.RESULT_OK);
                 finish();
             }else{
                 Toast toast = Toast.makeText(getApplicationContext(), "Failed to delete medicine image.", Toast.LENGTH_SHORT);
                 toast.show();
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         }else {
             Toast toast = Toast.makeText(getApplicationContext(), "Failed to delete medicine.", Toast.LENGTH_SHORT);
             toast.show();
+            setResult(Activity.RESULT_CANCELED);
             finish();
         }
     }
@@ -245,15 +249,18 @@ public class EditMedicineActivity extends AppCompatActivity {
             if(status == 1) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Medicine detail has been changed", Toast.LENGTH_SHORT);
                 toast.show();
+                setResult(Activity.RESULT_OK);
                 finish();
             }else{
                 Toast toast = Toast.makeText(getApplicationContext(), "Failed to update image.", Toast.LENGTH_SHORT);
                 toast.show();
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         }else{
             Toast toast = Toast.makeText(getApplicationContext(), "Failed to update medicine detail.", Toast.LENGTH_SHORT);
             toast.show();
+            setResult(Activity.RESULT_CANCELED);
             finish();
         }
     }

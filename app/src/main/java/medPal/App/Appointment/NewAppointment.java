@@ -1,4 +1,4 @@
-package medPal.App;
+package medPal.App.Appointment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import medPal.App.R;
 
 public class NewAppointment extends AppCompatActivity {
 
@@ -28,10 +30,12 @@ public class NewAppointment extends AppCompatActivity {
             case R.id.radio_confirm:
                 if(checked)
                     //confirm
+                    System.out.println("Confirmed");
                 break;
             case R.id.radio_follow_up:
                 if (checked)
                     //follow up
+                    System.out.println("Follow up");
                 break;
 
 
