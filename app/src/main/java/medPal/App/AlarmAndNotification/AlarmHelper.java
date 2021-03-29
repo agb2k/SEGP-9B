@@ -29,6 +29,7 @@ public class AlarmHelper {
     public static int APPOINTMENT = 2;
     public static int BLOOD_PRESSURE = 3;
     public static int BLOOD_SUGAR = 4;
+    public static int SNOOZE_ALARM_REFERENCE_CODE = 50001; // For creating new alarm when user snooze previous alarm
 
     private AlarmManager alarmManager;
     private Context context;

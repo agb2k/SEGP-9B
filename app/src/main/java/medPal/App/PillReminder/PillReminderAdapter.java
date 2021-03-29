@@ -42,7 +42,6 @@ public class PillReminderAdapter extends RecyclerView.Adapter<PillReminderAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
         ImageView medicineImageView = (ImageView) holder.medicineImage;
         Picasso.get().load(pillReminders.get(position).getMedicine().getImagePath()).into(medicineImageView);
 
@@ -52,7 +51,6 @@ public class PillReminderAdapter extends RecyclerView.Adapter<PillReminderAdapte
         TextView quantityTextView = (TextView) holder.quantity;
         String placeholder = "Take " + pillReminders.get(position).getQuantity();
         quantityTextView.setText(placeholder);
-
     }
 
     @Override

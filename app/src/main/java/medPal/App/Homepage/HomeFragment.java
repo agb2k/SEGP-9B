@@ -119,11 +119,10 @@ public class HomeFragment extends Fragment {
         nextPillReminderList = (ExpandableListView)v.findViewById(R.id.nextPillReminder);
         TextView noPillReminderMessage = (TextView)v.findViewById(R.id.noPillReminderMessage);
         if(timeList.size() > 0) {
-            // Show upcoming pill reminders
-            // This is line sets the height of the pill reminder section (480dp for each reminder)
             nextPillReminderList.setVisibility(View.VISIBLE);
             noPillReminderMessage.setVisibility(View.GONE);
-
+            // Show upcoming pill reminders
+            // This is line sets the height of the pill reminder section (480dp for each reminder)
             RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,420);
             nextPillReminderList.setLayoutParams(param);
             // Make some space between rows

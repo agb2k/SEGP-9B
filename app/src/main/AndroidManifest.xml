@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedPal">
-        <activity android:name=".Tracker.BloodSugarLevel.EditSugarLevelActivity"></activity>
+        <activity android:name=".Tracker.BloodSugarLevel.EditSugarLevelActivity" />
         <activity android:name=".Tracker.BloodPressure.EditPressureActivity" />
         <activity android:name=".Tracker.BloodPressure.NewPressureReminder" />
         <activity android:name=".Tracker.BloodPressure.PressureReminderList" />
@@ -65,7 +65,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
-
                 <!-- For htc devices. Source: https://www.semicolonworld.com/question/45980/boot-completed-not-working-android -->
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
             </intent-filter>
