@@ -22,7 +22,13 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-
+    <TextView
+        android:id="@+id/ReferenceView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:visibility="gone"
+        tools:ignore="MissingConstraints"/>
 
     <fragment
         android:id="@+id/fragment"

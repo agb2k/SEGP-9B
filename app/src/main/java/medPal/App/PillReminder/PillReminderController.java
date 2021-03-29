@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import medPal.App.PillReminder.Filters.FilterDay;
-import medPal.App.PillReminder.Filters.FilterNotTaken;
 import medPal.App.PillReminder.Filters.FilterTime;
 import medPal.App.PillReminder.Filters.FilterUpcoming;
 
@@ -23,7 +22,6 @@ public class PillReminderController implements Serializable {
     private ArrayList<PillReminder> pillReminderList = new ArrayList<PillReminder>();
     private ArrayList<PillReminder> todayPillReminder = new ArrayList<PillReminder>();
     private TreeMap<LocalTime,ArrayList<PillReminder>> pillReminderByTime = new TreeMap<LocalTime,ArrayList<PillReminder>>();
-    public TreeMap<LocalTime,Integer> takenBit = new TreeMap<LocalTime,Integer>();
 
     /**
      * Initialize and get list of pill reminders from database.
@@ -35,7 +33,6 @@ public class PillReminderController implements Serializable {
         pillReminderList = getDB.getAllPillReminder();
         formTodaysPillReminder();
         groupPillReminderByTime();
-        setAllNotTaken();
     }
 
     public ArrayList<Medicine> getAllMedicine() {
@@ -80,13 +77,6 @@ public class PillReminderController implements Serializable {
         pillReminderByTime = byTime.meetsCriteria(todayPillReminder);
     }
 
-    // Set all pill reminder as not taken
-    private void setAllNotTaken() {
-        for(LocalTime t : pillReminderByTime.keySet()) {
-            takenBit.put(t,0);
-        }
-    }
-
     // Get today's pill reminder
     public ArrayList<PillReminder> getTodaysPillReminder() {
         return todayPillReminder;
@@ -107,13 +97,6 @@ public class PillReminderController implements Serializable {
         return pr;
     }
 
-    // Get current pill reminders
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public TreeMap<LocalTime,ArrayList<PillReminder>> getNotTaken(){
-        FilterNotTaken notTaken = new FilterNotTaken();
-        return notTaken.meetsCriteria(pillReminderByTime,takenBit);
-    }
-
     // Get upcoming pill reminders
     @RequiresApi(api = Build.VERSION_CODES.O)
     public TreeMap<LocalTime,ArrayList<PillReminder>> getUpcomingPillReminder(){
@@ -121,31 +104,4 @@ public class PillReminderController implements Serializable {
         return upcoming.meetsCriteria(pillReminderByTime);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void takePill(ArrayList<PillReminder> prList, LocalTime t) {
-        // Take a whole list of pills of the same time
-        for(PillReminder p : prList) {
-            p.takePill();
-        }
-        // Set takenBit for time t as taken
-        takenBit.replace(t,1);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void takePill(PillReminder p, LocalTime t) {
-        // Take pill one by one
-        p.takePill();
-
-        PillReminder pr;
-        for(int i=0; i<getNotTaken().get(t).size(); i++) {
-            pr = getNotTaken().get(t).get(i);
-            if(!pr.hasTaken()) {
-                // If one of the pill reminder has not be taken, break the loop
-                break;
-            }else if(i == getNotTaken().get(t).size()-1) {
-                // All has been taken, replace taken bit to 1
-                takenBit.replace(t,1);
-            }
-        }
-    }
 }

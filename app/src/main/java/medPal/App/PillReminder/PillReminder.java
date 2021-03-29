@@ -21,7 +21,6 @@ public class PillReminder implements Serializable {
     private LocalDate end_date;
     private boolean noEndDate = false;
     private Medicine medicine;
-    private boolean taken;
 
     /**
      * Constructor of pill reminder object.
@@ -52,7 +51,6 @@ public class PillReminder implements Serializable {
             this.end_date = stringToLocalDate(end_date);
         }
         this.medicine = medicine;
-        taken = false;
     }
 
     /**
@@ -146,14 +144,6 @@ public class PillReminder implements Serializable {
 
     public void setMedicine(Medicine medicine) {
         this.medicine = medicine;
-    }
-
-    public void takePill() {
-        taken = true;
-    }
-
-    public boolean hasTaken() {
-        return taken;
     }
 
     @Override

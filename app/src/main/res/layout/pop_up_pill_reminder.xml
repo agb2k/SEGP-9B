@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="20dp"
+        android:background="@color/blueFontColor">
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:textColor="@color/teal_700"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"/>
+
+            <Button
+                android:id="@+id/takePillButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="15dp"
+                android:text="Take Pill"
+                />
+
+            <Button
+                android:id="@+id/snoozeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Snooze"
+                android:layout_gravity="center"
+                android:background="@drawable/no_background_black_border"
+                android:textColor="@color/teal_700"
+                android:textSize="12dp"
+                />
+
+            <Button
+                android:id="@+id/skipButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skip"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="30dp"
+                android:layout_gravity="center"
+                android:textColor="@color/lightgrey"
+                android:background="@android:color/transparent"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
