@@ -2,6 +2,7 @@ package medPal.App.Tracker.BloodSugarLevel;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -41,6 +42,9 @@ public class NewSugarLevelRecord extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sugar_level_record);
+
+        //Intent intent = new Intent(NewSugarLevelRecord.this, SugarLevelActivity.class);
+        //startActivityForResult(intent,ACTIVITY_REQUEST_CODE);
 
         getSupportActionBar().setTitle("New Blood Sugar Level Record");
 
@@ -96,6 +100,10 @@ public class NewSugarLevelRecord extends AppCompatActivity {
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(NewSugarLevelRecord.this);
                 requestQueue.add(stringRequest);
+                finish();
+                Intent intent = new Intent(NewSugarLevelRecord.this, SugarLevelActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

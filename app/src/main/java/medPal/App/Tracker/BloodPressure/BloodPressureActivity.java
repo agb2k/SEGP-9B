@@ -119,7 +119,8 @@ public class BloodPressureActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.pressureGraph);
-        lineChart.setVisibleXRangeMaximum(5);
+        lineChart.setVisibleXRangeMaximum(3);
+        //lineChart.setVisibleXRange(0, 5);
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -143,16 +144,28 @@ public class BloodPressureActivity extends AppCompatActivity {
         ArrayList<Entry> yValues2 = new ArrayList<>();
 
         int n = x_axis.size();
-        for(int i=0; i<n; i++){
-            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
-            yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
-        }
 
-        for(int i=0; i<n; i++){
-            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
-            yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
-        }
+        if(n>=5) {
+            for (int i = n - 5; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+            }
 
+            for (int i = n - 5; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+            }
+
+            for (int i = 0; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
+            }
+        }
 
 
 

@@ -48,6 +48,7 @@ public class SugarLevelActivity extends AppCompatActivity {
     private Button b4;
     private Button b5;
     private static final String apiurl = "https://bulacke.xyz/medpal-db/getSugarRecord.php";
+    //public static final int ACTIVITY_REQUEST_CODE = 10005;
     ListView lv;
 
     private static String date[];
@@ -65,8 +66,12 @@ public class SugarLevelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sugar_level);
         getSupportActionBar().setTitle("Blood Sugar Level");
 
+        //Intent intent = new Intent(SugarLevelActivity.this, NewSugarLevelRecord.class);
+        //startActivityForResult(intent,ACTIVITY_REQUEST_CODE);
+
         x_axis.clear();
         y_axis.clear();
+
         lv = (ListView) findViewById(R.id.lv);
         try {
             fetch_data_into_array(lv);
@@ -110,7 +115,9 @@ public class SugarLevelActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.sugarGraph);
+
         lineChart.setVisibleXRangeMaximum(6);
+
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -133,9 +140,17 @@ public class SugarLevelActivity extends AppCompatActivity {
         ArrayList<Entry> yValues = new ArrayList<>();
 
         int n = x_axis.size();
-        for(int i=0; i<n; i++){
-            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
-            yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+
+        if(n>=5) {
+            for (int i = n - 5; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+            }
         }
 
         LineDataSet set1 = new LineDataSet(yValues, "Sugar Level");

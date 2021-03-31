@@ -2,6 +2,7 @@ package medPal.App.Tracker.BloodPressure;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -102,6 +103,10 @@ public class NewPressureRecord extends AppCompatActivity  {
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(NewPressureRecord.this);
                 requestQueue.add(stringRequest);
+                finish();
+                Intent intent = new Intent(NewPressureRecord.this, BloodPressureActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
