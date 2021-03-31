@@ -79,12 +79,7 @@ public class PillReminderFragment extends Fragment {
         }
     }
 
-    private PillReminderController prController;
-    private Button b1;
-    private ExpandableListView parentListView;
-    private ExpandableListAdapter parentAdapter;
     private ExpandableListView expandableMedicineList;
-    private ExpandableListAdapter expandableMedicineAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -94,17 +89,16 @@ public class PillReminderFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_pill_reminder, container, false);
 
         // Get ExpandableListView
-        parentListView = (ExpandableListView) v.findViewById(R.id.prExpandableListView);
+        ExpandableListView parentListView = (ExpandableListView) v.findViewById(R.id.prExpandableListView);
         // Call PillReminderController
-        prController = new PillReminderController();
+        PillReminderController prController = new PillReminderController();
         // Get today's pill reminder, grouped by time
         TreeMap<LocalTime,ArrayList<PillReminder>> prByTime = prController.getPillReminderByTime();
         // Get the list of time of reminders
-        ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
-        timeList.addAll(prByTime.keySet());
+        ArrayList<LocalTime> timeList = new ArrayList<LocalTime>(prByTime.keySet());
 
         // Add new reminder button
-        b1 = v.findViewById(R.id.NewPillReminderButton);
+        Button b1 = v.findViewById(R.id.NewPillReminderButton);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +116,7 @@ public class PillReminderFragment extends Fragment {
         Fragment navhostFragment = requireActivity().getSupportFragmentManager().findFragmentById(R.id.fragment);
         assert navhostFragment != null;
         Fragment currentFragment = navhostFragment.getChildFragmentManager().getFragments().get(0);
-        parentAdapter = new PillReminderTimeAdapter(getContext(), currentFragment, timeList, prByTime, prController);
+        ExpandableListAdapter parentAdapter = new PillReminderTimeAdapter(getContext(), currentFragment, timeList, prByTime, prController);
         parentListView.setAdapter(parentAdapter);
         // Expand all
         for(int i=0; i<timeList.size(); i++){
@@ -142,7 +136,7 @@ public class PillReminderFragment extends Fragment {
         ArrayList<Medicine> medicineList = prController.getAllMedicine();
         HashMap<String, ArrayList<Medicine>> medicineHashMap = new HashMap<>();
         medicineHashMap.put("Medicine Detail", medicineList);
-        expandableMedicineAdapter = new MedicineAdapter(getContext(), medicineHashMap);
+        ExpandableListAdapter expandableMedicineAdapter = new MedicineAdapter(getContext(), medicineHashMap);
         expandableMedicineList.setAdapter(expandableMedicineAdapter);
 
         expandableMedicineList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
