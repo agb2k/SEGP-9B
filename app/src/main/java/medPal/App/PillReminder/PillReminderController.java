@@ -1,6 +1,9 @@
 package medPal.App.PillReminder;
 
+import android.content.Context;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
@@ -18,6 +21,7 @@ import medPal.App.PillReminder.Filters.FilterUpcoming;
  * A class to handle the pill reminders list.
  */
 public class PillReminderController implements Serializable {
+    private Context context;
     private ArrayList<Medicine> medicineList = new ArrayList<>();
     private ArrayList<PillReminder> pillReminderList = new ArrayList<PillReminder>();
     private ArrayList<PillReminder> todayPillReminder = new ArrayList<PillReminder>();
@@ -27,7 +31,8 @@ public class PillReminderController implements Serializable {
      * Initialize and get list of pill reminders from database.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public PillReminderController() {
+    public PillReminderController(Context context) {
+        this.context = context;
         RetrievePillReminders getDB = new RetrievePillReminders();
         medicineList = getDB.getAllMedicine();
         pillReminderList = getDB.getAllPillReminder();
@@ -101,7 +106,7 @@ public class PillReminderController implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public TreeMap<LocalTime,ArrayList<PillReminder>> getUpcomingPillReminder(){
         FilterUpcoming upcoming = new FilterUpcoming();
-        return upcoming.meetsCriteria(pillReminderByTime);
+        return upcoming.meetsCriteria(context, pillReminderByTime);
     }
 
 }

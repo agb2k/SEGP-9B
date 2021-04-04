@@ -34,7 +34,6 @@ import static medPal.App.PillReminder.PillReminderFragment.UPDATE_PILL_REMINDER_
  */
 public class EditPillReminderActivity extends AppCompatActivity {
 
-    PillReminderController prController;
     ArrayList<PillReminder> prList = new ArrayList<>();
     LocalTime time;
 
@@ -46,7 +45,7 @@ public class EditPillReminderActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Edit Pill Reminder");
 
         String t = getIntent().getStringExtra("TimeLabel");
-        prController = (PillReminderController) getIntent().getSerializableExtra("Controller");
+        prList = (ArrayList<PillReminder>) getIntent().getSerializableExtra("PillReminders");
 
         int h = Integer.parseInt(t.substring(0,2));
         int m = Integer.parseInt(t.substring(3));
@@ -55,8 +54,6 @@ public class EditPillReminderActivity extends AppCompatActivity {
         TextView timeTitle = (TextView) findViewById(R.id.editPillReminderTime);
         DateTimeFormatter df = DateTimeFormatter.ofPattern("hh:mm a");
         timeTitle.setText(time.format(df));
-
-        prList = prController.getPillReminderByTime().get(time);
 
         EditPillReminderAdapter adapter = new EditPillReminderAdapter(this, prList);
         ListView list = (ListView)findViewById(R.id.editPillReminderListView);
@@ -79,7 +76,6 @@ public class EditPillReminderActivity extends AppCompatActivity {
     public void startEditPillReminderDetailActivity(PillReminder pr) {
         Intent editPillReminderDetail = new Intent(this,EditPillReminderDetail.class);
         editPillReminderDetail.putExtra("PillReminderObj",pr);
-        editPillReminderDetail.putExtra("Controller",prController);
         startActivityForResult(editPillReminderDetail, UPDATE_PILL_REMINDER_REQUEST_CODE);
     }
 

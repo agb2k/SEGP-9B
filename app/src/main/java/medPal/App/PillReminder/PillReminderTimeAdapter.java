@@ -46,9 +46,7 @@ public class PillReminderTimeAdapter implements ExpandableListAdapter {
     }
 
     public void keyIndexing() {
-        for(LocalTime t : prByTime.keySet()){
-            prByTimeKeySet.add(t);
-        }
+        prByTimeKeySet.addAll(prByTime.keySet());
     }
 
     @Override
@@ -126,7 +124,7 @@ public class PillReminderTimeAdapter implements ExpandableListAdapter {
                 Intent editPillReminder = new Intent(context, EditPillReminderActivity.class);
                 // Parse time
                 editPillReminder.putExtra("TimeLabel",time.toString());
-                editPillReminder.putExtra("Controller",prController);
+                editPillReminder.putExtra("PillReminders",prController.getPillReminderByTime().get(time));
                 ((Fragment) fragment).startActivityForResult(editPillReminder,PillReminderFragment.UPDATE_PILL_REMINDER_REQUEST_CODE);
             }
         });

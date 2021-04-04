@@ -28,6 +28,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 import medPal.App.MainActivity;
+import medPal.App.PillReminder.PillReminderPopUp.TakePillPopUp;
 import medPal.App.R;
 
 /**
@@ -91,7 +92,7 @@ public class PillReminderFragment extends Fragment {
         // Get ExpandableListView
         ExpandableListView parentListView = (ExpandableListView) v.findViewById(R.id.prExpandableListView);
         // Call PillReminderController
-        PillReminderController prController = new PillReminderController();
+        PillReminderController prController = new PillReminderController(getContext());
         // Get today's pill reminder, grouped by time
         TreeMap<LocalTime,ArrayList<PillReminder>> prByTime = prController.getPillReminderByTime();
         // Get the list of time of reminders
@@ -118,16 +119,22 @@ public class PillReminderFragment extends Fragment {
         Fragment currentFragment = navhostFragment.getChildFragmentManager().getFragments().get(0);
         ExpandableListAdapter parentAdapter = new PillReminderTimeAdapter(getContext(), currentFragment, timeList, prByTime, prController);
         parentListView.setAdapter(parentAdapter);
+
         // Expand all
         for(int i=0; i<timeList.size(); i++){
             parentListView.expandGroup(i);
         }
-        // Disable collapse
-        parentListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-                return true; // This way the expander cannot be collapsed
+
+        // This will fix the display issue. Detail of the display issue is explained below.
+        // Issue: When user insert new record, the last group of listview will not expand (ie last
+        //        group of pill reminders will disappear)
+        // Possible reason: When the expandGroup() is called above, the expandableListView have not
+        //                  been loaded, therefore if we wait until the view has been completely
+        //                  loaded, the expandGroup() will be working for last group.
+        // This part of code will fix the issue, however, no evidence or similar issues found online.
+        parentListView.post(new Runnable() {
+            public void run() {
+                parentListView.expandGroup(timeList.size()-1);
             }
         });
 

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -585,11 +586,14 @@ public class NewSugarReminder extends AppCompatActivity implements
             }
         }
 
+        Log.v("Bulacke","In here");
         // Create a new notification
         if (mActive.equals("true")) {
             if (mRepeat.equals("true")) {
+                Log.v("Bulacke","Is repeat");
                 new AlarmScheduler().setRepeatAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri, mRepeatTime);
             } else if (mRepeat.equals("false")) {
+                Log.v("Bulacke","Not repeat");
                 new AlarmScheduler().setAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri);
             }
 

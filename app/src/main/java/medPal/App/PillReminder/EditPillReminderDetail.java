@@ -43,7 +43,6 @@ import static android.view.View.GONE;
 public class EditPillReminderDetail extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
-    private PillReminderController prController;
     private PillReminder pr;
 
     private int prType;
@@ -69,7 +68,6 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         setContentView(R.layout.activity_edit_pill_reminder_detail);
         getSupportActionBar().setTitle("Edit Pill Reminder");
 
-        prController = (PillReminderController) getIntent().getSerializableExtra("Controller");
         pr = (PillReminder) getIntent().getSerializableExtra("PillReminderObj");
 
         putDataIntoInputField();
