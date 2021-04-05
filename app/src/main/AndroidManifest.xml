@@ -37,6 +37,11 @@
         <activity android:name=".Appointment.NewAppointment" /> <!-- Health Condition Pop up window -->
 
 
+<<<<<<< HEAD
+=======
+        <!-- Health Condition Pop up window
+
+>>>>>>> 24afd1ae89b64d614540a1377ebe46880ff5a53d
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />

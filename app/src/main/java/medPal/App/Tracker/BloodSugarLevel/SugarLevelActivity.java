@@ -115,7 +115,9 @@ public class SugarLevelActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.sugarGraph);
-        //lineChart.setVisibleXRangeMaximum(5);
+
+        lineChart.setVisibleXRangeMaximum(6);
+
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
