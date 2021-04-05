@@ -65,7 +65,7 @@ public class NewPressureReminder extends AppCompatActivity implements
     private String mActive;
 
     private Uri mCurrentReminderUri;
-    private boolean mVehicleHasChanged = false;
+    private boolean mVehicleHasChanged= false;
 
     // Values for orientation change
     private static final String KEY_TITLE = "title_key";
@@ -107,6 +107,8 @@ public class NewPressureReminder extends AppCompatActivity implements
 
             setTitle("Add reminder details");
 
+
+
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a reminder that hasn't been created yet.)
             invalidateOptionsMenu();
@@ -133,11 +135,10 @@ public class NewPressureReminder extends AppCompatActivity implements
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
         // Initialize default values
-
         mActive = "true";
         mRepeat = "true";
         mRepeatNo = Integer.toString(1);
-        mRepeatType = "Hour";
+        mRepeatType = "Day";
 
         mCalendar = Calendar.getInstance();
         mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
@@ -150,6 +151,7 @@ public class NewPressureReminder extends AppCompatActivity implements
 
         mDate = mDay + "/" + mMonth + "/" + mYear;
         mTime = mHour + ":" + mMinute;
+
 
 
 
