@@ -32,10 +32,12 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
+import java.util.Random;
 
+import medPal.App.AlarmAndNotification.AlarmHelper;
 import medPal.App.R;
 import medPal.App.Tracker.Alarm.AlarmReminderContract;
-import medPal.App.Tracker.Alarm.AlarmScheduler;
+
 
 
 public class NewPressureReminder extends AppCompatActivity implements
@@ -95,8 +97,11 @@ public class NewPressureReminder extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_pressure_reminder);
 
+
         Intent intent = getIntent();
         mCurrentReminderUri = intent.getData();
+
+
 
         if (mCurrentReminderUri == null) {
 
@@ -105,7 +110,7 @@ public class NewPressureReminder extends AppCompatActivity implements
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a reminder that hasn't been created yet.)
             invalidateOptionsMenu();
-        } else {
+        }else{
 
             setTitle("Edit reminder");
 
@@ -123,10 +128,12 @@ public class NewPressureReminder extends AppCompatActivity implements
         mRepeatNoText = (TextView) findViewById(R.id.set_repeat_no_pressure);
         mRepeatTypeText = (TextView) findViewById(R.id.set_repeat_type_pressure);
         mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch_pressure);
+        onSwitchRepeat(mRepeatSwitch);
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
         // Initialize default values
+
         mActive = "true";
         mRepeat = "true";
         mRepeatNo = Integer.toString(1);
@@ -139,8 +146,12 @@ public class NewPressureReminder extends AppCompatActivity implements
         mMonth = mCalendar.get(Calendar.MONTH) + 1;
         mDay = mCalendar.get(Calendar.DATE);
 
+
+
         mDate = mDay + "/" + mMonth + "/" + mYear;
         mTime = mHour + ":" + mMinute;
+
+
 
         // Setup Reminder Title EditText
         mTitleText.addTextChangedListener(new TextWatcher() {
@@ -205,9 +216,9 @@ public class NewPressureReminder extends AppCompatActivity implements
         }
 
 
-        getSupportActionBar().setTitle("Add Reminder");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setTitle("Add Reminder");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
 
 
     }
@@ -227,6 +238,7 @@ public class NewPressureReminder extends AppCompatActivity implements
 
     // On clicking Time picker
     public void setTime(View v){
+
         Calendar now = Calendar.getInstance();
         TimePickerDialog tpd = TimePickerDialog.newInstance(
                 this,
@@ -235,7 +247,7 @@ public class NewPressureReminder extends AppCompatActivity implements
                 false
         );
         tpd.setThemeDark(false);
-        tpd.show(getFragmentManager(), "Timepickerdialog");
+        tpd.show(getFragmentManager(), "TimePickerDialog");
     }
 
     // On clicking Date picker
@@ -247,7 +259,7 @@ public class NewPressureReminder extends AppCompatActivity implements
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
         );
-        dpd.show(getFragmentManager(), "Datepickerdialog");
+        dpd.show(getFragmentManager(), "DatePickerDialog");
     }
 
     // Obtain time from time picker
@@ -294,8 +306,8 @@ public class NewPressureReminder extends AppCompatActivity implements
 
     // On clicking the repeat switch
     public void onSwitchRepeat(View view) {
-        boolean on = ((Switch) view).isChecked();
-        if (on) {
+
+        if (mRepeatSwitch.isChecked()) {
             mRepeat = "true";
             mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
         } else {
@@ -513,12 +525,7 @@ public class NewPressureReminder extends AppCompatActivity implements
     // On clicking the save button
     public void saveReminder(){
 
-     /*   if (mCurrentReminderUri == null ) {
-            // Since no fields were modified, we can return early without creating a new reminder.
-            // No need to create ContentValues and no need to do any ContentProvider operations.
-            return;
-        }
-*/
+
 
         ContentValues values = new ContentValues();
 
@@ -588,9 +595,15 @@ public class NewPressureReminder extends AppCompatActivity implements
         // Create a new notification
         if (mActive.equals("true")) {
             if (mRepeat.equals("true")) {
-                new AlarmScheduler().setRepeatAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri, mRepeatTime);
+                //new AlarmScheduler().setRepeatAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri, mRepeatTime);
+                final Random myRandom = new Random();
+                AlarmHelper alarmHelper = new AlarmHelper(getApplicationContext(), AlarmHelper.BLOOD_PRESSURE);
+                alarmHelper.setAlarm(selectedTimestamp, mRepeatTime, myRandom.nextInt(10000));
             } else if (mRepeat.equals("false")) {
-                new AlarmScheduler().setAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri);
+                //new AlarmScheduler().setAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri);
+                final Random myRandom = new Random();
+                AlarmHelper alarmHelper = new AlarmHelper(getApplicationContext(), AlarmHelper.BLOOD_PRESSURE);
+                alarmHelper.setAlarm(selectedTimestamp, myRandom.nextInt(10000));
             }
 
             Toast.makeText(this, "Alarm time is " + selectedTimestamp,
@@ -609,7 +622,6 @@ public class NewPressureReminder extends AppCompatActivity implements
         super.onBackPressed();
 
     }
-
 
 
 

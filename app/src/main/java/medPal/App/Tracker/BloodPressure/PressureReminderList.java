@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,9 +38,13 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
     ListView reminderListView;
     ProgressDialog prgDialog;
     TextView reminderText1;
+    ImageView activeOn;
+    ImageView activeOff;
     private String alarmTitle = "";
 
     private static final int VEHICLE_LOADER = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,8 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
         View emptyView = findViewById(R.id.empty_view2);
         reminderListView.setEmptyView(emptyView);
         reminderText1 = (TextView) findViewById(R.id.reminderTextPressure);
+
+
 
         mCursorAdapter = new AlarmCursorAdapter(this, null);
         reminderListView.setAdapter(mCursorAdapter);
@@ -173,4 +180,16 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
     public void restartLoader(){
         getSupportLoaderManager().restartLoader(VEHICLE_LOADER, null, this);
     }
+
+    /*public void setAlarmOn(View v){
+        activeOn = (ImageView) findViewById(R.id.active_image);
+        activeOn.setVisibility(View.VISIBLE);
+        activeOff = (ImageView) findViewById(R.id.active_image2);
+        activeOff.setVisibility(View.GONE);
+
+    }
+
+    public void setAlarmOff(View v){
+
+    }*/
 }
