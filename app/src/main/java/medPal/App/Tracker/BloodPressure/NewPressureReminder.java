@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -107,17 +108,39 @@ public class NewPressureReminder extends AppCompatActivity implements
 
             setTitle("Add reminder details");
 
+            mActive = "true";
+            mRepeat = "true";
+            mRepeatNo = Integer.toString(1);
+            mRepeatType = "Day";
+
+            mCalendar = Calendar.getInstance();
+            mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
+            mMinute = mCalendar.get(Calendar.MINUTE);
+            mYear = mCalendar.get(Calendar.YEAR);
+            mMonth = mCalendar.get(Calendar.MONTH) + 1;
+            mDay = mCalendar.get(Calendar.DATE);
+            mDate = mDay + "/" + mMonth + "/" + mYear;
+            mTime = mHour + ":" + mMinute;
 
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a reminder that hasn't been created yet.)
             invalidateOptionsMenu();
-        }else{
+        } else{
 
             setTitle("Edit reminder");
 
+            mActive = "true";
+            mRepeat = "true";
+            mRepeatNo = Integer.toString(1);
+            mRepeatType = "Day";
+
+            mDate = mDay + "/" + mMonth + "/" + mYear;
+            mTime = mHour + ":" + mMinute;
+
 
             getLoaderManager().initLoader(EXISTING_VEHICLE_LOADER, null, this);
+
         }
 
 
@@ -135,6 +158,7 @@ public class NewPressureReminder extends AppCompatActivity implements
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
         // Initialize default values
+        /*
         mActive = "true";
         mRepeat = "true";
         mRepeatNo = Integer.toString(1);
@@ -146,11 +170,13 @@ public class NewPressureReminder extends AppCompatActivity implements
         mYear = mCalendar.get(Calendar.YEAR);
         mMonth = mCalendar.get(Calendar.MONTH) + 1;
         mDay = mCalendar.get(Calendar.DATE);
-
-
-
         mDate = mDay + "/" + mMonth + "/" + mYear;
         mTime = mHour + ":" + mMinute;
+
+         */
+
+
+
 
 
 
@@ -274,6 +300,7 @@ public class NewPressureReminder extends AppCompatActivity implements
         } else {
             mTime = hourOfDay + ":" + minute;
         }
+
         mTimeText.setText(mTime);
     }
 
@@ -541,14 +568,24 @@ public class NewPressureReminder extends AppCompatActivity implements
 
 
         // Set up calender for creating the notification
-        mCalendar.set(Calendar.MONTH, --mMonth);
-        mCalendar.set(Calendar.YEAR, mYear);
-        mCalendar.set(Calendar.DAY_OF_MONTH, mDay);
-        mCalendar.set(Calendar.HOUR_OF_DAY, mHour);
-        mCalendar.set(Calendar.MINUTE, mMinute);
+
+        mCalendar = Calendar.getInstance();
+        Log.d("Date", mDate);
+        Log.d("time", mTime);
+        String[] seperated = mDate.split("/");
+        String[] timeSeperate = mTime.split(":");
+        mCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(seperated[0]));
+        mCalendar.set(Calendar.MONTH, Integer.parseInt(seperated[1]));
+        mCalendar.set(Calendar.YEAR, Integer.parseInt(seperated[2]));
+        mCalendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeSeperate[0]));
+        mCalendar.set(Calendar.MINUTE, Integer.parseInt(timeSeperate[0]));
         mCalendar.set(Calendar.SECOND, 0);
 
+
+
         long selectedTimestamp =  mCalendar.getTimeInMillis();
+
+
 
         // Check repeat type
         if (mRepeatType.equals("Minute")) {
@@ -686,6 +723,19 @@ public class NewPressureReminder extends AppCompatActivity implements
             mRepeatTypeText.setText(repeatType);
             mRepeatText.setText("Every " + repeatNo + " " + repeatType + "(s)");
             // Setup up active buttons
+            /*
+            if(active != null && active.equals("false")){
+                mActive = "false";
+
+            } else if (active != null && active.equals("true")){
+                mActive = "true";
+
+            }
+
+             */
+
+
+
             // Setup repeat switch
             if (repeat != null && repeat.equalsIgnoreCase("false")) {
                 mRepeatSwitch.setChecked(false);
