@@ -55,7 +55,7 @@ public class DatabaseHelper {
 
     public static String PILL_REMINDER = "PillReminder.php";
     public static String MEDICINE = "Medicine.php";
-    //public static String APPOINTMENT = ""; //Not implemented yet
+    public static String APPOINTMENT = "Appointment.php";
     public static String BLOOD_PRESSURE = "PressureRecord.php";
     public static String SUGAR_LEVEL = "SugarRecord.php";
     public static String MEDICINE_IMAGE = "MedicineImage.php";
