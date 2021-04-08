@@ -129,8 +129,12 @@ public class EditMedicineActivity extends AppCompatActivity {
      */
     public void putDataIntoInputField() {
         pillImage = (ImageButton) findViewById(R.id.PillImage);
-        Picasso.get().load(medicine.getImagePath()).into(pillImage);
-        if(medicine.getImagePath().equals("https://bulacke.xyz/medpal-img/")){
+        if (medicine.getImagePath().length() > 0)
+            Picasso.get().load(medicine.getImagePath()).into(pillImage);
+        else
+            Picasso.get().load(Medicine.MEDICINE_IMAGE_PLACEHOLDER).into(pillImage);
+
+        if(medicine.getImagePath().length() == 0){
             initiallyNoImage = true;
         }else{
             originalImage = true;

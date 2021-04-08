@@ -470,6 +470,10 @@ public class NewPillReminder extends AppCompatActivity implements
             if(time == ""){
                 timeInput.setHour(LocalTime.now().getHour());
                 timeInput.setMinute(LocalTime.now().getMinute());
+                // Set time once user clicks on time picker
+                setInputTime(LocalTime.now().getHour(),LocalTime.now().getMinute());
+                TextView displayTime = (TextView) findViewById(R.id.displayTime);
+                displayTime.setText(timeString(LocalTime.now().getHour(),LocalTime.now().getMinute()));
             }else{
                 timeInput.setHour(hour);
                 timeInput.setMinute(minute);
@@ -478,37 +482,41 @@ public class NewPillReminder extends AppCompatActivity implements
                 @Override
                 public void onTimeChanged(TimePicker timePicker, int h, int m) {
                     setInputTime(h,m);
-                    String AMPM;
-                    String time = "";
-                    if(h>12){
-                        AMPM = "PM";
-                        h -= 12;
-                    }else if(h==12){
-                        AMPM = "PM";
-                    }else{
-                        if(h==0){
-                            h += 12;
-                        }
-                        AMPM = "AM";
-                    }
-                    if(h<10){
-                        time += "0";
-                    }
-                    time += h;
-                    time += ":";
-                    if(m<10){
-                        time += "0";
-                    }
-                    time += m;
-                    String result = time + " " + AMPM;
                     TextView displayTime = (TextView) findViewById(R.id.displayTime);
-                    displayTime.setText(result);
+                    displayTime.setText(timeString(h,m));
                 }
             });
         }else{
             timePicker.setVisibility(GONE);
             button.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
         }
+    }
+
+    private String timeString(int h, int m) {
+        String AMPM;
+        String time = "";
+        if(h>12){
+            AMPM = "PM";
+            h -= 12;
+        }else if(h==12){
+            AMPM = "PM";
+        }else{
+            if(h==0){
+                h += 12;
+            }
+            AMPM = "AM";
+        }
+        if(h<10){
+            time += "0";
+        }
+        time += h;
+        time += ":";
+        if(m<10){
+            time += "0";
+        }
+        time += m;
+        time += " " + AMPM;
+        return time;
     }
 
     /**

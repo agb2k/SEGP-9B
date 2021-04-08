@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import medPal.App.PillReminder.Medicine;
 import medPal.App.PillReminder.PillReminder;
 import medPal.App.R;
 
@@ -37,7 +38,10 @@ public class PopUpPillReminderAdapter extends RecyclerView.Adapter<PopUpPillRemi
     public void onBindViewHolder(ViewHolder holder, int position) {
         final PillReminder pr = prList.get(position);
 
-        Picasso.get().load(pr.getMedicine().getImagePath()).into((ImageView) holder.pillImage);
+        if(pr.getMedicine().getImagePath().length() > 0)
+            Picasso.get().load(pr.getMedicine().getImagePath()).into((ImageView) holder.pillImage);
+        else
+            Picasso.get().load(Medicine.MEDICINE_IMAGE_PLACEHOLDER).into((ImageView) holder.pillImage);
 
         holder.pillName.setText(pr.getMedicine().getMedicineName());
 

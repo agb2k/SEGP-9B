@@ -52,7 +52,10 @@ public class MedicineAdapter extends BaseExpandableListAdapter {
         }
 
         ImageView medicineImageView = (ImageView) convertView.findViewById(R.id.medicineImage);
-        Picasso.get().load(medicineList.get("Medicine Detail").get(expandedListPosition).getImagePath()).into(medicineImageView);
+        if (medicineList.get("Medicine Detail").get(expandedListPosition).getImagePath().length() > 0)
+            Picasso.get().load(medicineList.get("Medicine Detail").get(expandedListPosition).getImagePath()).into(medicineImageView);
+        else
+            Picasso.get().load(Medicine.MEDICINE_IMAGE_PLACEHOLDER).into(medicineImageView);
 
         TextView medicineNameText = (TextView) convertView.findViewById(R.id.medicineName);
         medicineNameText.setText(medicineList.get("Medicine Detail").get(expandedListPosition).getMedicineName());
