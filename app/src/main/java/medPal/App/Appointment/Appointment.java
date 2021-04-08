@@ -7,6 +7,9 @@ import androidx.annotation.RequiresApi;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Appointment class.
+ */
 
 public class Appointment implements Serializable {
     private int appointmentID;
@@ -132,5 +135,18 @@ public class Appointment implements Serializable {
         this.remark = remark;
     }
 
-
+    @Override
+    public String toString() {
+        return "PillReminder\n" +
+                "appointmentID=" + appointmentID +
+                ", time='" + time + '\'' +
+                ", date=" + date + '\'' +
+                ", doctor='" + doctor + '\'' +
+                ", venue='" + venue + '\'' +
+                ", contact='" + contact +
+                ", email='" + email + '\'' +
+                ", purpose='" + purpose + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

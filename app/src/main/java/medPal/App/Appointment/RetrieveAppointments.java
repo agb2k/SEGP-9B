@@ -31,13 +31,13 @@ public class RetrieveAppointments {
             jsonStr = appointmentDbHelper.send();
             jsonArr = new JSONArray(jsonStr);
 
-            jsonStr = appointmentDbHelper.send();
-            jsonArr = new JSONArray(jsonStr);
             for(int i=0; i<jsonArr.length(); i++){
                 jsonObj = (JSONObject) jsonArr.get(i);
                 aObj = makeAppointmentObject(jsonObj);
                 AppointmentList.add(aObj);
+
             }
+            System.out.println(AppointmentList);
         } catch (InterruptedException | ExecutionException | JSONException e) {
             e.printStackTrace();
         }
@@ -59,7 +59,7 @@ public class RetrieveAppointments {
         return new Appointment(appointmentID, date, time, doctor, venue, contact, email, purpose, remark);
     }
 
-    public ArrayList<Appointment> getAppointmentList() {
+    public ArrayList<Appointment> getAllAppointment() {
         return AppointmentList;
     }
 

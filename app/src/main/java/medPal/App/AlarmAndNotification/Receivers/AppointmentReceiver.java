@@ -10,8 +10,8 @@ import medPal.App.App;
 
 public class AppointmentReceiver extends BroadcastReceiver {
 
-    private static final String TITLE = "Title for Notification Type 1";
-    private static final String TEXT = "Text for Notification Type 1";
+    private static final String TITLE = "MedPal - Appointment";
+    private static final String TEXT = "Time for your Appointment";
     private static final String INFO = "Info for Notification Type 1";
     private static final String CHANNEL_ID = App.CHANNEL_APPOINTMENT;
 
