@@ -35,9 +35,8 @@ public class RetrieveAppointments {
                 jsonObj = (JSONObject) jsonArr.get(i);
                 aObj = makeAppointmentObject(jsonObj);
                 AppointmentList.add(aObj);
-
             }
-            System.out.println(AppointmentList);
+//            System.out.println(AppointmentList);
         } catch (InterruptedException | ExecutionException | JSONException e) {
             e.printStackTrace();
         }

@@ -75,7 +75,7 @@
                     android:textSize="20sp"
                     android:text="Time:"/>
 
-                <TextView android:id="@+id/AppoimentTime"
+                <TextView android:id="@+id/AppointmentTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -93,7 +93,7 @@
                     android:textSize="20sp"
                     android:text="Doctor:"/>
 
-                <TextView android:id="@+id/AppoimentDoctor"
+                <TextView android:id="@+id/AppointmentDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -111,7 +111,7 @@
                     android:textSize="20sp"
                     android:text="Venue:"/>
 
-                <TextView android:id="@+id/AppoimentVenue"
+                <TextView android:id="@+id/AppointmentVenue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -129,7 +129,7 @@
                     android:textSize="20sp"
                     android:text="Contact:"/>
 
-                <TextView android:id="@+id/AppoimentContact"
+                <TextView android:id="@+id/AppointmentContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -138,16 +138,18 @@
                     android:textSize="20sp" />
             </TableRow>
 
-            <TableRow>
+            <TableRow android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
+                    android:text="Email/Link:"
                     android:textColor="#0000A0"
-                    android:textSize="20sp"
-                    android:text="Email/Link:"/>
+                    android:textSize="20sp" />
 
-                <TextView android:id="@+id/AppoimentEmail"
+                <TextView
+                    android:id="@+id/AppointmentEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -164,7 +166,7 @@
                 android:textSize="20sp"
                 android:text="Purpose:"/>
 
-            <TextView android:id="@+id/AppoimentPurpose"
+            <TextView android:id="@+id/AppointmentPurpose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
@@ -180,7 +182,7 @@
                 android:textSize="20sp"
                 android:text="Remark:"/>
 
-            <TextView android:id="@+id/AppoimentRemark"
+            <TextView android:id="@+id/AppointmentRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dip"

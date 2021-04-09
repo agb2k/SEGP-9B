@@ -59,6 +59,7 @@ public class Appointment implements Serializable {
         int day = Integer.parseInt(date.substring(6));
         String result = year + "" + month + "" + day;
         return LocalDate.of(year, month, day);
+
     }
 
 //    Getters and Setters
