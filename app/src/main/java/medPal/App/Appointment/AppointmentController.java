@@ -17,7 +17,6 @@ public class AppointmentController implements Serializable {
     public AppointmentController() {
         RetrieveAppointments getDB = new RetrieveAppointments();
         AppointmentList = getDB.getAllAppointment();
-        System.out.println(AppointmentList);
     }
 
     protected ArrayList<Appointment> getAllAppointments() {

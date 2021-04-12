@@ -6,13 +6,16 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import medPal.App.PillReminder.PillReminderController;
+import java.util.ArrayList;
+
 import medPal.App.R;
 
 /**
@@ -63,6 +66,8 @@ public class AppointmentFragment extends Fragment {
     }
 
     private Button b1;
+    private AppointmentAdapter AppointmentListAdapter;
+    private RecyclerView appointmentList;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -70,14 +75,16 @@ public class AppointmentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_appointment, container, false);
-        AppointmentController aController = new AppointmentController();
-        b1 = v.findViewById(R.id.newAppointmentButton);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openNewAppointment();
-            }
-        });
+
+        // Set up Next Appointment Data
+        appointmentList = v.findViewById(R.id.appointmentRVList);
+        appointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
+
+        AppointmentController AppointmentController = new AppointmentController();
+        ArrayList<Appointment> AppointmentArrayList = AppointmentController.getAllAppointments();
+
+        AppointmentListAdapter = new AppointmentAdapter(getContext(), AppointmentArrayList);
+        appointmentList.setAdapter(AppointmentListAdapter);
 
         return v;
     }

@@ -29,17 +29,17 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View cardview = inflater.inflate(R.layout.fragment_appointment, null, false);
+        View cardview = inflater.inflate(R.layout.list_appointment, null, false);
         ViewHolder viewHolder = new ViewHolder(cardview);
 
-        viewHolder.date = (TextView) cardview.findViewById(R.id.AppointmentDate);
-        viewHolder.time = (TextView) cardview.findViewById(R.id.AppointmentTime);
-        viewHolder.doctor = (TextView) cardview.findViewById(R.id.AppointmentDoctor);
-        viewHolder.venue = (TextView) cardview.findViewById(R.id.AppointmentVenue);
-        viewHolder.contact = (TextView) cardview.findViewById(R.id.AppointmentContact);
-        viewHolder.email = (TextView) cardview.findViewById(R.id.AppointmentEmail);
-        viewHolder.purpose = (TextView) cardview.findViewById(R.id.AppointmentPurpose);
-        viewHolder.remark = (TextView) cardview.findViewById(R.id.AppointmentRemark);
+        viewHolder.date = (TextView) cardview.findViewById(R.id.date);
+        viewHolder.time = (TextView) cardview.findViewById(R.id.time);
+        viewHolder.doctor = (TextView) cardview.findViewById(R.id.doctor);
+        viewHolder.venue = (TextView) cardview.findViewById(R.id.venue);
+        viewHolder.contact = (TextView) cardview.findViewById(R.id.contact);
+        viewHolder.email = (TextView) cardview.findViewById(R.id.email);
+        viewHolder.purpose = (TextView) cardview.findViewById(R.id.purpose);
+        viewHolder.remark = (TextView) cardview.findViewById(R.id.remark);
 
         return viewHolder;
     }
@@ -59,7 +59,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         venueTextView.setText(Appointments.get(position).getVenue());
 
         TextView contactTextView = (TextView) holder.contact;
-        contactTextView.setText(Appointments.get(position).getContact());
+        contactTextView.setText(Integer.toString(Appointments.get(position).getContact()));
 
         TextView emailTextView = (TextView) holder.email;
         emailTextView.setText(Appointments.get(position).getEmail());
@@ -76,8 +76,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         return Appointments.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView date;
         TextView time;
         TextView doctor;
@@ -90,14 +94,14 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
         public ViewHolder(View itemView) {
             super(itemView);
-            date = (TextView) itemView.findViewById(R.id.AppointmentDate);
-            time = (TextView) itemView.findViewById(R.id.AppointmentTime);
-            doctor = (TextView) itemView.findViewById(R.id.AppointmentDoctor);
-            venue = (TextView) itemView.findViewById(R.id.AppointmentVenue);
-            contact = (TextView) itemView.findViewById(R.id.AppointmentContact);
-            email = (TextView) itemView.findViewById(R.id.AppointmentEmail);
-            purpose = (TextView) itemView.findViewById(R.id.AppointmentPurpose);
-            remark = (TextView) itemView.findViewById(R.id.AppointmentRemark);
+            date = (TextView) itemView.findViewById(R.id.date);
+            time = (TextView) itemView.findViewById(R.id.time);
+            doctor = (TextView) itemView.findViewById(R.id.doctor);
+            venue = (TextView) itemView.findViewById(R.id.venue);
+            contact = (TextView) itemView.findViewById(R.id.contact);
+            email = (TextView) itemView.findViewById(R.id.email);
+            purpose = (TextView) itemView.findViewById(R.id.purpose);
+            remark = (TextView) itemView.findViewById(R.id.remark);
         }
     }
 }
