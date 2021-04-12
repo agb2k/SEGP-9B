@@ -86,6 +86,15 @@ public class AppointmentFragment extends Fragment {
         AppointmentListAdapter = new AppointmentAdapter(getContext(), AppointmentArrayList);
         appointmentList.setAdapter(AppointmentListAdapter);
 
+        // Add new reminder button
+        Button b1 = v.findViewById(R.id.newAppointmentButton);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewAppointment();
+            }
+        });
+
         return v;
     }
 
