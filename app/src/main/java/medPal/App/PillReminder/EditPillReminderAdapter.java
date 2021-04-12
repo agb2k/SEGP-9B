@@ -40,7 +40,10 @@ public class EditPillReminderAdapter extends BaseAdapter {
         viewHolder.quantity = (TextView) view.findViewById(R.id.editPillReminderQuantity);
         viewHolder.frequency = (TextView) view.findViewById(R.id.editPillReminderFrequency);
 
-        Picasso.get().load(prList.get(position).getMedicine().getImagePath()).into(viewHolder.medicineImg);
+        if(prList.get(position).getMedicine().getImagePath().length() > 0)
+            Picasso.get().load(prList.get(position).getMedicine().getImagePath()).into(viewHolder.medicineImg);
+        else
+            Picasso.get().load(Medicine.MEDICINE_IMAGE_PLACEHOLDER).into(viewHolder.medicineImg);
         viewHolder.medicineName.setText(prList.get(position).getMedicine().getMedicineName());
         String quantityStr = "Take " + prList.get(position).getQuantity();
         viewHolder.quantity.setText(quantityStr);

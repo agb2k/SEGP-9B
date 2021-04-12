@@ -94,29 +94,8 @@ public class TakePillPopUp {
     public ArrayList<PillReminder> getData(Context context) {
         // Get all pill reminders that have to be taken today
         TreeMap<LocalTime, ArrayList<PillReminder>> prByTime = new TreeMap<LocalTime, ArrayList<PillReminder>>();
-        PillReminderController prController = new PillReminderController();
-        prByTime = prController.getPillReminderByTime();
-
-        // Check which pill reminders have been handled (taken/skipped)
-        ArrayList<String> takenList = new ArrayList<>();
-        PillTakingDBHelper dbHelper = new PillTakingDBHelper(context);
-        LocalDate d = LocalDate.now();
-        String date = String.valueOf(d.getYear());
-        if(d.getMonthValue() < 10)
-            date += "0";
-        date += String.valueOf(d.getMonthValue());
-        if(d.getDayOfMonth() < 10)
-            date += "0";
-        date += String.valueOf(d.getDayOfMonth());
-        takenList = dbHelper.getTakenTime(date);
-
-        // Ignore those that have been taken/skipped
-        for(String t : takenList) {
-            int h = Integer.parseInt(t.substring(0,2));
-            int m = Integer.parseInt(t.substring(2));
-            LocalTime time = LocalTime.of(h,m);
-            prByTime.remove(time);
-        }
+        PillReminderController prController = new PillReminderController(context);
+        prByTime = prController.getUpcomingPillReminder();
 
         // Return the pill reminders of the earliest time slot
         return new ArrayList<>(prByTime.get(prByTime.firstKey()));

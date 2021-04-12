@@ -129,7 +129,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        PillReminderController nextPillReminderController = new PillReminderController();
+        PillReminderController nextPillReminderController = new PillReminderController(this.requireContext());
         TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();
         // Get the list of time of reminders
         ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();

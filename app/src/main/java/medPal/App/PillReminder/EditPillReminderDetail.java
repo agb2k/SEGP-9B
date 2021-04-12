@@ -43,7 +43,6 @@ import static android.view.View.GONE;
 public class EditPillReminderDetail extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
 
-    private PillReminderController prController;
     private PillReminder pr;
 
     private int prType;
@@ -69,7 +68,6 @@ public class EditPillReminderDetail extends AppCompatActivity implements
         setContentView(R.layout.activity_edit_pill_reminder_detail);
         getSupportActionBar().setTitle("Edit Pill Reminder");
 
-        prController = (PillReminderController) getIntent().getSerializableExtra("Controller");
         pr = (PillReminder) getIntent().getSerializableExtra("PillReminderObj");
 
         putDataIntoInputField();
@@ -186,7 +184,10 @@ public class EditPillReminderDetail extends AppCompatActivity implements
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void putDataIntoInputField() {
         ImageView pillImage = (ImageView) findViewById(R.id.PillImage);
-        Picasso.get().load(pr.getMedicine().getImagePath()).into(pillImage);
+        if (pr.getMedicine().getImagePath().length() > 0)
+            Picasso.get().load(pr.getMedicine().getImagePath()).into(pillImage);
+        else
+            Picasso.get().load(Medicine.MEDICINE_IMAGE_PLACEHOLDER).into(pillImage);
 
         TextView pillName = (TextView) findViewById(R.id.PillName);
         pillName.setText(pr.getMedicine().getMedicineName());

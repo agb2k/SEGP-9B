@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.Serializable;
+
 import medPal.App.PillReminder.PillReminderPopUp.TakePillPopUp;
 
 public class MainActivity extends AppCompatActivity {

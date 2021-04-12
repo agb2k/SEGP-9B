@@ -8,7 +8,7 @@ public class MedicationRecord {
     private int dose;
     private int status;
 
-    MedicationRecord(String date, String time, String medicine, int dose, int status) {
+    public MedicationRecord(String date, String time, String medicine, int dose, int status) {
         this.date = date;
         this.time = time;
         this.medicine = medicine;
