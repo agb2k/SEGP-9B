@@ -108,12 +108,26 @@ public class HomeFragment extends Fragment {
         // Set up Next Appointment Data
         nextAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
         nextAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
+        TextView noUpcomingAppointment = (TextView)v.findViewById(R.id.noUpcomingAppointment);
 
         NextAppointmentController nextAppointmentController = new NextAppointmentController();
         ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
 
-        nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
-        nextAppointmentList.setAdapter(nextAppointmentListAdapter);
+        if(nextAppointmentArrayList.size()>0) {
+            nextAppointmentList.setVisibility(View.VISIBLE);
+            noUpcomingAppointment.setVisibility(View.GONE);
+
+            //Get upcoming appointment data and et up view
+            nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
+            nextAppointmentList.setAdapter(nextAppointmentListAdapter);
+
+        }
+        else {
+            nextAppointmentList.setVisibility(View.GONE);
+            noUpcomingAppointment.setVisibility(View.VISIBLE);
+        }
+
+
 
         PillReminderController nextPillReminderController = new PillReminderController();
         TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();

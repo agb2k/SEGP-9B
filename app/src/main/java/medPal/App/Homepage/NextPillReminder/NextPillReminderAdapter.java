@@ -104,7 +104,7 @@ public class NextPillReminderAdapter implements ExpandableListAdapter {
 
         if(convertView == null) {
             LayoutInflater userInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView = userInflater.inflate(R.layout.list_parent_pill_reminder, null);
+            convertView = userInflater.inflate(R.layout.home_pill_reminder, null);
             convertView.setHorizontalScrollBarEnabled(true);
 
             parentHolder = new NextPillReminderAdapter.ParentHolder();
