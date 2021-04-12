@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -108,20 +107,6 @@ public class NewPressureReminder extends AppCompatActivity implements
 
             setTitle("Add reminder details");
 
-            mActive = "true";
-            mRepeat = "true";
-            mRepeatNo = Integer.toString(1);
-            mRepeatType = "Day";
-
-            mCalendar = Calendar.getInstance();
-            mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
-            mMinute = mCalendar.get(Calendar.MINUTE);
-            mYear = mCalendar.get(Calendar.YEAR);
-            mMonth = mCalendar.get(Calendar.MONTH) + 1;
-            mDay = mCalendar.get(Calendar.DATE);
-            mDate = mDay + "/" + mMonth + "/" + mYear;
-            mTime = mHour + ":" + mMinute;
-
 
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
@@ -130,15 +115,6 @@ public class NewPressureReminder extends AppCompatActivity implements
         } else{
 
             setTitle("Edit reminder");
-
-            mActive = "true";
-            mRepeat = "true";
-            mRepeatNo = Integer.toString(1);
-            mRepeatType = "Day";
-
-            mDate = mDay + "/" + mMonth + "/" + mYear;
-            mTime = mHour + ":" + mMinute;
-
 
             getLoaderManager().initLoader(EXISTING_VEHICLE_LOADER, null, this);
 
@@ -154,13 +130,14 @@ public class NewPressureReminder extends AppCompatActivity implements
         mRepeatNoText = (TextView) findViewById(R.id.set_repeat_no_pressure);
         mRepeatTypeText = (TextView) findViewById(R.id.set_repeat_type_pressure);
         mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch_pressure);
+        mRepeatSwitch.isChecked();
         onSwitchRepeat(mRepeatSwitch);
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
 
         // Initialize default values
-        /*
+
         mActive = "true";
         mRepeat = "true";
         mRepeatNo = Integer.toString(1);
@@ -173,7 +150,12 @@ public class NewPressureReminder extends AppCompatActivity implements
         mMonth = mCalendar.get(Calendar.MONTH) + 1;
         mDay = mCalendar.get(Calendar.DATE);
         mDate = mDay + "/" + mMonth + "/" + mYear;
-        mTime = mHour + ":" + mMinute;
+        if(mMinute < 10){
+            mTime = mHour + ":" + "0" + mMinute;
+        } else {
+            mTime = mHour + ":" + mMinute;
+        }
+
 
 
         // Initialize Views
@@ -188,7 +170,7 @@ public class NewPressureReminder extends AppCompatActivity implements
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
-         */
+
 
 
 
@@ -217,7 +199,8 @@ public class NewPressureReminder extends AppCompatActivity implements
         mTimeText.setText(mTime);
         mRepeatNoText.setText(mRepeatNo);
         mRepeatTypeText.setText(mRepeatType);
-        mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+        mRepeatText.setText("Off");
+        //mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
 
         // To save state on device rotation
         if (savedInstanceState != null) {
@@ -582,7 +565,7 @@ public class NewPressureReminder extends AppCompatActivity implements
 
 
         // Set up calender for creating the notification
-
+        /*
         mCalendar = Calendar.getInstance();
         Log.d("Date", mDate);
         Log.d("time", mTime);
@@ -593,6 +576,17 @@ public class NewPressureReminder extends AppCompatActivity implements
         mCalendar.set(Calendar.YEAR, Integer.parseInt(seperated[2]));
         mCalendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeSeperate[0]));
         mCalendar.set(Calendar.MINUTE, Integer.parseInt(timeSeperate[0]));
+        mCalendar.set(Calendar.SECOND, 0);
+
+        long selectedTimestamp =  mCalendar.getTimeInMillis();
+
+         */
+
+        mCalendar.set(Calendar.MONTH, --mMonth);
+        mCalendar.set(Calendar.YEAR, mYear);
+        mCalendar.set(Calendar.DAY_OF_MONTH, mDay);
+        mCalendar.set(Calendar.HOUR_OF_DAY, mHour);
+        mCalendar.set(Calendar.MINUTE, mMinute);
         mCalendar.set(Calendar.SECOND, 0);
 
 

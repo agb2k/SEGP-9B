@@ -125,6 +125,8 @@ public class NewSugarReminder extends AppCompatActivity implements
         mRepeatNoText = (TextView) findViewById(R.id.set_repeat_no);
         mRepeatTypeText = (TextView) findViewById(R.id.set_repeat_type);
         mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch);
+        mRepeatSwitch.isChecked();
+        onSwitchRepeat(mRepeatSwitch);
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
 
@@ -132,7 +134,7 @@ public class NewSugarReminder extends AppCompatActivity implements
         mActive = "true";
         mRepeat = "true";
         mRepeatNo = Integer.toString(1);
-        mRepeatType = "Hour";
+        mRepeatType = "Day";
 
         mCalendar = Calendar.getInstance();
         mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
@@ -142,7 +144,11 @@ public class NewSugarReminder extends AppCompatActivity implements
         mDay = mCalendar.get(Calendar.DATE);
 
         mDate = mDay + "/" + mMonth + "/" + mYear;
-        mTime = mHour + ":" + mMinute;
+        if(mMinute < 10){
+            mTime = mHour + ":" + "0" + mMinute;
+        } else {
+            mTime = mHour + ":" + mMinute;
+        }
 
         // Setup Reminder Title EditText
         mTitleText.addTextChangedListener(new TextWatcher() {
@@ -165,7 +171,8 @@ public class NewSugarReminder extends AppCompatActivity implements
         mTimeText.setText(mTime);
         mRepeatNoText.setText(mRepeatNo);
         mRepeatTypeText.setText(mRepeatType);
-        mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+        mRepeatText.setText("Off");
+        //mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
 
         // To save state on device rotation
         if (savedInstanceState != null) {
@@ -205,6 +212,12 @@ public class NewSugarReminder extends AppCompatActivity implements
             mFAB1.setVisibility(View.GONE);
             mFAB2.setVisibility(View.VISIBLE);
         }
+
+
+
+        //getSupportActionBar().setTitle("Add Reminder");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
 
 
 
@@ -292,8 +305,8 @@ public class NewSugarReminder extends AppCompatActivity implements
 
     // On clicking the repeat switch
     public void onSwitchRepeat(View view) {
-        boolean on = ((Switch) view).isChecked();
-        if (on) {
+
+        if (mRepeatSwitch.isChecked()) {
             mRepeat = "true";
             mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
         } else {

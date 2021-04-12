@@ -1,20 +1,14 @@
 package medPal.App.Tracker.BloodSugarLevel;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,10 +78,12 @@ public class SugarReminderList extends AppCompatActivity implements LoaderManage
         });
 
         getSupportLoaderManager().initLoader(VEHICLE_LOADER, null, this);
+        LoaderManager.getInstance(this);
 
 
     }
 
+    /*
     private void openNewSugarReminder() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -131,6 +127,13 @@ public class SugarReminderList extends AppCompatActivity implements LoaderManage
         });
         builder.show();
 }
+
+     */
+
+    private void openNewSugarReminder(){
+        Intent intent1 = new Intent(this, NewSugarReminder.class);
+        startActivity(intent1);
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
