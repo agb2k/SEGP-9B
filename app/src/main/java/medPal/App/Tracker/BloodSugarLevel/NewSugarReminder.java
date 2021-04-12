@@ -142,6 +142,11 @@ public class NewSugarReminder extends AppCompatActivity implements
 
         mDate = mDay + "/" + mMonth + "/" + mYear;
         mTime = mHour + ":" + mMinute;
+        if(mMinute < 10){
+            mTime = mHour + ":" + "0" + mMinute;
+        } else {
+            mTime = mHour + ":" + mMinute;
+        }
 
         // Setup Reminder Title EditText
         mTitleText.addTextChangedListener(new TextWatcher() {
@@ -164,7 +169,8 @@ public class NewSugarReminder extends AppCompatActivity implements
         mTimeText.setText(mTime);
         mRepeatNoText.setText(mRepeatNo);
         mRepeatTypeText.setText(mRepeatType);
-        mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+        mRepeatText.setText("Off");
+        //mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
 
         // To save state on device rotation
         if (savedInstanceState != null) {
@@ -206,9 +212,9 @@ public class NewSugarReminder extends AppCompatActivity implements
         }
 
 
-        getSupportActionBar().setTitle("Add Reminder");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setTitle("Add Reminder");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
 
 
     }
