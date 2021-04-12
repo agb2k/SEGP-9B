@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import medPal.App.R;
+import medPal.App.Tracker.BloodSugarLevel.SugarLevelActivity;
 
 public class NewPressureRecord extends AppCompatActivity  {
 
@@ -107,6 +108,7 @@ public class NewPressureRecord extends AppCompatActivity  {
                 Intent intent = new Intent(NewPressureRecord.this, BloodPressureActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+
             }
         });
 

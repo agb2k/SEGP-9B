@@ -10,10 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import medPal.App.R;
 
-
+/***
+ * Adapter to handle the view of the last blood record at homepage
+ */
 public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecordAdapter.ViewHolder> {
 
     private Context context;
@@ -42,18 +45,55 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
 
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
+        //Set up view for last blood pressure record
         TextView bpTimeView = (TextView) holder.bpTime;
-        String tempStr = lastBloodPressureList.get(position).getTime();
-        String tempBPTime = "Last Recorded at " + tempStr.substring(0,5) + " " + lastBloodPressureList.get(position).getDate();
+        String tempTime = lastBloodPressureList.get(position).getTime();
+        String tempDate = lastBloodPressureList.get(position).getDate();
+        String tempBPTime;
+
+        if (Integer.parseInt(tempTime.substring(0,2))>=12) {
+            int convert = Integer.parseInt(tempTime.substring(0,2)) - 12;
+            String tempStr;
+            if (convert<10) {
+                tempStr = "0" + convert;
+            }
+            else {
+                tempStr = String.valueOf(convert);
+            }
+            tempBPTime = "Last Recorded: "+ tempDate.substring(5,10) + " " + tempStr + tempTime.substring(2,5) + "PM " ;
+        }
+        else {
+            tempBPTime = "Last Recorded: "+ tempDate.substring(5,10) + " " + tempTime.substring(0,5) + "AM " ;
+        }
+
         bpTimeView.setText(tempBPTime);
 
         TextView bpRecordView = (TextView) holder.bpRecord;
         String tempBPRecord = lastBloodPressureList.get(position).getSYS() + "/" + lastBloodPressureList.get(position).getDIA();
         bpRecordView.setText(tempBPRecord);
 
+
+        //Set up view for last blood glucose record
         TextView bgTimeView = (TextView) holder.bgTime;
-        String tempStr2 = lastBloodGlucoseList.get(position).getTime();
-        String tempBGTime = "Last Recorded at " + tempStr2.substring(0,5) + " " + lastBloodGlucoseList.get(position).getDate();
+        String tempTime2 = lastBloodGlucoseList.get(position).getTime();
+        String tempDate2 = lastBloodGlucoseList.get(position).getDate();
+        String tempBGTime;
+
+        if (Integer.parseInt(tempTime2.substring(0,2))>=12) {
+            int convert = Integer.parseInt(tempTime2.substring(0,2)) - 12;
+            String tempStr;
+            if (convert<10) {
+                tempStr = "0" + convert;
+            }
+            else {
+                tempStr = String.valueOf(convert);
+            }
+            tempBGTime = "Last Recorded: "+ tempDate2.substring(5,10)+ " " + tempStr + tempTime2.substring(2,5) + "PM " ;
+        }
+        else {
+            tempBGTime = "Last Recorded: "+ tempDate2.substring(5,10) + " " + tempTime2.substring(0,5) + "AM " ;
+        }
+
         bgTimeView.setText(tempBGTime);
 
         TextView bgLevelView = (TextView) holder.bgLevel;

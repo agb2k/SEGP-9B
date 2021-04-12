@@ -1,10 +1,13 @@
 package medPal.App.Homepage;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +44,8 @@ import medPal.App.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    public static int UPDATE_HOME_REQUEST_CODE = 20001;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -165,5 +170,19 @@ public class HomeFragment extends Fragment {
 
         return v;
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == UPDATE_HOME_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Fragment navhostFragment = requireActivity().getSupportFragmentManager().findFragmentById(R.id.fragment);
+                assert navhostFragment != null;
+                Fragment currentFragment = navhostFragment.getChildFragmentManager().getFragments().get(0);
+                FragmentTransaction fragmentTransaction = currentFragment.getParentFragmentManager().beginTransaction();
+                fragmentTransaction.detach(currentFragment);
+                fragmentTransaction.attach(currentFragment);
+                fragmentTransaction.commit();
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package medPal.App.Tracker.BloodPressure;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -47,6 +48,7 @@ public class BloodPressureActivity extends AppCompatActivity {
     private Button b3;
     private Button b4;
 
+    public static final int UPDATE_BLODD_PRESSURE_REQUEST_CODE = 10006;
     private static final String apiurl ="https://bulacke.xyz/medpal-db/getPressureRecord.php";
     ListView lv2;
 
@@ -297,11 +299,12 @@ public class BloodPressureActivity extends AppCompatActivity {
 
     public void openNewPressureRecord() {
         Intent intent1 = new Intent(this, NewPressureRecord.class);
-        startActivity(intent1);
+        startActivityForResult(intent1, UPDATE_BLODD_PRESSURE_REQUEST_CODE);
     }
 
     public void openPressureReminderList() {
         Intent intent = new Intent(this, PressureReminderList.class);
         startActivity(intent);
     }
+
 }

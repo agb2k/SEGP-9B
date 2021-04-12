@@ -102,6 +102,7 @@ public class NewPressureReminder extends AppCompatActivity implements
 
             setTitle("Add reminder details");
 
+
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a reminder that hasn't been created yet.)
             invalidateOptionsMenu();
@@ -112,19 +113,6 @@ public class NewPressureReminder extends AppCompatActivity implements
 
             getLoaderManager().initLoader(EXISTING_VEHICLE_LOADER, null, this);
         }
-
-
-        // Initialize Views
-        mToolbar = (Toolbar) findViewById(R.id.toolbar1_pressure);
-        mTitleText = (EditText) findViewById(R.id.reminder_title_pressure);
-        mDateText = (TextView) findViewById(R.id.set_date_pressure);
-        mTimeText = (TextView) findViewById(R.id.set_time_pressure);
-        mRepeatText = (TextView) findViewById(R.id.set_repeat_pressure);
-        mRepeatNoText = (TextView) findViewById(R.id.set_repeat_no_pressure);
-        mRepeatTypeText = (TextView) findViewById(R.id.set_repeat_type_pressure);
-        mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch_pressure);
-        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
-        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
         // Initialize default values
         mActive = "true";
@@ -141,6 +129,20 @@ public class NewPressureReminder extends AppCompatActivity implements
 
         mDate = mDay + "/" + mMonth + "/" + mYear;
         mTime = mHour + ":" + mMinute;
+
+        // Initialize Views
+        mToolbar = (Toolbar) findViewById(R.id.toolbar1_pressure);
+        mTitleText = (EditText) findViewById(R.id.reminder_title_pressure);
+        mDateText = (TextView) findViewById(R.id.set_date_pressure);
+        mTimeText = (TextView) findViewById(R.id.set_time_pressure);
+        mRepeatText = (TextView) findViewById(R.id.set_repeat_pressure);
+        mRepeatNoText = (TextView) findViewById(R.id.set_repeat_no_pressure);
+        mRepeatTypeText = (TextView) findViewById(R.id.set_repeat_type_pressure);
+        mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch_pressure);
+        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
+        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
+
+
 
         // Setup Reminder Title EditText
         mTitleText.addTextChangedListener(new TextWatcher() {
@@ -204,10 +206,6 @@ public class NewPressureReminder extends AppCompatActivity implements
             mFAB2.setVisibility(View.VISIBLE);
         }
 
-
-        getSupportActionBar().setTitle("Add Reminder");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
 
     }
