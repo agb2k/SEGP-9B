@@ -156,8 +156,7 @@ public class NewPressureReminder extends AppCompatActivity implements
             mTime = mHour + ":" + mMinute;
         }
 
-<<<<<<< HEAD
-=======
+
 
         // Initialize Views
         mToolbar = (Toolbar) findViewById(R.id.toolbar1_pressure);
@@ -171,8 +170,7 @@ public class NewPressureReminder extends AppCompatActivity implements
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1_pressure);
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2_pressure);
 
-         */
->>>>>>> 67c758df0ef46a0a91d3050900bd0b0e78f60389
+
 
 
 
