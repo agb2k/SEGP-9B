@@ -34,7 +34,7 @@
         <activity android:name=".Tracker.BloodSugarLevel.SugarLevelActivity" />
         <activity android:name=".Tracker.BloodPressure.BloodPressureActivity" />
         <activity android:name=".PillReminder.NewPillReminder" />
-        <activity android:name=".Appointment.NewAppointment" /> <!-- Health Condition Pop up window -->
+        <activity android:name=".Appointment.NewAppointment" />
 
 
 
