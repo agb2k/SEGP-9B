@@ -66,4 +66,6 @@
         android:layout_centerVertical="true"
         android:id="@+id/active_image"/>
 
+
+
 </RelativeLayout>

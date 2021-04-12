@@ -1,20 +1,18 @@
 package medPal.App.Tracker.BloodPressure;
 
-import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TaskStackBuilder;
 import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,9 +35,21 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
     ListView reminderListView;
     ProgressDialog prgDialog;
     TextView reminderText1;
+    ImageView activeOn;
+    ImageView activeOff;
     private String alarmTitle = "";
 
     private static final int VEHICLE_LOADER = 0;
+
+
+    public static PendingIntent getReminderPendingIntent(Context context, Uri uri) {
+        Intent action = new Intent(context, PressureReminderList.class);
+        action.setData(uri);
+        return PendingIntent.getService(context, 0, action, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +63,8 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
         reminderListView.setEmptyView(emptyView);
         reminderText1 = (TextView) findViewById(R.id.reminderTextPressure);
 
+
+
         mCursorAdapter = new AlarmCursorAdapter(this, null);
         reminderListView.setAdapter(mCursorAdapter);
 
@@ -65,6 +77,22 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
 
             // Set the URI on the data field of the intent
             intent.setData(currentVehicleUri);
+
+
+            PendingIntent operation = TaskStackBuilder.create(this).addNextIntentWithParentStack(intent).getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            Cursor cursor = getContentResolver().query(currentVehicleUri, null, null, null, null);
+
+            String description = "";
+            try{
+                if (cursor!=null && cursor.moveToFirst()){
+                    description = AlarmReminderContract.getColumnString(cursor, AlarmReminderContract.AlarmReminderEntry.KEY_TITLE);
+                }
+            } finally{
+                if (cursor != null){
+                    cursor.close();
+                }
+            }
 
             startActivity(intent);
 
@@ -82,10 +110,11 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
         });
 
         getSupportLoaderManager().initLoader(VEHICLE_LOADER, null, this);
+        LoaderManager.getInstance(this);
 
 
     }
-
+    /*
     private void openNewPressureReminder() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -130,6 +159,12 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
         builder.show();
     }
 
+     */
+    private void openNewPressureReminder(){
+        Intent intent1 = new Intent(this, NewPressureReminder.class);
+        startActivity(intent1);
+    }
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         String[] projection = {
@@ -171,6 +206,19 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
     }
 
     public void restartLoader(){
-        getSupportLoaderManager().restartLoader(VEHICLE_LOADER, null, this);
+        getLoaderManager().restartLoader(VEHICLE_LOADER, null, null);
+        LoaderManager.getInstance(this);
     }
+
+    /*public void setAlarmOn(View v){
+        activeOn = (ImageView) findViewById(R.id.active_image);
+        activeOn.setVisibility(View.VISIBLE);
+        activeOff = (ImageView) findViewById(R.id.active_image2);
+        activeOff.setVisibility(View.GONE);
+
+    }
+
+    public void setAlarmOff(View v){
+
+    }*/
 }
