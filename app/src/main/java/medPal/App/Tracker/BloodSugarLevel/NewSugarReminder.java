@@ -33,10 +33,11 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
+import java.util.Random;
 
+import medPal.App.AlarmAndNotification.AlarmHelper;
 import medPal.App.R;
 import medPal.App.Tracker.Alarm.AlarmReminderContract;
-import medPal.App.Tracker.Alarm.AlarmScheduler;
 
 
 public class NewSugarReminder extends AppCompatActivity implements
@@ -205,10 +206,6 @@ public class NewSugarReminder extends AppCompatActivity implements
             mFAB2.setVisibility(View.VISIBLE);
         }
 
-
-        getSupportActionBar().setTitle("Add Reminder");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
 
     }
@@ -590,11 +587,23 @@ public class NewSugarReminder extends AppCompatActivity implements
         // Create a new notification
         if (mActive.equals("true")) {
             if (mRepeat.equals("true")) {
-                Log.v("Bulacke","Is repeat");
+
+            /*    Log.v("Bulacke","Is repeat");
                 new AlarmScheduler().setRepeatAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri, mRepeatTime);
             } else if (mRepeat.equals("false")) {
                 Log.v("Bulacke","Not repeat");
-                new AlarmScheduler().setAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri);
+                new AlarmScheduler().setAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri);*/
+
+                //new AlarmScheduler().setRepeatAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri, mRepeatTime);
+                final Random myRandom = new Random();
+                AlarmHelper alarmHelper = new AlarmHelper(getApplicationContext(), AlarmHelper.BLOOD_SUGAR);
+                alarmHelper.setAlarm(selectedTimestamp, mRepeatTime, myRandom.nextInt(10000));
+            } else if (mRepeat.equals("false")) {
+                //new AlarmScheduler().setAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri);
+                final Random myRandom = new Random();
+                AlarmHelper alarmHelper = new AlarmHelper(getApplicationContext(), AlarmHelper.BLOOD_SUGAR);
+                alarmHelper.setAlarm(selectedTimestamp, myRandom.nextInt(10000));
+
             }
 
             Toast.makeText(this, "Alarm time is " + selectedTimestamp,

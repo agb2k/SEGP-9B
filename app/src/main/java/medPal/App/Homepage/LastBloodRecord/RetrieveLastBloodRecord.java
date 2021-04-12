@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
+
 
 public class RetrieveLastBloodRecord {
 
@@ -33,9 +35,12 @@ public class RetrieveLastBloodRecord {
         LastBloodPressure bpObj;
         LastBloodGlucose bgObj;
 
+        DatabaseHelper BpDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastBloodPressure.php");
+        DatabaseHelper BgDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastSugarRecord.php");
+
         try {
             //Get last blood pressure record
-            jsonStr = new ConnectDB().execute("https://bulacke.xyz/medpal-db/getLastBloodPressure.php").get();
+            jsonStr = BpDbHelper.send();
             jsonArray = new JSONArray(jsonStr);
             for(int i=0; i<jsonArray.length(); i++) {
                 jsonObject = (JSONObject) jsonArray.get(i);
@@ -44,7 +49,7 @@ public class RetrieveLastBloodRecord {
             }
 
             //get last blood glucose record
-            jsonStr = new ConnectDB().execute("https://bulacke.xyz/medpal-db/getLastSugarRecord.php").get();
+            jsonStr = BgDbHelper.send();
             jsonArray = new JSONArray(jsonStr);
             for(int i=0; i<jsonArray.length(); i++) {
                 jsonObject = (JSONObject) jsonArray.get(i);

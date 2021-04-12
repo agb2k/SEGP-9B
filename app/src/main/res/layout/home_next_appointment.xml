@@ -22,7 +22,7 @@
             <TextView
                 android:id="@+id/NextAppointmentStatus2"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Confirmed"
                 android:textAlignment="center"
                 android:textColor="#3D9824"
@@ -35,7 +35,7 @@
                 android:id="@+id/NextAppointmentDate"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="2020-11-20"
+                android:text="No"
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
@@ -44,7 +44,7 @@
                 android:id="@+id/NextAppointmentDate2"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="2020-11-20"
+                android:text="No"
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
@@ -55,7 +55,7 @@
                 android:id="@+id/NextAppointmentTime"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="15:00"
+                android:text="Appointment"
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
@@ -63,7 +63,7 @@
                 android:id="@+id/NextAppointmentTime2"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:text="20:00"
+                android:text="Appointment"
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
@@ -75,7 +75,7 @@
                 android:id="@+id/NextAppointmentHospital"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
-                android:text="clinic1"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
@@ -84,7 +84,7 @@
                 android:id="@+id/NextAppointmentHospital2"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
-                android:text="clinic2"
+                android:text=" "
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
@@ -95,7 +95,7 @@
                 android:id="@+id/NextAppointmentDoc"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
-                android:text="Dr. Sam"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
@@ -104,15 +104,12 @@
                 android:id="@+id/NextAppointmentDoc2"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
-                android:text="Dr. Tim"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#0000A0"
                 android:textSize="20sp" />
         </TableRow>
 
-
     </TableLayout>
-
-
 
 </LinearLayout>

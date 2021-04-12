@@ -43,6 +43,17 @@
             android:groupIndicator="@null"
             />
 
+        <TextView
+            android:id="@+id/noUpcomingAppointment"
+            android:layout_below="@+id/appointmentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="2dp"
+            android:text="No upcoming apointment."
+            android:visibility="gone"
+            />
+
     </RelativeLayout>
 
     <RelativeLayout android:id="@+id/pillHome"

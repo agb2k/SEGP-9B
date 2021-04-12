@@ -2,6 +2,7 @@ package medPal.App.Tracker.BloodSugarLevel;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -42,6 +43,9 @@ public class NewSugarLevelRecord extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sugar_level_record);
 
+        //Intent intent = new Intent(NewSugarLevelRecord.this, SugarLevelActivity.class);
+        //startActivityForResult(intent,ACTIVITY_REQUEST_CODE);
+
         getSupportActionBar().setTitle("New Blood Sugar Level Record");
 
         e1 = (EditText) findViewById(R.id.editTextDateSugar);
@@ -72,7 +76,7 @@ public class NewSugarLevelRecord extends AppCompatActivity {
                 s1 = e1.getText().toString();
                 s2 = e2.getText().toString();
                 s3 = e3.getText().toString();
-                String url = "https://bulacke.xyz/medpal-db/postInsertSugarRecord.php";
+                String url = "https://bulacke.xyz/medpal-db/insertSugarRecord.php";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -96,6 +100,10 @@ public class NewSugarLevelRecord extends AppCompatActivity {
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(NewSugarLevelRecord.this);
                 requestQueue.add(stringRequest);
+                finish();
+                Intent intent = new Intent(NewSugarLevelRecord.this, SugarLevelActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

@@ -1,5 +1,6 @@
 package medPal.App.Tracker.BloodPressure;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -47,6 +48,7 @@ public class BloodPressureActivity extends AppCompatActivity {
     private Button b3;
     private Button b4;
 
+    public static final int UPDATE_BLODD_PRESSURE_REQUEST_CODE = 10006;
     private static final String apiurl ="https://bulacke.xyz/medpal-db/getPressureRecord.php";
     ListView lv2;
 
@@ -119,6 +121,8 @@ public class BloodPressureActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.pressureGraph);
+        lineChart.setVisibleXRangeMaximum(3);
+        //lineChart.setVisibleXRange(0, 5);
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -142,16 +146,28 @@ public class BloodPressureActivity extends AppCompatActivity {
         ArrayList<Entry> yValues2 = new ArrayList<>();
 
         int n = x_axis.size();
-        for(int i=0; i<n; i++){
-            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
-            yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
-        }
 
-        for(int i=0; i<n; i++){
-            //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
-            yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
-        }
+        if(n>=5) {
+            for (int i = n - 5; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+            }
 
+            for (int i = n - 5; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
+            }
+
+            for (int i = 0; i < n; i++) {
+                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
+                yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
+            }
+        }
 
 
 
@@ -283,11 +299,12 @@ public class BloodPressureActivity extends AppCompatActivity {
 
     public void openNewPressureRecord() {
         Intent intent1 = new Intent(this, NewPressureRecord.class);
-        startActivity(intent1);
+        startActivityForResult(intent1, UPDATE_BLODD_PRESSURE_REQUEST_CODE);
     }
 
     public void openPressureReminderList() {
         Intent intent = new Intent(this, PressureReminderList.class);
         startActivity(intent);
     }
+
 }
