@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Check if this app is opened from pill reminder notification
         // If yes, it will show the pop up window for taking pill
-        // Note: Extra is set in (AlarmAndNotification.Receivers.)PillReminderReceiver
+        // Note: Extra is set in (AlarmAndNotification.Receivers.PillReminderReceiver)
         // Note: Need to wait otherwise the pop up shows too early and will crash (https://stackoverflow.com/a/51436824)
         findViewById(R.id.ReferenceView).post(new Runnable() {
             public void run() {
