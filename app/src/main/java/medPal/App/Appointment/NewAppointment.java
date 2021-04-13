@@ -1,8 +1,8 @@
 package medPal.App.Appointment;
 
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +39,8 @@ public class NewAppointment extends AppCompatActivity {
 
     Button confirmBtn;
 
+    Boolean checked;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,11 +61,7 @@ public class NewAppointment extends AppCompatActivity {
         confirmBtn.setOnClickListener(v -> {
             try {
                 getUserInput();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (UnsupportedEncodingException | InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         });
@@ -71,20 +69,18 @@ public class NewAppointment extends AppCompatActivity {
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
+        checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.radio_confirm:
                 if(checked)
-                    checked = true;
+                    remarkStr = remarkStr + "(Confirmed)";
                 break;
             case R.id.radio_follow_up:
                 if (checked)
-                    checked = false;
+                    remarkStr = remarkStr + "(Planned)";
                 break;
-
-
         }
     }
 
@@ -97,9 +93,66 @@ public class NewAppointment extends AppCompatActivity {
         contactStr = contact.getText().toString();
         emailStr = email.getText().toString();
         purposeStr = purpose.getText().toString();
-        remarkStr = remark.getText().toString();
+        remarkStr = remark.getText().toString() + remarkStr;
 
-        sendData(dateStr, timeStr, doctorStr, venueStr, contactStr, emailStr, purposeStr, remarkStr);
+        boolean valid = true;
+        if ( TextUtils.isEmpty(dateStr) ) {
+            date.setError("Date cannot be empty. Format eg. 20120922");
+            valid = false;
+        }
+
+        if ( dateStr.length() != 8 ) {
+            date.setError("Date must consist of exactly 8 digits. Format eg. 20120922");
+            valid = false;
+        }
+
+        if ( TextUtils.isEmpty(timeStr) ) {
+            time.setError("Time cannot be empty. Format eg. 1400");
+            valid = false;
+        }
+
+        if ( timeStr.length() != 4 ) {
+            time.setError("Date must consist of exactly 4 digits. Format eg. 1400");
+            valid = false;
+        }
+
+        if ( TextUtils.isEmpty(doctorStr) ) {
+            doctor.setError("Doctor cannot be empty");
+            valid = false;
+        }
+
+        if ( TextUtils.isEmpty(venueStr) ) {
+            venue.setError("Venue cannot be empty");
+            valid = false;
+        }
+
+        if ( TextUtils.isEmpty(contactStr) ) {
+            contact.setError("Contact cannot be empty");
+            valid = false;
+        }
+
+        if ( TextUtils.isEmpty(emailStr) ) {
+            email.setError("Email cannot be empty");
+            valid = false;
+        }
+
+        if ( TextUtils.isEmpty(purposeStr) ) {
+            purpose.setError("Purpose cannot be empty");
+            valid = false;
+        }
+
+        if ( TextUtils.isEmpty(remarkStr) ) {
+            remark.setError("Remark cannot be empty");
+            valid = false;
+        }
+
+        if (checked == null){
+            valid=false;
+        }
+
+        if ( valid ) {
+            sendData(dateStr, timeStr, doctorStr, venueStr, contactStr, emailStr, purposeStr, remarkStr);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -116,10 +169,5 @@ public class NewAppointment extends AppCompatActivity {
         insertDB.encodeData("remark", remarkStr);
 
         String message = insertDB.send();
-
-        if(message.length() > 1) {
-            message = message.substring(1,message.length()-1);
-            String medicineId = message.split(",")[1];
-        }
     }
 }

@@ -9,25 +9,29 @@
         android:orientation="vertical">
 
         <RadioGroup
+            android:id="@+id/newApptRG"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <RadioButton android:id="@+id/radio_confirm"
+            <RadioButton
+                android:id="@+id/radio_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:onClick="onRadioButtonClicked"
                 android:text="Confirmed"
-                android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/radio_follow_up"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radio_follow_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="20sp"
+                android:onClick="onRadioButtonClicked"
                 android:text="Planned"
-                android:onClick="onRadioButtonClicked"/>
+                android:textSize="20sp" />
         </RadioGroup>
 
         <RelativeLayout
