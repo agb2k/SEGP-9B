@@ -1,5 +1,6 @@
 package medPal.App.Appointment;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -40,6 +41,8 @@ public class NewAppointment extends AppCompatActivity {
     Button confirmBtn;
 
     Boolean checked;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -153,6 +156,9 @@ public class NewAppointment extends AppCompatActivity {
         if ( valid ) {
             sendData(dateStr, timeStr, doctorStr, venueStr, contactStr, emailStr, purposeStr, remarkStr);
         }
+
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
