@@ -10,7 +10,7 @@ public class UserIdentityDBHelper {
 
     private final SQLiteDatabase myDB;
     private static String DB_NAME = "UserIdentityDB";
-    private static String TABLE_NAME = "MedicationRecord";
+    private static String TABLE_NAME = "UserIdentityRecord";
 
     public UserIdentityDBHelper(Context context) {
         File DB_PATH = context.getDatabasePath(DB_NAME);
