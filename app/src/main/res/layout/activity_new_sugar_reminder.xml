@@ -195,7 +195,7 @@
                     android:onClick="onSwitchRepeat"
                     android:textOn="On"
                     android:textOff="Off"
-                    android:onClick="onSwitchRepeat"/>
+                    />
 
             </RelativeLayout>
 
