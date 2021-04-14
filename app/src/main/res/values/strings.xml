@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Login_SignUp</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="unfilled_Parameter">All fields are required</string>
+    <string name="send">Send</string>
+
+
+    <string name="signup">Sign Up</string>
+    <string name="SignUp_alreadyHaveAcc">Already have account? <u>Login</u></string>
+    <string name="signUp_passwordMismatch">Password Mismatch</string>
+
+    <string name="login_alreadyHaveAcc">"Create a new account? <u>Sign up</u> "</string>
+    <string name="login_confirmPassword">Confirm Password</string>
+    <string name="login_forgotPasswordMsg">Forgot password? <u>Reset password</u></string>
+
+
+    <string name="verifyEmail_header">Verify your email</string>
+    <string name="verifyEmail_msg">Verification email has been sent to \n \n <b>%1$s</b>\n \n Please check your Inbox and Spam folder and click on activation link to activate account.</string>
+    <string name="verifyEmail_buttonBackToLogin">Back to Login</string>
+    <string name="MainActivity_header">MainActivity</string>
+
+    <string name="noVerificationEmailMsg">Didn\'t receive verification email? <u>Resend</u></string>
+    <string name="resend_header">Resend Verification Email</string>
+    <string name="resend_emailNotGiven">Please enter email registered for account</string>
+
+    <string name="forgotPassword_msg">Enter email used for account registration. Link for resetting password will be sent to this email.</string>
+    <string name="forgotPassword_header">Reset Password</string>
+    <string name="forgotPassword_BackToLogin">Back to <u>Login</u></string>
+    <string name="Resend_VerificationEmailResent">Verification email sent, Please check your Inbox/Spam folder.</string>
+    <string name="forgotPassword_resetEmailSentMsg">Link to Reset Password is sent. Please check Inbox/Spam folder.</string>
+    <string name="resend_msg">Enter email used for account registration.</string>
+</resources>
