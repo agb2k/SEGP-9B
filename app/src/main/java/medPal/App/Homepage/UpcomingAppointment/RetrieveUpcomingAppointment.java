@@ -23,7 +23,7 @@ public class RetrieveUpcomingAppointment {
         JSONObject jsonObj;
         UpcomingAppointment aptObj;
 
-        DatabaseHelper UpAptDbHelper = new DatabaseHelper("https://sayft1nottingham.000webhostapp.com/getAppointment2.php");
+        DatabaseHelper UpAptDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getAppointment.php");
 
         try {
 
