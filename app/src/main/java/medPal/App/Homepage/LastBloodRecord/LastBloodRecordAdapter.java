@@ -52,7 +52,10 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
         String tempBPTime;
 
         if (Integer.parseInt(tempTime.substring(0,2))>=12) {
-            int convert = Integer.parseInt(tempTime.substring(0,2)) - 12;
+            int convert = Integer.parseInt(tempTime.substring(0,2));
+            if(Integer.parseInt(tempTime.substring(0,2))>12) {
+                convert = convert - 12;
+            }
             String tempStr;
             if (convert<10) {
                 tempStr = "0" + convert;
@@ -80,7 +83,10 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
         String tempBGTime;
 
         if (Integer.parseInt(tempTime2.substring(0,2))>=12) {
-            int convert = Integer.parseInt(tempTime2.substring(0,2)) - 12;
+            int convert = Integer.parseInt(tempTime.substring(0,2));
+            if(Integer.parseInt(tempTime.substring(0,2))>12) {
+                convert = convert - 12;
+            }
             String tempStr;
             if (convert<10) {
                 tempStr = "0" + convert;
