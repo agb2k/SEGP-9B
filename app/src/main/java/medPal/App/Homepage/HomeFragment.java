@@ -20,6 +20,7 @@ import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -128,8 +129,12 @@ public class HomeFragment extends Fragment {
         }
 
 
-
-        PillReminderController nextPillReminderController = new PillReminderController(this.requireContext());
+        PillReminderController nextPillReminderController = null;
+        try {
+            nextPillReminderController = new PillReminderController(this.requireContext());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();
         // Get the list of time of reminders
         ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
@@ -165,7 +170,12 @@ public class HomeFragment extends Fragment {
         lastBloodRecordList = v.findViewById(R.id.lastBloodRecord);
         lastBloodRecordList.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
-        LastBloodRecordController lastBloodRecordController = new LastBloodRecordController();
+        LastBloodRecordController lastBloodRecordController = null;
+        try {
+            lastBloodRecordController = new LastBloodRecordController();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         ArrayList<LastBloodPressure> lastBloodPressureList = lastBloodRecordController.getLastBloodPressureList();
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 

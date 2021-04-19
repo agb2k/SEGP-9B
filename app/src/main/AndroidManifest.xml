@@ -35,13 +35,17 @@
         <activity android:name=".Tracker.BloodPressure.BloodPressureActivity" />
         <activity android:name=".PillReminder.NewPillReminder" />
         <activity android:name=".Appointment.NewAppointment" />
-
+        <activity android:name=".LoginSystem.Login" />
+        <activity android:name=".LoginSystem.VerifyEmail" />
+        <activity android:name=".LoginSystem.ResendVerificationEmail" />
+        <activity android:name=".LoginSystem.ForgotPassword" />
+        <activity android:name=".LoginSystem.SignUp" />
 
 
         <activity
             android:name=".Homepage.healthPopUp"
             android:theme="@style/healthPopStyle" />
-        <activity android:name=".Homepage.editHealth" />-->
+        <activity android:name=".Homepage.editHealth" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

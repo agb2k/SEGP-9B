@@ -13,4 +13,7 @@
     <color name="fab_pressed">#546e7a</color>
     <color name="blueFontColor">#0000A0</color>
     <color name="textBoxGrey">#DEDEE4</color>
+    <color name="lightBlue">#86C9FC</color>
+    <color name="deepBlue">#00CAEE</color>
+    <color name="midBlue">#2196F3</color>
 </resources>

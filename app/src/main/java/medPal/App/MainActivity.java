@@ -13,6 +13,7 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 import medPal.App.PillReminder.PillReminderPopUp.TakePillPopUp;
 
@@ -42,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
                     // Use fragment view as parent view
                     View view = findViewById(R.id.ReferenceView);
                     TakePillPopUp popUpClass = new TakePillPopUp();
-                    popUpClass.showPopupWindow(MainActivity.this,view);
+                    try {
+                        popUpClass.showPopupWindow(MainActivity.this,view);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

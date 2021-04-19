@@ -21,6 +21,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,7 +93,12 @@ public class PillReminderFragment extends Fragment {
         // Get ExpandableListView
         ExpandableListView parentListView = (ExpandableListView) v.findViewById(R.id.prExpandableListView);
         // Call PillReminderController
-        PillReminderController prController = new PillReminderController(getContext());
+        PillReminderController prController = null;
+        try {
+            prController = new PillReminderController(getContext());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         // Get today's pill reminder, grouped by time
         TreeMap<LocalTime,ArrayList<PillReminder>> prByTime = prController.getPillReminderByTime();
         // Get the list of time of reminders

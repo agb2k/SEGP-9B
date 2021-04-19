@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import medPal.App.R;
@@ -85,7 +86,12 @@ public class AppointmentFragment extends Fragment {
         appointmentList = v.findViewById(R.id.appointmentRVList);
         appointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
-        AppointmentController AppointmentController = new AppointmentController();
+        AppointmentController AppointmentController = null;
+        try {
+            AppointmentController = new AppointmentController();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         ArrayList<Appointment> AppointmentArrayList = AppointmentController.getAllAppointments();
 
         AppointmentListAdapter = new AppointmentAdapter(getContext(), AppointmentArrayList);

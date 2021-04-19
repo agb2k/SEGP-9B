@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -17,7 +18,7 @@ public class RetrieveAppointments {
     private ArrayList<Appointment> AppointmentList = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    RetrieveAppointments() {
+    RetrieveAppointments() throws UnsupportedEncodingException {
 
         String jsonStr;
         JSONArray jsonArr;

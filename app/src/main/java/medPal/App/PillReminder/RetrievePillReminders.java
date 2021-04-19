@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class RetrievePillReminders {
     private ArrayList<Medicine> medicineList = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    RetrievePillReminders() {
+    RetrievePillReminders() throws UnsupportedEncodingException {
 
         String jsonStr;
         JSONArray jsonArr;

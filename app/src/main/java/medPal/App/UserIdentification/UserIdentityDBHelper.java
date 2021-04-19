@@ -18,17 +18,13 @@ public class UserIdentityDBHelper {
         myDB = SQLiteDatabase.openOrCreateDatabase(DB_PATH, null);
         myDB.execSQL(
                 "CREATE TABLE IF NOT EXISTS "+ TABLE_NAME +"(" +
-                        "user_id INTEGER NOT NULL," +
-                        "username TEXT NOT NULL," +
                         "email TEXT NOT NULL" +
                         ");"
         );
     }
 
-    public void insertRecord(int user_id, String username, String email) {
+    public void insertRecord(String email) {
         myDB.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(" +
-                user_id + "," +
-                "'" + username + "'," +
                 "'" + email + "'" +
                 ")"
         );
@@ -60,12 +56,10 @@ public class UserIdentityDBHelper {
 
         Cursor cursor = myDB.rawQuery("SELECT * FROM " + TABLE_NAME + ";",null);
         if (cursor.moveToFirst()){
-            int user_id = cursor.getInt(cursor.getColumnIndex("user_id"));
-            String username = cursor.getString(cursor.getColumnIndex("username"));
             String email = cursor.getString(cursor.getColumnIndex("email"));
 
             // Set information
-            identity.setInformation(user_id,username,email);
+            identity.setInformation(email);
         }
         cursor.close();
     }

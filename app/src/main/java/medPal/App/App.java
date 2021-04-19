@@ -3,8 +3,10 @@ package medPal.App;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 
+import medPal.App.LoginSystem.Login;
 import medPal.App.UserIdentification.UserIdentity;
 import medPal.App.UserIdentification.UserIdentityDBHelper;
 
@@ -17,7 +19,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-/*
+
         // Check if user has logged in
         UserIdentity identity = UserIdentity.getInstance();
         if(!identity.loggedIn()) {
@@ -26,13 +28,14 @@ public class App extends Application {
             UserIdentityDBHelper dbHelper = new UserIdentityDBHelper(this.getApplicationContext());
             if(dbHelper.isEmpty()) {
                 // If no login information, go to login page
-                // TODO Go to login page //
+                Intent loginIntent = new Intent(this.getApplicationContext(), Login.class);
+                startActivity(loginIntent);
             }else{
                 // Initialize UserIdentity with the data from database
                 dbHelper.getRecord();
             }
         }
-*/
+
         // Create notification channels
         createNotificationChannels();
     }
