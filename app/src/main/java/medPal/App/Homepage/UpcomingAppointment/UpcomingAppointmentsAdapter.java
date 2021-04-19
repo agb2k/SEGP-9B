@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import medPal.App.Appointment.Appointment;
 import medPal.App.R;
 
 public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAppointmentsAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<UpcomingAppointment> upcomingAppointments = new ArrayList<>();
+    private ArrayList<Appointment> upcomingAppointments = new ArrayList<>();
 
-    public UpcomingAppointmentsAdapter(Context context, ArrayList<UpcomingAppointment> upcomingAppointments) {
+    public UpcomingAppointmentsAdapter(Context context, ArrayList<Appointment> upcomingAppointments) {
         this.context = context;
         this.upcomingAppointments = upcomingAppointments;
     }

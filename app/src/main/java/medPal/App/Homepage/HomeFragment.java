@@ -26,19 +26,17 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 
+import medPal.App.Appointment.Appointment;
 import medPal.App.Homepage.LastBloodRecord.LastBloodGlucose;
 import medPal.App.Homepage.LastBloodRecord.LastBloodPressure;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordAdapter;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
-import medPal.App.Homepage.NextAppointment.NextAppointment;
-import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
-import medPal.App.Homepage.NextAppointment.NextAppointmentController;
 import medPal.App.Homepage.NextPillReminder.NextPillReminderAdapter;
+import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentController;
+import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentsAdapter;
 import medPal.App.PillReminder.PillReminder;
 import medPal.App.PillReminder.PillReminderController;
 import medPal.App.R;
-import medPal.App.UserIdentification.UserIdentity;
-import medPal.App.UserIdentification.UserIdentityDBHelper;
 
 import static android.view.View.GONE;
 
@@ -97,7 +95,7 @@ public class HomeFragment extends Fragment {
 
     private Button healthBtn;
     private RecyclerView nextAppointmentList;
-    private NextAppointmentAdapter nextAppointmentListAdapter;
+    private UpcomingAppointmentsAdapter upcomingAppointmentsAdapter;
     private ExpandableListView nextPillReminderList;
     private ExpandableListAdapter nextPillReminderAdapter;
     private RecyclerView lastBloodRecordList;
@@ -110,27 +108,34 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         // Set up Next Appointment Data
         nextAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
         nextAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
         TextView noUpcomingAppointment = (TextView)v.findViewById(R.id.noUpcomingAppointment);
 
-        NextAppointmentController nextAppointmentController = new NextAppointmentController();
-        ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
+        UpcomingAppointmentController upcomingAppointmentController = null;
+        try {
+            upcomingAppointmentController = new UpcomingAppointmentController();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Appointment> upcomingAppointmentArrayList = upcomingAppointmentController.getUpcomingAppointmentsList();
 
-        if(nextAppointmentArrayList.size()>0) {
+        if(upcomingAppointmentArrayList .size()>0) {
             nextAppointmentList.setVisibility(View.VISIBLE);
             noUpcomingAppointment.setVisibility(GONE);
 
             //Get upcoming appointment data and et up view
-            nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
-            nextAppointmentList.setAdapter(nextAppointmentListAdapter);
+            upcomingAppointmentsAdapter = new UpcomingAppointmentsAdapter(getContext(), upcomingAppointmentArrayList);
+            nextAppointmentList.setAdapter(upcomingAppointmentsAdapter);
 
         }
         else {
             nextAppointmentList.setVisibility(GONE);
             noUpcomingAppointment.setVisibility(View.VISIBLE);
         }
+
 
 
         PillReminderController nextPillReminderController = null;

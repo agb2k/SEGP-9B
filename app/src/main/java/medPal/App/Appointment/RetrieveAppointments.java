@@ -18,7 +18,7 @@ public class RetrieveAppointments {
     private ArrayList<Appointment> AppointmentList = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    RetrieveAppointments() throws UnsupportedEncodingException {
+    public RetrieveAppointments() throws UnsupportedEncodingException {
 
         String jsonStr;
         JSONArray jsonArr;
