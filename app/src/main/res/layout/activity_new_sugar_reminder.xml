@@ -194,7 +194,7 @@
                     android:layout_marginStart="8dp"
                     android:textOn="On"
                     android:textOff="Off"
-                    android:onClick="onSwitchRepeat"/>
+                    />
 
             </RelativeLayout>
 
