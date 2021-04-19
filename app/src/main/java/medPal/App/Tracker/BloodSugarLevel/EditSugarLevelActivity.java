@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 public class EditSugarLevelActivity extends AppCompatActivity {
@@ -64,30 +65,17 @@ public class EditSugarLevelActivity extends AppCompatActivity {
                 s2 = editTime.getText().toString();
                 s3 = editLevel.getText().toString();
 
-                String url = "https://bulacke.xyz/medpal-db/updateSugarRecord.php";
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(medPal.App.Tracker.BloodSugarLevel.EditSugarLevelActivity.this, response.trim(), Toast.LENGTH_LONG).show();
-                    }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(medPal.App.Tracker.BloodSugarLevel.EditSugarLevelActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }){
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Date", s1);
-                        params.put("Time", s2);
-                        params.put("Level", s3);
+                try {
+                    DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.UPDATE, DatabaseHelper.SUGAR_LEVEL);
+                    dbHelper.setUserInfo();
+                    dbHelper.encodeData("Date", s1);
+                    dbHelper.encodeData("Time", s2);
+                    dbHelper.encodeData("Level", s3);
+                    dbHelper.send();
+                } catch (UnsupportedEncodingException | ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                        return params;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(medPal.App.Tracker.BloodSugarLevel.EditSugarLevelActivity.this);
-                requestQueue.add(stringRequest);
                 finish();
                 Intent intent = new Intent(EditSugarLevelActivity.this, SugarLevelActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

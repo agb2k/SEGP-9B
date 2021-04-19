@@ -7,12 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavDestination;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +21,8 @@ import java.io.UnsupportedEncodingException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.TreeMap;
 
-import medPal.App.MainActivity;
-import medPal.App.PillReminder.PillReminderPopUp.TakePillPopUp;
 import medPal.App.R;
 
 /**
@@ -138,11 +131,13 @@ public class PillReminderFragment extends Fragment {
         //                  been loaded, therefore if we wait until the view has been completely
         //                  loaded, the expandGroup() will be working for last group.
         // This part of code will fix the issue, however, no evidence or similar issues found online.
-        parentListView.post(new Runnable() {
-            public void run() {
-                parentListView.expandGroup(timeList.size()-1);
-            }
-        });
+        if(timeList.size() > 0) {
+            parentListView.post(new Runnable() {
+                public void run() {
+                    parentListView.expandGroup(timeList.size() - 1);
+                }
+            });
+        }
 
         // Create expandable list view for medicine
         expandableMedicineList = (ExpandableListView) v.findViewById(R.id.expandableMedicineList);

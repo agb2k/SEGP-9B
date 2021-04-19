@@ -165,6 +165,7 @@ public class NewAppointment extends AppCompatActivity {
     private void sendData(String dateStr, String timeStr, String doctorStr, String venueStr, String contactStr, String emailStr, String purposeStr, String remarkStr) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         DatabaseHelper insertDB = new DatabaseHelper(DatabaseHelper.INSERT, DatabaseHelper.APPOINTMENT);
 
+        insertDB.setUserInfo();
         insertDB.encodeData("date",dateStr);
         insertDB.encodeData("time",timeStr);
         insertDB.encodeData("doctor", doctorStr);

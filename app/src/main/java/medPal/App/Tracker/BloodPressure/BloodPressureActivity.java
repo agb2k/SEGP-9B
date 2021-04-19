@@ -37,11 +37,13 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 public class BloodPressureActivity extends AppCompatActivity {
@@ -83,6 +85,8 @@ public class BloodPressureActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         lv2.setOnItemClickListener((parent, view, position, id) -> {
             String s = lv2.getItemAtPosition(position).toString();
@@ -121,6 +125,8 @@ public class BloodPressureActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.pressureGraph);
+        // TODO Handle graph when no record in database
+/*
         lineChart.setVisibleXRangeMaximum(3);
         //lineChart.setVisibleXRange(0, 5);
 
@@ -202,37 +208,17 @@ public class BloodPressureActivity extends AppCompatActivity {
         lineChart.setData(data);
         lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
 
-
+*/
 
 
 
     }
 
-    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException {
+    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
-        class dbManager extends AsyncTask<String, Void, String>
-        {
-            protected String doInBackground(String... strings){
-                try{
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    StringBuffer data = new StringBuffer();
-                    String line;
-
-                    while((line = br.readLine()) != null){
-                        data.append(line + "\n");
-                    }
-                    br.close();
-                    return data.toString();
-                } catch (Exception ex) {
-                    return ex.getMessage();
-                }
-            }
-        }
-        dbManager obj = new dbManager();
-        String data = obj.execute(apiurl).get();
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.BLOOD_PRESSURE);
+        dbHelper.setUserInfo();
+        String data = dbHelper.send();
 
         try {
             JSONArray ja = new JSONArray(data);

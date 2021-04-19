@@ -1,6 +1,7 @@
 package medPal.App.LoginSystem;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,7 +20,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ExecutionException;
 
 import medPal.App.DatabaseHelper;
+import medPal.App.MainActivity;
 import medPal.App.R;
+import medPal.App.UserIdentification.UserIdentity;
 import medPal.App.UserIdentification.UserIdentityDBHelper;
 
 public class Login extends AppCompatActivity {
@@ -109,6 +112,9 @@ public class Login extends AppCompatActivity {
                                             Toast toast_loginSuccess = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT);
                                             toast_loginSuccess.show();
                                             setUserIdentification(email_input);
+
+                                            Intent mainActivity = new Intent(Login.this, MainActivity.class);
+                                            startActivity(mainActivity);
                                             finish();
                                         } else if (result.equals("Account not activated yet")) {
                                             Toast toast_accountNotVerified = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT);
@@ -147,8 +153,29 @@ public class Login extends AppCompatActivity {
         UserIdentityDBHelper userDbHelper = new UserIdentityDBHelper(this.getApplicationContext());
         userDbHelper.insertRecord(email);
         userDbHelper.getRecord();
+        UserIdentity.getInstance().setInformation(email);
+    }
+/*
+    private class setInformation extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... email) {
+            UserIdentityDBHelper userDbHelper = new UserIdentityDBHelper(Login.this);
+            userDbHelper.insertRecord(email[0]);
+            userDbHelper.getRecord();
+            Log.v("Bulacke",UserIdentity.getInstance().getEmail());
+            UserIdentity.getInstance().setInformation(email[0]);
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            Intent mainActivity = new Intent(Login.this, MainActivity.class);
+            startActivity(mainActivity);
+            finish();
+        }
     }
 
+ */
     // Avoid users to by-pass the verification phase
     @Override
     public void onBackPressed() {

@@ -37,6 +37,10 @@ import medPal.App.Homepage.NextPillReminder.NextPillReminderAdapter;
 import medPal.App.PillReminder.PillReminder;
 import medPal.App.PillReminder.PillReminderController;
 import medPal.App.R;
+import medPal.App.UserIdentification.UserIdentity;
+import medPal.App.UserIdentification.UserIdentityDBHelper;
+
+import static android.view.View.GONE;
 
 
 /**
@@ -116,7 +120,7 @@ public class HomeFragment extends Fragment {
 
         if(nextAppointmentArrayList.size()>0) {
             nextAppointmentList.setVisibility(View.VISIBLE);
-            noUpcomingAppointment.setVisibility(View.GONE);
+            noUpcomingAppointment.setVisibility(GONE);
 
             //Get upcoming appointment data and et up view
             nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
@@ -124,7 +128,7 @@ public class HomeFragment extends Fragment {
 
         }
         else {
-            nextAppointmentList.setVisibility(View.GONE);
+            nextAppointmentList.setVisibility(GONE);
             noUpcomingAppointment.setVisibility(View.VISIBLE);
         }
 
@@ -144,7 +148,7 @@ public class HomeFragment extends Fragment {
         TextView noPillReminderMessage = (TextView)v.findViewById(R.id.noPillReminderMessage);
         if(timeList.size() > 0) {
             nextPillReminderList.setVisibility(View.VISIBLE);
-            noPillReminderMessage.setVisibility(View.GONE);
+            noPillReminderMessage.setVisibility(GONE);
             // Show upcoming pill reminders
             // This is line sets the height of the pill reminder section (480dp for each reminder)
             RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,420);
@@ -156,12 +160,10 @@ public class HomeFragment extends Fragment {
             nextPillReminderAdapter = new NextPillReminderAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
             nextPillReminderList.setAdapter(nextPillReminderAdapter);
             // Expand all
-            for(int i=0; i<1; i++){
-                nextPillReminderList.expandGroup(i);
-            }
+            nextPillReminderList.expandGroup(0);
         }else{
             // If no upcoming pill reminders for today, show message
-            nextPillReminderList.setVisibility(View.GONE);
+            nextPillReminderList.setVisibility(GONE);
             noPillReminderMessage.setVisibility(View.VISIBLE);
         }
 
@@ -179,10 +181,14 @@ public class HomeFragment extends Fragment {
         ArrayList<LastBloodPressure> lastBloodPressureList = lastBloodRecordController.getLastBloodPressureList();
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 
-
-        lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(),lastBloodPressureList,lastBloodGlucoseList);
-        lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
-
+        // Handle if no record for blodd pressure and sugar
+        // TODO Handle other situations (if one list is empty another is not)
+        if(lastBloodPressureList.size() > 0 && lastBloodGlucoseList.size() > 0) {
+            lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
+            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
+        } else {
+            lastBloodRecordList.setVisibility(GONE);
+        }
         /*healthBtn = v.findViewById(R.id.healthConditionButton);
 
         healthBtn.setOnClickListener(new View.OnClickListener() {

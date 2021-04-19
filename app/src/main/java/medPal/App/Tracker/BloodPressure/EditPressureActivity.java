@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 public class EditPressureActivity extends AppCompatActivity {
@@ -68,31 +69,18 @@ public class EditPressureActivity extends AppCompatActivity {
                 s3 = editSys.getText().toString();
                 s4 = editDia.getText().toString();
 
-                String url = "https://bulacke.xyz/medpal-db/updatePressureRecord.php";
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(EditPressureActivity.this, response.trim(), Toast.LENGTH_LONG).show();
-                    }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(EditPressureActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }){
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Date", s1);
-                        params.put("Time", s2);
-                        params.put("SYS", s3);
-                        params.put("DIA", s4);
+                try {
+                    DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.UPDATE, DatabaseHelper.BLOOD_PRESSURE);
+                    dbHelper.setUserInfo();
+                    dbHelper.encodeData("Date", s1);
+                    dbHelper.encodeData("Time", s2);
+                    dbHelper.encodeData("SYS", s3);
+                    dbHelper.encodeData("DIA", s4);
+                    dbHelper.send();
+                } catch (UnsupportedEncodingException | ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                        return params;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(EditPressureActivity.this);
-                requestQueue.add(stringRequest);
                 finish();
                 Intent intent = new Intent(EditPressureActivity.this, BloodPressureActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

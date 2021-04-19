@@ -8,14 +8,16 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import medPal.App.PillReminder.PillReminderPopUp.TakePillPopUp;
+import medPal.App.UserIdentification.UserIdentity;
+import medPal.App.UserIdentification.UserIdentityDBHelper;
 
 public class MainActivity extends AppCompatActivity {
 

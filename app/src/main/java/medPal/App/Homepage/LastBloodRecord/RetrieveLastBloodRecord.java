@@ -37,7 +37,9 @@ public class RetrieveLastBloodRecord {
         LastBloodGlucose bgObj;
 
         DatabaseHelper BpDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastBloodPressure.php");
+        BpDbHelper.setUserInfo();
         DatabaseHelper BgDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastSugarRecord.php");
+        BgDbHelper.setUserInfo();
 
         try {
             //Get last blood pressure record
@@ -93,25 +95,4 @@ public class RetrieveLastBloodRecord {
         return lastBloodGlucoseList;
     }
 
-    static class ConnectDB extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... source) {
-            StringBuilder total = new StringBuilder();
-            try {
-                URL url = new URL(source[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("accept", "application/json");
-                InputStream responseStream = connection.getInputStream();
-                BufferedReader r = new BufferedReader(new InputStreamReader(responseStream));
-                for (String line; (line = r.readLine()) != null; ) {
-                    total.append(line).append('\n');
-                }
-                connection.disconnect();
-            }catch(IOException ioE) {
-                ioE.printStackTrace();
-            }
-            return total.toString();
-        }
-
-    }
 }

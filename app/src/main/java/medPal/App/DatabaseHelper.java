@@ -3,6 +3,7 @@ package medPal.App;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -91,8 +92,8 @@ public class DatabaseHelper {
     /**
      * Put user id
      */
-    public void setUserId() throws UnsupportedEncodingException {
-        encodeData("user_id", USER_ACCOUNT);
+    public void setUserInfo() throws UnsupportedEncodingException {
+        encodeData("user", USER_ACCOUNT);
     }
 
     /**

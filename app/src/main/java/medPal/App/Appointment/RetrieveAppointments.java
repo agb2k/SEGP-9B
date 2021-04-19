@@ -27,6 +27,7 @@ public class RetrieveAppointments {
         Appointment aObj;
 
         DatabaseHelper appointmentDbHelper = new DatabaseHelper(DatabaseHelper.GET,DatabaseHelper.APPOINTMENT);
+        appointmentDbHelper.setUserInfo();
 
         try{
             jsonStr = appointmentDbHelper.send();

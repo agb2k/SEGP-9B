@@ -362,6 +362,7 @@ public class NewPillReminder extends AppCompatActivity implements
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendData(String medicineName, String manufacturer, int dosage, int prType, int daysInterval, String week_bit, String time, int quantity, String startDate, String endDate, String purpose, String remark, Bitmap bitmap) throws UnsupportedEncodingException, ExecutionException, InterruptedException {
         DatabaseHelper insertDB = new DatabaseHelper(DatabaseHelper.INSERT,DatabaseHelper.PILL_REMINDER);
+        insertDB.setUserInfo();
         insertDB.encodeData("medicine",medicineName);
         insertDB.encodeData("manufacturer",manufacturer);
         insertDB.encodeData("dosage", String.valueOf(dosage));

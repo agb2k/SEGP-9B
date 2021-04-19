@@ -41,7 +41,9 @@ public class RetrievePillReminders {
         PillReminder prObj;
 
         DatabaseHelper medDbHelper = new DatabaseHelper(DatabaseHelper.GET,DatabaseHelper.MEDICINE);
+        medDbHelper.setUserInfo();
         DatabaseHelper pillDbHelper = new DatabaseHelper(DatabaseHelper.GET,DatabaseHelper.PILL_REMINDER);
+        pillDbHelper.setUserInfo();
 
         // Extract data from JSON
         try {

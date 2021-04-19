@@ -1,5 +1,7 @@
 package medPal.App.UserIdentification;
 
+import android.util.Log;
+
 /**
  * Handle user identification.
  */
@@ -27,7 +29,7 @@ public class UserIdentity {
         this.email = email;
     }
 
-    public String getEmail() { return email; }
+    public String getEmail() { return email==null?"no_identity":email; }
 
     public boolean loggedIn() {
         return loggedIn;

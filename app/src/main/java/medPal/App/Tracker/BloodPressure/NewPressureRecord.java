@@ -22,11 +22,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 import medPal.App.Tracker.BloodSugarLevel.SugarLevelActivity;
 
@@ -79,31 +82,17 @@ public class NewPressureRecord extends AppCompatActivity  {
                 s2 = e2.getText().toString();
                 s3 = e3.getText().toString();
                 s4 = e4.getText().toString();
-                String url = "https://bulacke.xyz/medpal-db/insertPressureRecord.php";
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(NewPressureRecord.this, response.trim(), Toast.LENGTH_LONG).show();
-                    }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(NewPressureRecord.this, error.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }){
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Date", s1);
-                        params.put("Time", s2);
-                        params.put("SYS", s3);
-                        params.put("DIA", s4);
-
-                        return params;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(NewPressureRecord.this);
-                requestQueue.add(stringRequest);
+                try {
+                    DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.INSERT, DatabaseHelper.BLOOD_PRESSURE);
+                    dbHelper.setUserInfo();
+                    dbHelper.encodeData("Date", s1);
+                    dbHelper.encodeData("Time", s2);
+                    dbHelper.encodeData("SYS", s3);
+                    dbHelper.encodeData("DIA", s4);
+                    dbHelper.send();
+                } catch (UnsupportedEncodingException | ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
                 finish();
                 Intent intent = new Intent(NewPressureRecord.this, BloodPressureActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
