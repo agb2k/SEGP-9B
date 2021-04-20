@@ -251,7 +251,6 @@ public class BloodPressureActivity extends AppCompatActivity {
 
 
 
-
     public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.BLOOD_PRESSURE);
