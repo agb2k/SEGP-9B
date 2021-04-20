@@ -35,20 +35,6 @@ public class UpcomingAppointmentController implements Serializable {
         upcomingAppointmentsList = getDB.getAllAppointment();
     }
 
-    /*@RequiresApi(api = Build.VERSION_CODES.O)
-    public ArrayList<UpcomingAppointment> getUpcomingAppointmentsList() {
-        ArrayList<UpcomingAppointment> resultList = new ArrayList<>();
-        for(int i=0; i<upcomingAppointmentsList.size(); i++ ){
-            LocalDate tempDate = upcomingAppointmentsList.get(i).getDate();
-            LocalTime tempTime = stringToLocalTime(upcomingAppointmentsList.get(i).getTime());
-
-            if (tempDate.compareTo(LocalDate.now())>=0 && tempTime.compareTo(LocalTime.now())>=0) {
-                resultList.add(upcomingAppointmentsList.get(i));
-            }
-        }
-        return resultList;
-    }*/
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public ArrayList<Appointment> getUpcomingAppointmentsList() {
         ArrayList<Appointment> resultList = new ArrayList<>();
@@ -56,7 +42,7 @@ public class UpcomingAppointmentController implements Serializable {
             LocalDate tempDate = upcomingAppointmentsList.get(i).getDate();
             LocalTime tempTime = stringToLocalTime(upcomingAppointmentsList.get(i).getTime());
 
-            if (tempDate.compareTo(LocalDate.now())>=0 && tempTime.compareTo(LocalTime.now())>=0) {
+            if (tempDate.compareTo(LocalDate.now())>=0 && tempTime.compareTo(LocalTime.now())>=0 ) {
                 resultList.add(upcomingAppointmentsList.get(i));
             }
         }
@@ -71,4 +57,5 @@ public class UpcomingAppointmentController implements Serializable {
         LocalTime localTime = LocalTime.of(hour, min);
         return localTime;
     }
+
 }
