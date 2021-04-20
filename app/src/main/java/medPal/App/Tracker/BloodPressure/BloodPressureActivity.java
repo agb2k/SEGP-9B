@@ -1,6 +1,5 @@
 package medPal.App.Tracker.BloodPressure;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -93,6 +92,8 @@ public class BloodPressureActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
         });
 
+
+        // Click to edit record
         lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -107,7 +108,7 @@ public class BloodPressureActivity extends AppCompatActivity {
 
 
         
-
+        // Go to add new record
         b3 = (Button) findViewById(R.id.NewPressureRecordButton);
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +117,7 @@ public class BloodPressureActivity extends AppCompatActivity {
             }
         });
 
+        // Go to Reminder Page
         b4 = (Button) findViewById(R.id.NewPressureReminderButton);
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,17 +130,17 @@ public class BloodPressureActivity extends AppCompatActivity {
         // TODO Handle graph when no record in database
 /*
         lineChart.setVisibleXRangeMaximum(3);
-        //lineChart.setVisibleXRange(0, 5);
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setLabelRotationAngle(-45);
         xAxis.setGranularityEnabled(true);
         xAxis.setLabelCount(5);
+
+        //Get data from database for X-axis
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float index, AxisBase axis) {
-                //return xVal[(int) value]; // xVal is a string array
                 return x_axis.get((int) index);
             }
 
@@ -153,30 +155,27 @@ public class BloodPressureActivity extends AppCompatActivity {
 
         int n = x_axis.size();
 
+        // plotting data to the graph， limit to 5 maximum
         if(n>=5) {
             for (int i = n - 5; i < n; i++) {
-                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
 
             for (int i = n - 5; i < n; i++) {
-                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
                 yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
             }
         } else {
             for (int i = 0; i < n; i++) {
-                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
 
             for (int i = 0; i < n; i++) {
-                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
                 yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
             }
         }
 
 
-
+        // Design of plotting
         LineDataSet set1 = new LineDataSet(yValues, "SYS");
         set1.setFillAlpha(110);
         set1.setColor(Color.RED);
@@ -214,11 +213,13 @@ public class BloodPressureActivity extends AppCompatActivity {
 
     }
 
+
     public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.BLOOD_PRESSURE);
         dbHelper.setUserInfo();
         String data = dbHelper.send();
+
 
         try {
             JSONArray ja = new JSONArray(data);
@@ -246,6 +247,7 @@ public class BloodPressureActivity extends AppCompatActivity {
         }
     }
 
+    //create listview of records with data from database
     class myadapter extends ArrayAdapter<String>
     {
         Context context;

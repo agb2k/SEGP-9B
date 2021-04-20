@@ -51,6 +51,7 @@ public class EditPressureActivity extends AppCompatActivity {
         b1 = (Button) findViewById(R.id.Edit_ConfirmPressureRecordButton);
         b2 = (Button) findViewById(R.id.DeletePressureRecordButton);
 
+        // put data into column after clicking record from listview
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             editDate.setText(bundle.getString("Date"));
@@ -61,6 +62,7 @@ public class EditPressureActivity extends AppCompatActivity {
             editDia.setText(bundle.getString("Dia"), TextView.BufferType.EDITABLE);
         }
 
+        // Save changes
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +90,7 @@ public class EditPressureActivity extends AppCompatActivity {
             }
         });
 
+        // Delete record
         b2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

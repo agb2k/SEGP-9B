@@ -102,17 +102,13 @@ public class NewPressureReminder extends AppCompatActivity implements
         mCurrentReminderUri = intent.getData();
 
 
-
+        // new reminder
         if (mCurrentReminderUri == null) {
 
             setTitle("Add reminder details");
 
-
-
-            // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make sense to delete a reminder that hasn't been created yet.)
             invalidateOptionsMenu();
-        } else{
+        } else{ // edit reminder
 
             setTitle("Edit reminder");
 
