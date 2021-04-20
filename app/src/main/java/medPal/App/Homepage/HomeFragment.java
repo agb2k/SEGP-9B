@@ -28,6 +28,7 @@ import java.util.TreeMap;
 
 import medPal.App.Appointment.Appointment;
 import medPal.App.Homepage.LastBloodRecord.LastBloodGlucose;
+import medPal.App.Homepage.LastBloodRecord.LastBloodGlucoseAdapter;
 import medPal.App.Homepage.LastBloodRecord.LastBloodPressure;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordAdapter;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
@@ -100,6 +101,7 @@ public class HomeFragment extends Fragment {
     private ExpandableListAdapter nextPillReminderAdapter;
     private RecyclerView lastBloodRecordList;
     private LastBloodRecordAdapter lastBloodRecordAdapter;
+    private LastBloodGlucoseAdapter lastBloodGlucoseAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -194,6 +196,22 @@ public class HomeFragment extends Fragment {
         } else {
             lastBloodRecordList.setVisibility(GONE);
         }
+
+        /*if(lastBloodPressureList.size() > 0) {
+            lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList);
+            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
+        } else {
+            lastBloodRecordList.setVisibility(GONE);
+        }
+
+        if(lastBloodPressureList.size() > 0 && lastBloodGlucoseList.size() > 0) {
+            lastBloodGlucoseAdapter = new LastBloodGlucoseAdapter(getContext(), lastBloodGlucoseList);
+            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
+        } else {
+            lastBloodRecordList.setVisibility(GONE);
+        }*/
+
+
 
 
         return v;
