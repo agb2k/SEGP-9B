@@ -112,31 +112,19 @@ public class HomeFragment extends Fragment {
         // Set up Next Appointment Data
         nextAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
         nextAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
-        TextView noUpcomingAppointment = (TextView)v.findViewById(R.id.noUpcomingAppointment);
-
         UpcomingAppointmentController upcomingAppointmentController = null;
+
         try {
             upcomingAppointmentController = new UpcomingAppointmentController();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         ArrayList<Appointment> upcomingAppointmentArrayList = upcomingAppointmentController.getUpcomingAppointmentsList();
+        ArrayList<Appointment> confirmedAppointmentArrayList = upcomingAppointmentController.getConfirmedAppointment();
 
-        if(upcomingAppointmentArrayList .size()>0) {
-            nextAppointmentList.setVisibility(View.VISIBLE);
-            noUpcomingAppointment.setVisibility(GONE);
-
-            //Get upcoming appointment data and et up view
-            upcomingAppointmentsAdapter = new UpcomingAppointmentsAdapter(getContext(), upcomingAppointmentArrayList);
-            nextAppointmentList.setAdapter(upcomingAppointmentsAdapter);
-
-        }
-        else {
-            nextAppointmentList.setVisibility(GONE);
-            noUpcomingAppointment.setVisibility(View.VISIBLE);
-        }
-
-
+        //Get upcoming appointment data and et up view
+        upcomingAppointmentsAdapter = new UpcomingAppointmentsAdapter(getContext(), upcomingAppointmentArrayList, confirmedAppointmentArrayList);
+        nextAppointmentList.setAdapter(upcomingAppointmentsAdapter);
 
         PillReminderController nextPillReminderController = null;
         try {
@@ -185,8 +173,6 @@ public class HomeFragment extends Fragment {
         }
         ArrayList<LastBloodPressure> lastBloodPressureList = lastBloodRecordController.getLastBloodPressureList();
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
-
-        // Handle if no record for blood pressure and sugar
 
         lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
         lastBloodRecordList.setAdapter(lastBloodRecordAdapter);

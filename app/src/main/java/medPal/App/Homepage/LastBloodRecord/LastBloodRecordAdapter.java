@@ -45,7 +45,7 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
 
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
-
+        // Handle if no record for blood pressure
         if(lastBloodPressureList.size()>0) {
             //Set up view for last blood pressure record
             TextView bpTimeView = (TextView) holder.bpTime;
@@ -76,6 +76,7 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
             bpRecordView.setText(tempBPRecord);
         }
         else {
+            //Set view if no blood pressure record
             TextView bpTimeView = (TextView) holder.bpTime;
             bpTimeView.setText("No Record");
             TextView bpRecordView = (TextView) holder.bpRecord;
