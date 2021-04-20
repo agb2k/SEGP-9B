@@ -186,22 +186,10 @@ public class HomeFragment extends Fragment {
         ArrayList<LastBloodPressure> lastBloodPressureList = lastBloodRecordController.getLastBloodPressureList();
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 
-        // Handle if no record for blodd pressure and sugar
-        // TODO Handle other situations (if one list is empty another is not)
-        if(lastBloodPressureList.size() > 0 && lastBloodGlucoseList.size() > 0) {
-            lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
-            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
-        } else {
-            lastBloodRecordList.setVisibility(GONE);
-        }
-        /*healthBtn = v.findViewById(R.id.healthConditionButton);
+        // Handle if no record for blood pressure and sugar
+        lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
+        lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
 
-        healthBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), healthPopUp.class));
-            }
-        });*/
 
         return v;
 
