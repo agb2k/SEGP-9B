@@ -46,36 +46,41 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
 
+        if(lastBloodPressureList.size()>0) {
+            //Set up view for last blood pressure record
+            TextView bpTimeView = (TextView) holder.bpTime;
+            String tempTime = lastBloodPressureList.get(position).getTime();
+            String tempDate = lastBloodPressureList.get(position).getDate();
+            String tempBPTime;
 
-        //Set up view for last blood pressure record
-        TextView bpTimeView = (TextView) holder.bpTime;
-        String tempTime = lastBloodPressureList.get(position).getTime();
-        String tempDate = lastBloodPressureList.get(position).getDate();
-        String tempBPTime;
+            if (Integer.parseInt(tempTime.substring(0, 2)) >= 12) {
+                int convert = Integer.parseInt(tempTime.substring(0, 2));
+                if (Integer.parseInt(tempTime.substring(0, 2)) > 12) {
+                    convert = convert - 12;
+                }
+                String tempStr;
+                if (convert < 10) {
+                    tempStr = "0" + convert;
+                } else {
+                    tempStr = String.valueOf(convert);
+                }
+                tempBPTime = "Last Recorded: " + tempDate.substring(5, 10) + " " + tempStr + tempTime.substring(2, 5) + "PM ";
+            } else {
+                tempBPTime = "Last Recorded: " + tempDate.substring(5, 10) + " " + tempTime.substring(0, 5) + "AM ";
+            }
 
-        if (Integer.parseInt(tempTime.substring(0,2))>=12) {
-            int convert = Integer.parseInt(tempTime.substring(0,2));
-            if(Integer.parseInt(tempTime.substring(0,2))>12) {
-                convert = convert - 12;
-            }
-            String tempStr;
-            if (convert<10) {
-                tempStr = "0" + convert;
-            }
-            else {
-                tempStr = String.valueOf(convert);
-            }
-            tempBPTime = "Last Recorded: "+ tempDate.substring(5,10) + " " + tempStr + tempTime.substring(2,5) + "PM " ;
+            bpTimeView.setText(tempBPTime);
+
+            TextView bpRecordView = (TextView) holder.bpRecord;
+            String tempBPRecord = lastBloodPressureList.get(position).getSYS() + "/" + lastBloodPressureList.get(position).getDIA();
+            bpRecordView.setText(tempBPRecord);
         }
         else {
-            tempBPTime = "Last Recorded: "+ tempDate.substring(5,10) + " " + tempTime.substring(0,5) + "AM " ;
+            TextView bpTimeView = (TextView) holder.bpTime;
+            bpTimeView.setText("No Record");
+            TextView bpRecordView = (TextView) holder.bpRecord;
+            bpRecordView.setText("-");
         }
-
-        bpTimeView.setText(tempBPTime);
-
-        TextView bpRecordView = (TextView) holder.bpRecord;
-        String tempBPRecord = lastBloodPressureList.get(position).getSYS() + "/" + lastBloodPressureList.get(position).getDIA();
-        bpRecordView.setText(tempBPRecord);
 
         // Handle if no record for blood glucose
         if(lastBloodGlucoseList.size()>0) {
@@ -86,8 +91,8 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
             String tempBGTime;
 
             if (Integer.parseInt(tempTime2.substring(0, 2)) >= 12) {
-                int convert = Integer.parseInt(tempTime.substring(0, 2));
-                if (Integer.parseInt(tempTime.substring(0, 2)) > 12) {
+                int convert = Integer.parseInt(tempTime2.substring(0, 2));
+                if (Integer.parseInt(tempTime2.substring(0, 2)) > 12) {
                     convert = convert - 12;
                 }
                 String tempStr;
@@ -106,13 +111,14 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
             TextView bgLevelView = (TextView) holder.bgLevel;
             String tempLevel = String.valueOf(lastBloodGlucoseList.get(position).getLevel());
             bgLevelView.setText(tempLevel);
+
         }
         else {
             //Set view if no blood glucose record
             TextView bgTimeView = (TextView) holder.bgTime;
-            bgTimeView.setText("-");
+            bgTimeView.setText("No Record");
             TextView bgLevelView = (TextView) holder.bgLevel;
-            bgLevelView.setText("no record");
+            bgLevelView.setText("-");
 
         }
         

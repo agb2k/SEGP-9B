@@ -28,6 +28,7 @@ import java.util.TreeMap;
 
 import medPal.App.Appointment.Appointment;
 import medPal.App.Homepage.LastBloodRecord.LastBloodGlucose;
+import medPal.App.Homepage.LastBloodRecord.LastBloodGlucoseAdapter;
 import medPal.App.Homepage.LastBloodRecord.LastBloodPressure;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordAdapter;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
@@ -100,6 +101,7 @@ public class HomeFragment extends Fragment {
     private ExpandableListAdapter nextPillReminderAdapter;
     private RecyclerView lastBloodRecordList;
     private LastBloodRecordAdapter lastBloodRecordAdapter;
+    private LastBloodGlucoseAdapter lastBloodGlucoseAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -187,6 +189,7 @@ public class HomeFragment extends Fragment {
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 
         // Handle if no record for blood pressure and sugar
+
         lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
         lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
 
