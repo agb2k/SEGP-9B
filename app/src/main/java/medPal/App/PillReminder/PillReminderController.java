@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import androidx.annotation.RequiresApi;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class PillReminderController implements Serializable {
      * Initialize and get list of pill reminders from database.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public PillReminderController(Context context) {
+    public PillReminderController(Context context) throws UnsupportedEncodingException {
         this.context = context;
         RetrievePillReminders getDB = new RetrievePillReminders();
         medicineList = getDB.getAllMedicine();

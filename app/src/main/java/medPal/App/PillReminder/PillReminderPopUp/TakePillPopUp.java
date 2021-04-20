@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,11 +30,14 @@ import medPal.App.PillReminder.PillReminder;
 import medPal.App.PillReminder.PillReminderController;
 import medPal.App.R;
 
+/**
+ * This class creates and handles the pop-up window.
+ */
 public class TakePillPopUp {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("InflateParams")
-    public void showPopupWindow(Context context, final View view) {
+    public void showPopupWindow(Context context, final View view) throws UnsupportedEncodingException {
 
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -90,8 +94,13 @@ public class TakePillPopUp {
         });
     }
 
+    /**
+     * Get the pills that need to be taken now.
+     * @param context
+     * @return List of pill reminders.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public ArrayList<PillReminder> getData(Context context) {
+    public ArrayList<PillReminder> getData(Context context) throws UnsupportedEncodingException {
         // Get all pill reminders that have to be taken today
         TreeMap<LocalTime, ArrayList<PillReminder>> prByTime = new TreeMap<LocalTime, ArrayList<PillReminder>>();
         PillReminderController prController = new PillReminderController(context);
@@ -101,6 +110,12 @@ public class TakePillPopUp {
         return new ArrayList<>(prByTime.get(prByTime.firstKey()));
     }
 
+    /**
+     * When user clicks on take pill or skip option, save the status in database.
+     * @param context
+     * @param pillReminder List of pill reminders.
+     * @param status 1 for taken; 2 for skipped
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void takePill(Context context, ArrayList<PillReminder> pillReminder, int status) {
         LocalDate d = LocalDate.now();
@@ -123,6 +138,10 @@ public class TakePillPopUp {
         }
     }
 
+    /**
+     * When user clicks on 'Snooze' option, set another alarm 5 minutes from now.
+     * @param context
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void snooze(Context context) {
         long currentTime = TimeAndIntervalHelper.getMilli(LocalDateTime.now());
@@ -133,6 +152,11 @@ public class TakePillPopUp {
         alarmHelper.setAlarm(alarmTime,AlarmHelper.SNOOZE_ALARM_REFERENCE_CODE);
     }
 
+    /**
+     * Convert 24-hour format time (string) to 12-hour format time (string)
+     * @param t
+     * @return Time in 12-hour format
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private String to12Format(String t) {
         int h = Integer.parseInt(t.substring(0,2));

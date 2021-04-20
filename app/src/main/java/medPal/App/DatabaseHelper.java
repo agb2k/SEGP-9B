@@ -3,6 +3,7 @@ package medPal.App;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -14,6 +15,8 @@ import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import medPal.App.UserIdentification.UserIdentity;
 
 /**
  * DatabaseHelper Class
@@ -44,18 +47,24 @@ import javax.net.ssl.HttpsURLConnection;
  * ---> For those who are getting result from SQL queries, the returned string is JSON, you can use org.json library to extract data from JSON.
  */
 public class DatabaseHelper {
+    // URL
     private static final String url = "https://bulacke.xyz/";
     private static final String DIR_PHP = "medpal-db/";
     private static final String DIR_IMG = "medpal-img/";
 
+    // User ID
+    public static final String USER_ACCOUNT = UserIdentity.getInstance().getEmail();
+
+    // Operations
     public static String INSERT = "insert";
     public static String DELETE = "delete";
     public static String UPDATE = "update";
     public static String GET = "get";
 
+    // Type
     public static String PILL_REMINDER = "PillReminder.php";
     public static String MEDICINE = "Medicine.php";
-    //public static String APPOINTMENT = ""; //Not implemented yet
+    public static String APPOINTMENT = "Appointment.php";
     public static String BLOOD_PRESSURE = "PressureRecord.php";
     public static String SUGAR_LEVEL = "SugarRecord.php";
     public static String MEDICINE_IMAGE = "MedicineImage.php";
@@ -68,7 +77,7 @@ public class DatabaseHelper {
      * @param operation Operation to be performed (INSERT / DELETE / UPDATE / GET).
      * @param type Type (PILL_REMINDER / MEDICINE / APPOINTMENT / PRESSURE_RECORD / SUGAR_LEVEL / MEDICINE_IMAGE)
      */
-    public DatabaseHelper(String operation, String type) {
+    public DatabaseHelper(String operation, String type) throws UnsupportedEncodingException {
         completeUrl = url + DIR_PHP + operation + type;
     }
 
@@ -76,8 +85,15 @@ public class DatabaseHelper {
      * Constructor
      * @param url Complete URL of the target PHP file.
      */
-    public DatabaseHelper(String url) {
+    public DatabaseHelper(String url) throws UnsupportedEncodingException {
         completeUrl = url;
+    }
+
+    /**
+     * Put user id
+     */
+    public void setUserInfo() throws UnsupportedEncodingException {
+        encodeData("user", USER_ACCOUNT);
     }
 
     /**

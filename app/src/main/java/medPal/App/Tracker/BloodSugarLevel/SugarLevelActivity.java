@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
@@ -42,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 public class SugarLevelActivity extends AppCompatActivity {
@@ -78,6 +80,8 @@ public class SugarLevelActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
@@ -119,6 +123,8 @@ public class SugarLevelActivity extends AppCompatActivity {
 
         lineChart = (LineChart) findViewById(R.id.sugarGraph);
 
+        // TODO Handle graph when no record in database.
+/*
         lineChart.setVisibleXRangeMaximum(6);
 
 
@@ -175,35 +181,16 @@ public class SugarLevelActivity extends AppCompatActivity {
 
         lineChart.setData(data);
         lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
-
+*/
     }
 
-    // get data from database and put into array
-    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException {
 
-        class dbManager extends AsyncTask<String, Void, String>
-        {
-            protected String doInBackground(String... strings){
-                try{
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
-                    StringBuffer data = new StringBuffer();
-                    String line;
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.SUGAR_LEVEL);
+        dbHelper.setUserInfo();
+        String data = dbHelper.send();
 
-                    while((line = br.readLine()) != null){
-                        data.append(line + "\n");
-                    }
-                    br.close();
-                    return data.toString();
-                } catch (Exception ex) {
-                    return ex.getMessage();
-                }
-            }
-        }
-        dbManager obj = new dbManager();
-        String data = obj.execute(apiurl).get();
 
         try {
             JSONArray ja = new JSONArray(data);

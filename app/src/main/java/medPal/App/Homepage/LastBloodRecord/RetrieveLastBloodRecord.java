@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class RetrieveLastBloodRecord {
     private ArrayList<LastBloodGlucose> lastBloodGlucoseList = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    RetrieveLastBloodRecord() {
+    RetrieveLastBloodRecord() throws UnsupportedEncodingException {
         String jsonStr;
         JSONArray jsonArray;
         JSONObject jsonObject;
@@ -36,7 +37,9 @@ public class RetrieveLastBloodRecord {
         LastBloodGlucose bgObj;
 
         DatabaseHelper BpDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastBloodPressure.php");
+        BpDbHelper.setUserInfo();
         DatabaseHelper BgDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastSugarRecord.php");
+        BgDbHelper.setUserInfo();
 
         try {
             //Get last blood pressure record
@@ -92,25 +95,4 @@ public class RetrieveLastBloodRecord {
         return lastBloodGlucoseList;
     }
 
-    static class ConnectDB extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... source) {
-            StringBuilder total = new StringBuilder();
-            try {
-                URL url = new URL(source[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("accept", "application/json");
-                InputStream responseStream = connection.getInputStream();
-                BufferedReader r = new BufferedReader(new InputStreamReader(responseStream));
-                for (String line; (line = r.readLine()) != null; ) {
-                    total.append(line).append('\n');
-                }
-                connection.disconnect();
-            }catch(IOException ioE) {
-                ioE.printStackTrace();
-            }
-            return total.toString();
-        }
-
-    }
 }

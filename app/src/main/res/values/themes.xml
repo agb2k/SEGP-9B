@@ -28,5 +28,10 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <!-- Themes for Login/sign-up system -->
+    <style name="Theme.Button" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/midBlue</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
 
 </resources>
