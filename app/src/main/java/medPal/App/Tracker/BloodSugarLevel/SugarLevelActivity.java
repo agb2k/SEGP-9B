@@ -122,9 +122,10 @@ public class SugarLevelActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.sugarGraph);
+        lineChart.setNoDataText("No data available");
 
-        // TODO Handle graph when no record in database.
-/*
+
+
         lineChart.setVisibleXRangeMaximum(6);
 
 
@@ -135,18 +136,50 @@ public class SugarLevelActivity extends AppCompatActivity {
         xAxis.setLabelCount(5);
 
         //Get data from database for X-axis
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float index, AxisBase axis) {
-                //return xVal[(int) value]; // xVal is a string array
-                return x_axis.get((int) index);
-            }
+        if (x_axis.size() == 0) {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+
+                    return x_axis.get((int) index);
+
+                }
 
 
-            public int getDecimalDigits() {
-                return 0;
-            }
-        });
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        } else if (x_axis.size() == 1) {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+                    index = 0;
+
+                    return x_axis.get((int) index);
+                }
+
+
+
+
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        }else {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+
+                    return x_axis.get((int) index);
+                }
+
+
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        }
 
         ArrayList<Entry> yValues = new ArrayList<>();
 
@@ -157,31 +190,37 @@ public class SugarLevelActivity extends AppCompatActivity {
             for (int i = n - 5; i < n; i++) {
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
+        } else if(n==0){
+
         } else {
             for (int i = 0; i < n; i++) {
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
         }
 
-        LineDataSet set1 = new LineDataSet(yValues, "Sugar Level");
-        set1.setFillAlpha(110);
-        set1.setColor(Color.RED);
-        set1.setLineWidth(1.75f);
-        set1.setCircleRadius(5f);
-        set1.setCircleHoleRadius(2.5f);
-        set1.setValueTextSize(10);
-        set1.setCircleColor(Color.BLACK);
-        set1.setHighLightColor(Color.BLACK);
-        set1.setDrawValues(true);
+        if(n != 0) {
+            LineDataSet set1 = new LineDataSet(yValues, "Sugar Level");
+            set1.setFillAlpha(110);
+            set1.setColor(Color.RED);
+            set1.setLineWidth(1.75f);
+            set1.setCircleRadius(5f);
+            set1.setCircleHoleRadius(2.5f);
+            set1.setValueTextSize(10);
+            set1.setCircleColor(Color.BLACK);
+            set1.setHighLightColor(Color.BLACK);
+            set1.setDrawValues(true);
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
 
-        LineData data = new LineData(dataSets);
+            if (dataSets.isEmpty() == false) {
+                LineData data = new LineData(dataSets);
 
-        lineChart.setData(data);
-        lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
-*/
+                lineChart.setData(data);
+                lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
+            }
+        }
+
     }
 
 
