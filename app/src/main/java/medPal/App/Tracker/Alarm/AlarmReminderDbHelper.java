@@ -18,7 +18,7 @@ public class AlarmReminderDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // Create a String that contains the SQL statement to create the reminder table
-        String SQL_CREATE_ALARM_TABLE =  "CREATE TABLE " + AlarmReminderContract.AlarmReminderEntry.TABLE_NAME + " ("
+        String TABLE_Pressure =  "CREATE TABLE " + AlarmReminderContract.AlarmReminderEntry.TABLE_NAME + " ("
                 + AlarmReminderContract.AlarmReminderEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + AlarmReminderContract.AlarmReminderEntry.KEY_TITLE + " TEXT, "
                 + AlarmReminderContract.AlarmReminderEntry.KEY_DATE + " TEXT, "
@@ -28,8 +28,10 @@ public class AlarmReminderDbHelper extends SQLiteOpenHelper {
                 + AlarmReminderContract.AlarmReminderEntry.KEY_REPEAT_TYPE + " TEXT, "
                 + AlarmReminderContract.AlarmReminderEntry.KEY_ACTIVE + " TEXT " + " );";
 
+
+
         // Execute the SQL statement
-        sqLiteDatabase.execSQL(SQL_CREATE_ALARM_TABLE);
+        sqLiteDatabase.execSQL(TABLE_Pressure);
 
 
     }

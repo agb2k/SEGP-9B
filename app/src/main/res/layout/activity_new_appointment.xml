@@ -9,25 +9,29 @@
         android:orientation="vertical">
 
         <RadioGroup
+            android:id="@+id/newApptRG"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <RadioButton android:id="@+id/radio_confirm"
+            <RadioButton
+                android:id="@+id/radio_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:onClick="onRadioButtonClicked"
                 android:text="Confirmed"
-                android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/radio_follow_up"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radio_follow_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="20sp"
+                android:onClick="onRadioButtonClicked"
                 android:text="Planned"
-                android:onClick="onRadioButtonClicked"/>
+                android:textSize="20sp" />
         </RadioGroup>
 
         <RelativeLayout
@@ -46,14 +50,14 @@
 
             <EditText
                 android:id="@+id/NewAppointmentDate"
-                android:background="@drawable/input_text_box_column"
-                android:layout_marginStart="10dp"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/NewAppointmentDateCol"
+                android:autofillHints="Date"
+                android:background="@drawable/input_text_box_column"
                 android:inputType="date"
-                android:textSize="20sp"
-                android:autofillHints="Date" />
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -72,14 +76,14 @@
 
             <EditText
                 android:id="@+id/NewAppointmentTime"
-                android:background="@drawable/input_text_box_column"
-                android:layout_marginStart="10dp"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/NewAppointmentTimeCol"
+                android:autofillHints="Time"
+                android:background="@drawable/input_text_box_column"
                 android:inputType="time"
-                android:textSize="20sp"
-                android:autofillHints="Time" />
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -176,14 +180,14 @@
 
             <EditText
                 android:id="@+id/NewAppointmentEmail"
-                android:background="@drawable/input_text_box_column"
-                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/NewAppointmentEmailCol"
+                android:autofillHints="Email"
+                android:background="@drawable/input_text_box_column"
                 android:inputType="textEmailAddress"
-                android:textSize="20sp"
-                android:autofillHints="Email" />
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout

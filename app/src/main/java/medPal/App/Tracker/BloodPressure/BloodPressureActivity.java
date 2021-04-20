@@ -3,8 +3,8 @@ package medPal.App.Tracker.BloodPressure;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +34,11 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 public class BloodPressureActivity extends AppCompatActivity {
@@ -82,6 +80,8 @@ public class BloodPressureActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         lv2.setOnItemClickListener((parent, view, position, id) -> {
             String s = lv2.getItemAtPosition(position).toString();
@@ -103,7 +103,6 @@ public class BloodPressureActivity extends AppCompatActivity {
         });
 
 
-        
         // Go to add new record
         b3 = (Button) findViewById(R.id.NewPressureRecordButton);
         b3.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +122,8 @@ public class BloodPressureActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.pressureGraph);
+        lineChart.setNoDataText("No data available");
+
         lineChart.setVisibleXRangeMaximum(3);
 
         XAxis xAxis = lineChart.getXAxis();
@@ -132,17 +133,51 @@ public class BloodPressureActivity extends AppCompatActivity {
         xAxis.setLabelCount(5);
 
         //Get data from database for X-axis
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float index, AxisBase axis) {
-                return x_axis.get((int) index);
-            }
+        if (x_axis.size() == 0) {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+
+                    return x_axis.get((int) index);
+
+                }
 
 
-            public int getDecimalDigits() {
-                return 0;
-            }
-        });
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        } else if (x_axis.size() == 1) {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+                        index = 0;
+
+                        return x_axis.get((int) index);
+                    }
+
+
+
+
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        }else {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+
+                    return x_axis.get((int) index);
+                }
+
+
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        }
+
 
         ArrayList<Entry> yValues = new ArrayList<>();
         ArrayList<Entry> yValues2 = new ArrayList<>();
@@ -150,7 +185,7 @@ public class BloodPressureActivity extends AppCompatActivity {
         int n = x_axis.size();
 
         // plotting data to the graph， limit to 5 maximum
-        if(n>=5) {
+        if (n >= 5) {
             for (int i = n - 5; i < n; i++) {
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
@@ -158,6 +193,8 @@ public class BloodPressureActivity extends AppCompatActivity {
             for (int i = n - 5; i < n; i++) {
                 yValues2.add(new Entry(i, Float.parseFloat(y_axis2.get(i))));
             }
+        } else if (n == 0) {
+
         } else {
             for (int i = 0; i < n; i++) {
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
@@ -170,69 +207,57 @@ public class BloodPressureActivity extends AppCompatActivity {
 
 
         // Design of plotting
-        LineDataSet set1 = new LineDataSet(yValues, "SYS");
-        set1.setFillAlpha(110);
-        set1.setColor(Color.RED);
-        set1.setLineWidth(1.75f);
-        set1.setCircleRadius(5f);
-        set1.setCircleHoleRadius(2.5f);
-        set1.setValueTextSize(10);
-        set1.setCircleColor(Color.BLACK);
-        set1.setHighLightColor(Color.BLACK);
-        set1.setDrawValues(true);
+        if (n != 0) {
+            LineDataSet set1 = new LineDataSet(yValues, "SYS");
+            set1.setFillAlpha(110);
+            set1.setColor(Color.RED);
+            set1.setLineWidth(1.75f);
+            set1.setCircleRadius(5f);
+            set1.setCircleHoleRadius(2.5f);
+            set1.setValueTextSize(10);
+            set1.setCircleColor(Color.BLACK);
+            set1.setHighLightColor(Color.BLACK);
+            set1.setDrawValues(true);
 
-        LineDataSet set2 = new LineDataSet(yValues2, "DIA");
-        set2.setFillAlpha(110);
-        set2.setColor(Color.BLUE);
-        set2.setLineWidth(1.75f);
-        set2.setCircleRadius(5f);
-        set2.setCircleHoleRadius(2.5f);
-        set2.setValueTextSize(10);
-        set2.setCircleColor(Color.BLACK);
-        set2.setHighLightColor(Color.BLACK);
-        set2.setDrawValues(true);
-
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
-        dataSets.add(set2);
-
-        LineData data = new LineData(dataSets);
-
-        lineChart.setData(data);
-        lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
+            LineDataSet set2 = new LineDataSet(yValues2, "DIA");
+            set2.setFillAlpha(110);
+            set2.setColor(Color.BLUE);
+            set2.setLineWidth(1.75f);
+            set2.setCircleRadius(5f);
+            set2.setCircleHoleRadius(2.5f);
+            set2.setValueTextSize(10);
+            set2.setCircleColor(Color.BLACK);
+            set2.setHighLightColor(Color.BLACK);
+            set2.setDrawValues(true);
 
 
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+            dataSets.add(set2);
 
 
+            if (dataSets.isEmpty() == false) {
+                LineData data = new LineData(dataSets);
 
+                lineChart.setData(data);
+                lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
+            }
+
+        }
     }
 
-    // get data from database and put into array
-    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException {
 
-        class dbManager extends AsyncTask<String, Void, String>
-        {
-            protected String doInBackground(String... strings){
-                try{
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
-                    StringBuffer data = new StringBuffer();
-                    String line;
 
-                    while((line = br.readLine()) != null){
-                        data.append(line + "\n");
-                    }
-                    br.close();
-                    return data.toString();
-                } catch (Exception ex) {
-                    return ex.getMessage();
-                }
-            }
-        }
-        dbManager obj = new dbManager();
-        String data = obj.execute(apiurl).get();
+
+
+
+    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
+
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.BLOOD_PRESSURE);
+        dbHelper.setUserInfo();
+        String data = dbHelper.send();
+
 
         try {
             JSONArray ja = new JSONArray(data);

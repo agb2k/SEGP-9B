@@ -20,25 +20,25 @@ import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
 
+import medPal.App.Appointment.Appointment;
 import medPal.App.Homepage.LastBloodRecord.LastBloodGlucose;
 import medPal.App.Homepage.LastBloodRecord.LastBloodPressure;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordAdapter;
 import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
-import medPal.App.Homepage.NextAppointment.NextAppointment;
-import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
-import medPal.App.Homepage.NextAppointment.NextAppointmentController;
 import medPal.App.Homepage.NextPillReminder.NextPillReminderAdapter;
-import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointment;
 import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentController;
 import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentsAdapter;
 import medPal.App.PillReminder.PillReminder;
 import medPal.App.PillReminder.PillReminderController;
 import medPal.App.R;
+
+import static android.view.View.GONE;
 
 
 /**
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
     }
 
     private Button healthBtn;
-    private RecyclerView upcomingAppointmentList;
+    private RecyclerView nextAppointmentList;
     private UpcomingAppointmentsAdapter upcomingAppointmentsAdapter;
     private ExpandableListView nextPillReminderList;
     private ExpandableListAdapter nextPillReminderAdapter;
@@ -109,32 +109,41 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-
-        // Set up Upcoming Appointment Data
-        upcomingAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
-        upcomingAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
+        // Set up Next Appointment Data
+        nextAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
+        nextAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
         TextView noUpcomingAppointment = (TextView)v.findViewById(R.id.noUpcomingAppointment);
 
-        UpcomingAppointmentController upcomingAppointmentController = new UpcomingAppointmentController();
-        ArrayList<UpcomingAppointment> upcomingAppointmentArrayList = upcomingAppointmentController.getUpcomingAppointmentsList();
+        UpcomingAppointmentController upcomingAppointmentController = null;
+        try {
+            upcomingAppointmentController = new UpcomingAppointmentController();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Appointment> upcomingAppointmentArrayList = upcomingAppointmentController.getUpcomingAppointmentsList();
 
-        if(upcomingAppointmentArrayList.size()>0) {
-            upcomingAppointmentList.setVisibility(View.VISIBLE);
-            noUpcomingAppointment.setVisibility(View.GONE);
+        if(upcomingAppointmentArrayList .size()>0) {
+            nextAppointmentList.setVisibility(View.VISIBLE);
+            noUpcomingAppointment.setVisibility(GONE);
 
             //Get upcoming appointment data and et up view
             upcomingAppointmentsAdapter = new UpcomingAppointmentsAdapter(getContext(), upcomingAppointmentArrayList);
-            upcomingAppointmentList.setAdapter(upcomingAppointmentsAdapter);
+            nextAppointmentList.setAdapter(upcomingAppointmentsAdapter);
 
         }
         else {
-            upcomingAppointmentList.setVisibility(View.GONE);
+            nextAppointmentList.setVisibility(GONE);
             noUpcomingAppointment.setVisibility(View.VISIBLE);
         }
 
 
 
-        PillReminderController nextPillReminderController = new PillReminderController(this.requireContext());
+        PillReminderController nextPillReminderController = null;
+        try {
+            nextPillReminderController = new PillReminderController(this.requireContext());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         TreeMap<LocalTime,ArrayList<PillReminder>> nextPillReminder = nextPillReminderController.getUpcomingPillReminder();
         // Get the list of time of reminders
         ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
@@ -144,7 +153,7 @@ public class HomeFragment extends Fragment {
         TextView noPillReminderMessage = (TextView)v.findViewById(R.id.noPillReminderMessage);
         if(timeList.size() > 0) {
             nextPillReminderList.setVisibility(View.VISIBLE);
-            noPillReminderMessage.setVisibility(View.GONE);
+            noPillReminderMessage.setVisibility(GONE);
             // Show upcoming pill reminders
             // This is line sets the height of the pill reminder section (480dp for each reminder)
             RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,420);
@@ -156,12 +165,10 @@ public class HomeFragment extends Fragment {
             nextPillReminderAdapter = new NextPillReminderAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
             nextPillReminderList.setAdapter(nextPillReminderAdapter);
             // Expand all
-            for(int i=0; i<1; i++){
-                nextPillReminderList.expandGroup(i);
-            }
+            nextPillReminderList.expandGroup(0);
         }else{
             // If no upcoming pill reminders for today, show message
-            nextPillReminderList.setVisibility(View.GONE);
+            nextPillReminderList.setVisibility(GONE);
             noPillReminderMessage.setVisibility(View.VISIBLE);
         }
 
@@ -170,14 +177,23 @@ public class HomeFragment extends Fragment {
         lastBloodRecordList = v.findViewById(R.id.lastBloodRecord);
         lastBloodRecordList.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
-        LastBloodRecordController lastBloodRecordController = new LastBloodRecordController();
+        LastBloodRecordController lastBloodRecordController = null;
+        try {
+            lastBloodRecordController = new LastBloodRecordController();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         ArrayList<LastBloodPressure> lastBloodPressureList = lastBloodRecordController.getLastBloodPressureList();
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 
-
-        lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(),lastBloodPressureList,lastBloodGlucoseList);
-        lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
-
+        // Handle if no record for blodd pressure and sugar
+        // TODO Handle other situations (if one list is empty another is not)
+        if(lastBloodPressureList.size() > 0 && lastBloodGlucoseList.size() > 0) {
+            lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
+            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
+        } else {
+            lastBloodRecordList.setVisibility(GONE);
+        }
         /*healthBtn = v.findViewById(R.id.healthConditionButton);
 
         healthBtn.setOnClickListener(new View.OnClickListener() {

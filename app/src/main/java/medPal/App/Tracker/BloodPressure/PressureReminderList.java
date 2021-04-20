@@ -64,7 +64,6 @@ public class PressureReminderList extends AppCompatActivity implements LoaderMan
         reminderText1 = (TextView) findViewById(R.id.reminderTextPressure);
 
 
-
         mCursorAdapter = new AlarmCursorAdapter(this, null);
         reminderListView.setAdapter(mCursorAdapter);
 

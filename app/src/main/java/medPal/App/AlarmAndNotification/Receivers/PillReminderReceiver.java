@@ -5,8 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import medPal.App.AlarmAndNotification.AlarmHelper;
-import medPal.App.AlarmAndNotification.SQLiteHelper;
 import medPal.App.App;
 import medPal.App.MainActivity;
 

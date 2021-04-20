@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
@@ -42,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
 import medPal.App.R;
 
 public class SugarLevelActivity extends AppCompatActivity {
@@ -78,6 +80,8 @@ public class SugarLevelActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
@@ -118,6 +122,9 @@ public class SugarLevelActivity extends AppCompatActivity {
         });
 
         lineChart = (LineChart) findViewById(R.id.sugarGraph);
+        lineChart.setNoDataText("No data available");
+
+
 
         lineChart.setVisibleXRangeMaximum(6);
 
@@ -129,18 +136,50 @@ public class SugarLevelActivity extends AppCompatActivity {
         xAxis.setLabelCount(5);
 
         //Get data from database for X-axis
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float index, AxisBase axis) {
-                //return xVal[(int) value]; // xVal is a string array
-                return x_axis.get((int) index);
-            }
+        if (x_axis.size() == 0) {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+
+                    return x_axis.get((int) index);
+
+                }
 
 
-            public int getDecimalDigits() {
-                return 0;
-            }
-        });
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        } else if (x_axis.size() == 1) {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+                    index = 0;
+
+                    return x_axis.get((int) index);
+                }
+
+
+
+
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        }else {
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float index, AxisBase axis) {
+
+                    return x_axis.get((int) index);
+                }
+
+
+                public int getDecimalDigits() {
+                    return 0;
+                }
+            });
+        }
 
         ArrayList<Entry> yValues = new ArrayList<>();
 
@@ -151,59 +190,46 @@ public class SugarLevelActivity extends AppCompatActivity {
             for (int i = n - 5; i < n; i++) {
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
+        } else if(n==0){
+
         } else {
             for (int i = 0; i < n; i++) {
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
         }
 
-        LineDataSet set1 = new LineDataSet(yValues, "Sugar Level");
-        set1.setFillAlpha(110);
-        set1.setColor(Color.RED);
-        set1.setLineWidth(1.75f);
-        set1.setCircleRadius(5f);
-        set1.setCircleHoleRadius(2.5f);
-        set1.setValueTextSize(10);
-        set1.setCircleColor(Color.BLACK);
-        set1.setHighLightColor(Color.BLACK);
-        set1.setDrawValues(true);
+        if(n != 0) {
+            LineDataSet set1 = new LineDataSet(yValues, "Sugar Level");
+            set1.setFillAlpha(110);
+            set1.setColor(Color.RED);
+            set1.setLineWidth(1.75f);
+            set1.setCircleRadius(5f);
+            set1.setCircleHoleRadius(2.5f);
+            set1.setValueTextSize(10);
+            set1.setCircleColor(Color.BLACK);
+            set1.setHighLightColor(Color.BLACK);
+            set1.setDrawValues(true);
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
 
-        LineData data = new LineData(dataSets);
+            if (dataSets.isEmpty() == false) {
+                LineData data = new LineData(dataSets);
 
-        lineChart.setData(data);
-        lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
+                lineChart.setData(data);
+                lineChart.animateX(3000, Easing.EasingOption.EaseInCirc);
+            }
+        }
 
     }
 
-    // get data from database and put into array
-    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException {
 
-        class dbManager extends AsyncTask<String, Void, String>
-        {
-            protected String doInBackground(String... strings){
-                try{
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+    public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
-                    StringBuffer data = new StringBuffer();
-                    String line;
+        DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.SUGAR_LEVEL);
+        dbHelper.setUserInfo();
+        String data = dbHelper.send();
 
-                    while((line = br.readLine()) != null){
-                        data.append(line + "\n");
-                    }
-                    br.close();
-                    return data.toString();
-                } catch (Exception ex) {
-                    return ex.getMessage();
-                }
-            }
-        }
-        dbManager obj = new dbManager();
-        String data = obj.execute(apiurl).get();
 
         try {
             JSONArray ja = new JSONArray(data);

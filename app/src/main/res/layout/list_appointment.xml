@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/home_column">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/dateLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Date:"/>
+
+                <TextView android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Date (yymmdd)"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/timeLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Time:"/>
+
+                <TextView android:id="@+id/time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Time"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/doctorLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Doctor:"/>
+
+                <TextView android:id="@+id/doctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Name"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/venueLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Venue:"/>
+
+                <TextView android:id="@+id/venue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Hospital Name"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/contactLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp"
+                    android:text="Contact:"/>
+
+                <TextView android:id="@+id/contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Contact No."
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/emailLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Email/Link:"
+                    android:textColor="#0000A0"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Email"
+                    android:textColor="@color/lightgrey"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/purposeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="20sp"
+                android:text="Purpose:"/>
+
+            <TextView android:id="@+id/purpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:text="BodyCheck"
+                android:textColor="@color/lightgrey"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/remarkLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textColor="#0000A0"
+                android:textSize="20sp"
+                android:text="Remark:"/>
+
+            <TextView android:id="@+id/remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:text="None"
+                android:textColor="@color/lightgrey"
+                android:textSize="20sp" />
+
+        </TableLayout>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
