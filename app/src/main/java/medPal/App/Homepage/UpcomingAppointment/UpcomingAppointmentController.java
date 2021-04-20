@@ -21,16 +21,12 @@ public class UpcomingAppointmentController implements Serializable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public UpcomingAppointmentController() throws UnsupportedEncodingException {
-        //RetrieveUpcomingAppointment getDB = new RetrieveUpcomingAppointment();
-        //upcomingAppointmentsList = getDB.getUpcomingAppointmentsList();
         RetrieveAppointments getDB = new RetrieveAppointments();
         upcomingAppointmentsList = getDB.getAllAppointment();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void refreshData() throws UnsupportedEncodingException {
-        //RetrieveUpcomingAppointment getDB = new RetrieveUpcomingAppointment();
-        //upcomingAppointmentsList = getDB.getUpcomingAppointmentsList();
         RetrieveAppointments getDB = new RetrieveAppointments();
         upcomingAppointmentsList = getDB.getAllAppointment();
     }
@@ -43,12 +39,15 @@ public class UpcomingAppointmentController implements Serializable {
             LocalTime tempTime = stringToLocalTime(upcomingAppointmentsList.get(i).getTime());
             String status = upcomingAppointmentsList.get(i).getRemark();
 
-            //Add appointment to list if the date is larger than today and status is not confirmed
-            if (tempDate.compareTo(LocalDate.now())>0 && !checkStatus(status)) {
-                resultList.add(upcomingAppointmentsList.get(i));
+            //If the date is today and status is not confirmed then check if the time larger than now
+            if (tempDate.compareTo(LocalDate.now())==0  && !checkStatus(status)) {
+                //if time is larger than now then add to list
+                if(tempTime.compareTo(LocalTime.now())>=0){
+                    resultList.add(upcomingAppointmentsList.get(i));
+                }
             }
-            //If the date is today then check if the time larger than now
-            else if (tempDate.compareTo(LocalDate.now())==0 && tempTime.compareTo(LocalTime.now())>=0 && !checkStatus(status)) {
+            //Add appointment to list if the date is larger than today and status is not confirmed
+            else if (tempDate.compareTo(LocalDate.now())>0 && !checkStatus(status)) {
                 resultList.add(upcomingAppointmentsList.get(i));
             }
 
@@ -64,14 +63,18 @@ public class UpcomingAppointmentController implements Serializable {
             LocalTime tempTime = stringToLocalTime(upcomingAppointmentsList.get(i).getTime());
             String status = upcomingAppointmentsList.get(i).getRemark();
 
-            //Add appointment to list if the date is larger than today and status is not confirmed
-            if (tempDate.compareTo(LocalDate.now())>0 && checkStatus(status)) {
+            //If the date is today and status is confirmed then check if the time larger than now
+            if (tempDate.compareTo(LocalDate.now())==0 && tempTime.compareTo(LocalTime.now())>=0 && checkStatus(status)) {
+                //if time is larger than now then add to list
+                if(tempTime.compareTo(LocalTime.now())>=0){
+                    resultList.add(upcomingAppointmentsList.get(i));
+                }
+            }
+            //Add appointment to list if the date is larger than today and status is confirmed
+            else if (tempDate.compareTo(LocalDate.now())>0 && checkStatus(status)) {
                 resultList.add(upcomingAppointmentsList.get(i));
             }
-            //If the date is today then check if the time larger than now
-            else if (tempDate.compareTo(LocalDate.now())==0 && tempTime.compareTo(LocalTime.now())>=0 && checkStatus(status)) {
-                resultList.add(upcomingAppointmentsList.get(i));
-            }
+
 
         }
         return resultList;
@@ -86,6 +89,7 @@ public class UpcomingAppointmentController implements Serializable {
         return localTime;
     }
 
+    //Function to check confirmed appointment
     private Boolean checkStatus(String status) {
         boolean check=false;
         for(int i=0; i<(status.length()-8); i++) {
