@@ -42,8 +42,7 @@ public class PillTakingDBHelper {
     }
 
     public ArrayList<MedicationRecord> getRecord(int month) {
-        ArrayList<MedicationRecord> list = new ArrayList<>();
-
+        ArrayList<MedicationRecord> list = new ArrayList<MedicationRecord>();
         Cursor cursor = myDB.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE month = " + month + ";",null);
         if (cursor.moveToFirst()){
             while (!cursor.isAfterLast()) {

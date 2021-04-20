@@ -1,11 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <TableLayout
+    <LinearLayout
+        android:id="@+id/plannedApt"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/NextAppointmentStatus"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Planned"
+            android:textAlignment="center"
+            android:textColor="#FF0000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentDate"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentTime"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Appointment"
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentHospital"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentDoc"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/plannedApt"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/NextAppointmentStatus2"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="Confirmed"
+            android:textAlignment="center"
+            android:textColor="#3D9824"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentDate2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentTime2"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="Appointment"
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentHospital2"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/NextAppointmentDoc2"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#0000A0"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+
+    <!--<TableLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content">
 
@@ -110,6 +219,6 @@
                 android:textSize="20sp" />
         </TableRow>
 
-    </TableLayout>
+    </TableLayout>-->
 
-</LinearLayout>
+</RelativeLayout>

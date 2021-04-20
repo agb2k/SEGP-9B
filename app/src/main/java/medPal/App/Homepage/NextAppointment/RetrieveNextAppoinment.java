@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
+
 
 public class RetrieveNextAppoinment {
 
@@ -30,10 +32,11 @@ public class RetrieveNextAppoinment {
         JSONArray jsonArray;
         JSONObject jsonObject;
         NextAppointment nextAppointment;
+        DatabaseHelper nextAptDbhelper = new DatabaseHelper("https://sayft1nottingham.000webhostapp.com/getNextAppointment.php");
 
         try {
             //Retrieve Next Appointment
-            jsonStr = new ConnectDB().execute("https://sayft1nottingham.000webhostapp.com/getNextAppointment.php").get();
+            jsonStr = nextAptDbhelper.send();
             jsonArray = new JSONArray(jsonStr);
             for(int i=0; i<jsonArray.length(); i++) {
                 jsonObject = (JSONObject) jsonArray.get(i);
@@ -64,29 +67,5 @@ public class RetrieveNextAppoinment {
         return NextApptList;
     }
 
-    static class ConnectDB extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... source) {
-            StringBuilder total = new StringBuilder();
-            try {
-                // Create a neat value object to hold the URL
-                URL url = new URL(source[0]);
-                // Open a connection(?) on the URL(?) and cast the response(??)
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                // Now it's "open", we can set the request method, headers etc.
-                connection.setRequestProperty("accept", "application/json");
-                // This line makes the request
-                InputStream responseStream = connection.getInputStream();
-                BufferedReader r = new BufferedReader(new InputStreamReader(responseStream));
-                for (String line; (line = r.readLine()) != null; ) {
-                    total.append(line).append('\n');
-                }
-                connection.disconnect();
-            }catch(IOException ioE){
-                ioE.printStackTrace();
-            }
-            return total.toString();
-        }
-    }
 
 }

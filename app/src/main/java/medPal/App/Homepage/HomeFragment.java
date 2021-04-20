@@ -33,6 +33,9 @@ import medPal.App.Homepage.NextAppointment.NextAppointment;
 import medPal.App.Homepage.NextAppointment.NextAppointmentAdapter;
 import medPal.App.Homepage.NextAppointment.NextAppointmentController;
 import medPal.App.Homepage.NextPillReminder.NextPillReminderAdapter;
+import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointment;
+import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentController;
+import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentsAdapter;
 import medPal.App.PillReminder.PillReminder;
 import medPal.App.PillReminder.PillReminderController;
 import medPal.App.R;
@@ -91,8 +94,8 @@ public class HomeFragment extends Fragment {
     }
 
     private Button healthBtn;
-    private RecyclerView nextAppointmentList;
-    private NextAppointmentAdapter nextAppointmentListAdapter;
+    private RecyclerView upcomingAppointmentList;
+    private UpcomingAppointmentsAdapter upcomingAppointmentsAdapter;
     private ExpandableListView nextPillReminderList;
     private ExpandableListAdapter nextPillReminderAdapter;
     private RecyclerView lastBloodRecordList;
@@ -105,25 +108,27 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Set up Next Appointment Data
-        nextAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
-        nextAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
+
+
+        // Set up Upcoming Appointment Data
+        upcomingAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
+        upcomingAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
         TextView noUpcomingAppointment = (TextView)v.findViewById(R.id.noUpcomingAppointment);
 
-        NextAppointmentController nextAppointmentController = new NextAppointmentController();
-        ArrayList<NextAppointment> nextAppointmentArrayList = nextAppointmentController.getNextApptList();
+        UpcomingAppointmentController upcomingAppointmentController = new UpcomingAppointmentController();
+        ArrayList<UpcomingAppointment> upcomingAppointmentArrayList = upcomingAppointmentController.getUpcomingAppointmentsList();
 
-        if(nextAppointmentArrayList.size()>0) {
-            nextAppointmentList.setVisibility(View.VISIBLE);
+        if(upcomingAppointmentArrayList.size()>0) {
+            upcomingAppointmentList.setVisibility(View.VISIBLE);
             noUpcomingAppointment.setVisibility(View.GONE);
 
             //Get upcoming appointment data and et up view
-            nextAppointmentListAdapter = new NextAppointmentAdapter(getContext(), nextAppointmentArrayList);
-            nextAppointmentList.setAdapter(nextAppointmentListAdapter);
+            upcomingAppointmentsAdapter = new UpcomingAppointmentsAdapter(getContext(), upcomingAppointmentArrayList);
+            upcomingAppointmentList.setAdapter(upcomingAppointmentsAdapter);
 
         }
         else {
-            nextAppointmentList.setVisibility(View.GONE);
+            upcomingAppointmentList.setVisibility(View.GONE);
             noUpcomingAppointment.setVisibility(View.VISIBLE);
         }
 
