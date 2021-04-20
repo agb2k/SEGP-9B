@@ -6,26 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import medPal.App.R;
 
-/***
- * Adapter to handle the view of the last blood record at homepage
- */
-public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecordAdapter.ViewHolder> {
-
+public class LastBloodGlucoseAdapter extends RecyclerView.Adapter<LastBloodGlucoseAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<LastBloodPressure> lastBloodPressureList = new ArrayList<>();
     private ArrayList<LastBloodGlucose> lastBloodGlucoseList = new ArrayList<>();
 
-    public LastBloodRecordAdapter(Context context, ArrayList<LastBloodPressure> lastBloodPressureList, ArrayList<LastBloodGlucose> lastBloodGlucoseList) {
+    public LastBloodGlucoseAdapter(Context context, ArrayList<LastBloodGlucose> lastBloodGlucoseList) {
         this.context = context;
-        this.lastBloodPressureList = lastBloodPressureList;
         this.lastBloodGlucoseList = lastBloodGlucoseList;
     }
 
@@ -33,48 +25,18 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View cardview = inflater.inflate(R.layout.home_last_record, null, false);
-        ViewHolder viewHolder = new ViewHolder(cardview);
 
-        viewHolder.bpTime = (TextView) cardview.findViewById(R.id.lastPressureTime);
-        viewHolder.bpRecord = (TextView) cardview.findViewById(R.id.lastPressure);
+        LastBloodGlucoseAdapter.ViewHolder viewHolder = new LastBloodGlucoseAdapter.ViewHolder(cardview);
+
         viewHolder.bgTime = (TextView) cardview.findViewById(R.id.lastGlucoseTime);
         viewHolder.bgLevel = (TextView) cardview.findViewById(R.id.lastGlucose);
 
         return viewHolder;
     }
 
+
     @Override
-    public void onBindViewHolder( ViewHolder holder, int position) {
-        //Set up view for last blood pressure record
-        TextView bpTimeView = (TextView) holder.bpTime;
-        String tempTime = lastBloodPressureList.get(position).getTime();
-        String tempDate = lastBloodPressureList.get(position).getDate();
-        String tempBPTime;
-
-        if (Integer.parseInt(tempTime.substring(0,2))>=12) {
-            int convert = Integer.parseInt(tempTime.substring(0,2));
-            if(Integer.parseInt(tempTime.substring(0,2))>12) {
-                convert = convert - 12;
-            }
-            String tempStr;
-            if (convert<10) {
-                tempStr = "0" + convert;
-            }
-            else {
-                tempStr = String.valueOf(convert);
-            }
-            tempBPTime = "Last Recorded: "+ tempDate.substring(5,10) + " " + tempStr + tempTime.substring(2,5) + "PM " ;
-        }
-        else {
-            tempBPTime = "Last Recorded: "+ tempDate.substring(5,10) + " " + tempTime.substring(0,5) + "AM " ;
-        }
-
-        bpTimeView.setText(tempBPTime);
-
-        TextView bpRecordView = (TextView) holder.bpRecord;
-        String tempBPRecord = lastBloodPressureList.get(position).getSYS() + "/" + lastBloodPressureList.get(position).getDIA();
-        bpRecordView.setText(tempBPRecord);
-
+    public void onBindViewHolder(LastBloodGlucoseAdapter.ViewHolder holder, int position) {
 
         //Set up view for last blood glucose record
         TextView bgTimeView = (TextView) holder.bgTime;
@@ -118,15 +80,11 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView bpTime;
-        TextView bpRecord;
         TextView bgTime;
         TextView bgLevel;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            bpTime = (TextView) itemView.findViewById(R.id.lastPressureTime);
-            bpRecord = (TextView) itemView.findViewById(R.id.lastPressure);
             bgTime = (TextView) itemView.findViewById(R.id.lastGlucoseTime);
             bgLevel = (TextView) itemView.findViewById(R.id.lastGlucose);
         }
