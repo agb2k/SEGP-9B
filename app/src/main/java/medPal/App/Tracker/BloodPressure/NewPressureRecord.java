@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import medPal.App.R;
-import medPal.App.Tracker.BloodSugarLevel.SugarLevelActivity;
 
 public class NewPressureRecord extends AppCompatActivity  {
 
@@ -72,6 +71,7 @@ public class NewPressureRecord extends AppCompatActivity  {
             }
         });
 
+        // Store data into database
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

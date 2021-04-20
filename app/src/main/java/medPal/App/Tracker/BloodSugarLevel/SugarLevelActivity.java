@@ -86,17 +86,19 @@ public class SugarLevelActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
         });
 
+        // Click to edit record
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent3 = new Intent(SugarLevelActivity.this, EditSugarLevelActivity.class);
-                intent3.putExtra("Date", date[position]);
+                intent3.putExtra("Date", date[position]); // initialise data with the last record
                 intent3.putExtra("Time", time[position]);
                 intent3.putExtra("Level", level[position]);
                 startActivity(intent3);
             }
         });
 
+        // Go to add new record
         b4 = (Button) findViewById(R.id.NewSugarLevelRecordButton);
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +107,7 @@ public class SugarLevelActivity extends AppCompatActivity {
             }
         });
 
+        // Go to reminder page
         b5 = (Button) findViewById(R.id.NewSugarLevelReminderButton);
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +127,8 @@ public class SugarLevelActivity extends AppCompatActivity {
         xAxis.setLabelRotationAngle(-45);
         xAxis.setGranularityEnabled(true);
         xAxis.setLabelCount(5);
+
+        //Get data from database for X-axis
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float index, AxisBase axis) {
@@ -141,14 +146,13 @@ public class SugarLevelActivity extends AppCompatActivity {
 
         int n = x_axis.size();
 
+        // plotting data to the graph
         if(n>=5) {
             for (int i = n - 5; i < n; i++) {
-                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
         } else {
             for (int i = 0; i < n; i++) {
-                //yValues.add(new Entry(Float.parseFloat(x_axis.get(i)), Float.parseFloat(y_axis.get(i))));
                 yValues.add(new Entry(i, Float.parseFloat(y_axis.get(i))));
             }
         }
@@ -174,6 +178,7 @@ public class SugarLevelActivity extends AppCompatActivity {
 
     }
 
+    // get data from database and put into array
     public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException {
 
         class dbManager extends AsyncTask<String, Void, String>
@@ -223,6 +228,7 @@ public class SugarLevelActivity extends AppCompatActivity {
         }
     }
 
+    //create listview of records with data from database
     class myadapter extends ArrayAdapter<String>
     {
         Context context;

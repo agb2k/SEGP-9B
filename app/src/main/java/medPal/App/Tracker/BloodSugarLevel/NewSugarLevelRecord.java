@@ -43,8 +43,7 @@ public class NewSugarLevelRecord extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sugar_level_record);
 
-        //Intent intent = new Intent(NewSugarLevelRecord.this, SugarLevelActivity.class);
-        //startActivityForResult(intent,ACTIVITY_REQUEST_CODE);
+
 
         getSupportActionBar().setTitle("New Blood Sugar Level Record");
 
@@ -70,6 +69,8 @@ public class NewSugarLevelRecord extends AppCompatActivity {
             }
         });
 
+
+        // Store data into datanase
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

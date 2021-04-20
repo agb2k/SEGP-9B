@@ -5,17 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import medPal.App.AlarmAndNotification.AlarmHelper;
-import medPal.App.AlarmAndNotification.SQLiteHelper;
 import medPal.App.App;
-import medPal.App.MainActivity;
 import medPal.App.Tracker.BloodSugarLevel.NewSugarLevelRecord;
 
 public class BloodSugarReceiver extends BroadcastReceiver {
 
-    private static final String TITLE = "Title for Notification Type 1";
-    private static final String TEXT = "Text for Notification Type 1";
-    private static final String INFO = "Info for Notification Type 1";
+    private static final String TITLE = "medPal - Blood Sugar";
+    private static final String TEXT = "Have you done sugar recording?";
+    private static final String INFO = "Click here to do the recording now.";
     private static final String CHANNEL_ID = App.CHANNEL_SUGAR_LEVEL;
 
     @Override

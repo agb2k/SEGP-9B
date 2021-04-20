@@ -48,6 +48,7 @@ public class EditSugarLevelActivity extends AppCompatActivity {
         b1 = (Button) findViewById(R.id.edit_ConfirmSugarRecordButton);
         b2 = (Button) findViewById(R.id.DeleteSugarRecordButton);
 
+        // Initialise column with the last record
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             editDate.setText(bundle.getString("Date"));
@@ -57,6 +58,7 @@ public class EditSugarLevelActivity extends AppCompatActivity {
             editLevel.setText(bundle.getString("Level"), TextView.BufferType.EDITABLE);
         }
 
+        // Save changes
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +97,7 @@ public class EditSugarLevelActivity extends AppCompatActivity {
             }
         });
 
+        // Delete record
         b2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
