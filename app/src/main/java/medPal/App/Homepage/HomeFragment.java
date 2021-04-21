@@ -189,29 +189,9 @@ public class HomeFragment extends Fragment {
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 
         // Handle if no record for blood pressure and sugar
-        // TODO Handle other situations (if one list is empty another is not)
-        if(lastBloodPressureList.size() > 0 && lastBloodGlucoseList.size() > 0) {
-            lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
-            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
-        } else {
-            lastBloodRecordList.setVisibility(GONE);
-        }
 
-        /*if(lastBloodPressureList.size() > 0) {
-            lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList);
-            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
-        } else {
-            lastBloodRecordList.setVisibility(GONE);
-        }
-
-        if(lastBloodPressureList.size() > 0 && lastBloodGlucoseList.size() > 0) {
-            lastBloodGlucoseAdapter = new LastBloodGlucoseAdapter(getContext(), lastBloodGlucoseList);
-            lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
-        } else {
-            lastBloodRecordList.setVisibility(GONE);
-        }*/
-
-
+        lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
+        lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
 
 
         return v;
