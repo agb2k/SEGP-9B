@@ -181,7 +181,7 @@
 
             <Button
                 android:id="@+id/deleteAppt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Delete"
                 android:drawableEnd="@drawable/ic_discard"

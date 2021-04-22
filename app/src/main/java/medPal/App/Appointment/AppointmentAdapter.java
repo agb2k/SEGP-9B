@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.UnsupportedEncodingException;
@@ -111,6 +112,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            AppointmentDelete apptDelete = new AppointmentDelete();
+            apptDelete.refresh();
             System.out.println(appt);
         });
     }
