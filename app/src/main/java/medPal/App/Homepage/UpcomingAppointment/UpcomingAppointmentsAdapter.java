@@ -68,9 +68,9 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
                 } else {
                     tempStr = String.valueOf(convert);
                 }
-                apptTime = tempStr + ":" + tempTime.substring(2) + "PM ";
+                apptTime = tempStr + ":" + tempTime.substring(2) + " pm";
             } else {
-                apptTime = tempTime.substring(0, 2) + ":" + tempTime.substring(2) + "AM ";
+                apptTime = tempTime.substring(0, 2) + ":" + tempTime.substring(2) + " am";
             }
             apptTimeTextView.setText(apptTime);
 
@@ -111,9 +111,9 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
                 } else {
                     tempStr = String.valueOf(convert);
                 }
-                apptTime = tempStr + ":" + tempTime.substring(2) + "PM ";
+                apptTime = tempStr + ":" + tempTime.substring(2) + " pm";
             } else {
-                apptTime = tempTime.substring(0, 2) + ":" + tempTime.substring(2) + "AM ";
+                apptTime = tempTime.substring(0, 2) + ":" + tempTime.substring(2) + " am";
             }
             apptTimeTextView.setText(apptTime);
 
