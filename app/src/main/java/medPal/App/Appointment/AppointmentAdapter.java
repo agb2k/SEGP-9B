@@ -51,6 +51,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         viewHolder.email = (TextView) cardview.findViewById(R.id.email);
         viewHolder.purpose = (TextView) cardview.findViewById(R.id.purpose);
         viewHolder.remark = (TextView) cardview.findViewById(R.id.remark);
+        viewholder.deleteBtn = (Button) cardview.findViewById(R.id.deleteAppt);
 
         return viewHolder;
     }
@@ -81,8 +82,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         TextView remarkTextView = (TextView) holder.remark;
         remarkTextView.setText(Appointments.get(position).getRemark());
 
-        Button deleteBtn;
-        deleteBtn = (Button) holder.deleteBtn(R.id.deleteAppt);
+        deleteBtn = (Button) holder.deleteBtn;
 
         int appt;
         appt = Appointments.get(position).getAppointmentID();
@@ -96,7 +96,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
                 e.printStackTrace();
             }
             try {
-                dbHelper.encodeData("id",String.valueOf(appt.getAppointmentID()));
+                dbHelper.encodeData("id",String.valueOf(appt);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -145,6 +145,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             email = (TextView) itemView.findViewById(R.id.email);
             purpose = (TextView) itemView.findViewById(R.id.purpose);
             remark = (TextView) itemView.findViewById(R.id.remark);
+            deleteBtn = (Button) itemView.findViewById(R.id.deleteAppt);
 
         }
     }
