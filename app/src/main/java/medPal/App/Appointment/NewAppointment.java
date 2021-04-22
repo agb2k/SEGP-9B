@@ -17,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ExecutionException;
 
 import medPal.App.DatabaseHelper;
+import medPal.App.PillReminder.PillReminderAlarmHelper;
 import medPal.App.R;
 
 public class NewAppointment extends AppCompatActivity {
@@ -176,5 +177,12 @@ public class NewAppointment extends AppCompatActivity {
         insertDB.encodeData("remark", remarkStr);
 
         String message = insertDB.send();
+        setAlarm(timeStr,dateStr);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setAlarm(String time, String startDate) {
+        AppointmentAlarmHelper alarmHelper = new AppointmentAlarmHelper(getApplicationContext(), time, startDate);
+        alarmHelper.setAlarm();
     }
 }
