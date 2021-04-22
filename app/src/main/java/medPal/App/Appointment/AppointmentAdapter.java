@@ -51,7 +51,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         viewHolder.email = (TextView) cardview.findViewById(R.id.email);
         viewHolder.purpose = (TextView) cardview.findViewById(R.id.purpose);
         viewHolder.remark = (TextView) cardview.findViewById(R.id.remark);
-        viewholder.deleteBtn = (Button) cardview.findViewById(R.id.deleteAppt);
+        viewHolder.deleteBtn = (Button) cardview.findViewById(R.id.deleteAppt);
 
         return viewHolder;
     }
