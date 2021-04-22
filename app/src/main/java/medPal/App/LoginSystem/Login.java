@@ -95,7 +95,7 @@ public class Login extends AppCompatActivity {
                                 public void run() {
                                     //DATABASE CONNECTION CHANGE http://hpyzl1.jupiter.nottingham.edu.my/Login_php/login.php
                                     try {
-                                        DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/login.php");
+                                        DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/medpal-db/login.php");
                                         //DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/Login_php/login.php");
                                         dbHelper.encodeData("email",email_input);
                                         dbHelper.encodeData("password",password_input);
