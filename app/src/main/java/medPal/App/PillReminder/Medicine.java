@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Medicine implements Serializable {
 
-    public static final String MEDICINE_IMAGE_PLACEHOLDER = "https://bulacke.xyz/pill_drugs-512.png";
+    public static final String MEDICINE_IMAGE_PLACEHOLDER = "http://hpyzl1.jupiter.nottingham.edu.my/pill_drugs-512.png";
 
     private int medicineId;
     private String medicineName;
@@ -36,7 +36,7 @@ public class Medicine implements Serializable {
         this.manufacturer = manufacturer;
         this.dosage = dosage;
         if(imagePath.length() > 0) {
-            this.imagePath = "https://bulacke.xyz/medpal-img/" + imagePath;
+            this.imagePath = "http://hpyzl1.jupiter.nottingham.edu.my/medpal-img/" + imagePath;
         }else {
             this.imagePath = "";
         }

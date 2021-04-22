@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
@@ -48,7 +49,7 @@ import medPal.App.UserIdentification.UserIdentity;
  */
 public class DatabaseHelper {
     // URL
-    private static final String url = "https://bulacke.xyz/";
+    private static final String url = "http://hpyzl1.jupiter.nottingham.edu.my/";
     private static final String DIR_PHP = "medpal-db/";
     private static final String DIR_IMG = "medpal-img/";
 
@@ -130,10 +131,23 @@ public class DatabaseHelper {
      * @throws InterruptedException
      */
     public String send() throws ExecutionException, InterruptedException {
-        if(encodedData.length() > 0) {
+        /*if(encodedData.length() > 0) {
             return new DatabaseHelper.ConnectDB().execute(completeUrl,encodedData).get();
         }
-        return new DatabaseHelper.ConnectDB().execute(completeUrl).get();
+        return new DatabaseHelper.ConnectDB().execute(completeUrl).get();*/
+        String result = "";
+
+        if(encodedData.length() > 0) {
+            result = new DatabaseHelper.ConnectDB().execute(completeUrl,encodedData).get();
+            result = result.replace("/home/hpyzl1jupiter/public_html/medpal-db","");
+            Log.v("Bulacke",result);
+        }else{
+            result = new DatabaseHelper.ConnectDB().execute(completeUrl).get();
+            result = result.replace("/home/hpyzl1jupiter/public_html/medpal-db","");
+            Log.v("Bulacke",result);
+        }
+
+        return result;
     }
 
     /**
@@ -152,7 +166,7 @@ public class DatabaseHelper {
 
             try {
                 URL url = new URL(dest);
-                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
                 if(input.length > 1) {
                     OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
