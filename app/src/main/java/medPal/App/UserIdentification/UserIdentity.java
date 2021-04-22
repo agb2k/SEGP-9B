@@ -29,7 +29,7 @@ public class UserIdentity {
         this.email = email;
     }
 
-    public String getEmail() { return email==null?"no_identity":email; }
+    public String getEmail() { return email==null?"abhinav.basil@gmail.com":email; }
 
     public boolean loggedIn() {
         return loggedIn;

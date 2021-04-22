@@ -82,7 +82,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         TextView remarkTextView = (TextView) holder.remark;
         remarkTextView.setText(Appointments.get(position).getRemark());
 
-        deleteBtn = (Button) holder.deleteBtn;
+        Button deleteBtn = (Button) holder.deleteBtn;
 
         int appt;
         appt = Appointments.get(position).getAppointmentID();
@@ -91,12 +91,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         deleteBtn.setOnClickListener(v -> {
             DatabaseHelper dbHelper = null;
             try {
-                dbHelper = new DatabaseHelper(DatabaseHelper.DELETE,DatabaseHelper.MEDICINE);
+                dbHelper = new DatabaseHelper(DatabaseHelper.DELETE,DatabaseHelper.APPOINTMENT);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             try {
-                dbHelper.encodeData("id",String.valueOf(appt);
+                dbHelper.encodeData("id",String.valueOf(appt));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -111,6 +111,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println(appt);
         });
     }
 
