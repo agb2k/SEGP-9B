@@ -36,9 +36,9 @@ public class RetrieveLastBloodRecord {
         LastBloodPressure bpObj;
         LastBloodGlucose bgObj;
 
-        DatabaseHelper BpDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastBloodPressure.php");
+        DatabaseHelper BpDbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/medpal-db/getLastBloodPressure.php");
         BpDbHelper.setUserInfo();
-        DatabaseHelper BgDbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/getLastSugarRecord.php");
+        DatabaseHelper BgDbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/medpal-db/getLastSugarRecord.php");
         BgDbHelper.setUserInfo();
 
         try {

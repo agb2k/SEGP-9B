@@ -79,7 +79,7 @@ public class SignUp extends AppCompatActivity {
                             public void run() {
                                 try {
                                     //DATABASE CONNECTION CHANGE http://hpyzl1.jupiter.nottingham.edu.my/Login_php/signup.php
-                                    DatabaseHelper dbHelper = new DatabaseHelper("https://bulacke.xyz/medpal-db/signup.php");
+                                    DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/medpal-db/signup.php");
                                     //DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/Login_php/signup.php");
                                     dbHelper.encodeData("email",email_input);
                                     dbHelper.encodeData("password",password_input);
