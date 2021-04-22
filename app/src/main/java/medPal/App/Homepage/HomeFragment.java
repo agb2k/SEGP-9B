@@ -147,7 +147,7 @@ public class HomeFragment extends Fragment {
             RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,420);
             nextPillReminderList.setLayoutParams(param);
             // Make some space between rows
-            nextPillReminderList.setDividerHeight(50);
+            nextPillReminderList.setDividerHeight(0);
 
             // Set up ExpandableListView
             nextPillReminderAdapter = new NextPillReminderAdapter(getContext(), timeList, nextPillReminder, nextPillReminderController);
