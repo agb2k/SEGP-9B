@@ -128,4 +128,5 @@ public class AppointmentFragment extends Fragment {
             }
         }
     }
+
 }

@@ -13,21 +13,23 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="410dp"
             android:layout_marginTop="3dp"
             android:background="@drawable/home_column">
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/dateLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
+                    android:text="Date:"
                     android:textColor="#0000A0"
-                    android:textSize="20sp"
-                    android:text="Date:"/>
+                    android:textSize="20sp" />
 
-                <TextView android:id="@+id/date"
+                <TextView
+                    android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -37,16 +39,18 @@
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/timeLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
+                    android:text="Time:"
                     android:textColor="#0000A0"
-                    android:textSize="20sp"
-                    android:text="Time:"/>
+                    android:textSize="20sp" />
 
-                <TextView android:id="@+id/time"
+                <TextView
+                    android:id="@+id/time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -56,16 +60,18 @@
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/doctorLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
+                    android:text="Doctor:"
                     android:textColor="#0000A0"
-                    android:textSize="20sp"
-                    android:text="Doctor:"/>
+                    android:textSize="20sp" />
 
-                <TextView android:id="@+id/doctor"
+                <TextView
+                    android:id="@+id/doctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -75,16 +81,18 @@
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/venueLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
+                    android:text="Venue:"
                     android:textColor="#0000A0"
-                    android:textSize="20sp"
-                    android:text="Venue:"/>
+                    android:textSize="20sp" />
 
-                <TextView android:id="@+id/venue"
+                <TextView
+                    android:id="@+id/venue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -94,16 +102,18 @@
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/contactLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
+                    android:text="Contact:"
                     android:textColor="#0000A0"
-                    android:textSize="20sp"
-                    android:text="Contact:"/>
+                    android:textSize="20sp" />
 
-                <TextView android:id="@+id/contact"
+                <TextView
+                    android:id="@+id/contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dip"
@@ -138,11 +148,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
+                android:text="Purpose:"
                 android:textColor="#0000A0"
-                android:textSize="20sp"
-                android:text="Purpose:"/>
+                android:textSize="20sp" />
 
-            <TextView android:id="@+id/purpose"
+            <TextView
+                android:id="@+id/purpose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
@@ -155,11 +166,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
+                android:text="Remark:"
                 android:textColor="#0000A0"
-                android:textSize="20sp"
-                android:text="Remark:"/>
+                android:textSize="20sp" />
 
-            <TextView android:id="@+id/remark"
+            <TextView
+                android:id="@+id/remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dip"
@@ -167,7 +179,17 @@
                 android:textColor="@color/lightgrey"
                 android:textSize="20sp" />
 
+            <Button
+                android:id="@+id/deleteAppt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:drawableEnd="@drawable/ic_discard"
+                android:textColor="@color/mdtp_dark_gray"
+                android:textSize="20sp" />
+
         </TableLayout>
+
 
 
     </LinearLayout>
