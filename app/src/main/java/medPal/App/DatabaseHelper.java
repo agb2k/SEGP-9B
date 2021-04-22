@@ -131,20 +131,14 @@ public class DatabaseHelper {
      * @throws InterruptedException
      */
     public String send() throws ExecutionException, InterruptedException {
-        /*if(encodedData.length() > 0) {
-            return new DatabaseHelper.ConnectDB().execute(completeUrl,encodedData).get();
-        }
-        return new DatabaseHelper.ConnectDB().execute(completeUrl).get();*/
         String result = "";
 
         if(encodedData.length() > 0) {
             result = new DatabaseHelper.ConnectDB().execute(completeUrl,encodedData).get();
             result = result.replace("/home/hpyzl1jupiter/public_html/medpal-db","");
-            Log.v("Bulacke",result);
         }else{
             result = new DatabaseHelper.ConnectDB().execute(completeUrl).get();
             result = result.replace("/home/hpyzl1jupiter/public_html/medpal-db","");
-            Log.v("Bulacke",result);
         }
 
         return result;
