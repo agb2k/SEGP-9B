@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,10 +93,10 @@ public class BloodPressureActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent3 = new Intent(BloodPressureActivity.this, EditPressureActivity.class);
-                intent3.putExtra("Date", date[position]);
-                intent3.putExtra("Time", time[position]);
-                intent3.putExtra("Sys", sys[position]);
-                intent3.putExtra("Dia", dia[position]);
+                intent3.putExtra("Date", date[position]); // bring the date set before to the edit page
+                intent3.putExtra("Time", time[position]); // bring the time set before to the edit page
+                intent3.putExtra("Sys", sys[position]); // bring the value of SYS before to the edit page
+                intent3.putExtra("Dia", dia[position]); // bring the value of DIA before to the edit page
                 startActivity(intent3);
             }
         });
