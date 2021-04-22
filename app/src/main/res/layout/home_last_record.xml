@@ -60,7 +60,7 @@
                 android:padding="3dip"
                 android:textColor="#0000A0"
                 android:textSize="25sp"
-                android:text="Blood Glucose"/>
+                android:text="Blood Sugar"/>
 
             <TextView android:id="@+id/lastGlucose"
                 android:layout_width="fill_parent"

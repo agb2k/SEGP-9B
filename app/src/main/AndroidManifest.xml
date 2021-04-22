@@ -18,7 +18,8 @@
         android:label="medpal"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MedPal">
+        android:theme="@style/Theme.MedPal"
+        android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginSystem.Login" />
         <activity android:name=".LoginSystem.VerifyEmail" />
