@@ -38,6 +38,7 @@ public class NewAppointment extends AppCompatActivity {
     String emailStr;
     String purposeStr;
     String remarkStr;
+    String radioStr = "";
 
     Button confirmBtn;
 
@@ -79,11 +80,11 @@ public class NewAppointment extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.radio_confirm:
                 if(checked)
-                    remarkStr = remarkStr + "(Confirmed)";
+                    radioStr = "(Confirmed)";
                 break;
             case R.id.radio_follow_up:
                 if (checked)
-                    remarkStr = remarkStr + "(Planned)";
+                    radioStr = "(Planned)";
                 break;
         }
     }
@@ -97,7 +98,7 @@ public class NewAppointment extends AppCompatActivity {
         contactStr = contact.getText().toString();
         emailStr = email.getText().toString();
         purposeStr = purpose.getText().toString();
-        remarkStr = remark.getText().toString() + remarkStr;
+        remarkStr = remark.getText().toString() + radioStr;
 
         boolean valid = true;
         if ( TextUtils.isEmpty(dateStr) ) {

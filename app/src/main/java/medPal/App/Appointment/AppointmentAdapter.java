@@ -1,17 +1,28 @@
 package medPal.App.Appointment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
+import medPal.App.DatabaseHelper;
+import medPal.App.PillReminder.EditPillReminderActivity;
+import medPal.App.PillReminder.PillReminderFragment;
 import medPal.App.R;
 
 
@@ -40,6 +51,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         viewHolder.email = (TextView) cardview.findViewById(R.id.email);
         viewHolder.purpose = (TextView) cardview.findViewById(R.id.purpose);
         viewHolder.remark = (TextView) cardview.findViewById(R.id.remark);
+        viewHolder.deleteBtn = (Button) cardview.findViewById(R.id.deleteAppt);
 
         return viewHolder;
     }
@@ -69,6 +81,38 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
         TextView remarkTextView = (TextView) holder.remark;
         remarkTextView.setText(Appointments.get(position).getRemark());
+
+        Button deleteBtn = (Button) holder.deleteBtn;
+
+        int appt;
+        appt = Appointments.get(position).getAppointmentID();
+
+
+        deleteBtn.setOnClickListener(v -> {
+            DatabaseHelper dbHelper = null;
+            try {
+                dbHelper = new DatabaseHelper(DatabaseHelper.DELETE,DatabaseHelper.APPOINTMENT);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            try {
+                dbHelper.encodeData("id",String.valueOf(appt));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            try {
+                if(Integer.parseInt(dbHelper.send()) == 1) {
+                    System.out.println("Deleted");
+                }else {
+                    System.out.println("Not deleted");
+                }
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(appt);
+        });
     }
 
     @Override
@@ -90,7 +134,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         TextView email;
         TextView purpose;
         TextView remark;
-
+        Button deleteBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -102,6 +146,9 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             email = (TextView) itemView.findViewById(R.id.email);
             purpose = (TextView) itemView.findViewById(R.id.purpose);
             remark = (TextView) itemView.findViewById(R.id.remark);
+            deleteBtn = (Button) itemView.findViewById(R.id.deleteAppt);
+
         }
     }
+
 }
