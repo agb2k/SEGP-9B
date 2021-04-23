@@ -64,9 +64,9 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
                 } else {
                     tempStr = String.valueOf(convert);
                 }
-                tempBPTime = "Last Recorded: " + tempDate.substring(5, 10) + " " + tempStr + tempTime.substring(2, 5) + "PM ";
+                tempBPTime = "Last Recorded: " + tempDate.substring(5, 10) + " " + tempStr + tempTime.substring(2, 5) + " pm ";
             } else {
-                tempBPTime = "Last Recorded: " + tempDate.substring(5, 10) + " " + tempTime.substring(0, 5) + "AM ";
+                tempBPTime = "Last Recorded: " + tempDate.substring(5, 10) + " " + tempTime.substring(0, 5) + " am ";
             }
 
             bpTimeView.setText(tempBPTime);
@@ -102,9 +102,9 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
                 } else {
                     tempStr = String.valueOf(convert);
                 }
-                tempBGTime = "Last Recorded: " + tempDate2.substring(5, 10) + " " + tempStr + tempTime2.substring(2, 5) + "PM ";
+                tempBGTime = "Last Recorded: " + tempDate2.substring(5, 10) + " " + tempStr + tempTime2.substring(2, 5) + " pm ";
             } else {
-                tempBGTime = "Last Recorded: " + tempDate2.substring(5, 10) + " " + tempTime2.substring(0, 5) + "AM ";
+                tempBGTime = "Last Recorded: " + tempDate2.substring(5, 10) + " " + tempTime2.substring(0, 5) + " am ";
             }
 
             bgTimeView.setText(tempBGTime);

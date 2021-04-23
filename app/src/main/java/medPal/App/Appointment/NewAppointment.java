@@ -17,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ExecutionException;
 
 import medPal.App.DatabaseHelper;
+import medPal.App.PillReminder.PillReminderAlarmHelper;
 import medPal.App.R;
 
 public class NewAppointment extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class NewAppointment extends AppCompatActivity {
     String emailStr;
     String purposeStr;
     String remarkStr;
+    String radioStr = "";
 
     Button confirmBtn;
 
@@ -78,11 +80,11 @@ public class NewAppointment extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.radio_confirm:
                 if(checked)
-                    remarkStr = remarkStr + "(Confirmed)";
+                    radioStr = "(Confirmed)";
                 break;
             case R.id.radio_follow_up:
                 if (checked)
-                    remarkStr = remarkStr + "(Planned)";
+                    radioStr = "(Planned)";
                 break;
         }
     }
@@ -96,7 +98,7 @@ public class NewAppointment extends AppCompatActivity {
         contactStr = contact.getText().toString();
         emailStr = email.getText().toString();
         purposeStr = purpose.getText().toString();
-        remarkStr = remark.getText().toString() + remarkStr;
+        remarkStr = remark.getText().toString() + radioStr;
 
         boolean valid = true;
         if ( TextUtils.isEmpty(dateStr) ) {
@@ -176,5 +178,12 @@ public class NewAppointment extends AppCompatActivity {
         insertDB.encodeData("remark", remarkStr);
 
         String message = insertDB.send();
+        setAlarm(timeStr,dateStr);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setAlarm(String time, String startDate) {
+        AppointmentAlarmHelper alarmHelper = new AppointmentAlarmHelper(getApplicationContext(), time, startDate);
+        alarmHelper.setAlarm();
     }
 }

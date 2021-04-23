@@ -16,7 +16,7 @@ First, go to your Receiver(eg AppointmentReceiver for Appointment related notif)
 class to edit your Notification message.
 Change the variables on the top: TITLE, TEXT, INFO
 
-Then follow the instrcution here to learn how to use AlarmHelper to create alarm.
+Then follow the instructions here to learn how to use AlarmHelper to create alarm.
 
 -------------------------------------------------------
 How to use AlarmHelper
@@ -30,7 +30,6 @@ First, initialize AlarmHelper:
   AlarmHelper.BLOOD_PRESSURE
   AlarmHelper.BLOOD_SUGAR
   (Use these defined constant to avoid mistakes)
-
 
 To create ONE-TIME alarm (not repeating):
 > alarmHelper.setAlarm(<(long)alarmTime>, <(int)reference_id>);
