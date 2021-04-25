@@ -41,10 +41,6 @@
         <activity android:name=".Tracker.BloodPressure.BloodPressureActivity" />
         <activity android:name=".PillReminder.NewPillReminder" />
         <activity android:name=".Appointment.NewAppointment" />
-        <activity
-            android:name=".Homepage.healthPopUp"
-            android:theme="@style/healthPopStyle" />
-        <activity android:name=".Homepage.editHealth" />
         <activity android:name=".Gateway">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

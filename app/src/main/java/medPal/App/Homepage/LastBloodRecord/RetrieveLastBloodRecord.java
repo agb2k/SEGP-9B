@@ -22,6 +22,9 @@ import java.util.concurrent.ExecutionException;
 
 import medPal.App.DatabaseHelper;
 
+/***
+ * Retrieve Last Blood Pressure and Last Blood Glucose Level from database
+ */
 
 public class RetrieveLastBloodRecord {
 
@@ -68,6 +71,12 @@ public class RetrieveLastBloodRecord {
         }
     }
 
+    /***
+     * Create Last Blood Pressure instance from JSON object.
+     * @param jsonObject JSON Object
+     * @return Last Blood Pressure insatrance
+     * @throws JSONException
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private LastBloodPressure makeBPobj(JSONObject jsonObject) throws JSONException {
         String date = jsonObject.getString("Date");
@@ -78,6 +87,12 @@ public class RetrieveLastBloodRecord {
         return new LastBloodPressure(date, time, SYS, DIA);
     }
 
+    /***
+     * Create Last Blood Glucose level instance from JSON object.
+     * @param jsonObject JSON Object
+     * @return Last Blood Glucose level insatrance
+     * @throws JSONException
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private LastBloodGlucose makeBGobj(JSONObject jsonObject) throws JSONException {
         String date = jsonObject.getString("Date");
@@ -87,10 +102,18 @@ public class RetrieveLastBloodRecord {
         return new LastBloodGlucose(date, time, level);
     }
 
+    /***
+     * Get Last Blood Pressure List
+     * @return Last BloodPressure List
+     */
     public ArrayList<LastBloodPressure> getLastBloodPressureList() {
         return lastBloodPressureList;
     }
 
+    /***
+     * Get Last Blood Glucose level List
+     * @return Last Blood Glucose level List
+     */
     public ArrayList<LastBloodGlucose> getLastBloodGlucoseList() {
         return lastBloodGlucoseList;
     }

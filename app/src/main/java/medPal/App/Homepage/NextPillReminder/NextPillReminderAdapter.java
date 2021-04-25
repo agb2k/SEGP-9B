@@ -28,6 +28,9 @@ import medPal.App.PillReminder.PillReminderController;
 import medPal.App.PillReminder.PillReminderTimeAdapter;
 import medPal.App.R;
 
+/***
+ * Adapter to handle the view of the Next Pill Reminder at homepage
+ */
 public class NextPillReminderAdapter implements ExpandableListAdapter {
     private Context context;
     private ArrayList<LocalTime> time = new ArrayList<LocalTime>();
@@ -35,6 +38,13 @@ public class NextPillReminderAdapter implements ExpandableListAdapter {
     private ArrayList<LocalTime> prByTimeKeySet = new ArrayList<>();
     private PillReminderController prController;
 
+    /***
+     * Constructor for  NextPillReminderAdapter
+     * @param context Contex
+     * @param time Pill Reminder Time List
+     * @param prByTime Pill Reminder List
+     * @param prController Pill Rmeinder Controller
+     */
     public NextPillReminderAdapter(Context context, ArrayList<LocalTime> time, TreeMap<LocalTime, ArrayList<PillReminder>> prByTime, PillReminderController prController) {
         this.context = context;
         this.time = time;
