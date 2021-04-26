@@ -14,7 +14,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 
 import medPal.App.R;
 
-
+// Open source code on github "delaroystudio", modified to be used in the app
 public class AlarmCursorAdapter extends CursorAdapter {
 
     private TextView mTitleText, mDateAndTimeText, mRepeatInfoText;

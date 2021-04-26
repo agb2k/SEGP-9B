@@ -238,9 +238,7 @@ public class NewPressureReminder extends AppCompatActivity implements
         }
 
 
-        //getSupportActionBar().setTitle("Add Reminder");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeButtonEnabled(true);
+
 
     }
 
@@ -561,22 +559,7 @@ public class NewPressureReminder extends AppCompatActivity implements
 
 
         // Set up calender for creating the notification
-        /*
-        mCalendar = Calendar.getInstance();
-        Log.d("Date", mDate);
-        Log.d("time", mTime);
-        String[] seperated = mDate.split("/");
-        String[] timeSeperate = mTime.split(":");
-        mCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(seperated[0]));
-        mCalendar.set(Calendar.MONTH, Integer.parseInt(seperated[1]));
-        mCalendar.set(Calendar.YEAR, Integer.parseInt(seperated[2]));
-        mCalendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeSeperate[0]));
-        mCalendar.set(Calendar.MINUTE, Integer.parseInt(timeSeperate[0]));
-        mCalendar.set(Calendar.SECOND, 0);
 
-        long selectedTimestamp =  mCalendar.getTimeInMillis();
-
-         */
 
         mCalendar.set(Calendar.MONTH, --mMonth);
         mCalendar.set(Calendar.YEAR, mYear);

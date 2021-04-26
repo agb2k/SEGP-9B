@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
+// Open source code on github "delaroystudio", modified to be used in the app
 public class AlarmReminderDbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "alarmreminder.db";
