@@ -23,6 +23,12 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
     private ArrayList<LastBloodPressure> lastBloodPressureList = new ArrayList<>();
     private ArrayList<LastBloodGlucose> lastBloodGlucoseList = new ArrayList<>();
 
+    /***
+     * Constructor for LastBloodRecordAdapter
+     * @param context Contex
+     * @param lastBloodPressureList last Blood Pressure List
+     * @param lastBloodGlucoseList last Blood Glucose List
+     */
     public LastBloodRecordAdapter(Context context, ArrayList<LastBloodPressure> lastBloodPressureList, ArrayList<LastBloodGlucose> lastBloodGlucoseList) {
         this.context = context;
         this.lastBloodPressureList = lastBloodPressureList;
@@ -53,6 +59,7 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
             String tempDate = lastBloodPressureList.get(position).getDate();
             String tempBPTime;
 
+            //Check Time and convert to 12hr format
             if (Integer.parseInt(tempTime.substring(0, 2)) >= 12) {
                 int convert = Integer.parseInt(tempTime.substring(0, 2));
                 if (Integer.parseInt(tempTime.substring(0, 2)) > 12) {
@@ -91,6 +98,7 @@ public class LastBloodRecordAdapter extends RecyclerView.Adapter<LastBloodRecord
             String tempDate2 = lastBloodGlucoseList.get(position).getDate();
             String tempBGTime;
 
+            //Check Time and convert to 12hr format
             if (Integer.parseInt(tempTime2.substring(0, 2)) >= 12) {
                 int convert = Integer.parseInt(tempTime2.substring(0, 2));
                 if (Integer.parseInt(tempTime2.substring(0, 2)) > 12) {

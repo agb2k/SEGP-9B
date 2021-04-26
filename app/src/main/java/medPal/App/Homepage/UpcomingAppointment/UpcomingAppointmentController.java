@@ -15,22 +15,27 @@ import java.util.ArrayList;
 import medPal.App.Appointment.Appointment;
 import medPal.App.Appointment.RetrieveAppointments;
 
+/***
+ * Class to handle Upcoming Appointment list
+ */
 public class UpcomingAppointmentController implements Serializable {
     private Context context;
     private ArrayList<Appointment> upcomingAppointmentsList = new ArrayList<Appointment>();
 
+    /***
+     * Initialise and get list of upcoming appointment
+     * @throws UnsupportedEncodingException
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public UpcomingAppointmentController() throws UnsupportedEncodingException {
         RetrieveAppointments getDB = new RetrieveAppointments();
         upcomingAppointmentsList = getDB.getAllAppointment();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void refreshData() throws UnsupportedEncodingException {
-        RetrieveAppointments getDB = new RetrieveAppointments();
-        upcomingAppointmentsList = getDB.getAllAppointment();
-    }
-
+    /***
+     * Get upcoming 'planned' appointment list
+     * @return Upcoming 'planned' appointment list
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public ArrayList<Appointment> getUpcomingAppointmentsList() {
         ArrayList<Appointment> resultList = new ArrayList<>();
@@ -55,6 +60,10 @@ public class UpcomingAppointmentController implements Serializable {
         return resultList;
     }
 
+    /***
+     * Get upcoming 'confirmed' appointment list
+     * @return Get upcoming confirmed' appointment list
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public ArrayList<Appointment> getConfirmedAppointment() {
         ArrayList<Appointment> resultList = new ArrayList<>();
@@ -80,6 +89,11 @@ public class UpcomingAppointmentController implements Serializable {
         return resultList;
     }
 
+    /***
+     * Convert time string to LocalTime format
+     * @param time Time string
+     * @return time
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private LocalTime stringToLocalTime(String time) {
         int hour = Integer.parseInt(time.substring(0,2));
@@ -89,7 +103,11 @@ public class UpcomingAppointmentController implements Serializable {
         return localTime;
     }
 
-    //Function to check confirmed appointment
+    /***
+     * Function to check status
+     * @param status String of remark in appointment
+     * @return True if 'confirmed', False if 'not confirmed'
+     */
     private Boolean checkStatus(String status) {
         boolean check=false;
         for(int i=0; i<(status.length()-8); i++) {

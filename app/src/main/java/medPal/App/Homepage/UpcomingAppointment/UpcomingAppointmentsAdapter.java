@@ -15,11 +15,20 @@ import java.util.List;
 import medPal.App.Appointment.Appointment;
 import medPal.App.R;
 
+/***
+ * Class to handle the view of the upcoming appointment at homepage
+ */
 public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAppointmentsAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Appointment> upcomingAppointments = new ArrayList<>();
     private ArrayList<Appointment> confirmedAppointments = new ArrayList<>();
 
+    /***
+     * Constructor for UpcomingAppointmentsAdapter
+     * @param context Contex
+     * @param upcomingAppointments upcoming 'planned' appointment list
+     * @param confirmedAppointments upcoming 'confirmed' appointment list
+     */
     public UpcomingAppointmentsAdapter(Context context, ArrayList<Appointment> upcomingAppointments, ArrayList<Appointment> confirmedAppointments) {
         this.context = context;
         this.upcomingAppointments = upcomingAppointments;
@@ -57,6 +66,8 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
             TextView apptTimeTextView = (TextView) holder.apptTime;
             String apptTime;
             String tempTime = upcomingAppointments.get(position).getTime();
+
+            //Check the time and convert it to 12hr format
             if (Integer.parseInt(tempTime.substring(0, 2)) >= 12) {
                 int convert = Integer.parseInt(tempTime.substring(0, 2));
                 if (Integer.parseInt(tempTime.substring(0, 2)) > 12) {
@@ -91,7 +102,7 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
             docNameTextView.setText("");
         }
 
-        //Handle if no planned appointment
+        //Handle if no confirmed appointment
         if(confirmedAppointments.size()>0) {
             //Set view for confirmed appointment
             TextView apptDateTextView = (TextView) holder.apptDate2;
@@ -100,6 +111,8 @@ public class UpcomingAppointmentsAdapter extends RecyclerView.Adapter<UpcomingAp
             TextView apptTimeTextView = (TextView) holder.apptTime2;
             String apptTime;
             String tempTime = confirmedAppointments.get(position).getTime();
+
+            //Check the time and convert it to 12hr format
             if (Integer.parseInt(tempTime.substring(0, 2)) >= 12) {
                 int convert = Integer.parseInt(tempTime.substring(0, 2));
                 if (Integer.parseInt(tempTime.substring(0, 2)) > 12) {

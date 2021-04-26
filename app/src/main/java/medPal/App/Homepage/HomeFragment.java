@@ -93,7 +93,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private Button healthBtn;
     private RecyclerView nextAppointmentList;
     private UpcomingAppointmentsAdapter upcomingAppointmentsAdapter;
     private ExpandableListView nextPillReminderList;
@@ -109,7 +108,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        // Set up Next Appointment Data
+        // Set up Upcoming Appointment Data
         nextAppointmentList = v.findViewById(R.id.nextAppointmentExpandableList);
         nextAppointmentList.setLayoutManager(new LinearLayoutManager(v.getContext()));
         UpcomingAppointmentController upcomingAppointmentController = null;
@@ -119,13 +118,15 @@ public class HomeFragment extends Fragment {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
         ArrayList<Appointment> upcomingAppointmentArrayList = upcomingAppointmentController.getUpcomingAppointmentsList();
         ArrayList<Appointment> confirmedAppointmentArrayList = upcomingAppointmentController.getConfirmedAppointment();
 
-        //Get upcoming appointment data and et up view
+        //Get upcoming appointment upcoming appointment list and upcoming confirmed appointment list and set up view
         upcomingAppointmentsAdapter = new UpcomingAppointmentsAdapter(getContext(), upcomingAppointmentArrayList, confirmedAppointmentArrayList);
         nextAppointmentList.setAdapter(upcomingAppointmentsAdapter);
 
+        // Set up Upcoming Pill reminder Data
         PillReminderController nextPillReminderController = null;
         try {
             nextPillReminderController = new PillReminderController(this.requireContext());
@@ -161,7 +162,7 @@ public class HomeFragment extends Fragment {
         }
 
 
-        // Set up last blood record
+        // Set up last blood record data
         lastBloodRecordList = v.findViewById(R.id.lastBloodRecord);
         lastBloodRecordList.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
@@ -174,6 +175,7 @@ public class HomeFragment extends Fragment {
         ArrayList<LastBloodPressure> lastBloodPressureList = lastBloodRecordController.getLastBloodPressureList();
         ArrayList<LastBloodGlucose> lastBloodGlucoseList = lastBloodRecordController.getLastBloodGlucoseList();
 
+        //Get the last blood pressure and last blood sugar level record and set the view of them
         lastBloodRecordAdapter = new LastBloodRecordAdapter(getContext(), lastBloodPressureList, lastBloodGlucoseList);
         lastBloodRecordList.setAdapter(lastBloodRecordAdapter);
 
@@ -182,6 +184,12 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /***
+     * Function to refresh home fragment
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == UPDATE_HOME_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
