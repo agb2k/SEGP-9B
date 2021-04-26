@@ -213,11 +213,6 @@ public class NewSugarReminder extends AppCompatActivity implements
 
 
 
-        //getSupportActionBar().setTitle("Add Reminder");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeButtonEnabled(true);
-
-
 
     }
 
