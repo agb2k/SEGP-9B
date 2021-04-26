@@ -3,7 +3,6 @@ package medPal.App.Tracker.BloodSugarLevel;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,11 +32,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -126,7 +121,7 @@ public class SugarLevelActivity extends AppCompatActivity {
 
 
 
-        lineChart.setVisibleXRangeMaximum(6);
+        //lineChart.setVisibleXRangeMaximum(6);
 
 
         XAxis xAxis = lineChart.getXAxis();
@@ -223,7 +218,7 @@ public class SugarLevelActivity extends AppCompatActivity {
 
     }
 
-
+    // get data from database and insert into list view
     public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.SUGAR_LEVEL);
@@ -254,7 +249,7 @@ public class SugarLevelActivity extends AppCompatActivity {
         }
     }
 
-    //create listview of records with data from database
+    ////get position of list view to insert value
     class myadapter extends ArrayAdapter<String>
     {
         Context context;

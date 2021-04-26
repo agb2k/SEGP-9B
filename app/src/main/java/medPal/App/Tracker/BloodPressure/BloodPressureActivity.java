@@ -123,13 +123,13 @@ public class BloodPressureActivity extends AppCompatActivity {
         lineChart = (LineChart) findViewById(R.id.pressureGraph);
         lineChart.setNoDataText("No data available");
 
-        lineChart.setVisibleXRangeMaximum(3);
+        //lineChart.setVisibleXRangeMaximum(3);
 
         XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // set label position to the bottom
         xAxis.setLabelRotationAngle(-45);
         xAxis.setGranularityEnabled(true);
-        xAxis.setLabelCount(5);
+        xAxis.setLabelCount(5); // limit 5 entry
 
         //Get data from database for X-axis
         if (x_axis.size() == 0) {
@@ -249,7 +249,7 @@ public class BloodPressureActivity extends AppCompatActivity {
 
 
 
-
+    // get data from database and insert into list view
     public void fetch_data_into_array(View view) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
 
         DatabaseHelper dbHelper = new DatabaseHelper(DatabaseHelper.GET, DatabaseHelper.BLOOD_PRESSURE);
@@ -283,7 +283,7 @@ public class BloodPressureActivity extends AppCompatActivity {
         }
     }
 
-    //create listview of records with data from database
+    //get position of list view to insert value
     class myadapter extends ArrayAdapter<String>
     {
         Context context;
