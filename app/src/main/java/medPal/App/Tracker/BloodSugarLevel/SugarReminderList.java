@@ -83,52 +83,7 @@ public class SugarReminderList extends AppCompatActivity implements LoaderManage
 
     }
 
-    /*
-    private void openNewSugarReminder() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Set reminder title");
-
-        final EditText input =  new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (input.getText().toString().isEmpty()) {
-                            return;
-                        }
-
-                        alarmTitle = input.getText().toString();
-                        ContentValues values = new ContentValues();
-
-                        values.put(AlarmReminderContract.AlarmReminderEntry.KEY_TITLE, alarmTitle);
-
-                        Uri newUri = getContentResolver().insert(AlarmReminderContract.AlarmReminderEntry.CONTENT_URI, values);
-
-                        restartLoader();
-
-                        if (newUri == null) {
-                            Toast.makeText(getApplicationContext(), "Setting Reminder Title failed", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Title set successfully", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-
-
-
-        });
-        builder.show();
-}
-
-     */
 
     private void openNewSugarReminder(){
         Intent intent1 = new Intent(this, NewSugarReminder.class);

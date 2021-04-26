@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-
+// Open source code on github "delaroystudio", modified to be used in the app
 public class AlarmReminderContract {
 
     private AlarmReminderContract() {}
