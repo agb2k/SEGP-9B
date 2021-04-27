@@ -29,6 +29,14 @@ public class UserIdentity {
         this.email = email;
     }
 
+    /**
+     * Logout
+     */
+    public void logout() {
+        loggedIn = false;
+        email = "no_identity";
+    }
+
     public String getEmail() { return email==null?"no_identity":email; }
 
     public boolean loggedIn() {

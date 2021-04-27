@@ -64,4 +64,12 @@ public class UserIdentityDBHelper {
         cursor.close();
     }
 
+    /**
+     * Delete user login information
+     */
+    public void logout() {
+        myDB.execSQL("DELETE FROM " + TABLE_NAME + ";");
+        UserIdentity.getInstance().logout();
+    }
+
 }

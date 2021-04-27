@@ -63,12 +63,12 @@ public class DatabaseHelper {
     public static String GET = "get";
 
     // Type
-    public static String PILL_REMINDER = "PillReminder.php";
-    public static String MEDICINE = "Medicine.php";
-    public static String APPOINTMENT = "Appointment.php";
-    public static String BLOOD_PRESSURE = "PressureRecord.php";
-    public static String SUGAR_LEVEL = "SugarRecord.php";
-    public static String MEDICINE_IMAGE = "MedicineImage.php";
+    public final static String PILL_REMINDER = "PillReminder.php";
+    public final static String MEDICINE = "Medicine.php";
+    public final static String APPOINTMENT = "Appointment.php";
+    public final static String BLOOD_PRESSURE = "PressureRecord.php";
+    public final static String SUGAR_LEVEL = "SugarRecord.php";
+    public final static String MEDICINE_IMAGE = "MedicineImage.php";
 
     private String completeUrl = "";
     private String encodedData = "";
@@ -79,7 +79,26 @@ public class DatabaseHelper {
      * @param type Type (PILL_REMINDER / MEDICINE / APPOINTMENT / PRESSURE_RECORD / SUGAR_LEVEL / MEDICINE_IMAGE)
      */
     public DatabaseHelper(String operation, String type) throws UnsupportedEncodingException {
-        completeUrl = url + DIR_PHP + operation + type;
+        String subdirectory = "";
+        switch (type) {
+            case PILL_REMINDER:
+            case MEDICINE:
+            case MEDICINE_IMAGE:
+                subdirectory = "PillReminder/";
+                break;
+            case APPOINTMENT:
+                subdirectory = "Appointment/";
+                break;
+            case BLOOD_PRESSURE:
+                subdirectory = "Tracker/BloodPressureLevel/";
+                break;
+            case SUGAR_LEVEL:
+                subdirectory = "Tracker/BloodSugarLevel/";
+                break;
+            default:
+                subdirectory = "";
+        }
+        completeUrl = url + DIR_PHP + subdirectory + operation + type;
     }
 
     /**
@@ -135,10 +154,8 @@ public class DatabaseHelper {
 
         if(encodedData.length() > 0) {
             result = new DatabaseHelper.ConnectDB().execute(completeUrl,encodedData).get();
-            result = result.replace("/home/hpyzl1jupiter/public_html/medpal-db","");
         }else{
             result = new DatabaseHelper.ConnectDB().execute(completeUrl).get();
-            result = result.replace("/home/hpyzl1jupiter/public_html/medpal-db","");
         }
 
         return result;
