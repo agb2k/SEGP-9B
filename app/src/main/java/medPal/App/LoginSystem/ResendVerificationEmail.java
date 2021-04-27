@@ -52,7 +52,7 @@ public class ResendVerificationEmail extends AppCompatActivity {
                         public void run() {
                             //DATABASE CONNECTION CHANGE http://hpyzl1.jupiter.nottingham.edu.my/Login_php/login.php
                             try {
-                                DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/medpal-db/resendVerificationEmail.php");
+                                DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/medpal-db/LoginSystem/resendVerificationEmail.php");
                                 //DatabaseHelper dbHelper = new DatabaseHelper("http://hpyzl1.jupiter.nottingham.edu.my/Login_php/login.php");
                                 dbHelper.encodeData("email",email_input);
 
