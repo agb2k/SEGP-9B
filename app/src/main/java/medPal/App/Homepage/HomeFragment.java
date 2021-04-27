@@ -4,27 +4,29 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.io.UnsupportedEncodingException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
-
 
 import medPal.App.Appointment.Appointment;
 import medPal.App.Homepage.LastBloodRecord.LastBloodGlucose;
@@ -34,9 +36,11 @@ import medPal.App.Homepage.LastBloodRecord.LastBloodRecordController;
 import medPal.App.Homepage.NextPillReminder.NextPillReminderAdapter;
 import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentController;
 import medPal.App.Homepage.UpcomingAppointment.UpcomingAppointmentsAdapter;
+import medPal.App.LoginSystem.Login;
 import medPal.App.PillReminder.PillReminder;
 import medPal.App.PillReminder.PillReminderController;
 import medPal.App.R;
+import medPal.App.UserIdentification.UserIdentityDBHelper;
 
 import static android.view.View.GONE;
 
@@ -58,6 +62,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Toolbar mToolbar;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -106,6 +111,29 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        /*
+        mToolbar = v.findViewById(R.id.toolbar0);
+
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+
+        mToolbar.inflateMenu(R.menu.menu);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.logoutMenu:{
+                        UserIdentityDBHelper dbHelper = new UserIdentityDBHelper(getContext());
+                        dbHelper.logout();
+                        getActivity().finish();
+                        startActivity(new Intent(getActivity(), Login.class));
+                    }
+                }
+                return false;
+            }
+        });
+
+         */
 
 
         // Set up Upcoming Appointment Data
@@ -202,5 +230,26 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logoutMenu: {
+                UserIdentityDBHelper dbHelper = new UserIdentityDBHelper(getContext());
+                dbHelper.logout();
+                getActivity().finish();
+                startActivity(new Intent(getActivity(), Login.class));
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
