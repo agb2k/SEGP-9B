@@ -2,9 +2,12 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".Homepage.HomeFragment">
+
+
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -12,6 +15,13 @@
     tools:context=".Homepage.HomeFragment"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="LOGOUT"
+        android:textSize="20dp" />
 
     <RelativeLayout android:id="@+id/appointmentHome"
         android:background="@drawable/home_column"
@@ -103,7 +113,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="20dp"
         android:stretchColumns="*">
 
         <TextView android:id="@+id/homeTrackerTitle"
@@ -128,5 +138,8 @@
     </RelativeLayout>
 
 
+
+
 </LinearLayout>
+
 </ScrollView>

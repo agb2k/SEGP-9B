@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -62,7 +58,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Toolbar mToolbar;
+    private Button button;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -112,8 +108,19 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+        button = v.findViewById(R.id.logoutButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserIdentityDBHelper dbHelper = new UserIdentityDBHelper(getContext());
+                dbHelper.logout();
+                getActivity().finish();
+                startActivity(new Intent(getActivity(), Login.class));
+            }
+        });
         /*
-        mToolbar = v.findViewById(R.id.toolbar0);
+        mToolbar = v.findViewById(R.id.toolbarABC);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
 
@@ -129,11 +136,11 @@ public class HomeFragment extends Fragment {
                         startActivity(new Intent(getActivity(), Login.class));
                     }
                 }
-                return false;
+                return true;
             }
         });
+        */
 
-         */
 
 
         // Set up Upcoming Appointment Data
@@ -231,7 +238,7 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
+    /*
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater = getActivity().getMenuInflater();
@@ -252,4 +259,6 @@ public class HomeFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+     */
 }
