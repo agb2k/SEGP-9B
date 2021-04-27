@@ -23,7 +23,7 @@ public class Appointment implements Serializable {
     private String remark;
 
     /**
-     * Constructor of pill reminder object.
+     * Constructor of Appointment object.
      * @param appointmentID Appointment ID.
      * @param date Appointment Date.
      * @param time Appointment Time.

@@ -182,9 +182,9 @@
             <Button
                 android:id="@+id/deleteAppt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Delete"
+                android:layout_height="60dp"
                 android:drawableEnd="@drawable/ic_discard"
+                android:text="Delete"
                 android:textColor="@color/mdtp_dark_gray"
                 android:textSize="20sp" />
 

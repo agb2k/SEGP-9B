@@ -117,7 +117,7 @@ public class NewAppointment extends AppCompatActivity {
         }
 
         if ( timeStr.length() != 4 ) {
-            time.setError("Date must consist of exactly 4 digits. Format eg. 1400");
+            time.setError("Time must consist of exactly 4 digits. Format eg. 1400");
             valid = false;
         }
 
@@ -142,13 +142,11 @@ public class NewAppointment extends AppCompatActivity {
         }
 
         if ( TextUtils.isEmpty(purposeStr) ) {
-            purpose.setError("Purpose cannot be empty");
-            valid = false;
+            purposeStr = "N/A";
         }
 
         if ( TextUtils.isEmpty(remarkStr) ) {
-            remark.setError("Remark cannot be empty");
-            valid = false;
+            remarkStr = "N/A" + radioStr;
         }
 
         if (checked == null){
@@ -157,10 +155,9 @@ public class NewAppointment extends AppCompatActivity {
 
         if ( valid ) {
             sendData(dateStr, timeStr, doctorStr, venueStr, contactStr, emailStr, purposeStr, remarkStr);
+            setResult(Activity.RESULT_OK);
+            finish();
         }
-
-        setResult(Activity.RESULT_OK);
-        finish();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
