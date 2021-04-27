@@ -88,7 +88,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         int appt;
         appt = Appointments.get(position).getAppointmentID();
 
-
         deleteBtn.setOnClickListener(v -> {
             DatabaseHelper dbHelper = null;
             try {
@@ -112,8 +111,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            AppointmentDelete apptDelete = new AppointmentDelete();
-            apptDelete.refresh();
             System.out.println(appt);
         });
     }
