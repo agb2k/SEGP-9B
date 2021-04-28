@@ -7,14 +7,14 @@ Primarily written in Java
 
 This file contains all code used to implement the MOBILE APPLICATION PLATFORM in our project. 
 
-All .java codes that defines operation of each Activity(Scene layout) can be found in the repository under: 
-*SEGP-9B/app/src/main/java/medPal/App/xxx.java*
+- All .java codes that defines operation of each Activity(Scene layout) can be found in the repository under: 
+  *SEGP-9B/app/src/main/java/medPal/App/xxx.java*
 
-All .xml code that defines layout of each Activity can be found in the repository under:
-*SEGP-9B/app/src/main/res/layout/xxx.xml*
+- All .xml code that defines layout of each Activity can be found in the repository under:
+  *SEGP-9B/app/src/main/res/layout/xxx.xml*
 
-AndoidManifest.xml that defines the flow of application can be found in:
-*SEGP-9B/app/src/AndroidManifest.xml*
+- AndroidManifest.xml that defines the flow of application can be found in:
+  *SEGP-9B/app/src/AndroidManifest.xml*
 
 # Guideline on running the app with Android Studio
 1. Download all the code from this repositiory
