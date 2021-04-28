@@ -29,8 +29,8 @@ Link to other repositories:<br>
 Download link: http://www.hpyzl1.jupiter.nottingham.edu.my/deploy_apk/downloadApk.html 
 
 If you are using Android Phone, you can download the APK file and install the App using the link above. However, the app is not officially deployed to Google Play so it will prompt out warning message during installation. If you not willing to giving us your information, you can try on our app using the account below:
-Email: patient.testingacc@gmail.com
-Password: Segp12345…
+<p>Email: patient.testingacc@gmail.com</p>
+<p>Password: Segp12345…</p>
 
 # Guideline on running the app with Android Studio
 1. Download all the code from this repositiory
