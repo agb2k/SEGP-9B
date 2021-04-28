@@ -7,7 +7,7 @@ Primarily written in Java
 
 *This file contains all code used to implement the MOBILE APPLICATION PLATFORM in our project.  
 
-All .java codes that defines operation of each Activity(Scene layout) for the application can be found in the repository under : 
+All .java codes that defines operation of each Activity(Scene layout) can be found in the repository under : 
 *SEGP-9B/app/src/main/java/medPal/App/xxx.java*
 
 All .xml code that defines layout of each Activity can be found in the repository under :
