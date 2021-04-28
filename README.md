@@ -16,6 +16,13 @@ This file contains all code used to implement the MOBILE APPLICATION PLATFORM in
 - AndroidManifest.xml that defines the flow of application can be found in:
   *SEGP-9B/app/src/AndroidManifest.xml*
 
+# Running App on Android Phone
+Download link: http://www.hpyzl1.jupiter.nottingham.edu.my/deploy_apk/downloadApk.html 
+
+If you are using Android Phone, you can download the APK file and install the App using the link above. However, the app is not officially deployed to Google Play so it will prompt out warning message during installation. If you not willing to giving us your information, you can try on our app using the account below:
+Email: patient.testingacc@gmail.com
+Password: Segp12345…
+
 # Guideline on running the app with Android Studio
 1. Download all the code from this repositiory
 2. Extract the zip file
@@ -23,3 +30,4 @@ This file contains all code used to implement the MOBILE APPLICATION PLATFORM in
 4. Import/Open this project in Android Studio
 5. Run the project in Android Studio
 6. The emulator will start and the app will be installed and use in the emulator
+
