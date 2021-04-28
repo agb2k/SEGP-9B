@@ -14,7 +14,7 @@ All .xml code that defines layout of each Activity can be found in the repositor
 *SEGP-9B/app/src/main/res/layout/xxx.xml*
 
 AndoidManifest.xml that defines the flow of application can be found in 
-*SEGP-9B/app/src/main/AndroidManifest.xml*
+*SEGP-9B/app/src/AndroidManifest.xml*
 
 # Guideline on running the app with Android Studio
 1. Download all the code from this repositiory
