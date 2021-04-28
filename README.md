@@ -16,6 +16,15 @@ This file contains all code used to implement the MOBILE APPLICATION PLATFORM in
 - AndroidManifest.xml that defines the flow of application can be found in:
   *SEGP-9B/app/src/AndroidManifest.xml*
 
+# Block Diagram
+
+<img src="bd-mobile-marked.png" alt="Block Diagram" width="600"/>
+
+This is one of the three repositories of the medPal project.<br><br>
+Link to other repositories:<br>
+- Repository for CRUD PHP files: https://github.com/sayft1/SEGP9b_php   
+- Repository for PC Platform: https://github.com/bulacke/SEGP9B-PC_Platform
+
 # Running App on Android Phone
 Download link: http://www.hpyzl1.jupiter.nottingham.edu.my/deploy_apk/downloadApk.html 
 
